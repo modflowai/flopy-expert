@@ -1,0 +1,80 @@
+name: Update FloPy Semantic Database
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual triggering
+  push:
+    branches:
+      - main
+    paths:
+      - 'incremental_processor.py'
+      - 'create_flopy_knowledge_base.py'
+      - '.github/workflows/update_flopy_db.yml'
+
+jobs:
+  update-database:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Clone FloPy repository
+      run: |
+        git clone https://github.com/modflowpy/flopy.git
+        cd flopy
+        echo "FLOPY_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "FLOPY_DATE=$(git log -1 --format=%cd --date=short)" >> $GITHUB_ENV
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Run incremental processor
+      env:
+        NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      run: |
+        python incremental_processor.py
+    
+    - name: Upload checkpoint
+      uses: actions/upload-artifact@v3
+      with:
+        name: processing-checkpoint
+        path: processor_checkpoint.json
+        retention-days: 30
+    
+    - name: Generate status report
+      run: |
+        python incremental_processor.py status > status_report.txt
+        cat status_report.txt
+    
+    - name: Create issue if failures exist
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const title = `FloPy DB Update Failed - ${new Date().toISOString().split('T')[0]}`;
+          const body = `The automated FloPy database update has failed.
+          
+          FloPy Commit: ${{ env.FLOPY_COMMIT }}
+          FloPy Date: ${{ env.FLOPY_DATE }}
+          
+          Please check the workflow logs for details.`;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['automated', 'database-update', 'failure']
+          });

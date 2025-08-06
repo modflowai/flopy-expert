@@ -1,0 +1,169 @@
+# Example GraphQL queries for FloPy Knowledge Base
+
+# 1. Search for SMS package (exact match)
+query SearchSMS {
+  search(query: "SMS", mode: EXACT, entityType: PACKAGE) {
+    packages {
+      id
+      name
+      code
+      modelFamily
+      purpose
+      userScenarios
+      relatedConcepts
+    }
+    totalResults
+  }
+}
+
+# 2. Semantic search for water table concepts
+query WaterTableConcepts {
+  search(query: "water table", mode: SEMANTIC, limit: 10) {
+    packages {
+      name
+      purpose
+      score
+    }
+    functions {
+      name
+      signature
+      whatItDoes
+      score
+    }
+    totalResults
+  }
+}
+
+# 3. Get specific package details
+query GetWELPackage {
+  getPackage(packageCode: "WEL") {
+    id
+    name
+    code
+    modelFamily
+    filePath
+    purpose
+    docstring
+    userScenarios
+    relatedConcepts
+  }
+}
+
+# 4. Find specific function
+query GetWaterTableFunction {
+  getFunction(functionName: "get_water_table") {
+    id
+    name
+    signature
+    docstring
+    modulePath
+    className
+    whatItDoes
+    whenToUse
+    lineNumber
+  }
+}
+
+# 5. Get class with all methods
+query GetModflowClass {
+  getClass(className: "Modflow") {
+    id
+    name
+    modulePath
+    docstring
+    baseClasses
+    purpose
+    methods {
+      name
+      signature
+      docstring
+      whatItDoes
+    }
+  }
+}
+
+# 6. Find usage patterns for wells
+query WellUsagePatterns {
+  findUsagePatterns(concept: "wells", limit: 5) {
+    id
+    patternName
+    description
+    workflowSteps
+    exampleCode
+    sourceFile
+  }
+}
+
+# 7. Full-text search for boundary conditions
+query BoundaryConditionSearch {
+  search(query: "boundary condition", mode: FULLTEXT, limit: 15) {
+    packages {
+      name
+      code
+      purpose
+      score
+    }
+    functions {
+      name
+      whatItDoes
+      score
+    }
+    totalResults
+  }
+}
+
+# 8. Hybrid search (recommended for general use)
+query HybridSearch {
+  search(query: "recharge", mode: HYBRID, limit: 20) {
+    packages {
+      name
+      code
+      modelFamily
+      purpose
+    }
+    functions {
+      name
+      signature
+      modulePath
+      className
+      whatItDoes
+    }
+    classes {
+      name
+      modulePath
+      purpose
+    }
+    totalResults
+  }
+}
+
+# 9. Get relationships for an entity
+query GetRelationships {
+  getRelationships(entityId: "your-entity-id-here") {
+    entityId
+    entityType
+    entityName
+    relationships {
+      targetId
+      targetName
+      targetType
+      relationshipType
+      strength
+    }
+  }
+}
+
+# 10. Search only functions
+query SearchFunctions {
+  search(query: "plot", mode: HYBRID, entityType: FUNCTION, limit: 10) {
+    functions {
+      name
+      signature
+      modulePath
+      className
+      whatItDoes
+      whenToUse
+    }
+    totalResults
+  }
+}

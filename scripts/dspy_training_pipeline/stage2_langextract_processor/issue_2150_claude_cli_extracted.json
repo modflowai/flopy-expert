@@ -1,0 +1,7 @@
+{
+  "flopy_modules": [
+    "flopy.utils.cvfd_utils.shapefile_to_xcyc"
+  ],
+  "problem": "Cell centroids calculated by shapefile_to_xcyc are incorrect when processing a mesh/grid from a shapefile, showing significant differences compared to geopandas (which produces correct centroids). This causes issues with interpolation algorithms in pilot-points and structural-overlays calibration.",
+  "resolution": "None mentioned - user worked around by switching from AlgoMesh grid to Gridgen"
+}

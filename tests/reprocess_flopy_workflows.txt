@@ -1,0 +1,8 @@
+0e606e65-9dfd-48bb-91fb-f172c11a373a,Notebooks/mf6_data_tutorial04.py
+eb1292dd-28e2-44ce-bfa4-d61ccd47cf87,Notebooks/mf6_lgr_tutorial01.py
+6ad75ec5-c4eb-4b85-8f7a-a7f5b5c5680c,Notebooks/vtk_pathlines_example.py
+b8840276-848b-44cb-a3af-28327b3de931,Notebooks/mf6_data_tutorial08.py
+12ad6581-3cc7-4a7d-88a8-1fe268fd81e7,Notebooks/mf6_mnw2_tutorial01.py
+d9206d4a-a653-4425-a14d-d1933030e57a,Notebooks/pest_tutorial01.py
+5dbb4ae8-0fab-48e8-a446-2cb44f9e576b,Notebooks/mt3d-usgs_example.py
+77695d35-0296-4552-ace3-4401564b75bd,Notebooks/dis_triangle_example.py

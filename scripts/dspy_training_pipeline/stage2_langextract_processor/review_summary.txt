@@ -1,0 +1,2324 @@
+Reviewing all 88 issues...
+
+================================================================================
+ISSUE #1675: What is the difference between flopy and MODFLOW API?
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Difference between flopy and MODFLOW API is unclear
+
+📦 MODULES (3 total):
+  - FloPy: 1
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW API
+    - MODFLOW6
+
+✅ RESOLUTIONS (1):
+  1. FloPy is a package for developing, editing, reading, and writing modflow input files as well as perf
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 1
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1675_reviewed.json
+
+================================================================================
+ISSUE #1681: `numpy.distutils` is deprecated since NumPy 1.23.0
+================================================================================
+
+📋 PROBLEMS (1):
+  1. numpy.distutils deprecation causes rio.resample_to_grid to fail
+
+📦 MODULES (7 total):
+  - FloPy: 1
+  - Non-FloPy: 6
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - numpy.distutils
+    - rio.resample_to_grid
+    - numpy
+    - setuptools
+    - modflow-setup
+
+✅ RESOLUTIONS (4):
+  1. Downgraded to numpy version 1.21.6
+  2. Recommended to use setuptools < 60.0
+  3. Recommended downgrading Python if running an alpha version of 3.12
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 7
+  - Cleaned modules: 3
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_1681_reviewed.json
+
+================================================================================
+ISSUE #1691: bug: trouble reading MODFLOW-2000 binary head output
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Trouble reading MODFLOW-2000 binary head output
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Use FormattedHeadFile to read formatted ascii head files instead of HeadFile
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1691_reviewed.json
+
+================================================================================
+ISSUE #1695: MultiPolygon not iterable
+================================================================================
+
+📋 PROBLEMS (1):
+  1. MultiPolygon not iterable
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. fixed in #1696
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1695_reviewed.json
+
+================================================================================
+ISSUE #1697: bug: flopy will not load model if reach 1 is not connected, error on l
+================================================================================
+
+📋 PROBLEMS (3):
+  1. Flopy fails to load a MODFLOW model when reach 1 is unconnected
+  2. FloPy has a bug parsing connection files
+  3. Some tests are failing
+
+📦 MODULES (6 total):
+  - FloPy: 2
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW6
+    - sfr
+    - FloPy
+    - datautil.py
+
+✅ RESOLUTIONS (1):
+  1. Modify datautil.py line 343 to include 'and max_split_size > 1' in the condition
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 2
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_1697_reviewed.json
+
+================================================================================
+ISSUE #1698: Can set_data infer "layer(s)" by shape of array?
+================================================================================
+
+📋 PROBLEMS (2):
+  1. idomain.set_data() method no longer infers the number of layers
+  2. Problem encountered when generating a model from scratch using external files, which is difficult to
+
+📦 MODULES (3 total):
+  - FloPy: 2
+  - Non-FloPy: 1
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - numpy
+
+  ⚠️  Duplicates: ['flopy.mf6.ModflowGwfdis']
+
+✅ RESOLUTIONS (1):
+  1. Tutorial notebook provided as a starting point for recreating the potential bug
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 2
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1698_reviewed.json
+
+================================================================================
+ISSUE #1701: bug: FloPy load throws error reading .nam file for a USG model
+================================================================================
+
+📋 PROBLEMS (1):
+  1. FloPy throws an error when loading a USG model's .nam file
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (2):
+  1. Use flopy.mfusg.MfUsg.load() to load mfusg models
+  2. Deprecation of USG support was turned into an error
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1701_reviewed.json
+
+================================================================================
+ISSUE #1723: how to plot an unstructured grid from a disu file
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Plotting an unstructured grid from a DISU file fails
+  2. Function _build_grid_geometry_info fails
+
+📦 MODULES (15 total):
+  - FloPy: 4
+  - Non-FloPy: 11
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - DISU
+    - BAS
+    - SMS
+    - OC
+    - DRN
+
+✅ RESOLUTIONS (1):
+  1. Load spatial information using 'from Grid Specification File' option
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 15
+  - Cleaned modules: 4
+  - Removed: 11
+✅ Saved to: ../data/extracted/reviewed/issue_1723_reviewed.json
+
+================================================================================
+ISSUE #1724: bug: Flopy is crashing on function using shapefiles
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Flopy crashes in GridIntersect when using shapefiles
+
+📦 MODULES (6 total):
+  - FloPy: 2
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - Shapely
+    - PyShp
+    - Gridintersect
+    - shapely
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 4
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1724_reviewed.json
+
+================================================================================
+ISSUE #1729: feature: broader path-like support
+================================================================================
+
+📋 PROBLEMS (1):
+  1. FloPy expects strings for some path parameters
+
+📦 MODULES (5 total):
+  - FloPy: 0
+  - Non-FloPy: 5
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MFSimulation
+    - pathlib.Path
+    - os.PathLike
+    - pathlib
+    - os.path
+
+✅ RESOLUTIONS (1):
+  1. Broader path-like support closed by #1730
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 0
+  - Removed: 5
+✅ Saved to: ../data/extracted/reviewed/issue_1729_reviewed.json
+
+================================================================================
+ISSUE #1731: bug:  Issue  when using the "STEPS" keyword in flopy.mf6.ModflowGwfoc(
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Issue when using the "STEPS" keyword in flopy.mf6.ModflowGwfoc() package and saverecord argument
+  2. MODFLOW 6 is not reading the entire list of output control steps
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - fp.mf6.ModflowGwfo
+
+✅ RESOLUTIONS (1):
+  1. Upgrade MODFLOW 6 to version 6.4.1
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 1
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1731_reviewed.json
+
+================================================================================
+ISSUE #1732: plot_pathline with wrong color argument in Modpath Notebooks 
+================================================================================
+
+📋 PROBLEMS (1):
+  1. plot_pathline uses 'color' argument instead of 'colors', resulting in grey lines
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Problem closed by #1687
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1732_reviewed.json
+
+================================================================================
+ISSUE #1740: bug: flopy creates FTL file using MF6 + MT3D USGS: causing crash
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy creates FTL file using MF6 + MT3D USGS causing crash
+
+📦 MODULES (5 total):
+  - FloPy: 1
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MT3D-USGS
+    - MF6
+    - ModelMuse
+    - MF6 GWT
+
+✅ RESOLUTIONS (1):
+  1. Switch to MF6 GWT
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 1
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_1740_reviewed.json
+
+================================================================================
+ISSUE #1749: Export MODPATH tracks to VTK?
+================================================================================
+
+📋 PROBLEMS (1):
+  1. FloPy does not export MODPATH tracks as polylines to VTK files
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODPATH
+
+✅ RESOLUTIONS (1):
+  1. closed by #1750
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 1
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1749_reviewed.json
+
+================================================================================
+ISSUE #1769: bug:  MODPATH 6 / mp6 : Program Exception - stack overflow --> ONLY IF
+================================================================================
+
+📋 PROBLEMS (2):
+  1. MODPATH6 executable fails to run when invoked from a FloPy script
+  2. Model not running properly due to incorrect mp6.exe executable
+
+📦 MODULES (3 total):
+  - FloPy: 1
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODPATH6
+    - FloPy
+
+✅ RESOLUTIONS (1):
+  1. Use the mp6.exe executable obtained via the get-modflow command instead of the one downloaded direct
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 1
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1769_reviewed.json
+
+================================================================================
+ISSUE #1776: Nocross term not recognized
+================================================================================
+
+📋 PROBLEMS (1):
+  1. NOCROSS command in Flopy's dispersion package is not recognized
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (3):
+  1. Support for NOCROSS has been implemented
+  2. Fix available by pulling on develop or with the next release of FloPy
+  3. Amend instantiation of the MT3D model with the version argument: flopy.mt3d.Mt3dms(..., version='mt3
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1776_reviewed.json
+
+================================================================================
+ISSUE #1779: bug: float32 data not returned in <pkg>.stress_period_data.to_array()
+================================================================================
+
+📋 PROBLEMS (2):
+  1. float32 data not returned in <pkg>.stress_period_data.to_array()
+  2. Incorrect result when specifying elevation as float32 or float64
+
+📦 MODULES (6 total):
+  - FloPy: 5
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MFTransientList
+
+✅ RESOLUTIONS (1):
+  1. Convert input data to float64
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 5
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1779_reviewed.json
+
+================================================================================
+ISSUE #1793: bug: set_data after initialization of package with empty list for a st
+================================================================================
+
+📋 PROBLEMS (1):
+  1. RCH package does not correctly write empty stress periods after using set_data()
+
+📦 MODULES (3 total):
+  - FloPy: 0
+  - Non-FloPy: 3
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - Flopy
+    - RCH package
+    - stress_period_data
+
+✅ RESOLUTIONS (1):
+  1. Fix for bug implemented in FloPy develop branch
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 0
+  - Removed: 3
+✅ Saved to: ../data/extracted/reviewed/issue_1793_reviewed.json
+
+================================================================================
+ISSUE #1809: Feature: In Modflow-2005/NWT, easily load a model with packages writte
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Difficulty changing Modflow-2005/NWT model packages from internal to external writing
+
+📦 MODULES (3 total):
+  - FloPy: 3
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Set model.external_path = '.' before writing model input files to make all arrays and lists external
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 3
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1809_reviewed.json
+
+================================================================================
+ISSUE #1817: Adding Modpath7Sim for second time replaces, but does not trigger 'rep
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Adding Modpath7Sim for second time replaces, but does not trigger 'replace' warning
+
+📦 MODULES (8 total):
+  - FloPy: 0
+  - Non-FloPy: 8
+  - Duplicates: 0
+  - Malformed: 8
+
+  ⚠️  Non-FloPy modules:
+    - Modpath7Sim
+    - Modpath7
+    - mf2005
+    - mf6
+    - dis
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 8
+  - Cleaned modules: 0
+  - Removed: 8
+✅ Saved to: ../data/extracted/reviewed/issue_1817_reviewed.json
+
+================================================================================
+ISSUE #1840: bug: cellid (node number, disv) supplied as int to ModflowGwfmaw writt
+================================================================================
+
+📋 PROBLEMS (1):
+  1. cellid (node number, disv) supplied as int to ModflowGwfmaw written as float
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Provide cellid as a list of tuples in ModflowGwfmaw connection data
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1840_reviewed.json
+
+================================================================================
+ISSUE #1841: bug: error on load of exchange pacakge
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Error on load of exchange package in flopy
+
+📦 MODULES (5 total):
+  - FloPy: 1
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MF6
+    - exchange package
+    - disv
+    - dis
+
+✅ RESOLUTIONS (1):
+  1. Fix for exchange package loading error implemented
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 1
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_1841_reviewed.json
+
+================================================================================
+ISSUE #1867: bug: Error when loading an mf6 model with time series package
+================================================================================
+
+📋 PROBLEMS (2):
+  1. flopy.mf6.MFSimulation.load fails when reading time series data
+  2. Issue in read_list_data_from_file
+
+📦 MODULES (5 total):
+  - FloPy: 5
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. PR committed to develop branch to fix the problem
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 5
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1867_reviewed.json
+
+================================================================================
+ISSUE #1880: bug: Check Laytyp in MFsimulation.load with verify_data=True
+================================================================================
+
+📋 PROBLEMS (1):
+  1. TypeError when loading confined Modflow 6 model in Flopy with verify_data=True
+
+📦 MODULES (0 total):
+  - FloPy: 0
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. A fix was committed to the develop branch of FloPy
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 0
+  - Cleaned modules: 0
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1880_reviewed.json
+
+================================================================================
+ISSUE #1895: bug: Read MT3DMS and MT3DUSGS Budgets from List File fails width ADV-P
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Read MT3DMS and MT3DUSGS Budgets from List File fails
+
+📦 MODULES (5 total):
+  - FloPy: 0
+  - Non-FloPy: 5
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MT3DMS
+    - MT3DUSGS
+    - ADV-Package
+    - GCG PACKAGE
+    - re
+
+✅ RESOLUTIONS (4):
+  1. Use regex instead of static character spans for parsing
+  2. Add a simple conditional to skip lines if string contains 'TOTAL PARTICLES USED IN THE CURRENT STEP'
+  3. Provide a PR
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 0
+  - Removed: 5
+✅ Saved to: ../data/extracted/reviewed/issue_1895_reviewed.json
+
+================================================================================
+ISSUE #1909: SSM Package fileinput does not accept 'mixed' keyword MF6
+================================================================================
+
+📋 PROBLEMS (1):
+  1. SSM Package fileinput does not accept 'mixed' keyword
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (2):
+  1. Try the latest flopy code from the develop branch as it has a fix.
+  2. Fix was closed by #1920 and included in Flopy version 3.4.2.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1909_reviewed.json
+
+================================================================================
+ISSUE #1911: bug: get_structured_faceflows outputting  wrong flows
+================================================================================
+
+📋 PROBLEMS (3):
+  1. get_structured_faceflows outputting wrong flows
+  2. Incorrect logic in flow term calculation snippet
+  3. Edge case issues with function
+
+📦 MODULES (7 total):
+  - FloPy: 5
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - get_structured_faceflows
+    - numpy
+
+✅ RESOLUTIONS (1):
+  1. Better testing for the function
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 7
+  - Cleaned modules: 6
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1911_reviewed.json
+
+================================================================================
+ISSUE #1922: bug: *** TypeError: 'MultiLineString' object is not iterable
+================================================================================
+
+📋 PROBLEMS (1):
+  1. TypeError: 'MultiLineString' object is not iterable when using flopy.utils.gridintersect.GridInterse
+
+📦 MODULES (5 total):
+  - FloPy: 1
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - shapely.geometry.MultiLineString
+    - shapely.geometry.shape
+    - shapefile.Reader
+    - Flopy
+
+✅ RESOLUTIONS (1):
+  1. See #1923 for potential fix
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 3
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1922_reviewed.json
+
+================================================================================
+ISSUE #1927: bug: very slow export with model_attributes_to_shapefile
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Very slow export with model_attributes_to_shapefile
+
+📦 MODULES (6 total):
+  - FloPy: 4
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - pyproj.CRS.from_epsg
+    - model_attributes_to_shapefile
+
+✅ RESOLUTIONS (1):
+  1. Performance issue with model_attributes_to_shapefile could not be reproduced
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 4
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1927_reviewed.json
+
+================================================================================
+ISSUE #1933: bug: Default value of `structured` in `modpath. ParticleData` is not d
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Default value of 'structured' in 'modpath.ParticleData' is not documented correctly
+
+📦 MODULES (1 total):
+  - FloPy: 0
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - fp.modpath.ParticleData
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 0
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1933_reviewed.json
+
+================================================================================
+ISSUE #1950: bug: export_contours broken with matplotlib 3.8
+================================================================================
+
+📋 PROBLEMS (1):
+  1. export_contours and export_contourf are broken with matplotlib 3.8
+
+📦 MODULES (7 total):
+  - FloPy: 4
+  - Non-FloPy: 3
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - matplotlib
+    - plot
+    - ContourSet
+
+✅ RESOLUTIONS (1):
+  1. Modification needed in flopy.export.utils to handle matplotlib's ContourSet as a Collection with a s
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 7
+  - Cleaned modules: 5
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1950_reviewed.json
+
+================================================================================
+ISSUE #1958: bug: Importing cross-sectional USG model results has 3 dimensional err
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Importing cross-sectional USG model results has 3 dimensional error
+
+📦 MODULES (3 total):
+  - FloPy: 1
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 2
+
+  ⚠️  Non-FloPy modules:
+    - Util3d
+    - Util2d
+
+✅ RESOLUTIONS (1):
+  1. Resolved via #1959 by changing a line in flopy/mfusg/mfusgbcf.py
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 1
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_1958_reviewed.json
+
+================================================================================
+ISSUE #1977: feature: Allow for user defined attribute columns in modpath shapefile
+================================================================================
+
+📋 PROBLEMS (1):
+  1. User-defined attribute columns in pathline_data recarray are not exported to shapefile by write_shap
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - PathlineFile
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 1
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_1977_reviewed.json
+
+================================================================================
+ISSUE #1995: bug: Mf6Splitter import error
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Mf6Splitter import error
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Update flopy installation
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_1995_reviewed.json
+
+================================================================================
+ISSUE #2007: Error when exporting hds to VTK (large file)
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Error when exporting HDS to VTK (large file)
+
+📦 MODULES (5 total):
+  - FloPy: 0
+  - Non-FloPy: 5
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - HeadFile
+    - vtk.Vtk
+    - vtkobj.add_heads
+    - vtkobj.write
+    - numpy
+
+✅ RESOLUTIONS (1):
+  1. specify `dtype=object` somewhere to use pointers/existing references instead of new memory
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 1
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_2007_reviewed.json
+
+================================================================================
+ISSUE #2027: Splitting small model using optimize_splitting_mask
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Small bug when running a small model and splitting that model using optimize_splitting_mask
+
+📦 MODULES (5 total):
+  - FloPy: 0
+  - Non-FloPy: 5
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - optimize_splitting_mask
+    - modflow 6
+    - flopy 3.6.0.dev0
+    - MF 6.4.2
+    - flopy
+
+✅ RESOLUTIONS (1):
+  1. Run `./pixi run install-flopy` in the class directory to install the version of flopy with the fix
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 0
+  - Removed: 5
+✅ Saved to: ../data/extracted/reviewed/issue_2027_reviewed.json
+
+================================================================================
+ISSUE #2048: bug: Cannot open VTK file after creating it 
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Cannot open VTK file after creating it
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. The .add_array() method has a masked_values= parameter that will set array values to nan.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2048_reviewed.json
+
+================================================================================
+ISSUE #2049: bug: GridIntersect's intersect method may throw IndexError when LineSt
+================================================================================
+
+📋 PROBLEMS (1):
+  1. GridIntersect's intersect method may throw IndexError when LineString starts outside model grid
+
+📦 MODULES (6 total):
+  - FloPy: 1
+  - Non-FloPy: 5
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - FloPy
+    - shapely.geometry.Point
+    - math.isclose
+    - numpy.isclose
+    - numpy.isclose
+
+  ⚠️  Duplicates: ['numpy.isclose']
+
+✅ RESOLUTIONS (3):
+  1. Implement approximate equality check using math.isclose() or numpy.isclose() within find_position_in
+  2. With method='vertex' it does work.
+  3. I'll see if I can fix it with isclose (NumPy's version, of course) and submit a PR
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 3
+  - Removed: 3
+✅ Saved to: ../data/extracted/reviewed/issue_2049_reviewed.json
+
+================================================================================
+ISSUE #2053: bug: failure to load mf6 test models
+================================================================================
+
+📋 PROBLEMS (4):
+  1. FloPy fails to load test001a_Tharmonic_tabs model
+  2. FloPy fails to load test004_bcfss model
+  3. FloPy fails to load test014_NWTP3Low_dev and test041_flowdivert_nwt_dev models
+  4. Comments at the end of the line in 'test004_bcfss' make data loading difficult for flopy
+
+📦 MODULES (8 total):
+  - FloPy: 2
+  - Non-FloPy: 6
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MFSimulation
+    - flow15.tdis
+    - gwf_1.npf
+    - mf6
+    - Integer2dReaderType
+
+✅ RESOLUTIONS (1):
+  1. test001a_Tharmonic_tabs, test014_NWTP3Low_dev, and test041_flowdivert_nwt_dev are fairly easy fixes
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 8
+  - Cleaned modules: 2
+  - Removed: 6
+✅ Saved to: ../data/extracted/reviewed/issue_2053_reviewed.json
+
+================================================================================
+ISSUE #2058: bug: ModflowUtlobs only loads last "continuous" block
+================================================================================
+
+📋 PROBLEMS (2):
+  1. ModflowUtlobs only loads last "continuous" block
+  2. class summary is being abbreviated
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (2):
+  1. A fix for this problem has been merged into the develop branch
+  2. discuss with the rest of the flopy team the best way to display the class summary in these cases
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2058_reviewed.json
+
+================================================================================
+ISSUE #2059: feature: Read gridgen files without Gridgen instance
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Read gridgen files without Gridgen instance
+
+📦 MODULES (8 total):
+  - FloPy: 0
+  - Non-FloPy: 8
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - Gridgen
+    - ModelGrid
+    - get_iac
+    - read1d
+    - np
+
+  ⚠️  Duplicates: ['Gridgen']
+
+✅ RESOLUTIONS (2):
+  1. Move reading gridgen files to a static method or separate function
+  2. Submit a PR to merge the proposed changes
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 8
+  - Cleaned modules: 0
+  - Removed: 8
+✅ Saved to: ../data/extracted/reviewed/issue_2059_reviewed.json
+
+================================================================================
+ISSUE #2072: New datatype checking (or np.ndarray requirements) in flopy/modpath/mp
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy.modpath.ParticleData fails to process 1D numpy arrays for partlocs parameter
+
+📦 MODULES (4 total):
+  - FloPy: 2
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - numpy
+    - numpy.lib.recfunctions.unstructured_to_structured
+
+✅ RESOLUTIONS (1):
+  1. Recasting partlocs to an explicit 1D np.ndarray (partlocs.reshape(len(partlocs), 1)) or a list (list
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 4
+  - Cleaned modules: 4
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2072_reviewed.json
+
+================================================================================
+ISSUE #2073: VoronoiGrid creates "polygons" with less than 3 vertex pairs
+================================================================================
+
+📋 PROBLEMS (1):
+  1. VoronoiGrid creates "polygons" with less than 3 vertex pairs
+
+📦 MODULES (4 total):
+  - FloPy: 0
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - VoronoiGrid
+    - VertexGrid
+    - FloPy
+    - PRT
+
+✅ RESOLUTIONS (4):
+  1. A simple check at the end of the tri2vor method resolves this issue by checking for nodes with less 
+  2. PR submission planned
+  3. Duplicate edge vertex fix implemented
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 4
+  - Cleaned modules: 0
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_2073_reviewed.json
+
+================================================================================
+ISSUE #2079: bug: LGR utility CDIST is 2D, MF6 GWFGWF expects 3D
+================================================================================
+
+📋 PROBLEMS (1):
+  1. LGR utility CDIST calculates 2D distance, but MF6 GWF Exchange expects 3D
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MF6 Groundwater Flow (GWF) Exchange
+
+✅ RESOLUTIONS (1):
+  1. The description of CDIST in the MODFLOW 6 input/output guide is incorrect; the LGR utility is correc
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 1
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2079_reviewed.json
+
+================================================================================
+ISSUE #2086: bug: `np.alltrue` will be deprecated in numpy 2.0
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy.plot.PlotMapView.contour_array uses np.alltrue which will be deprecated
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - numpy
+
+✅ RESOLUTIONS (1):
+  1. Replace np.alltrue with np.all
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2086_reviewed.json
+
+================================================================================
+ISSUE #2101: PlotMapView resets limits of existing axes to entire model domain
+================================================================================
+
+📋 PROBLEMS (2):
+  1. PlotMapView resets limits of existing axes to entire model domain
+  2. PlotMapView changes axis limits
+
+📦 MODULES (5 total):
+  - FloPy: 2
+  - Non-FloPy: 3
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - matplotlib.pyplot
+    - matplotlib.axes.Axes
+    - PlotMapView
+
+✅ RESOLUTIONS (2):
+  1. Set axes limits after calling PlotMapView and pass the axes object to PlotMapView
+  2. Use the 'extent' parameter in PlotMapView to set plotting extent
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 4
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2101_reviewed.json
+
+================================================================================
+ISSUE #2111: bug: Stack trace terminated abnormally.
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Stack trace terminated abnormally when running Modflow-2000 using flopy
+  2. Error from mf2k.exe
+
+📦 MODULES (16 total):
+  - FloPy: 0
+  - Non-FloPy: 16
+  - Duplicates: 2
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - flopy
+    - Modflow-2000
+    - ModflowBas6
+    - DIS
+    - LMT6
+
+  ⚠️  Duplicates: ['DIS', 'flopy']
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 16
+  - Cleaned modules: 0
+  - Removed: 16
+✅ Saved to: ../data/extracted/reviewed/issue_2111_reviewed.json
+
+================================================================================
+ISSUE #2114: bug: MF6 does not recognize the option name "BUDGETCSV" in LAK package
+================================================================================
+
+📋 PROBLEMS (2):
+  1. MF6 does not recognize the option name "BUDGETCSV" in LAK package written by FloPy due to odd whites
+  2. Model ran extremely slowly
+
+📦 MODULES (5 total):
+  - FloPy: 1
+  - Non-FloPy: 4
+  - Duplicates: 2
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MF6
+    - MODFLOW
+    - MODFLOW
+    - MODFLOW
+
+  ⚠️  Duplicates: ['MODFLOW', 'MODFLOW']
+
+✅ RESOLUTIONS (3):
+  1. Manually retype the BUDGETCSV line or replace the whitespace characters in the input file.
+  2. Initial problem solved by using MODFLOW v6.4.4
+  3. Slow model performance resolved by using MODFLOW v6.4.0
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 1
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_2114_reviewed.json
+
+================================================================================
+ISSUE #2117: bug: gwf.modeltime.steady_state inconsistent with input/output
+================================================================================
+
+📋 PROBLEMS (2):
+  1. gwf.modeltime.steady_state inconsistent with input/output from ModflowGwfsto
+  2. gwf.modeltime.steady_state returns all True when STO package is not loaded
+
+📦 MODULES (10 total):
+  - FloPy: 9
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - STO Package
+
+✅ RESOLUTIONS (2):
+  1. Refactor Flopy input to a single steady_state dictionary of True/False values
+  2. The first problem should now be fixed.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 10
+  - Cleaned modules: 9
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2117_reviewed.json
+
+================================================================================
+ISSUE #2118: bug: mf6 package name alters behavior with flopy
+================================================================================
+
+📋 PROBLEMS (1):
+  1. mf6 package name alters behavior with flopy
+
+📦 MODULES (6 total):
+  - FloPy: 5
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - flopy
+
+✅ RESOLUTIONS (1):
+  1. A fix has been checked in to the develop branch for this issue.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 5
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2118_reviewed.json
+
+================================================================================
+ISSUE #2145: bug: irch for rch and evt packages
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy cannot load existing models with rch and evt packages due to an irch error
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. models now load without error
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2145_reviewed.json
+
+================================================================================
+ISSUE #2150: bug: possible error detected in cvfd_utils cell centroids function sha
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Cell centroids are shown to be incorrect when processing a mesh/grid as a shapefile using cvfd_utils
+  2. Incorrect node locations in DISV
+
+📦 MODULES (17 total):
+  - FloPy: 5
+  - Non-FloPy: 12
+  - Duplicates: 3
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - cvfd_utils
+    - cvfd_utils.shapefile_to_xcyc
+    - geopandas
+    - cvfd_utils.shapefile_to_cvfd
+    - AlgoMesh
+
+  ⚠️  Duplicates: ['DISV', 'Gridgen', 'cvfd_utils']
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 17
+  - Cleaned modules: 2
+  - Removed: 15
+✅ Saved to: ../data/extracted/reviewed/issue_2150_reviewed.json
+
+================================================================================
+ISSUE #2152: bug: Grid intersect taking excessively long on simple voronoi grid
+================================================================================
+
+📋 PROBLEMS (3):
+  1. Grid intersect taking excessively long on simple voronoi grid
+  2. GridIntersect is taking forever to parse the cell2d list and construct the polygons
+  3. Issues regarding rotated/offset grids
+
+📦 MODULES (8 total):
+  - FloPy: 4
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - GridIntersect
+    - shapely.polygons
+    - modelgrid.get_cell_vertices
+    - VertexGrid
+
+✅ RESOLUTIONS (1):
+  1. Creating geometries using shapely.polygons and modelgrid.get_cell_vertices is near instantaneous
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 8
+  - Cleaned modules: 5
+  - Removed: 3
+✅ Saved to: ../data/extracted/reviewed/issue_2152_reviewed.json
+
+================================================================================
+ISSUE #2156: feat: list all simulation files
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Missing a way to list all input files for a simulation and distinguish them from output files
+
+📦 MODULES (0 total):
+  - FloPy: 0
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. More detailed discussion and a better proposed solution available in #2462
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 0
+  - Cleaned modules: 0
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2156_reviewed.json
+
+================================================================================
+ISSUE #2162: feature:  flopy.discretization.unstructuredgrid.intersect...but in 3D!
+================================================================================
+
+📋 PROBLEMS (4):
+  1. Ability to extract x,y,z coordinate given a node using an Unstructured Grid
+  2. Ability to extract node given an x,y,z using an Unstructured Grid
+  3. flopy.discretization.unstructuredgrid.intersect returns Cell2d number instead of node number for Uns
+  4. Many methods for Unstructured Grids still rely on layered format
+
+📦 MODULES (5 total):
+  - FloPy: 1
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - modelgrid.xyzvertices
+    - modelgrid.xcellcenters
+    - modelgrid.ycellcenters
+    - modelgrid.zcellcenters
+
+✅ RESOLUTIONS (3):
+  1. Intersect method already supports 3D with optional z parameter
+  2. icell2d number is the same as the node number
+  3. Working with utilities of the vertex grid and converting between vertex grid node number and unstruc
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 1
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_2162_reviewed.json
+
+================================================================================
+ISSUE #2163: bug: Plotting water table for Unstructured Grid
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Plotting water table for Unstructured Grid with pinch outs results in blank plots
+
+📦 MODULES (3 total):
+  - FloPy: 2
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - matplotlib.pyplot
+
+✅ RESOLUTIONS (1):
+  1. Apply .flatten() method to head data before plotting
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 3
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2163_reviewed.json
+
+================================================================================
+ISSUE #2178: bug: cannot pull CellBudgetFile records for a single package instance 
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Cannot pull CellBudgetFile records for a single package instance when there are multiple packages of
+  2. cannot pull CellBudgetFile record
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (2):
+  1. A recent addition through this PR should help.
+  2. Use the develop version
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2178_reviewed.json
+
+================================================================================
+ISSUE #2182: bug: Model name in tutorial too long
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Model name in tutorial too long for Modflow 6
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. updated tutorial with a shorter model name has been checked in
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2182_reviewed.json
+
+================================================================================
+ISSUE #2190: bug: pandas read in `mfdataplist` throwing a warning
+================================================================================
+
+📋 PROBLEMS (2):
+  1. pandas read in mfdataplist throwing a warning
+  2. ParserWarnings
+
+📦 MODULES (5 total):
+  - FloPy: 3
+  - Non-FloPy: 2
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - pandas
+    - pandas
+
+  ⚠️  Duplicates: ['pandas']
+
+✅ RESOLUTIONS (1):
+  1. flopy now traps pandas parser warnings and displays contextual information with the warning includin
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 4
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2190_reviewed.json
+
+================================================================================
+ISSUE #2210: bug: weird logic for checking "Size of vector" in add_transient_vector
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Weird logic for checking 'Size of vector' in add_transient_vector() leading to an assertion error
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Problem is not a bug and issue is closed.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2210_reviewed.json
+
+================================================================================
+ISSUE #2214: bug: failing test_gridintersect.py
+================================================================================
+
+📋 PROBLEMS (2):
+  1. failing test_gridintersect.py::test_linestring_offset_rot_structured_grid
+  2. Test failure caused by slightly different values from built-in sin versus NumPy sin
+
+📦 MODULES (6 total):
+  - FloPy: 1
+  - Non-FloPy: 5
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - shapely.LineString
+    - numpy.sqrt
+    - shapely
+    - numpy.sin
+    - shapely.affinity
+
+✅ RESOLUTIONS (3):
+  1. dbrakenhoff will look into this
+  2. modify this test to avoid the small intersection, like change the rotation angle to definitely inter
+  3. submit a quick PR on this
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 6
+  - Cleaned modules: 6
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2214_reviewed.json
+
+================================================================================
+ISSUE #2250: bug: Extraneous kwargs provided to the energy storage package 
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Extraneous kwargs provided to the energy storage package
+
+📦 MODULES (3 total):
+  - FloPy: 2
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW 6
+
+✅ RESOLUTIONS (2):
+  1. Use the last release or develop versions of both MODFLOW 6 and FloPy
+  2. Regenerate FloPy MF6 package classes
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 2
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2250_reviewed.json
+
+================================================================================
+ISSUE #2253: bug: The Example Gallery appears to be not building correctly
+================================================================================
+
+📋 PROBLEMS (1):
+  1. The Example Gallery appears to be not building correctly
+
+📦 MODULES (3 total):
+  - FloPy: 1
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - rtd.yml
+    - GH actions
+
+✅ RESOLUTIONS (4):
+  1. Fix for Example Gallery build issue is being worked on
+  2. Latest version of Example Gallery should soon be fixed
+  3. A commit was pushed to master to trigger a build as a one-time fix
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 1
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_2253_reviewed.json
+
+================================================================================
+ISSUE #2260: bug: trying to run lpr_tutorial01 I get an MFDataException
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Running lpr_tutorial01.py fails with MFDataException
+  2. Problem related to flopy.mf6.data.mfdatastorage
+
+📦 MODULES (14 total):
+  - FloPy: 12
+  - Non-FloPy: 2
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - numpy
+    - matplotlib
+
+  ⚠️  Duplicates: ['flopy.mf6.data.mfdatastorage']
+
+✅ RESOLUTIONS (1):
+  1. Install the develop branch as a workaround
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 14
+  - Cleaned modules: 13
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2260_reviewed.json
+
+================================================================================
+ISSUE #2263: bug: `flopy.utils.cvfdutil.gridlist_to_disv_gridprops` not working for
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy.utils.cvfdutil.gridlist_to_disv_gridprops not working for nested grids with arbitrary levels o
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (2):
+  1. Update the vertex-to-cell mapping as vertices are added to the larger cell
+  2. Feel free to submit a PR or I can try to take a look the week after next.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2263_reviewed.json
+
+================================================================================
+ISSUE #2268: flopy.modflow.mfbcf module
+================================================================================
+
+📋 PROBLEMS (1):
+  1. When loading an existing modflow model with Modflow.load, sf1 and sf2 in the bcf package are respect
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Documentation clarifies the definitions of sf1 and sf2 in the bcf package
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2268_reviewed.json
+
+================================================================================
+ISSUE #2277: UZF Cells Package Data not processed in simulation
+================================================================================
+
+📋 PROBLEMS (2):
+  1. UZF Cells Package Data not processed in simulation
+  2. MODFLOW fails to read UZF package data from the input file
+
+📦 MODULES (8 total):
+  - FloPy: 0
+  - Non-FloPy: 8
+  - Duplicates: 2
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - Flopy
+    - UZF
+    - UZT
+    - STO
+    - Flopy
+
+  ⚠️  Duplicates: ['Flopy', 'UZF']
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 8
+  - Cleaned modules: 0
+  - Removed: 8
+✅ Saved to: ../data/extracted/reviewed/issue_2277_reviewed.json
+
+================================================================================
+ISSUE #2280: SIGSEGV, segmentation error running MODFLOW
+================================================================================
+
+📋 PROBLEMS (1):
+  1. SIGSEGV, segmentation error running MODFLOW
+
+📦 MODULES (2 total):
+  - FloPy: 0
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW
+    - modflow6
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 0
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_2280_reviewed.json
+
+================================================================================
+ISSUE #2283: bug: `modelgrid` coord info dropped when using a DISV grid
+================================================================================
+
+📋 PROBLEMS (2):
+  1. modelgrid coord info dropped when using a DISV grid
+  2. modelgrid object does not get coordinate information from DI
+
+📦 MODULES (11 total):
+  - FloPy: 10
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - DiscretizationType
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 11
+  - Cleaned modules: 10
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2283_reviewed.json
+
+================================================================================
+ISSUE #2289: bug: flopy.plot.PlotCrossSection not plotting projected coords
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy.plot.PlotCrossSection plots with orthogonal coordinates instead of projected
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. To plot cross sections using geographic/projected coordinates use geographic_coords=True
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2289_reviewed.json
+
+================================================================================
+ISSUE #2299: feature: flopy.plot.crosssection plot cell centres (DISU)
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy.plot.crosssection plot_grid does not plot cell centres for DISU cross-sections
+
+📦 MODULES (3 total):
+  - FloPy: 3
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Add separate methods, plot_nodes and plot_vertices, to both PlotMapView and PlotCrossSection to plot
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 3
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2299_reviewed.json
+
+================================================================================
+ISSUE #2321: cvfd util bug - skip_hanging_node_check
+================================================================================
+
+📋 PROBLEMS (2):
+  1. flopy.utils.cvfdutil.shapefile_to_cvfd fails
+  2. hanging_node_check got stuck and ran forever
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Issue closed given #2423
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2321_reviewed.json
+
+================================================================================
+ISSUE #2342: bug: typo shapely function call within gridintersect
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Typo in shapely function call within flopy.utils.gridintersect.py
+
+📦 MODULES (3 total):
+  - FloPy: 1
+  - Non-FloPy: 2
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - shapely
+    - shapely
+
+  ⚠️  Duplicates: ['shapely']
+
+✅ RESOLUTIONS (1):
+  1. Fix is submitted through PR #2343
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 3
+  - Cleaned modules: 2
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2342_reviewed.json
+
+================================================================================
+ISSUE #2353: bug: Flopy does not load an MF6 EVT package with a Boundary Name
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Flopy does not load an MF6 EVT package with a Boundary Name
+  2. float(data) fails in convert_data function
+
+📦 MODULES (4 total):
+  - FloPy: 2
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MF6 EVT package
+    - MF6
+
+✅ RESOLUTIONS (1):
+  1. Investigation of data conversion issue initiated
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 4
+  - Cleaned modules: 2
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_2353_reviewed.json
+
+================================================================================
+ISSUE #2389: Feature Request: Support for the SWR Package in FloPy
+================================================================================
+
+📋 PROBLEMS (1):
+  1. SWR package not supported in FloPy
+
+📦 MODULES (4 total):
+  - FloPy: 1
+  - Non-FloPy: 3
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - FloPy
+    - SWR package
+    - MODFLOW-NWT
+
+✅ RESOLUTIONS (1):
+  1. A ModflowSwr1 class exists in flopy.modflow.mfswr1 for SWR post-processing
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 4
+  - Cleaned modules: 1
+  - Removed: 3
+✅ Saved to: ../data/extracted/reviewed/issue_2389_reviewed.json
+
+================================================================================
+ISSUE #2395: bug: `ParticleData.to_prp()` returns global coordinates
+================================================================================
+
+📋 PROBLEMS (1):
+  1. ParticleData.to_prp() returns global coordinates
+
+📦 MODULES (4 total):
+  - FloPy: 2
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW 6 PRT6
+    - modflow6
+
+✅ RESOLUTIONS (4):
+  1. Add option to to_prp() for returning global or model coordinates
+  2. Review options for specifying model coordinates in Modflow6
+  3. Specify vertices in model coordinates
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 4
+  - Cleaned modules: 2
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_2395_reviewed.json
+
+================================================================================
+ISSUE #2402: Is there some interest in having an GroundWaterML2 import/export in fl
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Absence of GroundWaterML2 import/export functionality in flopy
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Develop and implement GroundWaterML2 import/export plugin for flopy
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2402_reviewed.json
+
+================================================================================
+ISSUE #2415: does Mf6Splitter work for multilayer models?
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Mf6Splitter does not work for multilayer models
+  2. Mf6Splitter does not work for GWE models
+
+📦 MODULES (13 total):
+  - FloPy: 10
+  - Non-FloPy: 3
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - GWE models
+    - GWF models
+    - GWT models
+
+  ⚠️  Duplicates: ['flopy.mf6.utils.Mf6Splitter']
+
+✅ RESOLUTIONS (2):
+  1. The model splitter supports multi-layer models. It does not support splitting models differently by 
+  2. Updates to support GWE models will be made
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 13
+  - Cleaned modules: 9
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_2415_reviewed.json
+
+================================================================================
+ISSUE #2416: Use uv or pixi in CI?
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Current CI jobs use pip or micromamba
+  2. Conda environment file needs to be kept in sync with pyproject.toml
+
+📦 MODULES (16 total):
+  - FloPy: 0
+  - Non-FloPy: 16
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - pip
+    - micromamba
+    - setup-python
+    - setup-micromamba
+    - flopy
+
+✅ RESOLUTIONS (2):
+  1. Remove the conda environment file
+  2. Use Pixi for Flopy CI
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 16
+  - Cleaned modules: 0
+  - Removed: 16
+✅ Saved to: ../data/extracted/reviewed/issue_2416_reviewed.json
+
+================================================================================
+ISSUE #2429: Horizontal well using MNW2
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Strange behavior encountered with MNW2 for horizontal well gallery
+  2. Multi-node wells (MNW) cause convergence issues and unrepresentative water budget values when not ac
+
+📦 MODULES (9 total):
+  - FloPy: 0
+  - Non-FloPy: 9
+  - Duplicates: 1
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW-NWT
+    - MNW2
+    - CHD
+    - RIV
+    - RCH
+
+  ⚠️  Duplicates: ['MNW2']
+
+✅ RESOLUTIONS (1):
+  1. Activate/deactivate wells per stress period using itmp.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 9
+  - Cleaned modules: 0
+  - Removed: 9
+✅ Saved to: ../data/extracted/reviewed/issue_2429_reviewed.json
+
+================================================================================
+ISSUE #2440: bug: NodeParticleData error message expects array instead of list (a q
+================================================================================
+
+📋 PROBLEMS (1):
+  1. NodeParticleData expects array instead of list
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. NodeParticleData error fixed
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2440_reviewed.json
+
+================================================================================
+ISSUE #2455: AttributeError: 'WindowsPath' object has no attribute 'lower'.
+================================================================================
+
+📋 PROBLEMS (1):
+  1. AttributeError: 'WindowsPath' object has no attribute 'lower' when running simulation
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. AttributeError: 'WindowsPath' object has no attribute 'lower' fixed by pull request #2457
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2455_reviewed.json
+
+================================================================================
+ISSUE #2459: bug: Headfile.reverse() changes time-step indices
+================================================================================
+
+📋 PROBLEMS (1):
+  1. Headfile.reverse() changes time-step indices, leading to a mismatch with transport model time steps 
+
+📦 MODULES (1 total):
+  - FloPy: 1
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (1):
+  1. Fix applied to Headfile by changing header["kstp"] to (header["ktsp"] - 1)
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 1
+  - Cleaned modules: 1
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2459_reviewed.json
+
+================================================================================
+ISSUE #2473: bug: budgetfile.reverse() - unable to load w/ flopy
+================================================================================
+
+📋 PROBLEMS (2):
+  1. budgetfile.reverse() creates a reversed file that cannot be loaded by flopy
+  2. Unicode error is thrown
+
+📦 MODULES (2 total):
+  - FloPy: 2
+  - Non-FloPy: 0
+  - Duplicates: 0
+  - Malformed: 0
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 2
+  - Removed: 0
+✅ Saved to: ../data/extracted/reviewed/issue_2473_reviewed.json
+
+================================================================================
+ISSUE #2474: bug:SSM Package Incorrectly Assigned in Model Splitter
+================================================================================
+
+📋 PROBLEMS (1):
+  1. SSM Package Incorrectly Assigned in Model Splitter
+
+📦 MODULES (5 total):
+  - FloPy: 1
+  - Non-FloPy: 4
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - mf6split.split_multi_model
+    - SSM package
+    - WEL package
+    - GHB package
+
+✅ RESOLUTIONS (1):
+  1. PR #2465 includes updates for SSM package remapping which fixes this issue.
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 5
+  - Cleaned modules: 1
+  - Removed: 4
+✅ Saved to: ../data/extracted/reviewed/issue_2474_reviewed.json
+
+================================================================================
+ISSUE #2477: bug: flopy.mfusg.MfUsg.load( ) is not reading the well package correct
+================================================================================
+
+📋 PROBLEMS (1):
+  1. flopy.mfusg.MfUsg.load() is not reading the well package correctly
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - MODFLOW-USG well package
+
+✅ RESOLUTIONS (0):
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 1
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2477_reviewed.json
+
+================================================================================
+ISSUE #2497: bug: `Mf6Splitter` does not work when ATS is active
+================================================================================
+
+📋 PROBLEMS (2):
+  1. Mf6Splitter fails when ATS is active
+  2. mfsplit.split_model has issues with ATS support
+
+📦 MODULES (14 total):
+  - FloPy: 12
+  - Non-FloPy: 2
+  - Duplicates: 0
+  - Malformed: 1
+
+  ⚠️  Non-FloPy modules:
+    - optimize_splitting_mask
+    - mfsplit.split_model
+
+✅ RESOLUTIONS (2):
+  1. jlarsen-usgs will provide a fix
+  2. ATS support has been implemented in develop
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 14
+  - Cleaned modules: 12
+  - Removed: 2
+✅ Saved to: ../data/extracted/reviewed/issue_2497_reviewed.json
+
+================================================================================
+ISSUE #2558: bug: bindir argument for get_modflow(.run_main) fails if type is Path
+================================================================================
+
+📋 PROBLEMS (1):
+  1. bindir argument for flopy.utils.get_modflow.run_main fails if type is Path
+
+📦 MODULES (2 total):
+  - FloPy: 1
+  - Non-FloPy: 1
+  - Duplicates: 0
+  - Malformed: 0
+
+  ⚠️  Non-FloPy modules:
+    - pathlib.Path
+
+✅ RESOLUTIONS (1):
+  1. Fix for bindir argument type in flopy.utils.get_modflow.run_main will be submitted as a PR
+
+🔧 AUTO-CLEAN RESULT:
+  - Original modules: 2
+  - Cleaned modules: 1
+  - Removed: 1
+✅ Saved to: ../data/extracted/reviewed/issue_2558_reviewed.json
+
+================================================================================
+REVIEW COMPLETE!
+================================================================================
+Issues reviewed: 88
+Total modules removed: 206
+Highly problematic issues (>5 modules removed): [1723, 1817, 2053, 2059, 2111, 2150, 2277, 2416, 2429]

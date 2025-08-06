@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment
+.env
+venv/
+ENV/
+env/
+
+# Configuration with secrets
+config.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+config.py
+processing_checkpoints/
+pyemu_checkpoints/
+test_docstring_generation/
+
+# External repositories (treat as data)
+flopy/
+modflow6-examples/
+pyemu/
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite

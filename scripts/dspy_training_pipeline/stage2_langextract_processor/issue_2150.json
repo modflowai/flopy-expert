@@ -1,0 +1,104 @@
+{
+  "issue_number": 2150,
+  "title": "bug: possible error detected in cvfd_utils cell centroids function shapefile_to_xcyc",
+  "matched_modules": [
+    {
+      "class_name": "ModflowWel",
+      "package_code": "WEL",
+      "file_path": "/home/danilopezmella/flopy_expert/flopy/flopy/modflow/mfwel.py",
+      "model_family": "modflow",
+      "confidence": "medium",
+      "match_type": "natural_language",
+      "match_context": "well"
+    },
+    {
+      "class_name": "ModflowGwfMaw",
+      "package_code": "MAW",
+      "file_path": "/home/danilopezmella/flopy_expert/flopy/flopy/mf6/modflow/mfgwfmaw.py",
+      "model_family": "mf6",
+      "confidence": "medium",
+      "match_type": "natural_language",
+      "match_context": "well"
+    }
+  ],
+  "match_count": 2,
+  "has_high_confidence": false,
+  "original_issue": {
+    "number": 2150,
+    "title": "bug: possible error detected in cvfd_utils cell centroids function shapefile_to_xcyc",
+    "state": "closed",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2024-04-13T22:06:22+00:00",
+    "updated_at": "2024-04-23T21:52:10+00:00",
+    "closed_at": "2024-04-23T21:52:10+00:00",
+    "author": "laat0003",
+    "assignees": [],
+    "milestone": null,
+    "body": "**Describe the bug**\r\nCell centroids are shown to be incorrect when processing a mesh/grid as a shapefile using cvfd_utils shapefile_to_xcyc.  A comparison with geopandas (which produces the correct centroids confirmed in QGIS) shows that the differences can be significant. I tested the verts and iverts coming from shapefile_to_cvfd and this appears to work correctly.\r\n\r\n**To Reproduce**\r\nSteps to reproduce the behavior:\r\n1. Go to 'https://github.com/laat0003/shape2disv'\r\n2. View notebook 'shp2disv'\r\n4. See error as max absolute difference between centroids from geopandas and shapefile_to_xcyc\r\n\r\n**Expected behavior**\r\nExpected only small discrepancies between geopandas and shapefile_to_xcyc.\r\n\r\n**Additional context**\r\nPulled a mesh created with AlgoMesh from a shapefile into Flopy using cvfd_utils for a project in MF6 with DISV. All appeared to be working correctly at first. Modelgrid plotted fine and base configuration and execution of model didn't flag any issues. When calibrating with pilot-points and structural-overlays it appeared as though the interpolation algorithms were doing weird things. Struggled for a couple of weeks testing my PLPROC, pyemu and pypestutils config until I realized the issue was the grid. I didn't troubleshoot the grid issue at that time because I had burnt through the project budget by then. I ditched the AlgoMesh grid and went back to Gridgen where everything was peachy. \r\n",
+    "comments_count": 7,
+    "reactions": {
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "is_pull_request": false,
+    "comments": [
+      {
+        "id": 2054009732,
+        "author": "cnicol-gwlogic",
+        "created_at": "2024-04-14T10:58:46Z",
+        "updated_at": "2024-04-14T10:58:46Z",
+        "body": "I haven't looked at your example in detail, but on first read, I am wondering if this is a reflection of differences between centroid and node location (intersection of cell \"half\" lengths to each face). If using algomesh, I always interp to the node xy cords, not centroid. "
+      },
+      {
+        "id": 2054026269,
+        "author": "laat0003",
+        "created_at": "2024-04-14T12:04:38Z",
+        "updated_at": "2024-04-14T12:04:38Z",
+        "body": "Howdy Chris,\r\n\r\nHope things are going well for you.\r\n\r\nCheers for the comment. I'm just building the DISV input file. My verts and iverts are correct but my node locations are not. The only functions I am using to build DISV are shapefile_to_cvfd to get verts and iverts, then I pass those in to get_disv_gridprops to build the disv dictionary, which I unpack in my DISV object. The resultant node locations I end up with appear to be incorrect. If I specify the optional argument xcyc (in get_disv_gridprops), by getting the array of node locations from shapefile_to_xcyc then these are identical to the incorrect node locations. The algorithm for finding node locations in the centers of mesh polygons is the same in both shapefile_to_xcyc and get_disv_gridprops, which I guess is why they end up being identical - but wrong. These then go on to be the node locations in CELL2D, which I think then affects the GRB file that all the parameter pre-processors are using.\r\n\r\nIf I specify xcyc as an array of node locations obtained from geopandas' geodataframe.geometry.centroid then these end up being the same (or at least very close to) the node locations that AlgoMesh spits out. My notebook is just showing that there is difference in the two approaches and that it can be significant. \r\n\r\nPrecisely why they appear different? I don't know. I would have tried harder to unpick it myself but I already broke my brain trying to figure out why I was struggling to condition my ensemble despite having no prior data conflicts.\r\n\r\nTariq "
+      },
+      {
+        "id": 2054034267,
+        "author": "laat0003",
+        "created_at": "2024-04-14T12:31:59Z",
+        "updated_at": "2024-04-14T12:31:59Z",
+        "body": "This is an example of what was happening during calibration with a DISV built using Gridgen methods (expected behaviour) and a DISV built using the cvfd_utils shapefile methods (I call this the 'salt & pepper' effect). \r\n \r\n![GridgenDisv_vs_CvfdutilsDisv](https://github.com/modflowpy/flopy/assets/49386249/0514ce72-1d13-462d-b2cf-feac7c294f7d)\r\n"
+      },
+      {
+        "id": 2054131953,
+        "author": "christianlangevin",
+        "created_at": "2024-04-14T17:44:58Z",
+        "updated_at": "2024-04-14T17:44:58Z",
+        "body": "Hey @manangka, did I hear that you encountered something similar when you were testing one of the cvfd utility scripts in flopy?"
+      },
+      {
+        "id": 2059155602,
+        "author": "Manangka",
+        "created_at": "2024-04-16T13:54:03Z",
+        "updated_at": "2024-04-16T13:54:03Z",
+        "body": "@langevin-usgs I did find an issue in the cvfd script but I don't think its related to this issue.\r\nThe issue I encountered had to do with a single cell edge being connected to multiple other cells. When it was connected to 4 or more the grid connection was incorrectly generated"
+      },
+      {
+        "id": 2063185024,
+        "author": "laat0003",
+        "created_at": "2024-04-18T07:15:53Z",
+        "updated_at": "2024-04-18T07:15:53Z",
+        "body": "Thanks for that @langevin-usgs. It may be that the error @Manangka describes about a single face connected to multiple other cells is related to the issue with the cell node coordinates, or xcyc value because the CELL2D entries will be wrong. If I use geopandas to get xcyc and pass that into get_disv_gridprops then CELL2D ends up being correct (I've tested this with different grid shapefiles now) and I no longer get the \"salt and pepper\" issues I had previously. Example below.\r\n\r\nThe same shapefile is used to create the DISV object in both models shown below. The one on the left is using xcyc specified from geopandas centroid algorithm while the one on the right is using the default algorithm in get_disv_gridprops.\r\n![image](https://github.com/modflowpy/flopy/assets/49386249/e12e75ad-0d5f-4fbd-a18d-81ff2b14677d)\r\n"
+      },
+      {
+        "id": 2072804337,
+        "author": "christianlangevin",
+        "created_at": "2024-04-23T15:54:58Z",
+        "updated_at": "2024-04-23T15:56:45Z",
+        "body": "I dug into this today and found the problem.  The centroid calculation is not precise when x, y coordinates require a large number of digits.  This is somewhat related to a [recent issue in MODFLOW 6](https://github.com/MODFLOW-USGS/modflow6/issues/1346) that was fixed.  A [fix](https://github.com/modflowpy/flopy/pull/2165) has been submitted.\r\n\r\nBy the way, I reran your example (thanks for that) with the fixed version and there was no difference in centroid locations (`np.max(abs_diff)=0.0`)\r\n\r\nThank you for reporting the issue!"
+      }
+    ]
+  }
+}

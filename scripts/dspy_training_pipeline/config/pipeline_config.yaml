@@ -1,0 +1,117 @@
+# DSPy Training Pipeline Configuration
+
+# GitHub Collection Settings
+github:
+  owner: "modflowpy"
+  repo: "flopy"
+  state: "closed"  # closed, open, all
+  
+  # Date range settings (both required)
+  date_range:
+    from_date: "01-01-2022"
+    to_date: "31-12-2024"
+  
+  # Quality filters
+  min_comments: 2
+  max_issues: 200  # null for no limit
+  required_labels: []
+  excluded_labels:
+    - "duplicate"
+    - "wontfix"
+    - "invalid"
+    - "question"  # Often too vague
+
+# LangExtract Processing Settings
+langextract:
+  model: "gemini-2.5-flash"
+  extraction_passes: 3
+  max_workers: 10
+  max_char_buffer: 1000
+  
+  # Module extraction settings
+  module_extraction:
+    confidence_threshold: 0.7
+    include_implicit_references: true
+    
+  # Error pattern extraction settings
+  error_extraction:
+    include_stack_traces: true
+    categorize_errors: true
+    
+  # Relationship extraction settings
+  relationship_extraction:
+    max_distance: 500  # characters between mentions
+    relationship_types:
+      - "conflict"
+      - "dependency"
+      - "interaction"
+      - "inheritance"
+
+# DSPy Training Generation Settings
+dspy:
+  min_evidence_pieces: 2
+  confidence_threshold: 0.7
+  
+  # Structured input schema
+  output_schema:
+    target_modules:
+      max_count: 5
+      include_confidence: true
+    search_terms:
+      max_count: 10
+      include_synonyms: true
+    search_type:
+      options: ["semantic", "text", "hybrid"]
+      default: "semantic"
+    focus_areas:
+      enabled: true
+      categories:
+        - "budget_analysis"
+        - "solver_configuration"
+        - "boundary_conditions"
+        - "numerical_stability"
+        - "input_output"
+        - "visualization"
+
+# Data Quality Settings
+quality:
+  min_body_length: 50
+  min_title_length: 10
+  require_code_references: false
+  require_error_messages: false
+  
+  # Issue scoring weights
+  scoring_weights:
+    comments: 0.3
+    body_length: 0.2
+    labels: 0.2
+    module_mentions: 0.2
+    recency: 0.1
+
+# Output Settings
+output:
+  pretty_print: true
+  include_metadata: true
+  compression: false
+  
+  # File naming
+  file_prefixes:
+    raw_issues: "flopy_issues_quality"
+    module_extractions: "module_references"
+    error_extractions: "error_patterns"
+    relationships: "module_relationships"
+    training_data: "dspy_training_data"
+
+# Processing Limits
+limits:
+  max_issue_body_length: 10000
+  max_comment_length: 5000
+  max_comments_per_issue: 50
+  api_rate_delay: 1.0  # seconds between API calls
+
+# Logging Settings
+logging:
+  level: "INFO"
+  log_to_file: true
+  rotate_logs: true
+  max_log_size_mb: 10

@@ -1,0 +1,36 @@
+# Data outputs
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# API Keys
+.env
+config/secrets.yaml
+
+# Temporary files
+*.tmp
+*.bak
+~*
