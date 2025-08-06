@@ -98,6 +98,91 @@ CREATE TABLE pyemu_modules (
 - Removed unused `packages` and `workflows` tables
 - Cleaner, more focused schema
 
+## Module Usage Tracking Enhancement ✨
+
+### New Capabilities Added
+We've enhanced the semantic database with precise FloPy module usage tracking for all 72 workflows:
+
+**What's New:**
+- **Source Code Analysis**: Intelligent extraction of FloPy imports and usage patterns
+- **Precise Module Mapping**: Links workflow code to specific FloPy module files
+- **Enhanced Schema**: New `modules_used` column and `workflow_module_usage` relationship table
+
+### Database Schema Updates
+
+#### Enhanced FloPy Workflows Table
+```sql
+ALTER TABLE flopy_workflows 
+ADD COLUMN modules_used TEXT[] DEFAULT '{}';  -- Array of module file paths
+```
+
+#### New Workflow-Module Relationship Table  
+```sql
+CREATE TABLE workflow_module_usage (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    workflow_id UUID NOT NULL REFERENCES flopy_workflows(id) ON DELETE CASCADE,
+    module_id UUID NOT NULL REFERENCES flopy_modules(id) ON DELETE CASCADE,
+    import_type TEXT,  -- 'direct', 'from_import', 'class_import'
+    confidence FLOAT DEFAULT 1.0,  -- Confidence score for the match
+    created_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE(workflow_id, module_id)
+);
+```
+
+### Extraction Process
+
+The module extraction intelligently identifies FloPy usage patterns:
+
+1. **Direct Imports**: `import flopy.utils.binaryfile`
+2. **From Imports**: `from flopy.mf6.modflow import mfgwfchd`  
+3. **Class Usage**: `flopy.mf6.ModflowGwf(...)`
+4. **Nested Patterns**: `flopy.mf6.modflow.mfgwfdis.ModflowGwfdis`
+
+### Results Summary
+
+**Statistics:**
+- **All 72 workflows** now have identified FloPy modules
+- **125 unique modules** used across workflows (vs 233 total available)
+- **Average 34 modules per workflow** (realistic, focused usage)
+- **2,181 total relationships** with confidence scores
+
+**Example Results:**
+```sql
+-- mf6_simple_model_example.py uses these key modules:
+-- flopy/mf6/modflow/mfgwfchd.py (CHD package)
+-- flopy/mf6/modflow/mfgwfdis.py (DIS package)  
+-- flopy/mf6/modflow/mfgwfnpf.py (NPF package)
+-- flopy/mf6/modflow/mfims.py (IMS solver)
+-- flopy/utils/binaryfile.py (output processing)
+```
+
+### Usage Examples
+
+**Find workflows using specific modules:**
+```sql
+SELECT fw.tutorial_file, fw.title
+FROM flopy_workflows fw
+WHERE 'flopy/mf6/modflow/mfgwfwel.py' = ANY(fw.modules_used);
+```
+
+**Analyze module popularity:**
+```sql
+SELECT fm.relative_path, fm.package_code, COUNT(*) as usage_count
+FROM workflow_module_usage wmu 
+JOIN flopy_modules fm ON wmu.module_id = fm.id
+GROUP BY fm.id, fm.relative_path, fm.package_code
+ORDER BY usage_count DESC;
+```
+
+**Compare package codes vs specific modules:**
+```sql
+-- Now you can distinguish between:
+-- Package level: "WEL" (Well package)
+-- Module level: "flopy/mf6/modflow/mfgwfwel.py" vs "flopy/modflow/mfwel.py"
+```
+
+This enhancement bridges the gap between high-level package concepts and specific implementation details, providing much more granular insight into FloPy usage patterns across the tutorial ecosystem.
+
 ## File Structure
 ```
 flopy_expert/
@@ -107,6 +192,9 @@ flopy_expert/
 │   ├── docs_parser.py                 # FloPy documentation parser
 │   ├── pyemu_docs_parser.py          # pyEMU documentation parser
 │   └── graphql_api.py                # GraphQL API (partial)
+├── scripts/
+│   ├── add_modules_to_workflows_v2.py # ✨ NEW: Module usage extraction
+│   └── check_simple_example.py       # ✨ NEW: Module usage verification
 ├── config.py                         # API keys and settings
 ├── run_processing_flopy.py          # Process FloPy (3+ hours)
 ├── run_processing_pyemu.py          # Process pyEMU (~20 min)
@@ -182,6 +270,7 @@ ORDER BY model_family, git_commit_date;
 - **Table Architecture**: 8 related tables with foreign key relationships
 - **Quality Assurance**: Comprehensive QA system with reprocessing capabilities
 - **Retry Logic**: Robust error handling with exponential backoff across all processors
+- **Module Usage Tracking**: ✨ NEW - Precise FloPy module usage extracted from workflow source code
 
 ### 📊 Database Statistics
 - **Total Processed Items**: 338 (233 + 72 + 20 + 13)
@@ -190,6 +279,7 @@ ORDER BY model_family, git_commit_date;
 - **AI Analysis Success**: 100% have proper semantic purpose descriptions
 - **Processing Time**: ~5-6 hours total for all processing
 - **Storage**: ~1536 × 338 = 519,168 dimensional vectors in pgvector
+- **Workflow-Module Relationships**: 2,181 precise relationships across 125 unique modules
 
 ### ⚠️ Domain Expertise Limitations Discovered
 
