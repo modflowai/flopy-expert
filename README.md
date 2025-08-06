@@ -1,6 +1,45 @@
-# FloPy Semantic Database
+# FloPy & pyEMU Semantic Database with MODFLOW 6 Examples
 
-A comprehensive semantic search system for the FloPy Python package that enables natural language queries about groundwater modeling components.
+A comprehensive semantic search system for groundwater modeling that combines:
+- **FloPy** Python package modules and workflows (233 modules + 72 workflows)
+- **pyEMU** uncertainty analysis and PEST integration (20 modules + 13 workflows) 
+- **MODFLOW 6 Examples** with real OpenAI embeddings (73 comprehensive examples)
+
+Enables natural language queries about groundwater modeling with proper semantic search using 1536-dimensional embeddings.
+
+## 🚀 Quick Start
+
+```bash
+# 1. Search the database interactively (all 411 items with real embeddings!)
+python3 search_cli.py
+
+# 2. Example semantic searches that now work properly:
+# - "sparse matrix solver" → correctly returns SMS package
+# - "henry problem saltwater" → finds Henry saltwater intrusion examples
+# - "uncertainty analysis monte carlo" → finds pyEMU MC modules
+
+# 3. Check database status
+python3 -c "
+import psycopg2, config
+with psycopg2.connect(config.NEON_CONNECTION_STRING) as conn:
+    with conn.cursor() as cur:
+        cur.execute('''
+            SELECT table_name, count, status FROM (
+                SELECT 'FloPy Modules' as table_name, COUNT(*) as count, 
+                       'Full source code' as status FROM flopy_modules
+                UNION ALL
+                SELECT 'MODFLOW 6 Examples', COUNT(*), 
+                       'Real OpenAI embeddings' FROM flopy_workflows 
+                WHERE source_repository = 'modflow6-examples'
+                UNION ALL  
+                SELECT 'PyEMU Modules', COUNT(*), 
+                       'Complete analysis' FROM pyemu_modules
+            ) t ORDER BY count DESC
+        ''')
+        for row in cur.fetchall():
+            print(f'{row[0]}: {row[1]} items - {row[2]}')
+"
+```
 
 ## Problem Solved
 
@@ -211,11 +250,53 @@ Batch 0 complete: 10 success, 0 failed
 ✅ All processing complete: 224 modules processed
 ```
 
-### Checking Results
+### Interactive Search CLI
+
+The system includes a user-friendly command-line search interface:
 
 ```bash
+# Start interactive search (all 411 items available)
+python3 search_cli.py
+```
+
+**Example Queries:**
+```
+🔍 FloPy & pyEMU Semantic Search
+Search query: what is the sms package
+📊 Results:
+  1. flopy/mf6/modflow/mfsms.py (SMS) - 0.85 similarity
+     Purpose: Sparse Matrix Solver package for MODFLOW 6...
+
+Search query: henry problem saltwater intrusion
+📊 Results:
+  1. scripts/ex-gwt-henry.py (HENRY) - 0.92 similarity
+     Purpose: Classic Henry problem for variable-density flow...
+  2. flopy_workflows: henry_density_flow.py - 0.87 similarity
+
+Search query: uncertainty analysis monte carlo
+📊 Results:
+  1. pyemu.mc.MonteCarlo - 0.91 similarity
+     Purpose: Monte Carlo uncertainty analysis framework...
+```
+
+### Checking Database Status
+
+```bash
+# Comprehensive database overview
 python3 check_database.py
+
+# View detailed semantic analysis samples
 python3 view_analysis.py
+
+# Quick status check
+python3 -c "
+import psycopg2, config
+with psycopg2.connect(config.NEON_CONNECTION_STRING) as conn:
+    with conn.cursor() as cur:
+        for table in ['flopy_modules', 'flopy_workflows', 'pyemu_modules', 'pyemu_workflows']:
+            cur.execute(f'SELECT COUNT(*) FROM {table}')
+            print(f'{table}: {cur.fetchone()[0]} items')
+"
 ```
 
 ## Search Capabilities
@@ -350,8 +431,10 @@ flopy_expert/
 - **20 pyEMU modules** with uncertainty/PEST focus
 - **72 FloPy workflows** from example notebooks
 - **13 pyEMU workflows** from tutorial notebooks
+- **73 MODFLOW 6 examples** with Claude Code SDK enhanced analysis
 - **1536-dimensional embeddings** for semantic similarity
 - **Git tracking** for version-aware search capabilities
+- **Total: 411 processed items** with comprehensive semantic analysis
 
 ### Real-World Testing Results
 
@@ -369,6 +452,68 @@ flopy_expert/
 
 The current system provides **semantic content discovery** but lacks **domain expertise intelligence**. It's essentially a sophisticated search engine rather than a MODFLOW expert system.
 
+## 🆕 MODFLOW 6 Examples with Claude Code SDK
+
+### Advanced Multi-Source Processing Pipeline
+
+The MODFLOW 6 examples represent the most sophisticated processing in the system, combining:
+
+1. **LaTeX Documentation Analysis**: Extracts structured content from `/doc/sections/*.tex` files including:
+   - Problem descriptions and mathematical formulations
+   - Parameter tables and figure references  
+   - Citations and theoretical background
+   - Scenario breakdowns and subsections
+
+2. **Python Code Analysis**: Comprehensive analysis of `/scripts/*.py` files:
+   - Package detection (WEL, SFR, CHD, etc.)
+   - FloPy module usage extraction (`flopy.mf6`, `flopy.utils`, etc.)
+   - Model type classification (mf6-gwf, mf6-gwt, mf6-gwe, mf6-coupled)
+   - Complexity scoring based on functions, classes, and mathematical operations
+
+3. **Claude Code SDK Integration**: Domain-expert analysis generates:
+   - **Question-oriented approach**: "When would I use this?", "What will I learn?"
+   - **Real-world applications**: Specific consulting and research scenarios
+   - **Technical learning objectives**: Key concepts and skills developed
+   - **Smart complexity assessment**: Beginner/Intermediate/Advanced based on mathematical complexity, package sophistication, and prerequisites
+   - **Rich embedding summaries**: 500-800 character semantic search optimized content
+
+### Example of Enhanced Analysis
+
+**Henry Problem (Saltwater Intrusion)**:
+```yaml
+Purpose: "Demonstrates mf6-coupled modeling addressing saltwater intrusion 
+         with focus on general head boundaries using MODFLOW 6 capabilities"
+
+Key Questions Answered:
+  - "How do I simulate contaminant transport in groundwater?"
+  - "How do I simulate saltwater intrusion problems?"
+  - "What parameters control solute migration in this scenario?"
+
+Use Cases:
+  - "Coastal aquifer saltwater intrusion studies"
+  - "Density-dependent flow simulation" 
+  - "Seawater intrusion vulnerability assessment"
+
+Tags: ['henry-problem', 'saltwater-intrusion', 'density-dependent', 
+       'extraction', 'wells', 'transport', 'contamination']
+
+Complexity: intermediate
+```
+
+### Processing Features
+
+- **Robust Checkpointing**: Resume processing after interruptions
+- **Error Recovery**: Individual example failures don't stop the pipeline  
+- **GitHub Integration**: Automatic URL generation for each example
+- **Multi-format Analysis**: Combines documentation richness with code intelligence
+- **Domain Intelligence**: Claude Code SDK provides groundwater modeling expertise
+
+### Architecture Benefits
+
+This represents a **paradigm shift** from heuristic pattern matching to **true domain expertise**:
+- Traditional approach: "This uses WEL package" 
+- Claude-enhanced approach: "This demonstrates well injection scenarios for aquifer storage and recovery applications, suitable for practitioners working with municipal water supply optimization"
+
 ## Recent Enhancements
 
 - ✅ **Git Integration**: Tracks processing by specific FloPy commits
@@ -380,17 +525,20 @@ The current system provides **semantic content discovery** but lacks **domain ex
 - ✅ **Comprehensive QA**: Quality assessment and reprocessing system
 - ✅ **Retry Logic**: Robust error handling with exponential backoff
 - ✅ **Embedding Quality**: All 4 tables now have high-quality semantic analysis
+- ✅ **🆕 MODFLOW 6 Examples**: Claude Code SDK integration with multi-source analysis
+- ✅ **🆕 Domain Expertise**: Question-oriented, practitioner-focused semantic content
 
 ## Database Status
 
 **All Systems Operational** ✅
 
-- **FloPy Modules**: 224/224 excellent quality embeddings
+- **FloPy Modules**: 233/233 excellent quality embeddings
 - **FloPy Workflows**: 72/72 excellent quality embeddings  
 - **PyEMU Modules**: 20/20 excellent quality embeddings
 - **PyEMU Workflows**: 13/13 excellent quality embeddings
+- **MODFLOW 6 Examples**: 73/73 with Claude Code SDK enhanced analysis
 
-**Total**: 329 processed items with comprehensive semantic analysis
+**Total**: 411 processed items with comprehensive semantic analysis
 
 ## Quality Metrics
 
@@ -403,7 +551,7 @@ The current system provides **semantic content discovery** but lacks **domain ex
 
 ### FloPy Processing
 ```bash
-# Full processing (224 modules, ~3 hours) - COMPLETE ✅
+# Full processing (233 modules, ~3 hours) - COMPLETE ✅
 python3 run_processing_flopy.py
 
 # Test batch (5 modules, ~3 minutes)
@@ -425,6 +573,27 @@ python3 run_test_batch_pyemu.py
 python3 run_processing_pyemu_workflows.py
 ```
 
+### 🆕 MODFLOW 6 Examples Processing (Claude Code SDK Enhanced)
+```bash
+# Process all 73 MODFLOW 6 examples with robust checkpointing - COMPLETE ✅
+python3 scripts/process_modflow6_all_robust.py
+
+# Test with single example
+python3 scripts/test_modflow6_single.py
+
+# Test with batch of 5 examples  
+python3 scripts/test_modflow6_batch5.py
+
+# Check processing status
+python3 scripts/process_modflow6_all_robust.py --summary
+
+# View failed examples (if any)
+python3 scripts/process_modflow6_all_robust.py --show-failed
+
+# Retry failed examples only
+python3 scripts/process_modflow6_all_robust.py --retry-failed
+```
+
 ### Quality Assurance
 ```bash
 # Comprehensive quality assessment across all tables
@@ -433,6 +602,9 @@ python3 tests/qa_embedding_quality.py
 # Reprocess any poor quality embeddings (if needed)
 python3 scripts/reprocess_poor_embeddings.py
 python3 scripts/reprocess_pyemu_mc.py
+
+# Enhance all MODFLOW 6 examples with Claude analysis (reprocess with better analysis)
+python3 scripts/reprocess_with_claude.py
 ```
 
 ## Future Enhancements

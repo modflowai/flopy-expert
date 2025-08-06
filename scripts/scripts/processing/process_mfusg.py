@@ -114,7 +114,7 @@ class MFUSGProcessor:
             model_family='mfusg',
             package_code=package_code,
             module_docstring=module_docstring,
-            source_code=content[:5000],  # First 5000 chars
+            source_code=content,  # Store full source code
             classes=classes,
             functions=functions,
             file_hash=hashlib.sha256(content.encode()).hexdigest(),
@@ -135,10 +135,10 @@ Classes: {', '.join(module_info.classes[:5])}
 Functions: {', '.join(module_info.functions[:5])}
 
 Module Docstring:
-{module_info.module_docstring[:1000]}
+{module_info.module_docstring[:1500]}
 
 Source Code Sample:
-{module_info.source_code[:2000]}
+{module_info.source_code[:3000]}
 
 Provide analysis in this format:
 
