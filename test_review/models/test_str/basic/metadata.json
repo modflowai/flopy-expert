@@ -1,0 +1,93 @@
+{
+  "source_test": "test_str",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test STR - MODFLOW Stream Routing Demonstration",
+  "description": "Demonstrates the STR (Stream Routing) package in MODFLOW-2005 for modeling stream networks, surface water-groundwater interactions, and flow routing calculations",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "STR",
+      "file": "flopy.modflow.ModflowStr", 
+      "phase": 4,
+      "purpose": "Stream routing and surface water-groundwater interaction"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1, 
+      "purpose": "Grid discretization for stream network framework"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with stream corridor boundary conditions"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Enhanced hydraulic conductivity in stream alluvium"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc", 
+      "phase": 7,
+      "purpose": "Output control for heads and stream flows"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    }
+  ],
+  "package_details": {
+    "STR": "Stream routing package for surface water flow networks",
+    "DIS": "Structured discretization supporting stream cell definition",
+    "BAS": "Basic package with stream corridor active/inactive cells",
+    "LPF": "Layer property flow with enhanced alluvial conductivity",
+    "OC": "Output control for stream-aquifer interaction results",
+    "PCG": "Iterative solver for coupled stream-groundwater system"
+  },
+  "grid_type": "structured", 
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 15,
+    "ncol": 20,
+    "nper": 3,
+    "cell_size": "200m × 200m",
+    "domain_extent": "4.0km × 3.0km",
+    "active_cells": 180,
+    "stream_network": {
+      "segments": 4,
+      "reaches": 19,
+      "main_stream_length": "3.2km",
+      "tributary_length": "600m"
+    }
+  },
+  "key_features": [
+    "STR package for stream routing and flow calculations",
+    "Stream network topology with segment-reach structure",
+    "Surface water-groundwater interaction modeling",
+    "Manning's equation for channel hydraulics",
+    "Stream-aquifer conductance and exchange mechanisms",
+    "Seasonal flow variations and boundary condition management",
+    "Multi-segment connectivity with tributary junctions",
+    "Stream channel geometry and hydraulic parameter specification"
+  ],
+  "learning_objectives": [
+    "Understanding STR package capabilities and stream routing concepts",
+    "Implementing stream network topology and connectivity",
+    "Modeling surface water-groundwater interactions effectively",
+    "Applying Manning's equation for channel flow calculations",
+    "Configuring stream-aquifer conductance parameters",
+    "Managing seasonal flow variations and temporal boundary conditions", 
+    "Integrating stream systems with groundwater flow models",
+    "Understanding professional applications of stream routing modeling"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 30 seconds"
+}

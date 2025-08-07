@@ -1,0 +1,115 @@
+{
+  "source_test": "test_mp5",
+  "model_version": "mf2005", 
+  "variant": "basic",
+  "title": "Test MODPATH-5 - Particle Tracking Analysis Demonstration",
+  "description": "Demonstrates MODPATH-5 particle tracking capabilities including PathlineFile and EndpointFile utilities for 64-particle analysis, visualization, and transport studies",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "PathlineFile",
+      "file": "flopy.utils.PathlineFile",
+      "phase": 7,
+      "purpose": "Reading and analyzing MODPATH-5 particle trajectory data"
+    },
+    {
+      "package": "EndpointFile",
+      "file": "flopy.utils.EndpointFile", 
+      "phase": 7,
+      "purpose": "Reading and analyzing MODPATH-5 particle endpoint data"
+    },
+    {
+      "package": "PlotMapView",
+      "file": "flopy.plot.PlotMapView",
+      "phase": 7,
+      "purpose": "Visualization of pathlines and endpoints with model grid"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Grid discretization for particle tracking domain"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with gradient boundary conditions"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf", 
+      "phase": 2,
+      "purpose": "Heterogeneous hydraulic properties for flow patterns"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Multi-well pumping system for particle capture"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control for head and budget files"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    }
+  ],
+  "package_details": {
+    "PathlineFile": "Utility for reading MODPATH-5 particle trajectory files",
+    "EndpointFile": "Utility for reading MODPATH-5 particle endpoint files",
+    "PlotMapView": "Visualization tool for pathlines and model grid display",
+    "DIS": "Single-layer discretization for particle tracking analysis",
+    "BAS": "Boundary conditions with head gradient for flow direction",
+    "LPF": "Heterogeneous hydraulic conductivity with high/low zones",
+    "WEL": "Three-well system for capture zone delineation",
+    "OC": "Output control for MODFLOW results",
+    "PCG": "Iterative solver for steady-state flow"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 15, 
+    "ncol": 20,
+    "nper": 1,
+    "cell_size": "250m × 250m",
+    "domain_extent": "5.0km × 3.8km",
+    "active_cells": 234,
+    "aquifer_type": "Single-layer with heterogeneous properties",
+    "particle_tracking": {
+      "particle_count": 64,
+      "release_pattern": "8×8 grid in source area",
+      "tracking_type": "Forward tracking to well capture",
+      "analysis_scope": "Multi-well capture zone delineation"
+    }
+  },
+  "key_features": [
+    "MODPATH-5 particle tracking file utilities and analysis",
+    "PathlineFile class for trajectory data reading and processing",
+    "EndpointFile class for final location analysis",
+    "64-particle analysis with 8×8 release grid configuration",
+    "Multi-well capture zone analysis and visualization",
+    "Heterogeneous aquifer system with flow barriers and channels",
+    "Color-coded particle visualization and pathline plotting",
+    "Professional particle tracking applications and workflows"
+  ],
+  "learning_objectives": [
+    "Understanding MODPATH-5 file formats and data structures",
+    "Mastering PathlineFile and EndpointFile utility methods",
+    "Implementing multi-particle analysis and statistical evaluation",
+    "Developing particle tracking visualization and presentation skills",
+    "Applying heterogeneous aquifer concepts to particle transport",
+    "Understanding well capture zone analysis and delineation",
+    "Learning professional applications of particle tracking",
+    "Comparing MODPATH version capabilities and evolution"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 30 seconds"
+}

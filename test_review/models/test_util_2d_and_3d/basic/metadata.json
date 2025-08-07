@@ -1,0 +1,110 @@
+{
+  "source_test": "test_util_2d_and_3d",
+  "model_version": "utilities",
+  "variant": "basic", 
+  "title": "Test Util 2D and 3D - Utilities Demonstration",
+  "description": "Comprehensive demonstration of FloPy's core array handling utilities for managing 2D and 3D data arrays in MODFLOW models with time-varying capabilities",
+  "phase": 2,
+  "phase_name": "Model Setup",
+  "packages": [
+    {
+      "package": "Util2d",
+      "file": "flopy.utils.Util2d",
+      "phase": 2,
+      "purpose": "2D array handling with constant and variable data support"
+    },
+    {
+      "package": "Util3d", 
+      "file": "flopy.utils.Util3d",
+      "phase": 2,
+      "purpose": "3D array management with layer-specific operations and scaling"
+    },
+    {
+      "package": "Transient2d",
+      "file": "flopy.utils.Transient2d",
+      "phase": 2, 
+      "purpose": "Time-varying 2D arrays across stress periods for dynamic data"
+    },
+    {
+      "package": "Transient3d",
+      "file": "flopy.utils.Transient3d", 
+      "phase": 2,
+      "purpose": "Time-varying 3D arrays with temporal flexibility and period control"
+    },
+    {
+      "package": "MfList",
+      "file": "flopy.utils.MfList",
+      "phase": 4,
+      "purpose": "List-based data structures for boundary condition management"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow package with 3D hydraulic properties"
+    },
+    {
+      "package": "ModflowWel",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Well package demonstrating MfList stress period data"
+    },
+    {
+      "package": "ModflowRch",
+      "file": "flopy.modflow.ModflowRch", 
+      "phase": 4,
+      "purpose": "Recharge package with transient 2D array input"
+    }
+  ],
+  "package_details": {
+    "Util2d": "2D array handling with external file support and formatting",
+    "Util3d": "3D array operations with layer-specific control and scaling",
+    "Transient2d": "Time-dependent 2D arrays for seasonal/temporal variations",
+    "Transient3d": "Time-dependent 3D arrays for complex temporal modeling", 
+    "MfList": "Stress period data management for boundary conditions",
+    "ModflowLpf": "Layer property flow with heterogeneous hydraulic fields",
+    "ModflowWel": "Well boundary conditions with temporal variation",
+    "ModflowRch": "Recharge boundary conditions with spatial-temporal patterns"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 15,
+    "ncol": 20,
+    "nper": 4,
+    "delr": "uniform (not specified)",
+    "delc": "uniform (not specified)",
+    "array_types": [
+      "2D constant arrays",
+      "2D variable arrays", 
+      "3D layered arrays",
+      "Transient 2D arrays",
+      "Transient 3D arrays",
+      "MfList structures"
+    ]
+  },
+  "key_features": [
+    "Comprehensive 2D and 3D array management utilities",
+    "Time-varying array support for transient simulations",
+    "External file I/O with text and binary format support",
+    "Array scaling and mathematical operations",
+    "Layer-specific heterogeneity and spatial patterns",
+    "MfList boundary condition data structure management", 
+    "Array formatting and control record generation",
+    "Integration with MODFLOW packages for complete models",
+    "Statistical analysis and spatial heterogeneity tools"
+  ],
+  "learning_objectives": [
+    "Understanding FloPy's core array handling utilities",
+    "Mastering 2D array creation and manipulation techniques", 
+    "Implementing 3D arrays with layer-specific properties",
+    "Managing time-varying data with Transient2d and Transient3d",
+    "Using MfList for boundary condition data structures",
+    "Performing file I/O operations with arrays (text/binary)",
+    "Creating spatial heterogeneity and realistic property fields",
+    "Integrating array utilities in complete MODFLOW workflows",
+    "Applying statistical analysis to hydraulic property fields"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds"
+}

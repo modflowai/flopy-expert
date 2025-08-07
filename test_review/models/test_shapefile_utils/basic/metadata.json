@@ -1,0 +1,107 @@
+{
+  "source_test": "test_shapefile_utils",
+  "model_version": "utilities",
+  "variant": "basic",
+  "title": "Test Shapefile Utils - GIS Integration Demonstration",
+  "description": "Demonstrates FloPy's shapefile export utilities for spatial data management, GIS integration, and coordinate reference system handling in groundwater modeling workflows",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "StructuredGrid",
+      "file": "flopy.discretization.StructuredGrid", 
+      "phase": 7,
+      "purpose": "Grid geometry export and spatial coordinate management"
+    },
+    {
+      "package": "model_attributes_to_shapefile",
+      "file": "flopy.export.shapefile_utils.model_attributes_to_shapefile",
+      "phase": 7, 
+      "purpose": "Export model attributes and data to shapefile format"
+    },
+    {
+      "package": "shp2recarray", 
+      "file": "flopy.export.shapefile_utils.shp2recarray",
+      "phase": 7,
+      "purpose": "Read shapefile data into NumPy record arrays"
+    },
+    {
+      "package": "get_shapefile_crs",
+      "file": "flopy.utils.crs.get_shapefile_crs",
+      "phase": 7,
+      "purpose": "Coordinate reference system extraction and management"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Grid discretization for spatial reference framework"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf", 
+      "phase": 2,
+      "purpose": "Hydraulic properties for spatial attribute export"
+    },
+    {
+      "package": "ModflowWel",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Well locations and pumping data for point feature export"
+    },
+    {
+      "package": "ModflowRch",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Recharge data for spatially distributed attribute export"
+    }
+  ],
+  "package_details": {
+    "StructuredGrid": "Grid geometry and coordinate transformation utilities",
+    "model_attributes_to_shapefile": "Model data export to GIS-compatible formats",
+    "shp2recarray": "Shapefile reading and data conversion utilities",
+    "get_shapefile_crs": "Coordinate system detection and management",
+    "ModflowDis": "Discretization providing spatial framework",
+    "ModflowLpf": "Hydraulic properties for spatial analysis",
+    "ModflowWel": "Point-based boundary condition data", 
+    "ModflowRch": "Distributed recharge for spatial mapping"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 20,
+    "ncol": 25, 
+    "cell_size": "100m × 100m",
+    "domain_extent": "2.5km × 2.0km",
+    "total_cells": 1500,
+    "coordinate_system": "UTM with offset (500000, 4000000)",
+    "exportable_features": [
+      "Cell polygons",
+      "Grid boundaries", 
+      "Attribute data",
+      "Coordinate information"
+    ]
+  },
+  "key_features": [
+    "Shapefile export utilities for spatial data management",
+    "Grid-based geometry export for GIS integration",
+    "Model attribute export for spatial analysis and visualization",
+    "Coordinate reference system (CRS) management and projection",
+    "Integration workflows with professional GIS software",
+    "Spatial data exchange and cross-platform compatibility",
+    "Attribute table structure and data type management",
+    "Best practices for GIS workflow integration"
+  ],
+  "learning_objectives": [
+    "Understanding shapefile format structure and components",
+    "Mastering FloPy's spatial export utilities and methods",
+    "Implementing coordinate reference system management",
+    "Creating GIS-compatible spatial data from MODFLOW models",
+    "Integrating groundwater models with GIS workflows",
+    "Developing spatial analysis and visualization capabilities",
+    "Applying best practices for spatial data management",
+    "Understanding professional GIS integration applications"
+  ],
+  "complexity": "intermediate", 
+  "run_time": "< 30 seconds"
+}

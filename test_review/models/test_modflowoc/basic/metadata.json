@@ -1,0 +1,94 @@
+{
+  "source_test": "test_modflowoc",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test MODFLOW OC - Output Control Package Demonstration",
+  "description": "Demonstrates the OC (Output Control) package in MODFLOW-2005 for managing when and how model results are saved and printed, including head files, budget files, and output timing control",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc", 
+      "phase": 7,
+      "purpose": "Output control and result file management"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1, 
+      "purpose": "Grid discretization with multiple stress periods"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with boundary conditions"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow for multi-layer aquifer system"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Pumping wells with variable stress period data"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    }
+  ],
+  "package_details": {
+    "OC": "Output control package for timing and format specification",
+    "DIS": "Discretization with multiple periods for output demonstration",
+    "BAS": "Basic package with inactive boundary framework",
+    "LPF": "Layer property flow with convertible layer types",
+    "WEL": "Well package with variable pumping across periods",
+    "PCG": "Iterative solver for multi-period simulation"
+  },
+  "grid_type": "structured", 
+  "grid_details": {
+    "nlay": 2,
+    "nrow": 15,
+    "ncol": 20,
+    "nper": 5,
+    "cell_size": "100m × 100m",
+    "domain_extent": "2.0km × 1.5km",
+    "active_cells": 468,
+    "simulation_type": "Mixed steady-state and transient periods",
+    "output_control": {
+      "head_saves": 14,
+      "budget_saves": 14,
+      "print_events": 9,
+      "output_frequency": "Variable (monthly to quarterly)"
+    }
+  },
+  "key_features": [
+    "Output Control (OC) package for result file management",
+    "Variable output frequency across stress periods and time steps",
+    "Head file output control and binary format management",
+    "Budget file output control and cell-by-cell flow saves",
+    "Custom print format specification for different data types",
+    "Storage optimization with compact budget format options",
+    "Multi-period simulation with realistic output control scenarios",
+    "Professional output control strategies and best practices"
+  ],
+  "learning_objectives": [
+    "Understanding OC package capabilities and output timing control",
+    "Implementing variable output frequency strategies",
+    "Managing head and budget file output efficiently", 
+    "Configuring print formats and list file output",
+    "Optimizing storage requirements with strategic output control",
+    "Applying professional output control best practices",
+    "Integrating output control with multi-period simulations",
+    "Understanding industry applications of output management"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds"
+}

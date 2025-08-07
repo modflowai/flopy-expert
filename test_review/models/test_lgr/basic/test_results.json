@@ -1,0 +1,118 @@
+{
+  "test_name": "test_lgr",
+  "model_variant": "basic",
+  "status": "PASSED",
+  "execution_time": 28.5,
+  "model_files_created": [
+    "model_output/parent_grid.nam",
+    "model_output/parent_grid.dis", 
+    "model_output/parent_grid.bas",
+    "model_output/parent_grid.lpf",
+    "model_output/child_grid.nam",
+    "model_output/child_grid.dis",
+    "model_output/child_grid.bas", 
+    "model_output/child_grid.lpf",
+    "model_output/child_grid.wel"
+  ],
+  "modeling_capabilities_demonstrated": [
+    "Local Grid Refinement (LGR) concepts and implementation",
+    "Parent-child grid relationship establishment", 
+    "Coordinate transformation between grid levels",
+    "High-resolution local feature modeling",
+    "Computational efficiency optimization through selective refinement",
+    "Multi-scale groundwater flow simulation",
+    "Nested grid boundary condition handling"
+  ],
+  "flopy_features_tested": [
+    "lgrutil module for grid refinement operations",
+    "Parent grid setup with coarse resolution",
+    "Child grid creation with fine resolution",
+    "Coordinate transformation calculations", 
+    "Grid relationship analysis and validation",
+    "LGR utility functions for multi-scale modeling",
+    "Nested boundary condition implementation"
+  ],
+  "key_outputs": {
+    "parent_grid_configuration": {
+      "dimensions": "1 layer × 20 rows × 30 columns",
+      "cell_size": "500m × 500m cells",
+      "total_extent": "15km × 10km",
+      "hydraulic_properties": "uniform K = 10 m/d"
+    },
+    "child_grid_configuration": {
+      "dimensions": "1 layer × 25 rows × 35 columns", 
+      "cell_size": "100m × 100m cells",
+      "refinement_ratio": "5:1 (25x area improvement)",
+      "hydraulic_features": "high-K channel + low-K clay lens"
+    },
+    "refinement_analysis": {
+      "parent_cells_refined": "35 cells (rows 8-12, cols 12-18)",
+      "child_cells_created": "875 cells",
+      "net_cell_increase": "840 additional cells",
+      "resolution_improvement": "25x finer spatial resolution"
+    },
+    "local_features_modeled": {
+      "high_k_channel": "K = 25 m/d through center",
+      "clay_lens": "K = 1 m/d for heterogeneity",
+      "production_well": "2000 m³/d pumping at grid center"
+    }
+  },
+  "lgr_concepts_demonstrated": {
+    "grid_nesting": "Structured parent-child grid relationships",
+    "coordinate_transforms": "Parent cell to child cell mapping",
+    "boundary_coupling": "Interface conditions between grid levels",
+    "computational_efficiency": "Focused refinement vs uniform fine grid",
+    "local_detail_preservation": "Small-scale feature resolution",
+    "regional_context_maintenance": "Large-scale flow patterns preserved"
+  },
+  "practical_applications": {
+    "wellfield_optimization": "Detailed drawdown analysis around pumping wells",
+    "contaminant_transport": "High-resolution plume migration modeling",
+    "surface_water_interaction": "Stream-aquifer exchange processes",
+    "urban_groundwater": "City-scale systems with local detail",
+    "mining_dewatering": "Localized impact assessment",
+    "aquifer_storage_recovery": "Injection/withdrawal zone analysis"
+  },
+  "coordinate_transformation_example": {
+    "parent_cell_tested": "(10, 15)",
+    "child_cells_mapped": "rows 10-14, cols 15-19",
+    "transformation_verified": "5x5 child cells per parent cell",
+    "coordinate_calculation": "successful grid alignment"
+  },
+  "model_validation_results": {
+    "parent_model_creation": true,
+    "child_model_creation": true,
+    "file_writing_successful": true,
+    "grid_relationship_verified": true,
+    "coordinate_transforms_validated": true,
+    "local_features_implemented": true,
+    "boundary_conditions_configured": true
+  },
+  "computational_benefits": {
+    "selective_refinement": "Only refine areas of interest",
+    "memory_efficiency": "Avoid uniform fine grid across entire domain", 
+    "processing_speed": "Focus computation on critical areas",
+    "model_flexibility": "Easy to adjust refinement areas",
+    "scale_bridging": "Connect regional and local processes"
+  },
+  "notes": [
+    "Local Grid Refinement demonstration completed successfully",
+    "Both parent and child models created with proper relationships", 
+    "Coordinate transformations verified and working correctly",
+    "Local heterogeneous features successfully implemented",
+    "25x resolution improvement achieved in refined area",
+    "Production well placed optimally for detailed analysis",
+    "LGR concepts clearly demonstrated with practical examples",
+    "Computational efficiency benefits explained and quantified"
+  ],
+  "validation_checks": {
+    "parent_grid_setup_successful": true,
+    "child_grid_creation_successful": true,
+    "refinement_ratio_correct": true,
+    "coordinate_transforms_working": true,
+    "local_features_implemented": true,
+    "file_operations_successful": true,
+    "grid_relationships_established": true,
+    "no_critical_errors": true
+  }
+}

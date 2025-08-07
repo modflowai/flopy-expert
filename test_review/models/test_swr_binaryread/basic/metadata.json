@@ -1,0 +1,92 @@
+{
+  "source_test": "test_swr_binaryread",
+  "model_version": "utilities",
+  "variant": "basic",
+  "title": "Test SWR Binary Read - Utilities Demonstration", 
+  "description": "Demonstrates FloPy's SWR (Surface Water Routing) binary file reading utilities for processing stream network simulation results and extracting time series data",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "SwrStage",
+      "file": "flopy.utils.SwrStage",
+      "phase": 7,
+      "purpose": "Read water surface elevations from SWR stage files (.stg)"
+    },
+    {
+      "package": "SwrBudget", 
+      "file": "flopy.utils.SwrBudget",
+      "phase": 7,
+      "purpose": "Extract flow budgets from SWR simulation results (.bud/.flow)"
+    },
+    {
+      "package": "SwrFlow",
+      "file": "flopy.utils.SwrFlow", 
+      "phase": 7,
+      "purpose": "Read flow velocities between stream segments (.vel/.qm)"
+    },
+    {
+      "package": "SwrExchange",
+      "file": "flopy.utils.SwrExchange",
+      "phase": 7,
+      "purpose": "Process groundwater-surface water exchange rates (.qaq)"
+    },
+    {
+      "package": "SwrStructure",
+      "file": "flopy.utils.SwrStructure",
+      "phase": 7,
+      "purpose": "Analyze hydraulic structure flow data (.str)"
+    },
+    {
+      "package": "SwrObs",
+      "file": "flopy.utils.SwrObs",
+      "phase": 7, 
+      "purpose": "Extract observation time series data (.obs)"
+    }
+  ],
+  "package_details": {
+    "SwrStage": "Binary file reader for water surface elevations",
+    "SwrBudget": "Flow budget analysis from SWR simulations",
+    "SwrFlow": "Stream segment velocity and connectivity data",
+    "SwrExchange": "Groundwater interaction rate processing",
+    "SwrStructure": "Hydraulic structure performance analysis", 
+    "SwrObs": "Observation point time series extraction"
+  },
+  "grid_type": "stream_network",
+  "grid_details": {
+    "stream_reaches": 18,
+    "flow_connections": 40,
+    "time_steps": 336,
+    "observation_points": 9,
+    "file_types": [
+      "Stage (.stg)",
+      "Budget (.bud/.flow)",
+      "Flow (.vel/.qm)",
+      "Exchange (.qaq)", 
+      "Structure (.str)",
+      "Observation (.obs)"
+    ]
+  },
+  "key_features": [
+    "SWR binary file format understanding and processing",
+    "Stream network connectivity and flow routing concepts",
+    "Water surface elevation time series extraction",
+    "Flow budget analysis and mass balance validation", 
+    "Groundwater-surface water interaction quantification",
+    "Hydraulic structure performance monitoring",
+    "Observation data processing and analysis",
+    "Best practices for SWR post-processing workflows"
+  ],
+  "learning_objectives": [
+    "Understanding SWR binary file formats and structures",
+    "Mastering FloPy SWR utility classes for data extraction",
+    "Processing stream network simulation results effectively",
+    "Implementing time series analysis for hydrologic data",
+    "Analyzing surface water-groundwater interactions",
+    "Validating flow budgets and mass balance closure",
+    "Creating post-processing workflows for SWR models",
+    "Troubleshooting binary file reading issues"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 15 seconds"
+}

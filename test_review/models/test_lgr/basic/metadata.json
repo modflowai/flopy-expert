@@ -1,0 +1,98 @@
+{
+  "source_test": "test_lgr",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test LGR - MF2005 Demonstration",
+  "description": "Demonstrates FloPy's Local Grid Refinement (LGR) capabilities for creating nested high-resolution grids within coarser parent grids for detailed local analysis",
+  "phase": 1,
+  "phase_name": "Grid Generation",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Parent grid discretization (20×30, 500m cells)"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Parent grid basic package with uniform conditions"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Parent grid hydraulic properties"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Child grid discretization (25×35, 100m cells)"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Child grid with boundary conditions from parent"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Child grid detailed hydraulic properties with heterogeneity"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "High-capacity production well in refined area"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "WEL": "Well package for pumping stress"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "parent_grid": {
+      "nlay": 1,
+      "nrow": 20,
+      "ncol": 30,
+      "delr": 500.0,
+      "delc": 500.0,
+      "extent": "15km × 10km"
+    },
+    "child_grid": {
+      "nlay": 1,
+      "nrow": 25,
+      "ncol": 35,
+      "delr": 100.0,
+      "delc": 100.0,
+      "refinement_ratio": "5:1"
+    }
+  },
+  "key_features": [
+    "Local Grid Refinement (LGR) demonstration",
+    "Parent-child grid relationships",
+    "25x resolution improvement in refined area",
+    "Coordinate transformation utilities",
+    "Detailed local features (channels, clay lenses)",
+    "High-capacity production well simulation",
+    "Computational efficiency optimization"
+  ],
+  "learning_objectives": [
+    "Understanding Local Grid Refinement concepts",
+    "Creating parent and child grid relationships",
+    "Implementing coordinate transformations",
+    "Designing detailed local features",
+    "Managing computational efficiency",
+    "Applying LGR to real-world problems",
+    "Understanding grid refinement benefits"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 30 seconds"
+}

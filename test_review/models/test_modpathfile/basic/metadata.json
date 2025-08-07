@@ -1,0 +1,107 @@
+{
+  "source_test": "test_modpathfile",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test MODPATH File - Particle Tracking File Utilities Demonstration", 
+  "description": "Demonstrates FloPy's MODPATH file utilities for particle tracking analysis, including PathlineFile and EndpointFile classes for reading, analyzing, and exporting particle tracking data",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "PathlineFile",
+      "file": "flopy.utils.PathlineFile",
+      "phase": 7,
+      "purpose": "Reading and analyzing particle pathline trajectory data"
+    },
+    {
+      "package": "EndpointFile", 
+      "file": "flopy.utils.EndpointFile",
+      "phase": 7,
+      "purpose": "Reading and analyzing particle endpoint location data"
+    },
+    {
+      "package": "Modpath7",
+      "file": "flopy.modpath.Modpath7",
+      "phase": 7,
+      "purpose": "MODPATH-7 particle tracking simulation setup"
+    },
+    {
+      "package": "ModflowGwf",
+      "file": "flopy.mf6.ModflowGwf", 
+      "phase": 2,
+      "purpose": "MODFLOW-6 groundwater flow model for particle tracking"
+    },
+    {
+      "package": "ModflowGwfdis",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Grid discretization for particle tracking framework"
+    },
+    {
+      "package": "ModflowGwfnpf",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow for multi-layer particle tracking"
+    },
+    {
+      "package": "ModflowGwfwel",
+      "file": "flopy.mf6.ModflowGwfwel",
+      "phase": 4,
+      "purpose": "Well package for particle sinks and capture zones"
+    },
+    {
+      "package": "ModflowGwfriv",
+      "file": "flopy.mf6.ModflowGwfriv",
+      "phase": 4,
+      "purpose": "River boundary for particle sources and discharge"
+    }
+  ],
+  "package_details": {
+    "PathlineFile": "Utility class for reading and analyzing particle trajectory data",
+    "EndpointFile": "Utility class for reading and analyzing final particle locations",
+    "Modpath7": "MODPATH-7 particle tracking simulation interface",
+    "ModflowGwf": "MODFLOW-6 groundwater flow model foundation",
+    "ModflowGwfdis": "Structured grid discretization for tracking domain",
+    "ModflowGwfnpf": "Node property flow with multi-layer hydraulic properties",
+    "ModflowGwfwel": "Pumping well for particle capture zone analysis", 
+    "ModflowGwfriv": "River boundary conditions for particle sources"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 15,
+    "ncol": 12,
+    "nper": 1,
+    "cell_size": "100m × 100m (feet units)",
+    "domain_extent": "1.2km × 1.5km",
+    "total_cells": 540,
+    "aquifer_system": "Multi-layer with confining layer",
+    "particle_tracking": {
+      "well_location": "Layer 3, center domain for capture analysis",
+      "river_boundary": "15 cells along east edge",
+      "tracking_modes": "Forward and backward analysis capability"
+    }
+  },
+  "key_features": [
+    "MODPATH file utilities for particle tracking data analysis",
+    "PathlineFile class for trajectory data reading and filtering",
+    "EndpointFile class for final location data analysis",
+    "Data sorting and destination-based filtering capabilities",
+    "Shapefile export functionality for GIS integration",
+    "Performance optimization techniques for large datasets",
+    "MODFLOW-6/MODPATH-7 integration and workflow setup",
+    "Professional particle tracking analysis best practices"
+  ],
+  "learning_objectives": [
+    "Understanding MODPATH file structure and data organization",
+    "Mastering PathlineFile class methods and capabilities",
+    "Implementing EndpointFile class for endpoint analysis",
+    "Applying destination-based filtering for efficient analysis",
+    "Utilizing shapefile export for GIS integration workflows",
+    "Implementing performance optimization for large datasets",
+    "Developing professional particle tracking analysis skills",
+    "Understanding industry applications of particle tracking utilities"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 30 seconds"
+}
