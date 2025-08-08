@@ -186,12 +186,16 @@ class EmbeddingTestSuite:
         workflows = self.fetch_workflows()
         print(f"✓ Loaded {len(workflows)} FloPy workflows")
         
-        # Metadata
+        # Metadata with version tracking
         self.results['metadata'] = {
+            'test_version': 'v1.0_baseline_improved_prompt',
+            'prompt_version': 'frustrated_user_v1',
+            'embedding_model': 'text-embedding-3-small',
             'timestamp': self.timestamp,
             'total_workflows': len(workflows),
             'total_questions': sum(len(w['questions']) for w in workflows),
-            'unique_packages': len(set(w['primary_package'] for w in workflows))
+            'unique_packages': len(set(w['primary_package'] for w in workflows)),
+            'test_description': 'First comprehensive test with improved Gemini prompt (54.4% accuracy baseline)'
         }
         
         # Category analysis setup
@@ -335,9 +339,13 @@ class EmbeddingTestSuite:
         # Executive Summary
         print("\n📋 EXECUTIVE SUMMARY")
         print("-" * 40)
+        print(f"Test Version: {self.results['metadata']['test_version']}")
+        print(f"Prompt Version: {self.results['metadata']['prompt_version']}")
+        print(f"Test Date: {self.results['metadata']['timestamp']}")
         print(f"Total Workflows Tested: {self.results['metadata']['total_workflows']}")
         print(f"Total Questions Tested: {metrics['total_questions_tested']}")
         print(f"Unique Package Categories: {self.results['metadata']['unique_packages']}")
+        print(f"Description: {self.results['metadata']['test_description']}")
         
         # Performance Metrics
         print("\n🎯 ACCURACY METRICS")
