@@ -3,13 +3,13 @@
 ## Overview
 Simple tracking: Does the test run MODFLOW and converge?
 
-**Total Tests Processed**: 63/83
-**Tests That Run MODFLOW**: 27/63 (42.9%)
-**Educational Demos (No MODFLOW)**: 36/63 (57.1%)
+**Total Tests Processed**: 66/83
+**Tests That Run MODFLOW**: 30/66 (45.5%)
+**Educational Demos (No MODFLOW)**: 36/66 (54.5%)
 
 ---
 
-## Tests That Run MODFLOW (27 tests)
+## Tests That Run MODFLOW (30 tests)
 
 | # | Test Name | Package/Feature | Status |
 |---|-----------|----------------|--------|
@@ -42,6 +42,9 @@ Simple tracking: Does the test run MODFLOW and converge?
 | 27 | test_swr_binaryread | SWR utilities | ✅ RUNS |
 | 28 | test_util_2d_and_3d | Array utilities | ✅ RUNS |
 | 29 | test_wel | Well package | ✅ RUNS |
+| 30 | test_uzf | Unsaturated Zone Flow (UZF1) | ✅ CONVERGES! |
+| 31 | test_lak | Lake Package (LAK) | ✅ CONVERGES! |
+| 32 | test_subwt | Subsidence/Compaction (SWT) | ✅ CONVERGES! |
 
 ---
 
@@ -54,9 +57,9 @@ These don't run MODFLOW - they demonstrate FloPy utilities, file I/O, plotting, 
 
 ### High Priority (Physical Packages):
 1. ~~**test_sfr** - Stream Flow Routing~~ ✅ CONVERGES!
-2. **test_uzf** - Unsaturated Zone Flow (NEXT)
-3. **test_subwt** - Subsidence/Compaction
-4. **test_lak** - Lake package
+2. ~~**test_uzf** - Unsaturated Zone Flow~~ ✅ CONVERGES!
+3. ~~**test_lak** - Lake package~~ ✅ CONVERGES!
+4. ~~**test_subwt** - Subsidence/Compaction~~ ✅ CONVERGES!
 
 ### Medium Priority:
 5. **test_drn** - Drain package

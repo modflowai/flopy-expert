@@ -1,0 +1,225 @@
+{
+  "model_info": {
+    "name": "test_structured_faceflows",
+    "title": "Structured Face Flows Utility Demonstration",
+    "description": "Comprehensive demonstration of FloPy's MODFLOW 6 structured face flow utilities for converting sparse matrix connectivity format to traditional structured grid face flows with robust input validation and error handling.",
+    "complexity": "intermediate",
+    "model_type": "utility_demonstration",
+    "modflow_version": "mf6_utilities",
+    "packages_demonstrated": ["get_structured_faceflows", "get_residuals", "MF6_utils", "post_processing"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Understand MODFLOW 6 sparse matrix connectivity format (IA-JA-FLOWJA)",
+      "Master structured face flow extraction from MF6 data",
+      "Implement robust input validation and error handling",
+      "Calculate flow residuals for quality assurance",
+      "Apply professional MF6 post-processing workflows",
+      "Integrate face flow utilities with FloPy workflows",
+      "Establish best practices for MF6 data processing"
+    ],
+    "key_concepts": [
+      "MODFLOW 6 sparse connectivity format",
+      "IA-JA array structure and indexing",
+      "FLOWJA face flow data organization",
+      "Structured grid conversion algorithms",
+      "Input validation and error handling",
+      "Flow residual calculations",
+      "Professional post-processing workflows"
+    ],
+    "skill_level": "intermediate"
+  },
+  "utility_focus": {
+    "primary_functions": {
+      "get_structured_faceflows": {
+        "purpose": "Convert MF6 FLOWJA to structured RIGHT/FRONT/LOWER face flows",
+        "parameters": ["flowja", "ia", "ja"],
+        "returns": "tuple of (right_face, front_face, lower_face) arrays",
+        "validation": "Comprehensive input array validation"
+      },
+      "get_residuals": {
+        "purpose": "Calculate flow residuals for water balance verification",
+        "parameters": ["flowja", "ia", "ja"], 
+        "returns": "residual array for all cells",
+        "application": "Quality assurance and convergence checking"
+      }
+    },
+    "data_formats": {
+      "input_format": "MODFLOW 6 sparse connectivity (IA-JA-FLOWJA)",
+      "output_format": "Traditional structured face flow arrays",
+      "compatibility": "Compatible with existing FloPy plotting and analysis tools"
+    }
+  },
+  "mf6_connectivity_concepts": {
+    "sparse_matrix_format": {
+      "ia_array": "Index array indicating connectivity start positions for each cell",
+      "ja_array": "Connected cell indices corresponding to each connection",
+      "flowja_array": "Face flows for each connection in ja array",
+      "symmetry": "Flow from cell i to j equals negative flow from j to i"
+    },
+    "structured_conversion": {
+      "right_face_flows": "Flow in positive column direction (nlay×nrow×ncol+1)",
+      "front_face_flows": "Flow in positive row direction (nlay×nrow+1×ncol)",
+      "lower_face_flows": "Flow in positive layer direction (nlay+1×nrow×ncol)",
+      "boundary_handling": "Extra dimensions account for grid boundary faces"
+    }
+  },
+  "error_handling_framework": {
+    "validation_scenarios": [
+      {
+        "error_type": "Empty FLOWJA array",
+        "detection": "Array size validation",
+        "response": "ValueError with descriptive message",
+        "prevention": "Check array before processing"
+      },
+      {
+        "error_type": "Missing IA connectivity array",
+        "detection": "Required parameter validation",
+        "response": "ValueError indicating connectivity required",
+        "prevention": "Provide complete IA-JA pair"
+      },
+      {
+        "error_type": "Missing JA connectivity array", 
+        "detection": "Required parameter validation",
+        "response": "ValueError indicating index mapping required",
+        "prevention": "Provide complete IA-JA pair"
+      },
+      {
+        "error_type": "Array size mismatch",
+        "detection": "Consistency checking between arrays",
+        "response": "ValueError with size information",
+        "prevention": "Verify array dimensions match connectivity"
+      },
+      {
+        "error_type": "Invalid connectivity indices",
+        "detection": "Bounds checking on JA values",
+        "response": "ValueError with index information",
+        "prevention": "Validate indices are within grid bounds"
+      }
+    ],
+    "best_practices": [
+      "Always validate input arrays before processing",
+      "Check array sizes for consistency",
+      "Verify connectivity indices are within bounds",
+      "Test with simple examples before complex cases",
+      "Document assumptions and limitations"
+    ]
+  },
+  "professional_applications": {
+    "post_processing_workflows": [
+      "Flow budget analysis and verification from MF6 results",
+      "Specific discharge calculation for particle tracking",
+      "Traditional face flow format for legacy analysis tools",
+      "Flow visualization and interpretation using FloPy plotting",
+      "Water balance auditing and quality assurance",
+      "Integration with existing groundwater analysis workflows"
+    ],
+    "industry_use_cases": [
+      "Environmental consulting flow analysis and reporting",
+      "Groundwater model calibration and validation studies",
+      "Water resources assessment and management projects",
+      "Contamination migration analysis and remediation design",
+      "Well capture zone delineation for protection areas",
+      "Regulatory compliance and technical documentation"
+    ]
+  },
+  "flow_residual_analysis": {
+    "purpose": "Water balance verification and quality assurance",
+    "calculation_method": "Sum of all flows into and out of each cell",
+    "interpretation": {
+      "zero_residual": "Perfect flow conservation at cell level",
+      "small_residual": "Acceptable numerical precision limits",
+      "large_residual": "Potential convergence or model setup issues"
+    },
+    "applications": [
+      "Model convergence assessment",
+      "Numerical error identification",
+      "Quality control for complex models",
+      "Validation of boundary conditions",
+      "Troubleshooting flow conservation issues"
+    ]
+  },
+  "integration_workflow": {
+    "complete_mf6_processing": [
+      "1. Run MODFLOW 6 simulation with appropriate output",
+      "2. Load cell budget file (CBC) using FloPy utilities", 
+      "3. Extract FLOWJA, IA, and JA arrays from budget data",
+      "4. Apply get_structured_faceflows() for conversion",
+      "5. Calculate specific discharge using structured flows",
+      "6. Perform flow visualization and analysis",
+      "7. Validate results using get_residuals() function"
+    ],
+    "flopy_compatibility": [
+      "Seamless integration with MF6 model objects",
+      "Compatible with existing plotting utilities (PlotMapView, PlotCrossSection)",
+      "Supports traditional flow analysis workflows",
+      "Maintains professional standards and conventions",
+      "Enables comprehensive post-processing pipelines"
+    ]
+  },
+  "technical_specifications": {
+    "array_dimensions": {
+      "right_face": "(nlay, nrow, ncol+1)",
+      "front_face": "(nlay, nrow+1, ncol)", 
+      "lower_face": "(nlay+1, nrow, ncol)",
+      "rationale": "Extra dimension for cell interface flows"
+    },
+    "data_types": {
+      "flowja": "numpy.float64",
+      "ia": "numpy.int32",
+      "ja": "numpy.int32",
+      "output": "numpy.float64 arrays"
+    },
+    "performance": {
+      "complexity": "O(n) where n is number of connections",
+      "memory": "Moderate additional storage for output arrays",
+      "scalability": "Suitable for large MF6 models"
+    }
+  },
+  "validation_framework": [
+    {
+      "test": "Empty FLOWJA array handling",
+      "expected": "ValueError raised with clear message",
+      "description": "Ensures robust handling of missing flow data"
+    },
+    {
+      "test": "Missing connectivity array detection",
+      "expected": "ValueError for incomplete IA or JA arrays", 
+      "description": "Validates complete connectivity information required"
+    },
+    {
+      "test": "Array size consistency checking",
+      "expected": "ValueError for mismatched array dimensions",
+      "description": "Ensures data integrity and consistency"
+    },
+    {
+      "test": "Input validation framework",
+      "expected": "Comprehensive error checking and reporting",
+      "description": "Provides robust error handling for production use"
+    },
+    {
+      "test": "Professional workflow integration",
+      "expected": "Seamless integration with FloPy ecosystem",
+      "description": "Maintains compatibility with existing tools"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main structured face flows utility demonstration",
+    "metadata.json": "This metadata file",
+    "test_results.json": "Validation results and utility testing outcomes"
+  },
+  "technical_notes": {
+    "connectivity_format": "MF6 uses efficient sparse matrix representation",
+    "conversion_necessity": "Structured format needed for traditional analysis",
+    "error_handling": "Comprehensive validation prevents common processing errors",
+    "quality_assurance": "Residual calculations essential for flow balance verification", 
+    "professional_standards": "Industry-standard post-processing workflows supported",
+    "integration_benefits": "Maintains compatibility with existing FloPy ecosystem"
+  },
+  "qa_information": {
+    "model_runtime": "demonstration_only",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["array_validation_errors", "connectivity_mismatches", "dimension_inconsistencies"],
+    "testing_notes": "Focuses on utility function validation and error handling demonstration"
+  }
+}

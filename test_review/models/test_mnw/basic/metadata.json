@@ -1,0 +1,322 @@
+{
+  "model_info": {
+    "name": "test_mnw",
+    "title": "Multi-Node Well (MNW1/MNW2) Package Demonstration",
+    "description": "Comprehensive demonstration of FloPy's Multi-Node Well (MNW1 and MNW2) package capabilities for advanced well modeling with multiple completion zones, skin effects, and professional pumping optimization workflows.",
+    "complexity": "advanced",
+    "model_type": "multi_node_well",
+    "modflow_version": "mf2005_mnw",
+    "packages_demonstrated": ["MNW1", "MNW2", "MNWI", "multi_layer_wells", "well_skin_effects", "pumping_optimization"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Master MNW1 and MNW2 package configuration for multi-layer wells",
+      "Configure advanced well skin effects and hydraulic parameters",
+      "Implement complex pumping schedules and operational constraints",
+      "Apply professional multi-node well design and optimization",
+      "Establish quality assurance procedures for complex well systems",
+      "Integrate multi-format data workflows and compatibility",
+      "Develop industry-standard well field management practices"
+    ],
+    "key_concepts": [
+      "Multi-node well modeling and configuration",
+      "Well skin effects and hydraulic loss calculations",
+      "Multi-layer aquifer completion zone targeting",
+      "Complex pumping schedules and operational optimization",
+      "Professional well field design and management",
+      "Quality assurance and validation for advanced well systems",
+      "Industry-standard groundwater extraction and management"
+    ],
+    "skill_level": "advanced"
+  },
+  "mnw_package_focus": {
+    "mnw1_capabilities": {
+      "primary_function": "Multi-Node Well version 1 for basic multi-layer well systems",
+      "well_support": "Multiple completion zones with legacy compatibility",
+      "configuration_scope": "Multi-layer wells with stress period management",
+      "professional_features": "Industry-standard legacy well system support",
+      "integration": "MODFLOW 2005 multi-node well workflow compatibility"
+    },
+    "mnw2_capabilities": {
+      "primary_function": "Advanced Multi-Node Well version 2 with enhanced features",
+      "well_support": "Complex multi-layer wells with optimization capabilities",
+      "configuration_scope": "Advanced skin effects, constraints, and performance analysis",
+      "professional_features": "Industry-leading well design and optimization",
+      "integration": "Comprehensive MODFLOW well system workflow"
+    }
+  },
+  "mnw1_configuration": {
+    "package_parameters": {
+      "maximum_wells": "120 wells (mxmnw parameter)",
+      "stress_periods": "3 time periods with variable pumping",
+      "active_wells_per_period": "17 stress period entries",
+      "unique_well_numbers": "15 different well identifiers",
+      "well_label_categories": "4 distinct label types",
+      "professional_setup": "Legacy multi-well system configuration"
+    },
+    "model_configuration": {
+      "base_model": "mnw1.nam from mf2005_test example data",
+      "well_management": "Multiple wells with varying completion zones",
+      "stress_period_data": "Complex pumping schedules across time periods",
+      "quality_validation": "Node data consistency and completeness verification",
+      "professional_standards": "Industry-standard legacy well system support"
+    }
+  },
+  "mnw2_advanced_features": {
+    "node_configuration_methods": [
+      {
+        "method": "Elevation-based (ztop/zbotm)",
+        "description": "Well screen intervals defined by top/bottom elevations",
+        "use_case": "Professional aquifer zone targeting and completion design",
+        "advantages": "Direct elevation control and vertical completion specification"
+      },
+      {
+        "method": "Layer-based (k/i/j)",
+        "description": "Well nodes specified by layer/row/column grid indices",
+        "use_case": "Grid-aligned well placement and simplified configuration",
+        "advantages": "Automatic elevation assignment and grid-based design"
+      }
+    ],
+    "hydraulic_parameters": {
+      "well_radius": "Physical well diameter specification (rw parameter)",
+      "skin_radius": "Effective skin zone radius (rskin parameter)",
+      "skin_conductivity": "Altered zone permeability (kskin parameter)",
+      "pump_depth": "Pump intake elevation (zpump parameter)",
+      "loss_type": "Well skin resistance model ('skin' specification)",
+      "professional_characterization": "Industry-standard well performance parameters"
+    }
+  },
+  "well_skin_effects": {
+    "theoretical_basis": {
+      "skin_concept": "Well skin resistance due to drilling and completion effects",
+      "hydraulic_impact": "Modified permeability zone around well screen",
+      "performance_effect": "Additional head loss and reduced well efficiency",
+      "professional_significance": "Critical for realistic well performance modeling",
+      "industry_standard": "Required for accurate well system design"
+    },
+    "parameter_specification": {
+      "skin_type": "'skin' designation for skin effect modeling",
+      "well_radius_range": "1.0-0.5 units physical well diameter",
+      "skin_radius_specification": "2.0 units effective skin zone extent",
+      "skin_conductivity_range": "5.0 units/time altered zone permeability",
+      "pump_depth_range": "6.2-4.1 units pump intake elevation",
+      "professional_parameterization": "Realistic well design specification"
+    }
+  },
+  "pumping_optimization": {
+    "stress_period_management": {
+      "schedule_configuration": "Complex pumping schedules across stress periods",
+      "flow_rate_specification": "Desired pumping rates (qdes parameter)",
+      "operational_constraints": "Pump capacity and flow rate limits",
+      "period_reuse": "Efficient stress period data management (itmp=-1)",
+      "professional_optimization": "Industry-standard well operation management"
+    },
+    "advanced_constraints": {
+      "pump_location": "Automatic or specified pump placement (-1 for automatic)",
+      "flow_limits": "Operational flow rate constraints (qlimit parameter)",
+      "pump_capacity": "Maximum pump capacity specification (pumpcap parameter)",
+      "pressure_flags": "Pressure-based operational controls (ppflag parameter)",
+      "professional_operation": "Advanced well performance optimization"
+    }
+  },
+  "example_configurations": {
+    "ztop_zbotm_example": {
+      "well1_nodes": [
+        {"node": 0, "location": "(i=1, j=1)", "ztop": 9.5, "zbotm": 7.1, "zone": "upper_aquifer"},
+        {"node": 1, "location": "(i=1, j=1)", "ztop": 7.1, "zbotm": 5.1, "zone": "lower_aquifer"}
+      ],
+      "well2_nodes": [
+        {"node": 2, "location": "(i=3, j=3)", "ztop": 9.1, "zbotm": 3.7, "zone": "full_completion"}
+      ],
+      "hydraulic_parameters": {
+        "well_radius": "1.0 units",
+        "skin_radius": "2.0 units", 
+        "skin_conductivity": "5.0 units/time",
+        "pump_depth": "6.2-4.1 units"
+      }
+    },
+    "k_i_j_example": {
+      "well1_nodes": [
+        {"node": 0, "location": "k=3, i=1, j=1", "layer": 4, "completion": "deep_zone"},
+        {"node": 1, "location": "k=2, i=1, j=1", "layer": 3, "completion": "intermediate_zone"}
+      ],
+      "well2_nodes": [
+        {"node": 2, "location": "k=1, i=3, j=3", "layer": 2, "completion": "shallow_zone"}
+      ],
+      "elevation_assignment": "Automatic from model layer geometry",
+      "professional_placement": "Grid-aligned well positioning"
+    }
+  },
+  "pumping_schedules": {
+    "stress_period_examples": {
+      "period_0": {
+        "description": "Initial no-pumping period",
+        "well1_rate": "0 units³/time",
+        "well2_rate": "0 units³/time",
+        "operational_status": "Standby mode"
+      },
+      "period_1": {
+        "description": "Active pumping period",
+        "well1_rate": "100 units³/time",
+        "well2_rate": "1000 units³/time",
+        "operational_status": "Full production"
+      },
+      "period_2": {
+        "description": "Continued pumping (reuse period 1)",
+        "data_management": "itmp=-1 for period reuse",
+        "operational_status": "Sustained production",
+        "efficiency": "Optimized data management"
+      }
+    }
+  },
+  "data_format_support": {
+    "numpy_recarray": {
+      "format": "Native FloPy multi-node well format",
+      "advantages": "Direct MODFLOW compatibility and efficiency",
+      "use_case": "Standard well modeling and simulation workflows",
+      "professional_application": "Industry-standard modeling practices"
+    },
+    "pandas_dataframe": {
+      "format": "Pandas DataFrame integration for advanced analysis",
+      "advantages": "Python data science ecosystem compatibility",
+      "use_case": "Advanced well analysis and optimization workflows",
+      "professional_application": "Research and consulting data analysis"
+    },
+    "format_flexibility": {
+      "automatic_detection": "Seamless format conversion and compatibility",
+      "workflow_integration": "Multi-format data pipeline support",
+      "quality_assurance": "Consistent results across data formats",
+      "professional_standards": "Industry-standard data workflow compatibility"
+    }
+  },
+  "professional_applications": {
+    "municipal_water_supply": [
+      "Multi-layer aquifer water supply well design and optimization",
+      "Well field layout and interference analysis",
+      "Pumping schedule optimization for sustainable yield",
+      "Well performance monitoring and maintenance planning",
+      "Regulatory compliance and water rights management",
+      "Professional water utility system design and operation"
+    ],
+    "industrial_applications": [
+      "Process water extraction system design and management",
+      "Industrial cooling water well networks",
+      "Manufacturing facility groundwater supply systems",
+      "Mining dewatering and water supply integration",
+      "Power plant cooling water extraction systems",
+      "Professional industrial water resource management"
+    ],
+    "environmental_consulting": [
+      "Contamination remediation pumping well networks",
+      "Pump-and-treat system design and optimization",
+      "Hydraulic containment system implementation",
+      "Groundwater monitoring well network design",
+      "Natural attenuation enhancement systems",
+      "Environmental compliance and regulatory reporting"
+    ],
+    "agricultural_irrigation": [
+      "Irrigation well field design and management",
+      "Multi-layer aquifer agricultural water extraction",
+      "Seasonal pumping schedule optimization",
+      "Irrigation efficiency and water conservation",
+      "Agricultural water rights and sustainability",
+      "Professional agricultural water resource management"
+    ]
+  },
+  "quality_assurance_framework": {
+    "validation_procedures": [
+      "Node data consistency and completeness verification",
+      "Elevation ordering validation (ztop > zbotm for all nodes)",
+      "Layer index ordering verification (k increasing with depth)",
+      "Stress period data completeness and consistency checking",
+      "Hydraulic parameter reasonableness assessment",
+      "Professional well design specification validation"
+    ],
+    "data_integrity_checks": [
+      "Multi-format data consistency verification across formats",
+      "Well configuration spatial and hydraulic validation",
+      "Pumping schedule feasibility and constraint verification",
+      "File I/O integrity and format compliance checking",
+      "Professional quality control protocol implementation"
+    ]
+  },
+  "advanced_features": {
+    "well_object_design": {
+      "individual_well_management": "Mnw class for individual well encapsulation",
+      "well_id_standardization": "Automatic lowercase conversion for consistency",
+      "node_data_integration": "Seamless node and stress period data management",
+      "professional_organization": "Database-compatible well system organization"
+    },
+    "netcdf_export": {
+      "data_sharing": "NetCDF format export for professional data exchange",
+      "spatial_visualization": "Well data spatial distribution and analysis",
+      "time_series_export": "Pumping data temporal analysis and archiving",
+      "gis_integration": "Professional GIS and external system compatibility"
+    }
+  },
+  "package_integration": {
+    "mnwi_coordination": {
+      "information_package": "MNWI (Multi-Node Well Information) integration",
+      "dependency_validation": "MNWI package presence verification",
+      "data_output": "Comprehensive well performance information",
+      "professional_reporting": "Industry-standard well analysis documentation"
+    },
+    "modflow_compatibility": {
+      "wel_package_comparison": "WEL package functionality comparison",
+      "model_completeness": "Comprehensive MODFLOW model validation",
+      "package_workflow": "Professional multi-package integration",
+      "quality_standards": "Industry-standard modeling practice compliance"
+    }
+  },
+  "validation_framework": [
+    {
+      "test": "MNW1 package loading and configuration",
+      "expected": "120 maximum wells with 15 active wells across 3 stress periods",
+      "description": "Validates MNW1 legacy well system support and configuration"
+    },
+    {
+      "test": "MNW2 multi-format node data creation",
+      "expected": "Elevation and layer-based configuration with recarray/DataFrame support",
+      "description": "Ensures flexible MNW2 well configuration and data format compatibility"
+    },
+    {
+      "test": "Elevation ordering validation",
+      "expected": "ztop > zbotm ordering verification for all well nodes",
+      "description": "Confirms proper well completion zone elevation specification"
+    },
+    {
+      "test": "Layer index ordering validation",
+      "expected": "k index increasing with depth for layer-based configuration",
+      "description": "Validates proper layer-based well node specification"
+    },
+    {
+      "test": "Pumping schedule management",
+      "expected": "Complex stress period data with flow rates and constraints",
+      "description": "Ensures comprehensive pumping optimization and constraint handling"
+    },
+    {
+      "test": "Quality assurance and data integrity",
+      "expected": "Comprehensive validation and verification across all configurations",
+      "description": "Validates professional quality control and data integrity procedures"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main Multi-Node Well package demonstration script",
+    "metadata.json": "This comprehensive metadata file",
+    "test_results.json": "MNW package validation results and performance metrics"
+  },
+  "technical_notes": {
+    "mnw1_support": "Legacy Multi-Node Well version 1 with modern FloPy integration",
+    "mnw2_advanced": "Advanced Multi-Node Well version 2 with optimization capabilities",
+    "skin_effects": "Professional well skin resistance modeling and parameter specification",
+    "data_flexibility": "Multi-format data support with quality assurance across formats",
+    "pumping_optimization": "Advanced pumping schedule and constraint management",
+    "professional_standards": "Industry-standard multi-node well design and analysis"
+  },
+  "qa_information": {
+    "model_runtime": "demonstration_only",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["elevation_ordering", "layer_specification", "pumping_constraints", "data_format_compatibility"],
+    "testing_notes": "Focuses on MNW package validation and professional multi-node well system standards"
+  }
+}

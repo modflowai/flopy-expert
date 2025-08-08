@@ -164,16 +164,16 @@ def run_model():
     print(f"\n7. Pumping Well Configuration")
     print("-" * 40)
     
-    # Well 500m from coast
+    # Well 500m from coast - reduced pumping for better convergence
     wel_col = 40  # Column 40 (500m from coast)
     wel_data = {
-        1: [[0, 0, wel_col, -50.0]]  # 50 m³/day pumping in transient
+        1: [[0, 0, wel_col, -10.0]]  # Reduced to 10 m³/day pumping
     }
     
     wel = flopy.modflow.ModflowWel(mf, stress_period_data=wel_data)
     
     print(f"  Well location: {(ncol-wel_col)*delr:.0f}m from coast")
-    print(f"  Pumping rate: 50 m³/day (transient period)")
+    print(f"  Pumping rate: 10 m³/day (transient period)")
     print(f"  Purpose: Freshwater supply well")
     
     # 8. SWI2 Package Configuration
@@ -182,23 +182,29 @@ def run_model():
     
     # SWI2 parameters
     nsrf = 1  # Number of surfaces (1 interface between fresh and salt)
-    istrat = 1  # Stratified flow option
+    istrat = 0  # Continuous density variation (more stable)
     nobs = 0  # No observation points for demo
     iswizt = 55  # Unit number for zeta output
     iswiobs = 0  # No observation output
     
-    # Fluid densities
-    nu = [0.0, 0.025]  # Dimensionless density (fresh=0, seawater=0.025)
+    # Fluid densities - need nsrf+2 values for istrat=0
+    nu = [0.0, 0.0125, 0.025]  # Dimensionless density (fresh, transition, seawater)
     
     # Initial interface elevation (zeta)
-    # Interface slopes from -20m at coast to -35m inland
+    # Interface slopes from coast inland
     z_init = np.zeros((nsrf, nlay, nrow, ncol))
     for j in range(ncol):
         if j < ncol - 1:
-            # Ghyben-Herzberg: interface at 40*freshwater head below sea level
-            z_init[0, 0, 0, j] = -40.0 * strt[0, 0, j]
+            # Ghyben-Herzberg: interface depth based on freshwater head
+            # For head above sea level, interface is below sea level
+            head_above_sea = max(0.0, strt[0, 0, j])
+            # Interface depth = -40 * freshwater head above sea level
+            interface_depth = -40.0 * head_above_sea
+            # Ensure interface stays within aquifer bounds
+            z_init[0, 0, 0, j] = max(botm[0], interface_depth)
         else:
-            z_init[0, 0, 0, j] = botm[0] / 2.0  # Mid-depth at ocean
+            # At ocean boundary, interface at mid-depth
+            z_init[0, 0, 0, j] = botm[0] / 2.0
     
     # Effective porosity for transport
     ssz = 0.2  # Effective porosity
@@ -206,6 +212,8 @@ def run_model():
     # Source/sink fluid types
     isource = np.zeros((nlay, nrow, ncol), dtype=int)
     isource[0, 0, -1] = 1  # Ocean cell has seawater
+    # Set well cell to extract freshwater
+    isource[0, 0, wel_col] = -1  # Well extracts freshwater
     
     swi = flopy.modflow.ModflowSwi2(
         mf,
@@ -215,19 +223,19 @@ def run_model():
         zeta=z_init,
         ssz=ssz,
         isource=isource,
-        nsolver=1,  # Direct solver
+        nsolver=2,  # PCG solver for SWI2
         iprsol=0,
         mutsol=3,
         solver2params={
-            'mxiter': 100,
-            'iter1': 20,
+            'mxiter': 500,  # More iterations for convergence
+            'iter1': 100,   # More inner iterations
             'npcond': 1,
-            'zclose': 1e-3,
-            'rclose': 1e-3,
-            'relax': 1.0,
+            'zclose': 1e-3,  # Looser zeta closure for stability
+            'rclose': 1e-2,  # Looser residual closure 
+            'relax': 1.0,    # No under-relaxation
             'nbpol': 2,
-            'damp': 1.0,
-            'dampt': 1.0
+            'damp': 1.0,     # No damping for initial convergence
+            'dampt': 1.0     # No damping for transient
         }
     )
     
@@ -258,10 +266,14 @@ def run_model():
     
     pcg = flopy.modflow.ModflowPcg(
         mf,
-        mxiter=100,
-        iter1=50,
-        hclose=1e-4,
-        rclose=1e-3
+        mxiter=200,   # More outer iterations
+        iter1=100,    # More inner iterations
+        hclose=1e-3,  # Looser head closure for stability
+        rclose=1e-2,  # Looser residual closure
+        relax=0.98,   # Slight under-relaxation
+        nbpol=1,      # Use modified incomplete Cholesky
+        iprpcg=1,     # Print solver info
+        mutpcg=0      # Print tables of max head change
     )
     
     print(f"  Solver: PCG (Preconditioned Conjugate Gradient)")

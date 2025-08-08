@@ -1,0 +1,287 @@
+{
+  "model_info": {
+    "name": "test_plot_particle_tracks",
+    "title": "Particle Tracking Visualization Demonstration",
+    "description": "Comprehensive demonstration of FloPy's particle tracking visualization capabilities for MODPATH pathlines and endpoints in map view and cross-section plots, with multi-format data support and professional presentation workflows.",
+    "complexity": "advanced",
+    "model_type": "particle_tracking_visualization",
+    "modflow_version": "modpath6_visualization",
+    "packages_demonstrated": ["MODPATH-6", "PlotMapView", "PlotCrossSection", "pathline_plotting", "endpoint_plotting"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Master MODPATH pathline visualization in map view and cross-section",
+      "Configure endpoint particle plotting with statistical color schemes",
+      "Implement multi-format data support for particle tracking analysis",
+      "Apply professional particle tracking presentation workflows",
+      "Establish quality assurance procedures for particle visualization",
+      "Integrate MODFLOW-MODPATH modeling for flow path analysis",
+      "Develop industry-standard particle tracking documentation"
+    ],
+    "key_concepts": [
+      "MODPATH pathline visualization and analysis",
+      "Endpoint particle distribution characterization", 
+      "Multi-format data flexibility and workflow integration",
+      "Professional color schemes and statistical visualization",
+      "Map view and cross-section coordination for particle analysis",
+      "Quality assurance and validation for particle tracking",
+      "Industry-standard groundwater flow path analysis"
+    ],
+    "skill_level": "advanced"
+  },
+  "particle_tracking_focus": {
+    "modpath_integration": {
+      "primary_function": "Professional particle tracking visualization for groundwater flow analysis",
+      "model_support": "MODPATH-6 with multi-layer MODFLOW integration",
+      "data_formats": "Recarrays, DataFrames, concatenated data structures",
+      "visualization_scope": "Pathlines, endpoints, statistical analysis, professional presentation",
+      "professional_features": "Industry-standard particle tracking analysis workflows"
+    },
+    "visualization_capabilities": {
+      "pathline_plotting": "LineCollection-based pathline visualization in map and section views",
+      "endpoint_plotting": "PathCollection-based endpoint analysis with statistical coloring",
+      "color_customization": "Scalar, array-based, and statistical color schemes",
+      "multi_view_integration": "Coordinated map view and cross-section analysis",
+      "professional_presentation": "Publication-quality particle tracking figures"
+    }
+  },
+  "modpath_model_configuration": {
+    "base_model": {
+      "model_source": "EXAMPLE.nam from MP6 example data",
+      "modflow_model": "Multi-layer groundwater flow system",
+      "modpath_model": "ex6 particle tracking simulation",
+      "model_workspace": "Temporary directory with model files",
+      "professional_setup": "Industry-standard MODFLOW-MODPATH integration"
+    },
+    "simulation_parameters": {
+      "model_name": "ex6",
+      "tracking_direction": "Forward pathline tracking", 
+      "simulation_type": "Pathline analysis",
+      "source_package": "RCH (recharge-based particles)",
+      "start_time": "(2, 0, 1.0) - specific stress period timing",
+      "porosity": "0.1 effective porosity",
+      "output_files": "ex6.mppth (pathlines), ex6.mpend (endpoints)"
+    }
+  },
+  "pathline_visualization": {
+    "map_view_capabilities": {
+      "plotting_class": "PlotMapView pathline visualization",
+      "data_source": "Well destination pathline extraction",
+      "destination_cell": "(4, 12, 12) - specific well location",
+      "pathline_segments": "114 LineCollection paths",
+      "visualization_object": "matplotlib LineCollection",
+      "color_scheme": "Red pathlines with blue well overlays",
+      "professional_features": "Boundary condition integration and styling"
+    },
+    "cross_section_capabilities": {
+      "plotting_class": "PlotCrossSection pathline visualization",
+      "section_definition": "Row 4 through destination well",
+      "rendering_method": "Cell-based pathline method",
+      "pathline_segments": "6 vertical flow paths",
+      "visualization_object": "LineCollection in vertical section",
+      "flow_analysis": "3D particle tracking in cross-section view",
+      "professional_integration": "Map view and section coordination"
+    }
+  },
+  "data_format_support": {
+    "supported_formats": [
+      {
+        "format": "List of recarrays",
+        "description": "Native MODPATH pathline format",
+        "use_case": "Direct MODPATH output processing",
+        "advantages": "Native format compatibility and efficiency"
+      },
+      {
+        "format": "List of DataFrames", 
+        "description": "Pandas DataFrame integration",
+        "use_case": "Python data science workflow integration",
+        "advantages": "Advanced data analysis and manipulation"
+      },
+      {
+        "format": "Single concatenated recarray",
+        "description": "Combined pathline data structure",
+        "use_case": "Unified pathline analysis",
+        "advantages": "Simplified data handling and processing"
+      },
+      {
+        "format": "Single DataFrame",
+        "description": "Unified pandas data structure", 
+        "use_case": "Comprehensive statistical analysis",
+        "advantages": "Full pandas ecosystem integration"
+      }
+    ],
+    "processing_advantages": [
+      "Seamless integration with different data workflows",
+      "Python data science ecosystem compatibility",
+      "Flexible analysis and post-processing options",
+      "Professional data management and archiving",
+      "Quality assurance across multiple data formats"
+    ]
+  },
+  "endpoint_visualization": {
+    "plotting_capabilities": {
+      "plotting_class": "PlotMapView endpoint visualization",
+      "direction_filtering": "Direction-based endpoint analysis ('ending')",
+      "data_support": "Recarray and DataFrame compatibility",
+      "visualization_object": "PathCollection for point data rendering",
+      "particle_count": "625 endpoint particles",
+      "professional_features": "Statistical color mapping and analysis"
+    },
+    "color_customization": {
+      "scalar_colors": "Single color for all endpoints",
+      "array_based_coloring": "Statistical data visualization with c parameter",
+      "colormap_integration": "Viridis and other professional color schemes",
+      "random_arrays": "Statistical distribution display capabilities", 
+      "time_based_coloring": "Travel time visualization and analysis",
+      "precedence_rules": "c parameter overrides color parameter",
+      "colorbar_features": "Legend display with shrink options"
+    }
+  },
+  "modflow6_integration": {
+    "simulation_framework": {
+      "container": "MFSimulation architecture for modern modeling",
+      "time_discretization": "ModflowTdis time control",
+      "flow_model": "ModflowGwf groundwater flow simulation",
+      "grid_configuration": "1 × 10 × 10 cell rectangular domain",
+      "boundary_conditions": "CHD package implementation",
+      "output_control": "Head and budget file generation",
+      "solver": "IMS iterative solution methods"
+    },
+    "modpath7_future": {
+      "integration_status": "Under development (currently todo/skipped)",
+      "coupled_simulation": "MF6-MP7 integrated particle tracking",
+      "enhanced_capabilities": "Advanced particle tracking features",
+      "visualization_expansion": "Next-generation pathline and endpoint plotting",
+      "professional_evolution": "Future industry-standard particle tracking"
+    }
+  },
+  "professional_applications": {
+    "hydrogeological_consulting": [
+      "Well capture zone delineation and characterization",
+      "Contaminant source identification and flow path tracking",
+      "Groundwater age and travel time assessment",
+      "Flow path characterization for water supply systems",
+      "Wellhead protection area definition and mapping",
+      "Regulatory compliance documentation and reporting"
+    ],
+    "environmental_consulting": [
+      "Contamination migration pathway analysis and assessment",
+      "Remediation system design and performance optimization",
+      "Source-receptor relationship establishment and quantification",
+      "Environmental risk assessment and exposure pathway analysis",
+      "Natural attenuation pathway evaluation and monitoring",
+      "Regulatory agency interaction and technical documentation"
+    ],
+    "research_applications": [
+      "Groundwater flow system characterization research",
+      "Educational material development and training programs",
+      "Publication-quality figure generation for journals",
+      "Conference presentation and scientific poster development",
+      "Grant proposal technical documentation and visualization"
+    ]
+  },
+  "visualization_workflow": {
+    "map_view_procedure": [
+      "1. Load MODPATH pathline and endpoint data files",
+      "2. Configure PlotMapView with MODFLOW model object",
+      "3. Plot model grid structure and boundary conditions",
+      "4. Add pathline visualization with professional color schemes", 
+      "5. Overlay endpoint distributions with statistical coloring",
+      "6. Apply professional styling, legends, and annotations",
+      "7. Export publication-quality figures and documentation"
+    ],
+    "cross_section_procedure": [
+      "1. Define cross-section line through critical flow areas",
+      "2. Configure PlotCrossSection with MODFLOW model",
+      "3. Display vertical model structure and layer geometry",
+      "4. Add pathline visualization in vertical section view",
+      "5. Show boundary conditions in cross-section context",
+      "6. Coordinate analysis with map view particle tracking",
+      "7. Generate professional vertical flow path analysis"
+    ]
+  },
+  "quality_assurance_framework": {
+    "visualization_validation": [
+      "Collection type verification (LineCollection for pathlines, PathCollection for endpoints)",
+      "Pathline segment count validation (114 paths in map view, 6 in section)",
+      "Endpoint particle count verification (625 termination points)",
+      "Color scheme consistency checking across different views",
+      "Data format compatibility testing for multiple input types",
+      "Professional visualization standard compliance verification"
+    ],
+    "data_integrity_checks": [
+      "Multi-format data consistency verification across recarrays and DataFrames",
+      "Pathline continuity and connectivity validation for flow paths",
+      "Endpoint spatial distribution reasonableness assessment",
+      "Statistical color mapping accuracy and range validation",
+      "Professional quality control procedures and documentation"
+    ]
+  },
+  "advanced_techniques": {
+    "multi_panel_integration": [
+      "Coordinated map view and cross-section particle displays",
+      "Consistent color schemes and styling across different views",
+      "Integrated particle tracking analysis and interpretation",
+      "Professional multi-scale visualization and presentation",
+      "Publication-quality figure layouts and formatting"
+    ],
+    "statistical_visualization": [
+      "Travel time distribution analysis and characterization",
+      "Endpoint statistical distribution and spatial analysis",
+      "Pathline density mapping and flow convergence analysis", 
+      "Uncertainty visualization techniques for particle tracking",
+      "Professional statistical presentation and interpretation"
+    ]
+  },
+  "validation_framework": [
+    {
+      "test": "Pathline map view visualization",
+      "expected": "LineCollection with 114 path segments for destination well",
+      "description": "Validates pathline plotting capability in map view context"
+    },
+    {
+      "test": "Cross-section pathline visualization",
+      "expected": "LineCollection with 6 vertical flow paths through section",
+      "description": "Ensures pathline visualization in vertical cross-section view"
+    },
+    {
+      "test": "Endpoint particle plotting",
+      "expected": "PathCollection with 625 endpoint particles",
+      "description": "Confirms endpoint visualization with statistical color options"
+    },
+    {
+      "test": "Multi-format data support",
+      "expected": "Recarrays, DataFrames, and concatenated data compatibility",
+      "description": "Validates flexible data input and processing capabilities"
+    },
+    {
+      "test": "Color customization options",
+      "expected": "Scalar, array-based, and statistical coloring schemes",
+      "description": "Ensures comprehensive color mapping and visualization options"
+    },
+    {
+      "test": "Professional workflow integration",
+      "expected": "Coordinated map view and cross-section analysis",
+      "description": "Validates integrated particle tracking workflow procedures"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main particle tracking visualization demonstration script",
+    "metadata.json": "This comprehensive metadata file",
+    "test_results.json": "Particle tracking visualization validation results and metrics"
+  },
+  "technical_notes": {
+    "modpath_integration": "Professional MODPATH-6 particle tracking visualization",
+    "multi_format_support": "Comprehensive data format flexibility and workflow integration",
+    "visualization_quality": "Industry-standard pathline and endpoint plotting capabilities",
+    "statistical_analysis": "Advanced color mapping and particle distribution analysis",
+    "professional_workflow": "Complete particle tracking analysis and presentation pipeline",
+    "quality_assurance": "Rigorous validation and verification framework for visualization"
+  },
+  "qa_information": {
+    "model_runtime": "demonstration_only",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["data_format_compatibility", "collection_type_validation", "color_mapping_consistency"],
+    "testing_notes": "Focuses on particle tracking visualization validation and professional presentation standards"
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "model_info": {
+    "name": "test_postprocessing",
+    "title": "MODFLOW Post-Processing Utilities Demonstration",
+    "description": "Comprehensive demonstration of MODFLOW post-processing utilities including water table extraction, transmissivity calculations, gradient analysis, and saturated thickness computation for professional groundwater analysis.",
+    "complexity": "advanced",
+    "model_type": "post_processing_analysis",
+    "modflow_version": "mfnwt",
+    "packages_demonstrated": ["ModflowDis", "ModflowLpf", "ModflowUpw", "PostProcessing"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Extract water tables from 3D head distributions",
+      "Calculate transmissivity from head and aquifer data",
+      "Compute vertical gradients for flow analysis",
+      "Determine saturated thickness in unconfined aquifers",
+      "Analyze time-series groundwater data",
+      "Apply professional post-processing workflows"
+    ],
+    "key_concepts": [
+      "Water table extraction algorithms",
+      "Transmissivity computation methods",
+      "Vertical hydraulic gradient analysis",
+      "Saturated zone thickness calculation",
+      "Dry cell and no-flow boundary handling",
+      "Multi-layer aquifer characterization",
+      "Time-series groundwater analysis",
+      "Professional hydrogeological workflows"
+    ],
+    "skill_level": "advanced"
+  },
+  "model_setup": {
+    "grid_dimensions": {
+      "primary_grid": "3×3×3 cells for demonstration",
+      "analysis_grid": "8 observation points for transmissivity",
+      "time_series": "2 timesteps for temporal analysis"
+    },
+    "analysis_components": {
+      "water_table": "3D head array with dry cells and no-flow boundaries",
+      "transmissivity": "Multi-layer aquifer with open intervals",
+      "gradients": "Complex head distribution for flow analysis",
+      "time_series": "Multi-timestep water table evolution"
+    },
+    "data_structures": {
+      "head_arrays": "Complex 3D distributions with realistic values",
+      "boundary_conditions": "Dry cells (-1e30, -9999) and no-flow (1e30, 9999)",
+      "aquifer_properties": "Hydraulic conductivity and layer geometry"
+    }
+  },
+  "post_processing_utilities": {
+    "get_water_table": {
+      "purpose": "Extract 2D water table from 3D head arrays",
+      "key_parameters": ["hds", "hdry", "hnoflo"],
+      "capabilities": ["dry_cell_handling", "no_flow_boundaries", "time_series_support"]
+    },
+    "get_transmissivities": {
+      "purpose": "Calculate transmissivity from heads and aquifer properties", 
+      "key_parameters": ["heads", "model", "r", "c", "sctop", "scbot"],
+      "capabilities": ["open_intervals", "full_aquifer", "multi_layer"]
+    },
+    "get_gradients": {
+      "purpose": "Compute vertical hydraulic gradients",
+      "key_parameters": ["hds", "model", "nodata"],
+      "capabilities": ["vertical_flow_analysis", "layer_interface_gradients"]
+    },
+    "saturated_thickness": {
+      "purpose": "Calculate thickness of saturated zone",
+      "key_parameters": ["hds", "mask"],
+      "capabilities": ["unconfined_aquifers", "water_table_conditions"]
+    }
+  },
+  "packages_used": {
+    "ModflowDis": {
+      "purpose": "Model discretization for post-processing context",
+      "key_parameters": ["nlay", "nrow", "ncol", "botm", "top"]
+    },
+    "ModflowUpw": {
+      "purpose": "Upstream weighting package for transmissivity calculations",
+      "key_parameters": ["hk"]
+    },
+    "ModflowLpf": {
+      "purpose": "Layer Property Flow for gradient analysis",
+      "key_parameters": ["laytyp"]
+    }
+  },
+  "physical_processes": {
+    "analysis_focus": "post_processing_workflows",
+    "water_table_extraction": "unconfined_aquifer_analysis",
+    "transmissivity_analysis": "aquifer_characterization",
+    "gradient_analysis": "vertical_flow_assessment",
+    "applications": ["pump_tests", "contamination_studies", "water_supply_assessment"]
+  },
+  "seven_phase_conceptual_model": {
+    "1_grid_generation": {
+      "description": "3D model grids for complex post-processing analysis",
+      "packages": ["ModflowDis"],
+      "parameters": ["nlay", "nrow", "ncol", "delr", "delc"],
+      "educational_focus": "Model geometry for post-processing context"
+    },
+    "2_model_setup": {
+      "description": "Multi-layer aquifer system configuration",
+      "packages": ["ModflowUpw", "ModflowLpf"],
+      "parameters": ["hk", "laytyp", "botm", "top"],
+      "educational_focus": "Aquifer properties for analysis"
+    },
+    "3_initial_conditions": {
+      "description": "Complex head distributions with boundaries",
+      "packages": ["Head Arrays"],
+      "parameters": ["hds", "hdry", "hnoflo"],
+      "educational_focus": "Realistic head data preparation"
+    },
+    "4_boundary_conditions": {
+      "description": "Dry cells and no-flow boundary handling",
+      "packages": ["Boundary Processing"],
+      "parameters": ["boundary_values", "masking"],
+      "educational_focus": "Professional boundary condition treatment"
+    },
+    "5_solver": {
+      "description": "Post-processing computational algorithms",
+      "packages": ["FloPy Utilities"],
+      "parameters": ["algorithm_parameters"],
+      "educational_focus": "Post-processing computational methods"
+    },
+    "6_visualization": {
+      "description": "Results visualization and quality checking",
+      "packages": ["Analysis Output"],
+      "parameters": ["validation_checks"],
+      "educational_focus": "Result validation and interpretation"
+    },
+    "7_post_processing": {
+      "description": "Professional analysis workflow integration",
+      "packages": ["Professional Tools"],
+      "parameters": ["workflow_parameters"],
+      "educational_focus": "Complete post-processing workflows"
+    }
+  },
+  "professional_applications": [
+    "Pump test analysis and aquifer characterization",
+    "Water table mapping for unconfined aquifer studies",
+    "Vertical flow assessment between aquifer layers",
+    "Wellfield optimization and spacing design",
+    "Contamination plume analysis and flow pathways",
+    "Water supply assessment and aquifer yield evaluation",
+    "Monitoring network design and optimization",
+    "Environmental compliance and regulatory analysis"
+  ],
+  "file_structure": {
+    "model.py": "Main post-processing demonstration script",
+    "metadata.json": "This metadata file",
+    "test_results.json": "Analysis results and validation metrics"
+  },
+  "technical_notes": {
+    "water_table_extraction": "Handles complex boundary conditions and dry cells",
+    "transmissivity_calculation": "Supports both open intervals and full aquifer analysis",
+    "gradient_computation": "Accounts for variable layer thickness and geometry",
+    "time_series_analysis": "Scales efficiently to large temporal datasets",
+    "integration": "All utilities work seamlessly with FloPy model objects",
+    "professional_standards": "Meets industry requirements for groundwater analysis"
+  },
+  "validation_framework": [
+    {
+      "test": "Water table extraction validation",
+      "expected": "Sum = 17.0, Center = 1.0",
+      "description": "Validates proper water table calculation from 3D heads"
+    },
+    {
+      "test": "Alternative dry cell handling",
+      "expected": "Consistent results with different dry values",
+      "description": "Ensures robust handling of various dry cell conventions"
+    },
+    {
+      "test": "Time-series water table analysis",
+      "expected": "Sum = 34.0, Center sum = 2.0",
+      "description": "Validates multi-timestep water table extraction"
+    },
+    {
+      "test": "Gradient calculation validation",
+      "expected": "Valid numpy array with proper dimensions",
+      "description": "Ensures gradient computation produces valid results"
+    },
+    {
+      "test": "Saturated thickness validation",
+      "expected": "Valid thickness array matching head dimensions",
+      "description": "Validates saturated zone thickness calculation"
+    }
+  ],
+  "qa_information": {
+    "model_runtime": "fast",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["missing_model_geometry", "incorrect_dry_values", "boundary_condition_conflicts"],
+    "testing_notes": "Tests comprehensive post-processing utilities without running MODFLOW simulation"
+  }
+}

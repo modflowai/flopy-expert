@@ -1,0 +1,255 @@
+{
+  "model_info": {
+    "name": "test_plot_map_view",
+    "title": "Map View Plotting Utility Demonstration",
+    "description": "Comprehensive demonstration of FloPy's PlotMapView class for creating professional plan-view maps of groundwater models with coordinate system management, boundary condition visualization, and multi-model overlay capabilities.",
+    "complexity": "intermediate",
+    "model_type": "plotting_utility",
+    "modflow_version": "mf6_plotting",
+    "packages_demonstrated": ["PlotMapView", "coordinate_systems", "boundary_visualization", "multi_model_overlay"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Master PlotMapView class for professional groundwater mapping",
+      "Configure coordinate system transformations and rotations",
+      "Visualize comprehensive boundary conditions in plan view",
+      "Implement multi-model visualization and overlay techniques",
+      "Apply matplotlib collection management for consistent rendering",
+      "Establish professional cartographic standards and practices",
+      "Integrate map view with cross-section and 3D workflows"
+    ],
+    "key_concepts": [
+      "Plan-view groundwater model visualization",
+      "Coordinate system transformations and rotations",
+      "Professional cartographic presentation standards",
+      "Boundary condition spatial distribution mapping",
+      "Multi-model overlay and comparison techniques",
+      "Matplotlib collection management for quality assurance",
+      "GIS integration and coordinate reference systems"
+    ],
+    "skill_level": "intermediate"
+  },
+  "plotting_utility_focus": {
+    "plotmapview_class": {
+      "primary_function": "Create professional plan-view maps of groundwater models",
+      "coordinate_support": "Comprehensive coordinate system transformations",
+      "visualization_scope": "Boundary conditions, grid structure, multi-model overlay",
+      "professional_features": "Cartographic standards and presentation quality",
+      "integration": "Seamless matplotlib and GIS workflow compatibility"
+    },
+    "initialization_methods": {
+      "model_based": "PlotMapView(model=model) - Direct model object integration",
+      "grid_based": "PlotMapView(modelgrid=modelgrid) - Grid object integration",
+      "coordinate_inheritance": "Automatic coordinate system parameter inheritance",
+      "transformation_handling": "Automated rotation and offset management",
+      "professional_mapping": "Survey-grade coordinate system support"
+    }
+  },
+  "coordinate_system_management": {
+    "transformation_parameters": {
+      "grid_dimensions": "1 × 40 × 20 cells (nlay × nrow × ncol)",
+      "cell_size": "250.0 × 250.0 units (delr × delc)",
+      "initial_rotation": "20.0 degrees",
+      "coordinate_offset": "X: 500,000, Y: 2,934,000 units",
+      "grid_rotation": "45.0 degrees",
+      "elevation_range": "Top: 10, Bottom: 0 units"
+    },
+    "coordinate_features": [
+      "Real-world coordinate system integration",
+      "State plane and UTM coordinate support",
+      "Professional survey-grade positioning accuracy",
+      "GIS compatibility and data exchange",
+      "Transformation validation and quality control",
+      "Documentation of coordinate parameters"
+    ]
+  },
+  "boundary_condition_visualization": {
+    "supported_packages": [
+      {"code": "CHD", "name": "Constant Head", "description": "Fixed head boundary mapping"},
+      {"code": "LAK", "name": "Lake Package", "description": "Lake extent and spatial distribution"},
+      {"code": "SFR", "name": "Stream Flow Routing", "description": "Stream network plan view"},
+      {"code": "MAW", "name": "Multi-Aquifer Well", "description": "Well location and extent mapping"},
+      {"code": "WEL", "name": "Well Package", "description": "Well field spatial distribution"},
+      {"code": "GHB", "name": "General Head Boundary", "description": "GHB spatial extent mapping"},
+      {"code": "DRN", "name": "Drain Package", "description": "Drainage system plan view"},
+      {"code": "RIV", "name": "River Package", "description": "River network spatial mapping"},
+      {"code": "UZF", "name": "Unsaturated Zone Flow", "description": "UZF boundary spatial distribution"}
+    ],
+    "visualization_characteristics": {
+      "spatial_distribution": "Complete boundary condition spatial mapping",
+      "color_coding": "Professional color schemes for different BC types",
+      "symbology": "Industry-standard symbols and legends",
+      "grid_integration": "Seamless integration with model grid geometry",
+      "quality_assurance": "Collection validation for rendering consistency"
+    }
+  },
+  "matplotlib_integration": {
+    "collection_management": {
+      "preferred_types": "QuadMesh or PathCollection for boundary visualization",
+      "quality_issue": "Occasional wrong collection type returned (known issue)",
+      "validation_approach": "Collection type verification for consistency",
+      "error_handling": "Graceful degradation for visualization compatibility",
+      "professional_output": "Reliable rendering across different platforms"
+    },
+    "visualization_features": [
+      "Professional color schemes and symbology customization",
+      "Grid structure and cell boundary visualization",
+      "Boundary condition spatial distribution mapping",
+      "Multi-model overlay and comparison capabilities",
+      "Legend and annotation support for clear communication",
+      "Export capabilities for publication and presentation"
+    ]
+  },
+  "multi_model_capabilities": {
+    "parent_child_modeling": {
+      "parent_model": "Primary domain with base coordinate system",
+      "child_model_offset": "X: 700, Y: 0 units",
+      "child_model_rotation": "0 degrees",
+      "coordinate_alignment": "Professional alignment and transformation",
+      "overlay_integration": "Shared axis and comparison visualization"
+    },
+    "visualization_features": [
+      "Parent-child model spatial relationship mapping",
+      "Coordinate system alignment and transformation validation",
+      "Boundary condition overlay from multiple models",
+      "Professional multi-scale mapping capabilities",
+      "Comparative analysis and model comparison visualization"
+    ]
+  },
+  "professional_applications": {
+    "hydrogeological_mapping": [
+      "Regional groundwater flow system visualization",
+      "Well field design and boundary condition mapping",
+      "Contamination source and plume extent mapping",
+      "Remediation system layout and design visualization",
+      "Water resources management and planning support",
+      "Regulatory compliance documentation and reporting"
+    ],
+    "engineering_consulting": [
+      "Site investigation and characterization mapping",
+      "Dewatering system design and layout planning",
+      "Environmental impact assessment visualization",
+      "Construction and excavation planning support",
+      "Mining and industrial facility groundwater mapping",
+      "Geotechnical groundwater condition assessment"
+    ],
+    "research_applications": [
+      "Regional hydrogeological research and analysis",
+      "Educational and training material development",
+      "Publication-quality figure generation",
+      "Conference presentation and poster development",
+      "Grant proposal and technical documentation"
+    ]
+  },
+  "cross_section_integration": {
+    "workflow_coordination": {
+      "upper_left_coordinates": "(100.0, 210.0)",
+      "section_line_vertices": "[[101.0, 201.0], [119.0, 209.0]]",
+      "plotcrosssection_integration": "Seamless cross-section workflow",
+      "spatial_relationship": "Map-section coordinate consistency",
+      "professional_workflow": "Integrated visualization pipeline"
+    },
+    "integrated_procedure": [
+      "1. Create map view with boundary conditions",
+      "2. Define cross-section line locations on map",
+      "3. Generate corresponding vertical sections",
+      "4. Validate coordinate system consistency",
+      "5. Coordinate professional presentation"
+    ]
+  },
+  "gis_integration": {
+    "coordinate_compatibility": [
+      "ArcGIS and QGIS coordinate system support",
+      "Shapefile and geodatabase integration",
+      "Web mapping service compatibility",
+      "Professional cartographic data exchange",
+      "Regulatory compliance and data sharing"
+    ],
+    "external_system_integration": [
+      "CAD system coordinate compatibility",
+      "Survey data integration and validation",
+      "Remote sensing and aerial imagery overlay",
+      "Database and asset management system integration",
+      "Professional workflow automation"
+    ]
+  },
+  "quality_assurance_framework": {
+    "coordinate_validation": [
+      "Vertex position accuracy verification",
+      "Coordinate transformation consistency checking",
+      "Professional surveying standard compliance",
+      "Spatial accuracy quality assurance",
+      "Coordinate system parameter documentation"
+    ],
+    "visualization_quality": [
+      "Collection type validation for consistent rendering",
+      "Boundary condition visualization verification",
+      "Multi-platform rendering consistency testing",
+      "Professional cartographic standard compliance",
+      "Quality control for publication-ready output"
+    ]
+  },
+  "best_practices": {
+    "professional_mapping_guidelines": [
+      "Establish consistent coordinate reference system",
+      "Apply appropriate map scale and spatial extent",
+      "Include comprehensive legend and symbology",
+      "Maintain consistent color schemes across projects",
+      "Document coordinate system and transformation parameters",
+      "Follow organizational cartographic standards"
+    ],
+    "quality_assurance_procedures": [
+      "Validate coordinate transformations with known control points",
+      "Verify boundary condition spatial accuracy",
+      "Test multi-model alignment and overlay accuracy",
+      "Document map projection and coordinate system details",
+      "Archive source data and visualization parameters"
+    ]
+  },
+  "validation_framework": [
+    {
+      "test": "Grid plotting and coordinate transformation",
+      "expected": "Accurate coordinate transformations and vertex positioning",
+      "description": "Validates coordinate system management and grid visualization"
+    },
+    {
+      "test": "Boundary condition visualization",
+      "expected": "All BC types render with proper collection objects",
+      "description": "Ensures comprehensive boundary condition mapping capability"
+    },
+    {
+      "test": "Multi-model overlay validation",
+      "expected": "Parent-child models properly aligned and visualized",
+      "description": "Confirms multi-model visualization and overlay accuracy"
+    },
+    {
+      "test": "Collection type management",
+      "expected": "QuadMesh/PathCollection objects for consistent rendering",
+      "description": "Validates matplotlib collection management consistency"
+    },
+    {
+      "test": "Cross-section integration",
+      "expected": "Map-section workflow coordination and spatial consistency",
+      "description": "Ensures integrated visualization workflow functionality"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main PlotMapView utility demonstration script",
+    "metadata.json": "This comprehensive metadata file",
+    "test_results.json": "Map view plotting validation results and metrics"
+  },
+  "technical_notes": {
+    "coordinate_systems": "Professional coordinate transformation and reference system support",
+    "boundary_visualization": "Comprehensive MODFLOW 6 package spatial mapping",
+    "multi_model_support": "Advanced overlay and comparison visualization capabilities",
+    "matplotlib_integration": "Professional collection management with quality assurance",
+    "gis_compatibility": "Industry-standard GIS integration and data exchange",
+    "professional_standards": "Cartographic excellence and presentation quality"
+  },
+  "qa_information": {
+    "model_runtime": "demonstration_only",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["collection_type_variations", "coordinate_transformation_accuracy", "multi_model_alignment"],
+    "testing_notes": "Focuses on PlotMapView utility validation and professional cartographic standards"
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "model_info": {
+    "name": "test_specific_discharge",
+    "title": "Specific Discharge Calculation and Visualization Demonstration",
+    "description": "Comprehensive demonstration of FloPy's specific discharge calculation capabilities including extended budget analysis, vector field computation, and flow visualization for professional groundwater flow analysis.",
+    "complexity": "advanced",
+    "model_type": "flow_analysis",
+    "modflow_version": "mf2005_mf6_comparison",
+    "packages_demonstrated": ["get_extended_budget", "get_specific_discharge", "PlotMapView", "PlotCrossSection", "ModflowWel", "ModflowGhb", "ModflowRiv", "ModflowDrn", "ModflowRch"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Calculate specific discharge from cell-by-cell flow budgets",
+      "Perform extended budget analysis with boundary conditions",
+      "Visualize flow vectors in map view and cross-section",
+      "Verify water balance and flow conservation",
+      "Compare MODFLOW 2005 and MODFLOW 6 approaches",
+      "Apply quality assurance frameworks for flow analysis",
+      "Interpret complex 3D groundwater flow patterns"
+    ],
+    "key_concepts": [
+      "Specific discharge calculation methods",
+      "Darcy velocity and flow vectors",
+      "Extended budget analysis",
+      "Cell-by-cell flow budgets",
+      "Boundary interface handling",
+      "Water balance verification",
+      "Flow pattern visualization",
+      "Professional flow system characterization"
+    ],
+    "skill_level": "advanced"
+  },
+  "model_setup": {
+    "domain_geometry": {
+      "horizontal_extent": "100 × 100 m",
+      "vertical_extent": "0 to -100 m",
+      "grid_discretization": "4 × 4 × 4",
+      "cell_dimensions": "25 × 25 × 25 m",
+      "total_cells": 64
+    },
+    "hydraulic_properties": {
+      "hydraulic_conductivity": "1.0 m/day",
+      "recharge_rate": "0.1 m/day",
+      "top_layer": "convertible_water_table",
+      "lower_layers": "confined_conditions"
+    },
+    "time_discretization": {
+      "periods": 1,
+      "steady_state": true,
+      "purpose": "equilibrium_flow_analysis"
+    }
+  },
+  "boundary_conditions": {
+    "wells": {
+      "location": "west_boundary",
+      "number": 16,
+      "individual_rate": "100 m³/day",
+      "total_inflow": "1600 m³/day",
+      "distribution": "uniform_across_layers",
+      "purpose": "freshwater_inflow_simulation"
+    },
+    "general_head_boundaries": {
+      "locations": ["north", "south", "bottom"],
+      "head_elevation": "-30.0 m",
+      "conductance": "50.0 m²/day",
+      "number_of_cells": 39,
+      "purpose": "hydraulic_gradient_and_outflow"
+    },
+    "river": {
+      "location": "eastern_boundary",
+      "stage": "-30.0 m",
+      "conductance": "50.0 m²/day",
+      "riverbed_bottom": "-35.0 m",
+      "purpose": "surface_water_interaction"
+    },
+    "drains": {
+      "location": "southern_boundary",
+      "elevation": "-30.0 m",
+      "conductance": "50.0 m²/day",
+      "purpose": "shallow_drainage_simulation"
+    },
+    "recharge": {
+      "rate": "0.1 m/day",
+      "distribution": "uniform_over_domain",
+      "total_rate": "1000 m³/day",
+      "purpose": "precipitation_infiltration"
+    },
+    "no_flow_cell": {
+      "location": [1, 0, 1],
+      "purpose": "inactive_cell_handling_test"
+    }
+  },
+  "specific_discharge_methods": {
+    "calculation_theory": {
+      "darcy_law": "q = -K * ∇h",
+      "specific_discharge": "q = Q / A (volumetric flow per unit area)",
+      "vector_components": ["qx", "qy", "qz"],
+      "units": "m/day",
+      "relation_to_velocity": "v = q / n (n = porosity)"
+    },
+    "computation_process": [
+      "Extract face flows from cell budget file",
+      "Apply appropriate cross-sectional areas", 
+      "Account for cell geometry and grid orientation",
+      "Handle boundary conditions and inactive cells",
+      "Generate vector field components",
+      "Quality assurance through mass balance verification"
+    ],
+    "extended_budget_features": {
+      "boundary_incorporation": "Includes all boundary condition contributions",
+      "interface_handling": "Proper treatment of complex boundaries",
+      "mass_balance": "Complete water balance accounting",
+      "quality_assurance": "Enhanced accuracy for discharge calculations"
+    }
+  },
+  "packages_used": {
+    "get_extended_budget": {
+      "purpose": "Enhanced flow budget analysis with boundary conditions",
+      "key_parameters": ["cbc_file", "boundary_ifaces", "hdsfile", "model"]
+    },
+    "get_specific_discharge": {
+      "purpose": "Vector field calculation from face flows or direct output",
+      "key_parameters": ["vectors_or_spdis", "model", "head"]
+    },
+    "PlotMapView": {
+      "purpose": "Horizontal flow vector visualization",
+      "key_parameters": ["model", "layer", "plot_vector", "normalize", "masked_values"]
+    },
+    "PlotCrossSection": {
+      "purpose": "Vertical flow pattern visualization", 
+      "key_parameters": ["model", "line", "plot_vector", "head", "normalize"]
+    },
+    "ModflowWel": {
+      "purpose": "Well package for freshwater inflow simulation",
+      "key_parameters": ["stress_period_data", "ipakcb"]
+    },
+    "ModflowGhb": {
+      "purpose": "General Head Boundary for outflow conditions",
+      "key_parameters": ["stress_period_data", "ipakcb"]
+    },
+    "ModflowRiv": {
+      "purpose": "River package for surface water interaction",
+      "key_parameters": ["stress_period_data", "ipakcb"]
+    },
+    "ModflowDrn": {
+      "purpose": "Drain package for shallow drainage",
+      "key_parameters": ["stress_period_data", "ipakcb"]
+    },
+    "ModflowRch": {
+      "purpose": "Recharge package for distributed infiltration",
+      "key_parameters": ["rech", "ipakcb"]
+    }
+  },
+  "boundary_interface_codes": {
+    "WELLS": 1,
+    "HEAD_DEP_BOUNDS": 4,
+    "RIVER_LEAKAGE": 2,
+    "DRAIN": 3,
+    "RECHARGE": 6,
+    "purpose": "Proper boundary flow attribution in extended budget"
+  },
+  "expected_flow_patterns": {
+    "primary_flow": "west_to_east (inflow to outflow)",
+    "vertical_component": "downward due to recharge",
+    "water_table_conditions": "top layer convertible",
+    "dry_cells": "possible due to low GHB heads",
+    "complexity": "3D flow with multiple boundary interactions",
+    "characteristics": [
+      "Horizontal flow dominance in confined layers",
+      "Significant vertical components near recharge areas",
+      "Flow vectors point from high to low head",
+      "Variable magnitude based on K and gradients",
+      "Local variations due to boundary effects"
+    ]
+  },
+  "water_balance_verification": {
+    "total_inflow": {
+      "wells": "1600 m³/day",
+      "recharge": "1000 m³/day", 
+      "total": "2600 m³/day"
+    },
+    "outflow_mechanisms": ["GHB", "rivers", "drains"],
+    "balance_requirement": "inflow ≈ outflow (steady state)",
+    "quality_checks": [
+      "Cell-by-cell water balance calculation",
+      "Extended budget mass balance verification",
+      "Local flow conservation checks",
+      "Boundary flow accounting",
+      "No-flow and dry cell handling"
+    ]
+  },
+  "modflow_comparison": {
+    "mf2005_approach": {
+      "data_source": "Cell Budget File (CBC)",
+      "flow_records": ["RIGHT FACE", "FRONT FACE", "LOWER FACE"],
+      "processing": "Extended budget analysis required",
+      "workflow": "Post-processing for specific discharge"
+    },
+    "mf6_approach": {
+      "data_source": "NPF package with save_specific_discharge = True",
+      "output_record": "SPDIS (direct specific discharge)",
+      "processing": "Built-in calculation with boundaries",
+      "workflow": "Streamlined modern approach"
+    },
+    "comparison_results": {
+      "head_accuracy": "virtually identical calculated heads",
+      "discharge_consistency": "consistent specific discharge values",
+      "physics_validation": "same results from different approaches",
+      "code_verification": "validation of both implementations"
+    }
+  },
+  "visualization_capabilities": {
+    "map_view": {
+      "components": ["qx", "qy"],
+      "purpose": "horizontal flow patterns",
+      "features": ["vector_normalization", "color_coding", "masking"]
+    },
+    "cross_section_view": {
+      "components": ["qx", "qz"],
+      "purpose": "vertical flow patterns",
+      "features": ["head_contours", "flow_vectors", "boundary_interactions"]
+    },
+    "professional_applications": [
+      "Flow system characterization",
+      "Particle tracking validation",
+      "Contaminant transport analysis",
+      "Well capture zone delineation",
+      "Hydraulic connection assessment",
+      "Model calibration support"
+    ]
+  },
+  "validation_framework": {
+    "array_shape_verification": {
+      "qx_expected": "(4, 4, 5)",
+      "qy_expected": "(4, 5, 4)", 
+      "qz_expected": "(5, 4, 4)",
+      "purpose": "dimensional_consistency_check"
+    },
+    "flow_direction_validation": {
+      "horizontal": "eastward and southward components",
+      "vertical": "downward components",
+      "physical_realism": "consistent with boundary conditions"
+    },
+    "mass_balance_checks": {
+      "local_conservation": "cell-by-cell flow balance",
+      "global_conservation": "overall water balance",
+      "tolerance": "numerical precision limits"
+    },
+    "boundary_handling": {
+      "inactive_cells": "proper masking of no-flow cells",
+      "dry_cells": "appropriate treatment of dewatered cells",
+      "interface_flows": "correct boundary flow attribution"
+    }
+  },
+  "professional_applications": [
+    "Groundwater flow system characterization and interpretation",
+    "Particle tracking model input preparation and validation",
+    "Contaminant transport pathway analysis and prediction",
+    "Well capture zone delineation for water supply protection",
+    "Hydraulic connection assessment between aquifer units",
+    "Model verification and calibration through flow pattern analysis",
+    "Environmental remediation system design and optimization",
+    "Water resources management and sustainability assessment"
+  ],
+  "file_structure": {
+    "model.py": "Main specific discharge demonstration script",
+    "metadata.json": "This metadata file",
+    "test_results.json": "Flow analysis results and validation metrics"
+  },
+  "technical_notes": {
+    "calculation_accuracy": "Extended budget provides enhanced accuracy over simple face flows",
+    "boundary_treatment": "Comprehensive handling of complex boundary conditions",
+    "visualization_quality": "Professional-grade vector field plotting capabilities",
+    "code_comparison": "Demonstrates equivalence between MF2005 and MF6 approaches",
+    "quality_assurance": "Multiple validation checks ensure reliable results",
+    "professional_standards": "Industry-standard flow analysis and visualization methods"
+  },
+  "qa_information": {
+    "model_runtime": "configuration_only",
+    "expected_convergence": "requires_modflow_executable",
+    "common_issues": ["boundary_condition_complexity", "dry_cell_handling", "visualization_masking"],
+    "testing_notes": "Demonstrates comprehensive flow analysis workflow without requiring executables"
+  }
+}

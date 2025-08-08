@@ -1,0 +1,147 @@
+=== SWI2 Salt Water Intrusion Package Demonstration ===
+
+1. SWI2 Package Overview
+----------------------------------------
+  SWI2 capabilities:
+    • Density-dependent groundwater flow
+    • Sharp interface approximation
+    • Multiple density zones (freshwater to seawater)
+    • Transient interface movement
+    • Stratified and continuous density options
+    • Tip and toe tracking for interface
+
+2. Creating Coastal Aquifer Model
+----------------------------------------
+  Model type: Coastal aquifer cross-section
+  Grid: 1×1×50 cells
+  Domain length: 2500m (2.5km)
+  Aquifer thickness: 40m
+
+3. Model Discretization
+----------------------------------------
+  Stress periods: 2
+    Period 1: Steady-state initial conditions
+    Period 2: 3650 days (10.0 years) transient
+
+4. Basic Package Configuration
+----------------------------------------
+  Active cells: 49
+  Ocean boundary: Column 50 (constant head)
+  Initial gradient: 0.5m inland to 0m at coast
+
+5. Aquifer Properties
+----------------------------------------
+  Hydraulic conductivity: 10.0 m/d
+  Vertical K: 1.0 m/d
+  Specific storage: 1.0e-05 1/m
+  Specific yield: 0.20
+
+6. Recharge Configuration
+----------------------------------------
+  Recharge rate: 1 mm/day on land
+  Annual recharge: 365 mm/year
+  No recharge on ocean cell
+
+7. Pumping Well Configuration
+----------------------------------------
+  Well location: 500m from coast
+  Pumping rate: 50 m³/day (transient period)
+  Purpose: Freshwater supply well
+
+8. SWI2 Salt Water Intrusion Setup
+----------------------------------------
+  Density zones: 2
+    Zone 1: Freshwater (ρ = 1000 kg/m³)
+    Zone 2: Seawater (ρ = 1025 kg/m³)
+  Interface tracking: Sharp interface
+  Stratified flow approximation
+
+9. Interface Dynamics
+----------------------------------------
+  Ghyben-Herzberg relation:
+    • Interface depth = 40 × freshwater head
+    • Based on density difference
+    • ρf/Δρ ≈ 40 for fresh/seawater
+
+  Interface movement factors:
+    • Recharge pushes interface seaward
+    • Pumping pulls interface landward
+    • Tides cause interface fluctuation
+    • Sea level rise moves interface inland
+
+10. Solver Configuration
+----------------------------------------
+  Solver: PCG (Preconditioned Conjugate Gradient)
+  Max iterations: 100
+  Head closure: 1e-4 m
+  Residual closure: 1e-3 m³/d
+
+11. Output Control
+----------------------------------------
+  Save heads: Initial and final
+  Save budget: Initial and final
+  Zeta (interface) output: Every time step
+
+12. Writing Model Files
+----------------------------------------
+  ✓ Model files written successfully
+  ✓ Model ran successfully
+
+  Generated files: 11
+    - swi2_demo.bas
+    - swi2_demo.dis
+    - swi2_demo.hds
+    - swi2_demo.list
+    - swi2_demo.lpf
+    - swi2_demo.nam
+    - swi2_demo.oc
+    - swi2_demo.pcg
+    - swi2_demo.rch
+    - swi2_demo.swi2
+    ... and 1 more
+
+13. Professional Applications
+----------------------------------------
+  Professional applications:
+    • Coastal water supply: Sustainable freshwater extraction
+    • Seawater intrusion control: Barrier design and operation
+    • Climate adaptation: Sea level rise impact assessment
+    • Island hydrology: Freshwater lens management
+    • Submarine discharge: Nutrient flux to ocean
+    • Desalination planning: Intake design and impacts
+    • Aquifer storage recovery: Brackish water management
+    • Environmental protection: Ecosystem salinity control
+
+14. Monitoring and Management
+----------------------------------------
+  Monitoring strategies:
+    • Multi-level monitoring wells
+    • Electrical conductivity profiling
+    • Geophysical surveys (EM, resistivity)
+    • Water quality sampling
+    • Interface depth measurements
+
+  Management options:
+    • Pumping optimization
+    • Injection barriers
+    • Artificial recharge
+    • Pumping redistribution
+    • Scavenger wells
+
+15. Climate Change Impacts
+----------------------------------------
+  Climate change impacts:
+    • Sea level rise: Direct interface movement inland
+    • Reduced recharge: Less freshwater pressure
+    • Increased pumping: Higher water demand
+    • Storm surges: Temporary intrusion events
+    • Drought periods: Reduced freshwater lens
+    • Coastal flooding: Surface saltwater infiltration
+
+✓ SWI2 Salt Water Intrusion Demonstration Completed!
+  - Created coastal aquifer model
+  - Configured SWI2 package with interface
+  - Set up density-dependent flow
+  - Demonstrated pumping impacts
+  - Explained monitoring strategies
+  - Provided professional applications

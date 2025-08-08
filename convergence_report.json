@@ -1,0 +1,223 @@
+{
+  "converged": [],
+  "not_converged": [
+    {
+      "name": "test_binaryfile",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_binarygrid_util",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_cbc_full3D",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_cellbudgetfile",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_compare",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_copy",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_datautil",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_dis_cases",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_example_notebooks",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_export",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_flopy_io",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_flopy_module",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_formattedfile",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_gage",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_geospatial_util",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_get_modflow",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_grid",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_grid_cases",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_gridgen",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_gridintersect",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_gridutil",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_headufile",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_hydmodfile",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_lake_connections",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_lgr",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_lgrutil",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_listbudget",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mbase",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mf6",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mfnwt",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mfreadnam",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mfsimlist",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_model_dot_plot",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_model_splitter",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_modeltime",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_modflow",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_modflowdis",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_modflowoc",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_modpathfile",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mp5",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mp6",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mp7",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mp7_cases",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_mt3d",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_nwt_ag",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_obs",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_particledata",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_plotutil",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_shapefile_utils",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_str",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_swi2",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_swr_binaryread",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_util_2d_and_3d",
+      "message": "Exit code 2"
+    },
+    {
+      "name": "test_wel",
+      "message": "Exit code 2"
+    }
+  ],
+  "error": [],
+  "unknown": []
+}

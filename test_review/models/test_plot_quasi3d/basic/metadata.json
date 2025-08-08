@@ -1,0 +1,262 @@
+{
+  "model_info": {
+    "name": "test_plot_quasi3d",
+    "title": "Quasi-3D Plotting Utility Demonstration",
+    "description": "Comprehensive demonstration of FloPy's plotting capabilities for quasi-3D groundwater models with confining beds (laycbd), including multi-layer visualization, flow vector analysis, and professional hydrogeological presentation.",
+    "complexity": "advanced",
+    "model_type": "quasi_3d_plotting",
+    "modflow_version": "mf2005_quasi3d",
+    "packages_demonstrated": ["PlotMapView", "PlotCrossSection", "quasi3d_layers", "confining_beds", "flow_vectors"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Understand quasi-3D groundwater modeling with confining beds",
+      "Configure multi-layer aquifer systems with laycbd parameters", 
+      "Visualize complex layered groundwater systems professionally",
+      "Analyze flow patterns in aquitard-aquifer systems",
+      "Apply integrated map view and cross-section visualization",
+      "Interpret inter-aquifer flow and vertical leakage",
+      "Establish professional multi-layer system analysis workflows"
+    ],
+    "key_concepts": [
+      "Quasi-3D groundwater modeling theory",
+      "Confining bed (laycbd) implementation and effects",
+      "Multi-layer aquifer system visualization",
+      "Vertical flow resistance and aquitard modeling",
+      "Professional flow vector analysis in 3D",
+      "Integrated visualization workflows",
+      "Complex groundwater system characterization"
+    ],
+    "skill_level": "advanced"
+  },
+  "quasi3d_model_focus": {
+    "model_configuration": {
+      "domain_geometry": {
+        "horizontal_extent": "1000 × 1000 units",
+        "vertical_extent": "30 units (0 to -30)",
+        "grid_discretization": "3 layers × 10 rows × 10 columns",
+        "cell_dimensions": "100 × 100 units",
+        "total_thickness": "30 units"
+      },
+      "layer_structure": {
+        "aquifer_layers": 3,
+        "confining_beds": 1,
+        "laycbd_array": "[1, 0, 0]",
+        "total_model_layers": 4,
+        "confining_bed_location": "Below layer 1"
+      }
+    },
+    "confining_bed_theory": {
+      "purpose": "Represents low-permeability aquitards between aquifer layers",
+      "function": "Controls vertical flow and provides flow resistance",
+      "implementation": "laycbd parameter array defines confining bed locations",
+      "hydraulic_properties": "Vertical hydraulic conductivity (vkcb) parameter",
+      "professional_significance": "Critical for realistic multi-layer system modeling"
+    }
+  },
+  "hydraulic_system_design": {
+    "boundary_conditions": {
+      "constant_heads": {
+        "west_boundary": "10.0 units (high head)",
+        "east_boundary": "0.0 units (low head)",
+        "gradient": "Regional west-to-east flow",
+        "implementation": "ibound array specification"
+      },
+      "pumping_well": {
+        "location": "Layer 2, Row 5, Column 5 (center)",
+        "pumping_rate": "-1000 units³/time",
+        "purpose": "Creates radial flow pattern",
+        "layer_selection": "Middle aquifer for maximum impact"
+      }
+    },
+    "hydraulic_properties": {
+      "horizontal_conductivity": "10.0 units/time (uniform)",
+      "vertical_conductivity_aquifer": "10.0 units/time", 
+      "vertical_conductivity_confining": "10.0 units/time",
+      "conditions": "Isotropic within aquifers",
+      "professional_parameterization": "Realistic multi-layer system values"
+    }
+  },
+  "flow_system_analysis": {
+    "expected_flow_patterns": {
+      "layer_1": "Regional flow with well influence transmission",
+      "confining_bed": "Vertical leakage control and flow resistance",
+      "layer_2": "Well-dominated radial flow (pumping layer)",
+      "layer_3": "Regional flow with transmitted well effects",
+      "overall_system": "Complex 3D flow field with vertical components"
+    },
+    "flow_components": {
+      "horizontal_flow": "West-to-east regional gradient",
+      "radial_flow": "Convergent flow to pumping well",
+      "vertical_flow": "Through confining bed leakage",
+      "inter_layer_interaction": "Aquitard-controlled vertical exchange",
+      "flow_field_complexity": "Full 3D flow system"
+    }
+  },
+  "visualization_capabilities": {
+    "map_view_plotting": {
+      "layer_specific_analysis": "Individual layer head distribution",
+      "boundary_condition_display": "Wells and constant head boundaries",
+      "flow_vector_representation": "Horizontal flow components",
+      "head_contour_overlays": "Equipotential line visualization",
+      "grid_structure_display": "Cell boundaries and model discretization",
+      "professional_cartographic_output": "Publication-quality maps"
+    },
+    "cross_section_plotting": {
+      "multi_layer_structure": "Vertical aquifer-aquitard system",
+      "confining_bed_representation": "Visual aquitard layer display",
+      "vertical_flow_vectors": "3D flow field components",
+      "head_profile_analysis": "Vertical head distribution",
+      "boundary_condition_sections": "Vertical boundary representation",
+      "professional_hydrogeological_sections": "Industry-standard presentations"
+    }
+  },
+  "professional_visualization_workflow": {
+    "map_view_procedure": [
+      "1. Configure PlotMapView for target analysis layer",
+      "2. Display grid structure and model boundaries",
+      "3. Plot head distribution using array visualization",
+      "4. Add head contours for hydraulic interpretation",
+      "5. Show boundary conditions (wells, constant heads)",
+      "6. Overlay flow vectors for flow pattern analysis",
+      "7. Export professional-quality maps with legends"
+    ],
+    "cross_section_procedure": [
+      "1. Define cross-section line through critical features",
+      "2. Configure PlotCrossSection with quasi-3D model",
+      "3. Display multi-layer grid with confining beds",
+      "4. Show vertical head distribution profiles",
+      "5. Add head contours for gradient analysis",
+      "6. Display boundary conditions in vertical section",
+      "7. Plot 3D flow vectors (horizontal + vertical components)",
+      "8. Export professional hydrogeological sections"
+    ]
+  },
+  "model_output_analysis": {
+    "output_files": {
+      "head_file": "Head distribution across all layers (.hds)",
+      "budget_file": "Cell-by-cell flow budgets (.cbc)",
+      "flow_faces": "RIGHT FACE, FRONT FACE, LOWER FACE flow data",
+      "professional_processing": "Comprehensive post-processing workflow",
+      "quality_assurance": "Output validation and verification"
+    },
+    "flow_vector_analysis": {
+      "horizontal_components": "frf (right face), fff (front face)",
+      "vertical_component": "flf (lower face) for vertical flow",
+      "3d_reconstruction": "Complete 3D flow field assembly",
+      "vector_analysis": "Magnitude, direction, and pattern assessment",
+      "professional_interpretation": "Flow system characterization"
+    }
+  },
+  "professional_applications": {
+    "hydrogeological_consulting": [
+      "Multi-layer aquifer system characterization and analysis",
+      "Confined-unconfined aquifer assessment and modeling",
+      "Well field design and optimization for layered systems",
+      "Inter-aquifer flow quantification and leakage assessment",
+      "Aquitard effectiveness and vertical flow resistance analysis",
+      "Water supply sustainability analysis in complex systems"
+    ],
+    "engineering_environmental": [
+      "Contamination migration analysis in layered aquifer systems",
+      "Dewatering system design for multi-layer construction sites",
+      "Mine dewatering and aquitard breach impact analysis",
+      "Foundation design groundwater assessment for layered soils",
+      "Environmental remediation in complex aquitard-aquifer systems",
+      "Regulatory compliance and technical documentation"
+    ],
+    "research_applications": [
+      "Advanced multi-layer groundwater system research",
+      "Aquitard-aquifer interaction studies and analysis",
+      "Educational material development for complex systems",
+      "Publication-quality figure generation and presentation",
+      "Grant proposal and technical documentation support"
+    ]
+  },
+  "quality_assurance_framework": {
+    "model_validation": [
+      "Water balance verification across all model layers",
+      "Flow vector consistency checking between layers",
+      "Head distribution reasonableness assessment",
+      "Boundary condition implementation verification",
+      "Inter-layer flow conservation validation",
+      "Professional QA/QC protocol implementation"
+    ],
+    "expected_results": [
+      {"validation": "Model execution", "result": "Successful completion with all output files"},
+      {"validation": "Head distribution", "result": "Gradient from west (10.0) to east (0.0)"},
+      {"validation": "Well influence", "result": "Radial drawdown pattern in pumping layer"},
+      {"validation": "Flow vectors", "result": "Horizontal and vertical components captured"},
+      {"validation": "Confining bed", "result": "Vertical flow resistance demonstrated"},
+      {"validation": "Visualization", "result": "Professional maps and cross-sections generated"}
+    ]
+  },
+  "advanced_visualization_techniques": {
+    "professional_presentation": [
+      "Multi-panel figure layouts for comprehensive analysis",
+      "Consistent color schemes across different views",
+      "Professional contour intervals and spacing",
+      "Vector field normalization for clarity",
+      "Comprehensive legends and annotations",
+      "Publication-quality output formatting and resolution"
+    ],
+    "integrated_analysis": [
+      "Map-section coordinate consistency validation",
+      "Layer-to-layer flow pattern analysis",
+      "Aquitard effectiveness assessment and quantification",
+      "Well capture zone delineation in layered systems",
+      "Multi-scale visualization coordination and presentation"
+    ]
+  },
+  "validation_framework": [
+    {
+      "test": "Quasi-3D model configuration",
+      "expected": "Multi-layer system with confining bed properly configured",
+      "description": "Validates laycbd implementation and layer structure"
+    },
+    {
+      "test": "Flow system analysis",
+      "expected": "Complex 3D flow patterns with vertical leakage",
+      "description": "Confirms inter-layer flow and aquitard effects"
+    },
+    {
+      "test": "Map view visualization",
+      "expected": "Layer-specific analysis with comprehensive features",
+      "description": "Ensures professional map view plotting capability"
+    },
+    {
+      "test": "Cross-section visualization", 
+      "expected": "Multi-layer structure with confining bed representation",
+      "description": "Validates vertical system visualization"
+    },
+    {
+      "test": "Flow vector analysis",
+      "expected": "3D flow field with horizontal and vertical components",
+      "description": "Confirms comprehensive flow visualization"
+    },
+    {
+      "test": "Professional workflow integration",
+      "expected": "Seamless map-section coordination and analysis",
+      "description": "Ensures integrated visualization workflow"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main quasi-3D plotting demonstration script",
+    "metadata.json": "This comprehensive metadata file", 
+    "test_results.json": "Quasi-3D visualization validation results and metrics"
+  },
+  "technical_notes": {
+    "quasi3d_modeling": "Professional multi-layer aquifer system with confining beds",
+    "confining_bed_implementation": "Realistic aquitard representation with flow resistance",
+    "visualization_integration": "Comprehensive map view and cross-section coordination",
+    "flow_analysis": "Complete 3D flow field analysis with vertical components",
+    "professional_standards": "Industry-standard hydrogeological visualization practices",
+    "quality_assurance": "Rigorous validation and verification framework"
+  },
+  "qa_information": {
+    "model_runtime": "configuration_demonstration",
+    "expected_convergence": "requires_modflow_executable",
+    "common_issues": ["confining_bed_parameterization", "vertical_flow_analysis", "multi_layer_visualization"],
+    "testing_notes": "Focuses on quasi-3D visualization capabilities and professional workflow integration"
+  }
+}

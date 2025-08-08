@@ -1,0 +1,9 @@
+{
+  "timestamp": "20250808_153623",
+  "total_workflows": 72,
+  "total_questions": 720,
+  "rank_1_accuracy": 70.69444444444444,
+  "top_3_accuracy": 89.16666666666667,
+  "top_5_accuracy": 94.44444444444444,
+  "mean_rank": 2.0236111111111112
+}

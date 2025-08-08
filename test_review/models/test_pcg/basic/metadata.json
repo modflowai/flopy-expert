@@ -1,0 +1,178 @@
+{
+  "model_info": {
+    "name": "test_pcg",
+    "title": "PCG (Preconditioned Conjugate Gradient) Solver Demonstration",
+    "description": "Comprehensive demonstration of MODFLOW's PCG solver package, showing solver configuration, performance optimization, and preconditioning methods for large-scale groundwater models.",
+    "complexity": "intermediate",
+    "model_type": "solver_demonstration",
+    "modflow_version": "mf2005",
+    "packages_demonstrated": ["PCG", "DIS", "BAS", "LPF", "WEL", "RCH", "OC"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Understand PCG solver principles and applications",
+      "Configure PCG solver parameters for optimal performance",
+      "Choose appropriate preconditioning methods",
+      "Optimize solver settings for different problem types",
+      "Understand memory and performance considerations",
+      "Apply PCG to large-scale groundwater modeling"
+    ],
+    "key_concepts": [
+      "Preconditioned Conjugate Gradient method",
+      "Iterative solution techniques",
+      "Matrix preconditioning",
+      "Solver convergence criteria",
+      "Performance optimization",
+      "Memory-efficient computations",
+      "Large sparse linear systems",
+      "Numerical stability"
+    ],
+    "skill_level": "intermediate"
+  },
+  "model_setup": {
+    "grid_dimensions": {
+      "nlay": 3,
+      "nrow": 50,
+      "ncol": 50,
+      "total_cells": 7500,
+      "active_cells": "variable"
+    },
+    "domain_size": {
+      "length_x": 5000.0,
+      "length_y": 5000.0,
+      "length_units": "meters"
+    },
+    "time_discretization": {
+      "nper": 2,
+      "time_units": "days",
+      "stress_periods": [
+        {"perlen": 1.0, "nstp": 1, "type": "steady_state"},
+        {"perlen": 365.0, "nstp": 1, "type": "transient"}
+      ]
+    }
+  },
+  "solver_configuration": {
+    "solver_type": "PCG",
+    "parameters": {
+      "mxiter": 100,
+      "iter1": 50,
+      "npcond": 1,
+      "hclose": 1e-4,
+      "rclose": 1e-4,
+      "relax": 0.98,
+      "nbpol": 2,
+      "damp": 1.0
+    },
+    "preconditioning": "Modified Incomplete Cholesky",
+    "optimization_level": "optimized"
+  },
+  "packages_used": {
+    "DIS": {
+      "purpose": "Model discretization with 3D grid",
+      "key_parameters": ["nlay", "nrow", "ncol", "delr", "delc"]
+    },
+    "BAS": {
+      "purpose": "Basic package with complex boundary conditions",
+      "key_parameters": ["ibound", "strt"]
+    },
+    "LPF": {
+      "purpose": "Layer Property Flow with heterogeneous hydraulic conductivity",
+      "key_parameters": ["hk", "vka", "sy", "ss", "laytyp"]
+    },
+    "PCG": {
+      "purpose": "Preconditioned Conjugate Gradient solver demonstration",
+      "key_parameters": ["mxiter", "iter1", "npcond", "hclose", "rclose", "relax"]
+    },
+    "WEL": {
+      "purpose": "Pumping wells for system stress",
+      "key_parameters": ["stress_period_data"]
+    },
+    "RCH": {
+      "purpose": "Areal recharge",
+      "key_parameters": ["rech"]
+    },
+    "OC": {
+      "purpose": "Output control for heads and budgets",
+      "key_parameters": ["stress_period_data"]
+    }
+  },
+  "physical_processes": {
+    "flow_type": "3D groundwater flow",
+    "aquifer_system": "multi-layered with aquitard",
+    "boundary_conditions": ["constant_head", "wells", "recharge"],
+    "stress_conditions": ["pumping", "heterogeneity"],
+    "heterogeneity": "high_k_zones_and_aquitard"
+  },
+  "seven_phase_conceptual_model": {
+    "1_grid_generation": {
+      "description": "3D finite-difference grid with 50×50×3 cells",
+      "packages": ["DIS"],
+      "parameters": ["delr", "delc", "top", "botm"],
+      "educational_focus": "Large grid systems for PCG demonstration"
+    },
+    "2_model_setup": {
+      "description": "Multi-layer aquifer system with heterogeneous properties",
+      "packages": ["LPF"],
+      "parameters": ["hk", "vka", "laytyp", "sy", "ss"],
+      "educational_focus": "Heterogeneous K distribution for solver testing"
+    },
+    "3_initial_conditions": {
+      "description": "Hydraulic head distribution with boundary gradients",
+      "packages": ["BAS"],
+      "parameters": ["strt", "ibound"],
+      "educational_focus": "Initial conditions affect solver performance"
+    },
+    "4_boundary_conditions": {
+      "description": "Constant heads, pumping wells, and areal recharge",
+      "packages": ["BAS", "WEL", "RCH"],
+      "parameters": ["ibound", "stress_period_data", "rech"],
+      "educational_focus": "Complex boundary conditions for solver challenges"
+    },
+    "5_solver": {
+      "description": "PCG solver with optimized preconditioning settings",
+      "packages": ["PCG"],
+      "parameters": ["mxiter", "iter1", "npcond", "hclose", "rclose", "relax", "nbpol"],
+      "educational_focus": "PCG configuration and performance optimization"
+    },
+    "6_visualization": {
+      "description": "Head and budget output for solver performance analysis",
+      "packages": ["OC"],
+      "parameters": ["stress_period_data"],
+      "educational_focus": "Monitoring solver convergence and results"
+    },
+    "7_post_processing": {
+      "description": "Solver performance analysis and convergence assessment",
+      "packages": ["OC"],
+      "parameters": [],
+      "educational_focus": "Evaluating solver efficiency and accuracy"
+    }
+  },
+  "professional_applications": [
+    "Regional groundwater modeling with large grid systems",
+    "Urban water supply and wellfield optimization",
+    "Environmental remediation and contaminant modeling",
+    "Mining dewatering and large-scale excavation",
+    "Agricultural irrigation district modeling",
+    "Coastal aquifer management and saltwater intrusion",
+    "Climate change impact assessment on groundwater",
+    "Water rights analysis and drawdown interference studies"
+  ],
+  "file_structure": {
+    "model.py": "Main educational demonstration script",
+    "metadata.json": "This metadata file",
+    "test_results.json": "Model execution results and performance metrics"
+  },
+  "technical_notes": {
+    "solver_selection": "PCG is ideal for large models (>10,000 cells) due to memory efficiency",
+    "preconditioning": "Modified Incomplete Cholesky (NPCOND=1) provides best general performance",
+    "convergence": "Optimized settings balance speed and reliability",
+    "memory_usage": "PCG uses significantly less memory than direct solvers",
+    "performance_factors": ["grid_size", "heterogeneity", "boundary_conditions", "time_stepping"]
+  },
+  "qa_information": {
+    "model_runtime": "fast",
+    "expected_convergence": "yes",
+    "common_issues": ["slow_convergence_with_poor_preconditioning", "memory_limitations_with_very_large_grids"],
+    "testing_notes": "Tests PCG solver configuration and file format compatibility"
+  }
+}

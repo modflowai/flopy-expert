@@ -76,16 +76,6 @@ def create_model_with_metadata(workspace, name="metadata_demo"):
     lpf = flopy.modflow.ModflowLpf(mf, hk=10.0)
     
     # Output control
-
-# Write and run simulation
-print("Writing and running model...")
-sim.write_simulation()
-success, buff = sim.run_simulation(silent=True)
-if success:
-    print("  ✓ Model ran successfully")
-else:
-    print("  ⚠ Model run failed")
-
     oc = flopy.modflow.ModflowOc(mf)
     
     # PCG solver

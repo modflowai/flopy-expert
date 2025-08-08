@@ -1,0 +1,112 @@
+{
+    "test_name": "test_subwt",
+    "category": "Physical Process Package",
+    "subcategory": "Subsidence and Compaction",
+    "description": "Demonstrates FloPy's Subsidence and Water-Table (SWT) package for simulating land subsidence due to groundwater extraction",
+    "original_test": "test_subwt.py",
+    "model_type": "MODFLOW-2005 with SWT",
+    "packages_tested": ["DIS", "BAS", "LPF", "WEL", "SWT", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Land subsidence simulation",
+        "Aquifer system compaction",
+        "Effective stress calculations",
+        "Preconsolidation stress",
+        "Elastic and inelastic deformation",
+        "Interbed compaction",
+        "Time-dependent consolidation",
+        "Void ratio changes"
+    ],
+    
+    "model_characteristics": {
+        "grid": "10x10x3 regular grid",
+        "layers": 3,
+        "stress_periods": 2,
+        "time_discretization": "Steady state then transient",
+        "solver": "PCG",
+        "pumping_wells": 1,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "subsidence_features": {
+        "number_of_systems": 3,
+        "interbed_types": "No-delay (instantaneous)",
+        "compressible_thickness": "10-15 m per layer",
+        "recompression_index": "0.001 (elastic)",
+        "compression_index": "0.01 (inelastic)",
+        "void_ratio": "0.82",
+        "preconsolidation_offset": "5.0 m",
+        "specific_gravity_moist": "1.7",
+        "specific_gravity_saturated": "2.0"
+    },
+    
+    "physical_processes": {
+        "stress_types": "Geostatic, effective, preconsolidation",
+        "compaction_mechanisms": "Elastic and inelastic",
+        "consolidation": "Primary consolidation",
+        "drainage": "Vertical from interbeds",
+        "deformation": "Time-independent (no-delay)",
+        "subsidence_driver": "Pumping-induced drawdown"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Good with relaxed criteria",
+        "numerical_stability": "Stable with small pumping rate",
+        "mass_balance": "Within acceptable limits"
+    },
+    
+    "practical_applications": [
+        "Infrastructure risk assessment",
+        "Groundwater management planning",
+        "Land subsidence monitoring",
+        "Aquifer storage recovery impacts",
+        "Mining dewatering effects",
+        "Oil and gas reservoir compaction",
+        "Urban groundwater pumping impacts",
+        "Transportation infrastructure planning"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Assumes homogeneous interbeds",
+        "No-delay compaction (instantaneous)",
+        "Simplified preconsolidation stress",
+        "Single-phase flow only",
+        "No secondary compression",
+        "Uniform material properties"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "10x10x3 grid with 100m cells",
+        "2_model_setup": "LPF for groundwater flow",
+        "3_initial_conditions": "Heads at 45m (near top)",
+        "4_boundary_conditions": "CHD at all edges, pumping well",
+        "5_solver": "PCG with relaxed criteria",
+        "6_visualization": "Subsidence and compaction output",
+        "7_post_processing": "Stress and subsidence analysis"
+    },
+    
+    "files_generated": [
+        "subwt_demo.nam",
+        "subwt_demo.dis",
+        "subwt_demo.bas",
+        "subwt_demo.lpf",
+        "subwt_demo.wel",
+        "subwt_demo.swt",
+        "subwt_demo.pcg",
+        "subwt_demo.oc",
+        "subwt_demo.list",
+        "subwt_demo.hds",
+        "subwt_demo.cbc",
+        "subwt_demo.swt_subsidence.hds",
+        "subwt_demo.swt_total_comp.hds",
+        "subwt_demo.swt_geostatic_stress.hds",
+        "subwt_demo.swt_eff_stress.hds",
+        "subwt_demo.swt_precon_stress.hds"
+    ],
+    
+    "educational_value": "High - Demonstrates critical land subsidence processes essential for infrastructure planning, groundwater management, and understanding long-term impacts of groundwater extraction",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}

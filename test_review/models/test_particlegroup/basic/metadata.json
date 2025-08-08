@@ -1,0 +1,185 @@
+{
+  "model_info": {
+    "name": "test_particlegroup",
+    "title": "MODPATH Particle Group Configuration Demonstration",
+    "description": "Comprehensive demonstration of MODPATH particle tracking setup, showing different particle release strategies and configuration options for groundwater flow analysis.",
+    "complexity": "intermediate",
+    "model_type": "particle_tracking_setup",
+    "modflow_version": "mf2005",
+    "packages_demonstrated": ["ParticleData", "ParticleGroup", "MODPATH"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Understand MODPATH particle tracking concepts",
+      "Configure particle groups with different release strategies",
+      "Set up particle starting locations in structured grids",
+      "Validate particle group configurations",
+      "Apply particle tracking to contamination studies",
+      "Design monitoring and remediation systems"
+    ],
+    "key_concepts": [
+      "Advective particle transport",
+      "Particle release strategies",
+      "Pathline analysis",
+      "Capture zone delineation",
+      "Contaminant fate and transport",
+      "Forward and backward tracking",
+      "Time-based particle release",
+      "Structured grid particle placement"
+    ],
+    "skill_level": "intermediate"
+  },
+  "model_setup": {
+    "grid_dimensions": {
+      "particle_transect": "21 particles along column 2",
+      "grid_type": "structured",
+      "spatial_arrangement": "linear_transect"
+    },
+    "particle_configuration": {
+      "total_particles": 21,
+      "particle_locations": "transect_pattern",
+      "coordinate_system": "(layer, row, column)"
+    },
+    "time_discretization": {
+      "release_strategies": 3,
+      "time_units": "days",
+      "release_patterns": [
+        {"type": "single_time", "count": 1, "time": 0.0},
+        {"type": "regular_interval", "count": 10, "interval": 1.0},
+        {"type": "custom_times", "count": 10, "times": "0-9"}
+      ]
+    }
+  },
+  "particle_groups": {
+    "PG1_single_release": {
+      "release_option": 1,
+      "description": "Single-time particle release at t=0",
+      "release_count": 1,
+      "application": "Instantaneous spill scenarios"
+    },
+    "PG2_interval_release": {
+      "release_option": 2,
+      "description": "Regular interval release every 1.0 time unit",
+      "release_count": 10,
+      "release_interval": 1.0,
+      "application": "Continuous source monitoring"
+    },
+    "PG3_custom_release": {
+      "release_option": 3,
+      "description": "User-specified release times (0,1,2,...,9)",
+      "release_count": 10,
+      "custom_times": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "application": "Complex injection schedules"
+    }
+  },
+  "packages_used": {
+    "ParticleData": {
+      "purpose": "Define particle starting locations and IDs",
+      "key_parameters": ["partlocs", "structured", "particleids"]
+    },
+    "ParticleGroup": {
+      "purpose": "Configure particle release strategies and timing",
+      "key_parameters": ["particlegroupname", "particledata", "filename", "releasedata"]
+    }
+  },
+  "physical_processes": {
+    "transport_mechanism": "advective_transport",
+    "flow_field_source": "MODFLOW_velocity_field",
+    "tracking_method": "particle_pathlines",
+    "applications": ["contaminant_fate", "capture_zones", "source_tracking"]
+  },
+  "seven_phase_conceptual_model": {
+    "1_grid_generation": {
+      "description": "Structured grid with particle transect placement",
+      "packages": ["ParticleData"],
+      "parameters": ["partlocs", "structured"],
+      "educational_focus": "Particle location specification in structured grids"
+    },
+    "2_model_setup": {
+      "description": "MODPATH particle tracking configuration",
+      "packages": ["ParticleGroup"],
+      "parameters": ["particlegroupname", "particledata"],
+      "educational_focus": "Particle group organization and naming"
+    },
+    "3_initial_conditions": {
+      "description": "Particle starting positions and IDs",
+      "packages": ["ParticleData"],
+      "parameters": ["particleids", "partlocs"],
+      "educational_focus": "Particle identification and spatial arrangement"
+    },
+    "4_boundary_conditions": {
+      "description": "Particle release timing and strategies",
+      "packages": ["ParticleGroup"],
+      "parameters": ["releasedata"],
+      "educational_focus": "Different release option configurations"
+    },
+    "5_solver": {
+      "description": "MODPATH tracking algorithm (not directly configured)",
+      "packages": ["MODPATH"],
+      "parameters": [],
+      "educational_focus": "Particle tracking methodology"
+    },
+    "6_visualization": {
+      "description": "Particle location file output for visualization",
+      "packages": ["ParticleGroup"],
+      "parameters": ["filename"],
+      "educational_focus": "Output file generation for post-processing"
+    },
+    "7_post_processing": {
+      "description": "Pathline analysis and endpoint evaluation",
+      "packages": ["MODPATH"],
+      "parameters": [],
+      "educational_focus": "Particle tracking result interpretation"
+    }
+  },
+  "professional_applications": [
+    "Contaminant plume delineation and source identification",
+    "Well capture zone analysis for water supply protection",
+    "Groundwater remediation system design and optimization",
+    "Environmental compliance and risk assessment studies",
+    "Mining and industrial site contamination assessment",
+    "Agricultural chemical transport and fate analysis",
+    "Landfill leachate migration studies",
+    "Monitoring network design and optimization"
+  ],
+  "file_structure": {
+    "model.py": "Main particle group demonstration script",
+    "metadata.json": "This metadata file",
+    "test_results.json": "Model execution results and validation metrics"
+  },
+  "technical_notes": {
+    "particle_tracking": "MODPATH uses velocity field from MODFLOW for advective transport",
+    "release_options": "Three release strategies cover most practical applications",
+    "grid_compatibility": "Works with both structured and unstructured grids",
+    "file_formats": "Compatible with MODPATH-7 input requirements",
+    "validation": "Built-in validation ensures proper configuration"
+  },
+  "validation_tests": [
+    {
+      "test": "Single release count validation",
+      "expected": 1,
+      "description": "PG1 should have exactly 1 release time"
+    },
+    {
+      "test": "Interval release count validation", 
+      "expected": 10,
+      "description": "PG2 should have 10 release times with regular intervals"
+    },
+    {
+      "test": "Release interval type preservation",
+      "expected": "float",
+      "description": "Release interval should maintain original data type"
+    },
+    {
+      "test": "Custom time release count validation",
+      "expected": 10,
+      "description": "PG3 should have 10 user-specified release times"
+    }
+  ],
+  "qa_information": {
+    "model_runtime": "very_fast",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["particle_id_conflicts", "invalid_grid_coordinates", "incompatible_release_data"],
+    "testing_notes": "Tests particle group configuration and validation without running MODPATH simulation"
+  }
+}

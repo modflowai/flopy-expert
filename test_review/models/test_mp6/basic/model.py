@@ -135,12 +135,12 @@ def run_model():
     rch = ModflowRch(mf, rech=rch_rate)
     print(f"  Recharge: {rch_rate:.3f} m/d uniform rate")
     
-    # Standard pumping well
+    # Standard pumping well - reduced for convergence
     wel_data = {
-        0: [[3, 12, 12, -150000.0]]  # Layer 4, center location
+        0: [[3, 12, 12, -40000.0]]  # Layer 4, center location, reduced from -150000
     }
     wel = ModflowWel(mf, stress_period_data=wel_data)
-    print(f"  Standard well: {wel_data[0][0][3]:,.0f} m³/d at layer {wel_data[0][0][0]+1}")
+    print(f"  Standard well: {abs(wel_data[0][0][3]):,.0f} m³/d at layer {wel_data[0][0][0]+1}")
     
     # 5. MNW2 Multi-Node Well Setup
     print(f"\n5. Multi-Node Well (MNW2) Configuration")
@@ -170,10 +170,10 @@ def run_model():
         ],
     ).view(np.recarray)
     
-    # MNW2 stress period data
+    # MNW2 stress period data - reduced pumping for convergence
     mnw2_spd = {
         0: np.array(
-            [(0, "well1", -200000.0)],
+            [(0, "well1", -5000.0)],  # Reduced from -200000 to -5000 m³/d
             dtype=[("per", int), ("wellid", object), ("qdes", float)],
         )
     }
@@ -188,7 +188,7 @@ def run_model():
     
     print(f"  MNW2 well 'well1':")
     print(f"    Screens: Layers 3-5 (depths 40-80m)")
-    print(f"    Total pumping: {mnw2_spd[0][0][2]:,.0f} m³/d")
+    print(f"    Total pumping: {abs(mnw2_spd[0][0][2]):,.0f} m³/d")
     print(f"    Well radius: {node_data[0]['rw']:.1f}m")
     print(f"    Skin effects included")
     

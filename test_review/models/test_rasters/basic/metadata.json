@@ -1,0 +1,229 @@
+{
+  "model_info": {
+    "name": "test_rasters",
+    "title": "FloPy Raster Data Integration Demonstration",
+    "description": "Comprehensive demonstration of FloPy's raster data handling capabilities for GIS integration with groundwater models, including DEM processing, sampling operations, and coordinate transformations.",
+    "complexity": "advanced",
+    "model_type": "gis_integration",
+    "modflow_version": "mfnwt",
+    "packages_demonstrated": ["Raster", "StructuredGrid", "GIS_Integration"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Load and manipulate raster data in FloPy",
+      "Perform point and polygon sampling from rasters",
+      "Crop and resample rasters for model integration",
+      "Apply multiple resampling methods appropriately",
+      "Transform between coordinate reference systems",
+      "Create rasters from model array data",
+      "Integrate GIS workflows with groundwater modeling"
+    ],
+    "key_concepts": [
+      "Digital Elevation Model (DEM) processing",
+      "Raster sampling techniques",
+      "Spatial data resampling methods",
+      "Coordinate reference system transformations",
+      "GIS-groundwater model integration",
+      "Array-to-raster conversion",
+      "Professional spatial data workflows",
+      "Multi-resolution data handling"
+    ],
+    "skill_level": "advanced"
+  },
+  "model_setup": {
+    "spatial_data": {
+      "raster_source": "dem.img (Digital Elevation Model)",
+      "coordinate_system": "UTM (214110, 4366620 origin)",
+      "target_model": "Sagehen watershed MODFLOW model",
+      "elevation_range": "1942.1735 to 2608.557 meters"
+    },
+    "sampling_operations": {
+      "point_sampling": "Single coordinate (216110, 4368620)",
+      "polygon_sampling": "267,050 cells in rectangular subset",
+      "grid_resampling": "5,913 MODFLOW model cells",
+      "cropping_bounds": "1km buffer from original raster edges"
+    },
+    "processing_methods": {
+      "statistical": ["min", "max", "mean", "median", "mode"],
+      "interpolation": ["nearest", "linear", "cubic"],
+      "coordinate_transform": "UTM to WGS84 (EPSG:4326)",
+      "array_conversion": "Multi-band raster creation"
+    }
+  },
+  "raster_operations": {
+    "point_sampling": {
+      "purpose": "Extract elevation at specific coordinates",
+      "method": "Direct coordinate-based sampling",
+      "validation": "2336.3965m ± 1e-4",
+      "applications": ["well_elevation", "boundary_conditions"]
+    },
+    "polygon_sampling": {
+      "purpose": "Extract all raster values within polygon boundary",
+      "method": "Spatial intersection and extraction",
+      "result_size": 267050,
+      "elevation_range": [1942.1735, 2608.557],
+      "applications": ["watershed_analysis", "parameter_zones"]
+    },
+    "raster_cropping": {
+      "purpose": "Spatial subsetting for focused analysis",
+      "method": "Boundary-based clipping with masking",
+      "memory_efficiency": "Reduces processing requirements",
+      "applications": ["study_area_focus", "computational_optimization"]
+    },
+    "grid_resampling": {
+      "purpose": "Align raster data with MODFLOW grid",
+      "target_resolution": "MODFLOW cell size",
+      "result_size": 5913,
+      "preservation": "High data fidelity maintained",
+      "applications": ["topography_assignment", "parameter_interpolation"]
+    }
+  },
+  "packages_used": {
+    "Raster": {
+      "purpose": "Primary raster data handling and processing",
+      "key_parameters": ["load", "sample_point", "sample_polygon", "crop", "resample_to_grid"]
+    },
+    "StructuredGrid": {
+      "purpose": "MODFLOW model grid for resampling operations",
+      "key_parameters": ["delc", "delr", "xoff", "yoff", "crs"]
+    },
+    "Modflow": {
+      "purpose": "Target model for raster integration",
+      "key_parameters": ["modelgrid", "set_coord_info"]
+    }
+  },
+  "coordinate_systems": {
+    "source_crs": {
+      "type": "UTM",
+      "origin": [214110, 4366620],
+      "units": "meters",
+      "application": "Local watershed modeling"
+    },
+    "target_crs": {
+      "type": "WGS84",
+      "epsg_code": 4326,
+      "coordinates": [-120.321168, 39.466206],
+      "units": "degrees",
+      "application": "Global reference and web mapping"
+    }
+  },
+  "seven_phase_conceptual_model": {
+    "1_grid_generation": {
+      "description": "Raster data loading and spatial reference establishment",
+      "packages": ["Raster"],
+      "parameters": ["load", "bounds", "crs"],
+      "educational_focus": "Spatial data foundation and coordinate systems"
+    },
+    "2_model_setup": {
+      "description": "MODFLOW model grid configuration for raster integration",
+      "packages": ["Modflow", "StructuredGrid"],
+      "parameters": ["modelgrid", "set_coord_info"],
+      "educational_focus": "Model-raster spatial alignment"
+    },
+    "3_initial_conditions": {
+      "description": "Point sampling for boundary conditions and validation",
+      "packages": ["Raster"],
+      "parameters": ["sample_point", "coordinates"],
+      "educational_focus": "Precise location-based data extraction"
+    },
+    "4_boundary_conditions": {
+      "description": "Polygon sampling for parameter zones and boundaries",
+      "packages": ["Raster"],
+      "parameters": ["sample_polygon", "shape_bounds"],
+      "educational_focus": "Spatial zone data extraction"
+    },
+    "5_solver": {
+      "description": "Resampling algorithms and method selection",
+      "packages": ["Raster"],
+      "parameters": ["resample_to_grid", "method", "band"],
+      "educational_focus": "Data resampling and interpolation methods"
+    },
+    "6_visualization": {
+      "description": "Coordinate transformation and reprojection",
+      "packages": ["Raster"],
+      "parameters": ["to_crs", "epsg", "transform"],
+      "educational_focus": "Coordinate reference system management"
+    },
+    "7_post_processing": {
+      "description": "Array-to-raster conversion for result export",
+      "packages": ["Raster"],
+      "parameters": ["raster_from_array", "transform", "bands"],
+      "educational_focus": "Model results to GIS format export"
+    }
+  },
+  "professional_applications": [
+    "Digital elevation model processing for groundwater flow modeling",
+    "Land use and land cover integration for recharge estimation",
+    "Watershed boundary delineation and model domain definition",
+    "Well location optimization using topographic and accessibility constraints",
+    "Climate data integration including precipitation and temperature",
+    "Geological mapping integration for hydrogeologic parameters",
+    "Environmental contamination extent mapping and assessment",
+    "Model validation through spatial pattern comparison"
+  ],
+  "file_structure": {
+    "model.py": "Main raster integration demonstration script",
+    "metadata.json": "This metadata file",
+    "test_results.json": "Processing results and validation metrics"
+  },
+  "technical_notes": {
+    "raster_formats": "Supports all GDAL-compatible formats (GeoTIFF, IMG, ASCII, etc.)",
+    "coordinate_systems": "Full CRS transformation support via PROJ library",
+    "resampling_methods": "Statistical and interpolation methods for different data types",
+    "memory_management": "Efficient processing of large raster datasets",
+    "integration_workflow": "Seamless connection between GIS and groundwater modeling",
+    "professional_standards": "Industry-standard spatial data processing capabilities"
+  },
+  "resampling_methods": {
+    "statistical_methods": {
+      "min": {"value": 2088.52343, "use_case": "Conservative estimates, worst-case scenarios"},
+      "max": {"value": 2103.54882, "use_case": "Maximum impact analysis, peak conditions"},
+      "mean": {"value": 2097.05054, "use_case": "General smoothing, average conditions"},
+      "median": {"value": 2097.36254, "use_case": "Robust central tendency, outlier resistance"},
+      "mode": {"value": 2088.52343, "use_case": "Most common values, categorical data"}
+    },
+    "interpolation_methods": {
+      "nearest": {"value": 2097.81079, "use_case": "Categorical data, discrete classifications"},
+      "linear": {"value": 2097.81079, "use_case": "Continuous data, moderate smoothing"},
+      "cubic": {"value": 2097.81079, "use_case": "High-precision continuous data, maximum smoothness"}
+    }
+  },
+  "validation_framework": [
+    {
+      "test": "Point sampling accuracy",
+      "expected": 2336.3965,
+      "tolerance": 1e-4,
+      "description": "Validates precise coordinate-based elevation extraction"
+    },
+    {
+      "test": "Polygon sampling data count",
+      "expected": 267050,
+      "tolerance": 0,
+      "description": "Ensures complete spatial data extraction within boundaries"
+    },
+    {
+      "test": "Polygon elevation range",
+      "expected": [1942.1735, 2608.557],
+      "tolerance": 1e-4,
+      "description": "Validates elevation range preservation in spatial sampling"
+    },
+    {
+      "test": "Grid resampling cell count",
+      "expected": 5913,
+      "tolerance": 0,
+      "description": "Confirms proper alignment with MODFLOW model grid"
+    },
+    {
+      "test": "Grid resampling elevation range",
+      "expected": [1942.1735, 2605.6204],
+      "tolerance": 1e-4,
+      "description": "Validates elevation preservation during grid alignment"
+    }
+  ],
+  "qa_information": {
+    "model_runtime": "fast",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["coordinate_system_mismatch", "resolution_conflicts", "missing_spatial_reference"],
+    "testing_notes": "Tests comprehensive raster processing without requiring actual DEM files"
+  }
+}

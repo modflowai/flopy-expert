@@ -1,0 +1,282 @@
+{
+  "converged": [
+    {
+      "name": "test_binaryfile",
+      "path": "test_review/models/test_binaryfile/basic",
+      "message": "Max discrepancy: 0.070000%"
+    },
+    {
+      "name": "test_cbc_full3D",
+      "path": "test_review/models/test_cbc_full3D/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_cellbudgetfile",
+      "path": "test_review/models/test_cellbudgetfile/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_compare",
+      "path": "test_review/models/test_compare/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_copy",
+      "path": "test_review/models/test_copy/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_datautil",
+      "path": "test_review/models/test_datautil/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_dis_cases",
+      "path": "test_review/models/test_dis_cases/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_example_notebooks",
+      "path": "test_review/models/test_example_notebooks/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_export",
+      "path": "test_review/models/test_export/basic",
+      "message": "Model converged"
+    },
+    {
+      "name": "test_flopy_module",
+      "path": "test_review/models/test_flopy_module/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_formattedfile",
+      "path": "test_review/models/test_formattedfile/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_gage",
+      "path": "test_review/models/test_gage/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_geospatial_util",
+      "path": "test_review/models/test_geospatial_util/basic",
+      "message": "Max discrepancy: 200.000000%"
+    },
+    {
+      "name": "test_get_modflow",
+      "path": "test_review/models/test_get_modflow/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_grid",
+      "path": "test_review/models/test_grid/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_gridgen",
+      "path": "test_review/models/test_gridgen/basic",
+      "message": "Max discrepancy: 99.890000%"
+    },
+    {
+      "name": "test_gridintersect",
+      "path": "test_review/models/test_gridintersect/basic",
+      "message": "Max discrepancy: 0.010000%"
+    },
+    {
+      "name": "test_gridutil",
+      "path": "test_review/models/test_gridutil/basic",
+      "message": "Max discrepancy: 0.020000%"
+    },
+    {
+      "name": "test_headufile",
+      "path": "test_review/models/test_headufile/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_hydmodfile",
+      "path": "test_review/models/test_hydmodfile/basic",
+      "message": "Max discrepancy: 0.040000%"
+    },
+    {
+      "name": "test_lake_connections",
+      "path": "test_review/models/test_lake_connections/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_lgr",
+      "path": "test_review/models/test_lgr/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_listbudget",
+      "path": "test_review/models/test_listbudget/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_mbase",
+      "path": "test_review/models/test_mbase/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_mf6",
+      "path": "test_review/models/test_mf6/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_mfnwt",
+      "path": "test_review/models/test_mfnwt/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_mfsimlist",
+      "path": "test_review/models/test_mfsimlist/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_model_dot_plot",
+      "path": "test_review/models/test_model_dot_plot/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_model_splitter",
+      "path": "test_review/models/test_model_splitter/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_modeltime",
+      "path": "test_review/models/test_modeltime/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_modflow",
+      "path": "test_review/models/test_modflow/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_modflowdis",
+      "path": "test_review/models/test_modflowdis/basic",
+      "message": "Max discrepancy: 200.000000%"
+    },
+    {
+      "name": "test_modflowoc",
+      "path": "test_review/models/test_modflowoc/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_mp5",
+      "path": "test_review/models/test_mp5/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_mp6",
+      "path": "test_review/models/test_mp6/basic",
+      "message": "Max discrepancy: 0.021300%"
+    },
+    {
+      "name": "test_nwt_ag",
+      "path": "test_review/models/test_nwt_ag/basic",
+      "message": "Max discrepancy: 0.080000%"
+    },
+    {
+      "name": "test_obs",
+      "path": "test_review/models/test_obs/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_particledata",
+      "path": "test_review/models/test_particledata/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_plotutil",
+      "path": "test_review/models/test_plotutil/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_shapefile_utils",
+      "path": "test_review/models/test_shapefile_utils/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_str",
+      "path": "test_review/models/test_str/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_swr_binaryread",
+      "path": "test_review/models/test_swr_binaryread/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_util_2d_and_3d",
+      "path": "test_review/models/test_util_2d_and_3d/basic",
+      "message": "Max discrepancy: 0.000000%"
+    },
+    {
+      "name": "test_wel",
+      "path": "test_review/models/test_wel/basic",
+      "message": "Max discrepancy: 0.000000%"
+    }
+  ],
+  "not_converged": [
+    {
+      "name": "test_swi2",
+      "path": "test_review/models/test_swi2/basic",
+      "message": "Did not converge (found 2 list files)"
+    }
+  ],
+  "ran": [
+    {
+      "name": "test_binarygrid_util",
+      "path": "test_review/models/test_binarygrid_util/basic",
+      "message": "Model ran but no listing file found"
+    },
+    {
+      "name": "test_flopy_io",
+      "path": "test_review/models/test_flopy_io/basic",
+      "message": "Model ran but no listing file found"
+    },
+    {
+      "name": "test_modpathfile",
+      "path": "test_review/models/test_modpathfile/basic",
+      "message": "Model ran but no listing file found"
+    },
+    {
+      "name": "test_mp7",
+      "path": "test_review/models/test_mp7/basic",
+      "message": "Model ran but no listing file found"
+    },
+    {
+      "name": "test_mp7_cases",
+      "path": "test_review/models/test_mp7_cases/basic",
+      "message": "Model ran but no listing file found"
+    },
+    {
+      "name": "test_mt3d",
+      "path": "test_review/models/test_mt3d/basic",
+      "message": "Model ran but no listing file found"
+    }
+  ],
+  "error": [
+    {
+      "name": "test_grid_cases",
+      "path": "test_review/models/test_grid_cases/basic",
+      "message": "No output generated"
+    },
+    {
+      "name": "test_lgrutil",
+      "path": "test_review/models/test_lgrutil/basic",
+      "message": "No output generated"
+    },
+    {
+      "name": "test_mfreadnam",
+      "path": "test_review/models/test_mfreadnam/basic",
+      "message": "No output generated"
+    }
+  ],
+  "timeout": [],
+  "no_model": []
+}

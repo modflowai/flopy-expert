@@ -1,0 +1,5 @@
+# Fixed-format PCG file for compatibility testing
+# This represents a typical MODFLOW-2000 PCG file
+         100        30         1  # MXITER, ITER1, NPCOND
+    1.00E-03  1.00E-03  1.00E+00  # HCLOSE, RCLOSE, RELAX
+           0      1.00           # NBPOL, DAMP

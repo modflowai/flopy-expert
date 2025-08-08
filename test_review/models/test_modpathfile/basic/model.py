@@ -23,16 +23,6 @@ import numpy as np
 import os
 import flopy
 from flopy.mf6 import MFSimulation, ModflowGwf, ModflowGwfdis, ModflowGwfic, ModflowGwfnpf, ModflowGwfoc, ModflowGwfrcha, ModflowGwfriv, ModflowGwfwel, ModflowIms, ModflowTdis
-
-# Write and run simulation
-print("Writing and running model...")
-sim.write_simulation()
-success, buff = sim.run_simulation(silent=True)
-if success:
-    print("  ✓ Model ran successfully")
-else:
-    print("  ⚠ Model run failed")
-
 from flopy.modpath import Modpath7
 from flopy.utils import PathlineFile, EndpointFile
 

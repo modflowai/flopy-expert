@@ -177,16 +177,6 @@ def run_model():
     print(f"  River: {len(riv_data)} cells on east boundary")
     
     # 5. Solver and Output Control
-
-# Write and run simulation
-print("Writing and running model...")
-sim.write_simulation()
-success, buff = sim.run_simulation(silent=True)
-if success:
-    print("  ✓ Model ran successfully")
-else:
-    print("  ⚠ Model run failed")
-
     print(f"\n5. Solver and Output Control")
     print("-" * 40)
     

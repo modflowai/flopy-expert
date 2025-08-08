@@ -1,0 +1,227 @@
+{
+  "model_info": {
+    "name": "test_plot_cross_section",
+    "title": "Cross-Section Plotting Utility Demonstration", 
+    "description": "Comprehensive demonstration of FloPy's PlotCrossSection class for creating professional cross-sectional views of groundwater models with boundary condition visualization and robust error handling.",
+    "complexity": "intermediate",
+    "model_type": "plotting_utility",
+    "modflow_version": "mf6_plotting",
+    "packages_demonstrated": ["PlotCrossSection", "plot_bc", "matplotlib_integration", "boundary_visualization"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Master PlotCrossSection class for professional hydrogeological visualization",
+      "Configure flexible cross-section line definitions and orientations",
+      "Visualize comprehensive boundary conditions in cross-sectional views",
+      "Implement robust input validation and error handling for plotting",
+      "Apply matplotlib collection management for consistent rendering",
+      "Establish professional visualization standards and best practices",
+      "Integrate cross-section plotting with MODFLOW 6 package ecosystem"
+    ],
+    "key_concepts": [
+      "Cross-sectional hydrogeological visualization",
+      "Boundary condition representation in vertical profiles",
+      "Professional matplotlib integration and collection management",
+      "Flexible line definition methods and geometries",
+      "Input validation and error handling for plotting utilities",
+      "Quality assurance for visualization consistency",
+      "Professional presentation standards and customization"
+    ],
+    "skill_level": "intermediate"
+  },
+  "plotting_utility_focus": {
+    "plotcrosssection_class": {
+      "primary_function": "Create vertical cross-sectional views of groundwater models",
+      "grid_support": "Structured and unstructured grid compatibility",
+      "visualization_scope": "Boundary conditions, layer properties, and model geometry",
+      "customization": "Professional presentation features and styling options",
+      "integration": "Seamless matplotlib and FloPy workflow integration"
+    },
+    "line_definition_methods": {
+      "row_based": "{'row': row_index} - Horizontal cross-sections along grid rows",
+      "column_based": "{'column': column_index} - Vertical cross-sections along grid columns",
+      "arbitrary_line": "{'line': [(x1,y1), (x2,y2)]} - Custom linear transects",
+      "multi_segment": "[(x1,y1), (x2,y2), (x3,y3)] - Complex multi-segment sections",
+      "diagonal_sections": "Arbitrary orientation cross-sections through model domain",
+      "curved_sections": "Non-linear transect definitions for complex geometries"
+    }
+  },
+  "boundary_condition_visualization": {
+    "supported_packages": [
+      {"code": "CHD", "name": "Constant Head", "description": "Fixed head boundary visualization"},
+      {"code": "LAK", "name": "Lake Package", "description": "Lake extent and connection display"},
+      {"code": "SFR", "name": "Stream Flow Routing", "description": "Stream network cross-section representation"},
+      {"code": "MAW", "name": "Multi-Aquifer Well", "description": "Well completion zone visualization"},
+      {"code": "UZF", "name": "Unsaturated Zone Flow", "description": "UZF boundary representation"},
+      {"code": "WEL", "name": "Well Package", "description": "Well location and screen visualization"},
+      {"code": "GHB", "name": "General Head Boundary", "description": "GHB extent and properties"},
+      {"code": "DRN", "name": "Drain Package", "description": "Drain boundary visualization"},
+      {"code": "RIV", "name": "River Package", "description": "River boundary representation"}
+    ],
+    "visualization_features": {
+      "collection_objects": "PatchCollection for proper boundary rendering",
+      "color_coding": "Distinct colors for different boundary condition types",
+      "layer_specificity": "Layer-specific boundary condition representation",
+      "symbology": "Professional symbols and legends for clear interpretation",
+      "integration": "Seamless integration with model geometry and grid"
+    }
+  },
+  "matplotlib_integration": {
+    "collection_management": {
+      "preferred_type": "PatchCollection for boundary condition rendering",
+      "quality_issue": "Occasional LineCollection instead of PatchCollection",
+      "validation": "Collection type verification for rendering consistency",
+      "error_handling": "Graceful degradation when unexpected collection types occur",
+      "professional_standards": "Consistent rendering across different boundary types"
+    },
+    "customization_features": [
+      "Custom color schemes and professional symbology",
+      "Layer property visualization (hydraulic conductivity, porosity)",
+      "Head contour overlay capabilities for flow interpretation", 
+      "Professional axis labels, units, and formatting",
+      "Legend and annotation support for clear communication",
+      "Publication-quality output formats and resolution control"
+    ]
+  },
+  "input_validation_framework": {
+    "invalid_line_scenarios": [
+      {"input": "()", "error": "Empty tuple", "handling": "ValueError with descriptive message"},
+      {"input": "[]", "error": "Empty list", "handling": "ValueError with clear guidance"},
+      {"input": "(())", "error": "Nested empty tuple", "handling": "Validation error with correction suggestion"},
+      {"input": "[[]]", "error": "Nested empty list", "handling": "Input format error with examples"},
+      {"input": "(0, 0)", "error": "Single coordinate", "handling": "Insufficient points error"},
+      {"input": "[0, 0]", "error": "Single point list", "handling": "Line definition error with requirements"},
+      {"input": "[[0, 0]]", "error": "Invalid nesting", "handling": "Format validation with proper syntax"}
+    ],
+    "validation_features": [
+      "Comprehensive input validation for all line definition methods",
+      "Clear error messages with diagnostic information",
+      "User-friendly troubleshooting guidance and examples",
+      "Graceful failure handling with informative feedback",
+      "Professional error reporting for debugging support"
+    ]
+  },
+  "professional_applications": {
+    "hydrogeological_analysis": [
+      "Aquifer characterization and stratigraphic interpretation",
+      "Contamination plume delineation and migration pathway analysis",
+      "Well placement optimization and completion zone design",
+      "Remediation system design and performance evaluation",
+      "Regulatory compliance documentation and reporting",
+      "Stakeholder communication and public presentation"
+    ],
+    "engineering_consulting": [
+      "Dewatering system design and performance analysis",
+      "Foundation and excavation support system evaluation",
+      "Barrier and containment system design verification",
+      "Environmental impact assessment and mitigation planning",
+      "Water supply system evaluation and optimization",
+      "Geotechnical groundwater analysis and interpretation"
+    ],
+    "research_applications": [
+      "Advanced hydrogeological research and method development",
+      "Educational and training application development",
+      "Publication-quality figure generation for scientific papers",
+      "Conference presentation and poster development",
+      "Grant proposal and technical documentation support"
+    ]
+  },
+  "structured_grid_integration": {
+    "grid_parameters": {
+      "example_dimensions": "10 × 10 cells per layer",
+      "layer_thickness": "10 units (configurable)",
+      "cell_dimensions": "Unit cell size (delr = delc = 1.0)",
+      "grid_type": "Single layer structured grid for demonstration",
+      "total_domain": "10 × 10 × 10 model extent"
+    },
+    "visualization_features": [
+      "StructuredGrid object integration and compatibility",
+      "Layer thickness and structure visualization",
+      "Cell boundary representation and grid display",
+      "Property distribution visualization capabilities",
+      "Professional grid overlay and formatting options"
+    ]
+  },
+  "quality_assurance_framework": {
+    "visualization_validation": [
+      "Collection type verification (PatchCollection expected)",
+      "Boundary condition rendering confirmation and testing",
+      "Cross-section geometry validation and accuracy checking",
+      "Professional visualization standards compliance verification",
+      "Matplotlib integration testing and compatibility validation"
+    ],
+    "best_practices": [
+      "Representative transect location selection guidelines",
+      "Appropriate vertical exaggeration ratio determination",
+      "Comprehensive boundary condition inclusion requirements",
+      "Consistent symbology application across projects",
+      "Clear legend and annotation standards",
+      "Professional presentation format compliance"
+    ]
+  },
+  "workflow_integration": {
+    "standard_procedure": [
+      "1. Load MODFLOW 6 simulation and extract target model",
+      "2. Define cross-section line using appropriate method",
+      "3. Create PlotCrossSection object with line definition",
+      "4. Plot boundary conditions using plot_bc() method",
+      "5. Validate collection types and rendering quality",
+      "6. Customize visualization appearance and styling",
+      "7. Export for professional presentation and documentation"
+    ],
+    "error_prevention": [
+      "Validate line definitions before plotting execution",
+      "Test boundary condition rendering with sample data",
+      "Verify matplotlib collection types and rendering",
+      "Document cross-section locations and analysis purposes",
+      "Archive source code and parameter configurations",
+      "Follow organizational visualization standards and guidelines"
+    ]
+  },
+  "validation_framework": [
+    {
+      "test": "Boundary condition plotting validation",
+      "expected": "All specified boundary condition types render correctly",
+      "description": "Ensures comprehensive boundary condition visualization capability"
+    },
+    {
+      "test": "Collection type management validation",
+      "expected": "PatchCollection objects created for proper rendering",
+      "description": "Validates matplotlib collection type consistency"
+    },
+    {
+      "test": "Line definition validation",
+      "expected": "Invalid line definitions raise ValueError with clear messages",
+      "description": "Confirms robust input validation and error handling"
+    },
+    {
+      "test": "Grid integration validation",
+      "expected": "Structured grid properly handled and visualized",
+      "description": "Ensures seamless grid integration and display"
+    },
+    {
+      "test": "Professional output validation",
+      "expected": "Publication-quality cross-sections with proper formatting",
+      "description": "Confirms professional visualization standards compliance"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main PlotCrossSection utility demonstration script",
+    "metadata.json": "This comprehensive metadata file",
+    "test_results.json": "Cross-section plotting validation results and metrics"
+  },
+  "technical_notes": {
+    "line_definition_flexibility": "Multiple methods support diverse hydrogeological analysis needs",
+    "boundary_visualization": "Comprehensive MODFLOW 6 package support with professional rendering",
+    "matplotlib_integration": "Professional collection management with quality assurance",
+    "error_handling": "Robust validation framework with clear diagnostic feedback",
+    "professional_standards": "Industry-standard visualization practices and presentation quality",
+    "workflow_integration": "Seamless integration with FloPy modeling and analysis workflows"
+  },
+  "qa_information": {
+    "model_runtime": "demonstration_only",
+    "expected_convergence": "not_applicable",
+    "common_issues": ["collection_type_variations", "line_definition_errors", "boundary_rendering_inconsistencies"],
+    "testing_notes": "Focuses on PlotCrossSection utility validation and professional visualization standards"
+  }
+}

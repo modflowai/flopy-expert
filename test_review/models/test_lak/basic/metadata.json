@@ -1,0 +1,105 @@
+{
+    "test_name": "test_lak",
+    "category": "Physical Process Package",
+    "subcategory": "Lake-Groundwater Interaction",
+    "description": "Demonstrates FloPy's Lake (LAK) package for simulating lake-aquifer interactions",
+    "original_test": "test_lake_connections.py",
+    "model_type": "MODFLOW-2005 with LAK",
+    "packages_tested": ["DIS", "BAS", "LPF", "LAK", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Lake-groundwater interaction",
+        "Lakebed seepage and leakance",
+        "Lake stage dynamics",
+        "Lake water balance",
+        "Precipitation and evaporation",
+        "Head-dependent flux",
+        "Lake bathymetry",
+        "Multi-cell lake representation"
+    ],
+    
+    "model_characteristics": {
+        "grid": "7x7x1 regular grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "lake_size": "3x3 cells (9 total)",
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "lake_features": {
+        "number_of_lakes": 1,
+        "lake_cells": 9,
+        "initial_stage": "100.5 m",
+        "lakebed_leakance": "0.01 1/day",
+        "precipitation": "0.0 m/day",
+        "evaporation": "0.0 m/day",
+        "runoff": "0.0 m³/day",
+        "withdrawal": "0.0 m³/day",
+        "theta": -1.0
+    },
+    
+    "physical_processes": {
+        "seepage": "Head-dependent flux through lakebed",
+        "water_balance": "Lake stage from water budget",
+        "lakebed_resistance": "Controlled by leakance",
+        "groundwater_interaction": "Bidirectional exchange",
+        "stage_calculation": "Implicit solution",
+        "bank_storage": "Through horizontal connections"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "mass_balance": "0.000000%",
+        "solver_performance": "Excellent",
+        "numerical_stability": "Very stable with low leakance"
+    },
+    
+    "practical_applications": [
+        "Lake water level management",
+        "Lake-groundwater interaction studies",
+        "Water budget analysis",
+        "Climate change impacts on lakes",
+        "Dam seepage analysis",
+        "Artificial recharge ponds",
+        "Tailings pond assessment",
+        "Wetland hydrology"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Vertical lakebed seepage approximation",
+        "Uniform lakebed properties",
+        "No stratification in lake",
+        "Simplified bathymetry",
+        "No surface water routing to lake"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "7x7 grid with 100m cells",
+        "2_model_setup": "LPF for groundwater flow",
+        "3_initial_conditions": "Groundwater at 100m, lake at 100.5m",
+        "4_boundary_conditions": "CHD corners, lake cells",
+        "5_solver": "PCG with relaxed criteria",
+        "6_visualization": "Lake stage and groundwater heads",
+        "7_post_processing": "Lake water budget analysis"
+    },
+    
+    "files_generated": [
+        "lak_demo.nam",
+        "lak_demo.dis",
+        "lak_demo.bas",
+        "lak_demo.lpf",
+        "lak_demo.lak",
+        "lak_demo.pcg",
+        "lak_demo.oc",
+        "lak_demo.list",
+        "lak_demo.hds",
+        "lak_demo.cbc"
+    ],
+    
+    "educational_value": "High - Demonstrates lake-groundwater interactions essential for understanding surface water-groundwater connectivity, water resource management, and environmental impacts",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}
