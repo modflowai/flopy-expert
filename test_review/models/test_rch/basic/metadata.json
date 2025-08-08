@@ -1,0 +1,125 @@
+{
+    "test_name": "test_rch",
+    "category": "Source/Sink Package",
+    "subcategory": "Surface Recharge",
+    "description": "Demonstrates FloPy's Recharge (RCH) package for simulating spatially distributed surface recharge to groundwater",
+    "original_test": "test_rch.py",
+    "model_type": "MODFLOW-2005 with RCH",
+    "packages_tested": ["DIS", "BAS", "LPF", "RCH", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Spatially distributed recharge",
+        "Multi-zone land use recharge",
+        "Agricultural irrigation return flow",
+        "Urban stormwater infiltration",
+        "Managed aquifer recharge (MAR)",
+        "Natural precipitation recharge",
+        "Industrial area runoff",
+        "Water budget components"
+    ],
+    
+    "model_characteristics": {
+        "grid": "12x16x1 mixed land use grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "recharge_zones": 5,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "recharge_features": {
+        "agricultural_zone": {
+            "cells": 24,
+            "rate": "2.0 mm/day",
+            "description": "Irrigation return flow from crops"
+        },
+        "urban_residential": {
+            "cells": 32,
+            "rate": "0.8 mm/day",
+            "description": "Lawn and garden irrigation"
+        },
+        "natural_forest": {
+            "cells": 123,
+            "rate": "0.5 mm/day",
+            "description": "Natural precipitation infiltration"
+        },
+        "industrial_commercial": {
+            "cells": 9,
+            "rate": "0.1 mm/day",
+            "description": "Limited recharge from impervious surfaces"
+        },
+        "mar_facility": {
+            "cells": 4,
+            "rate": "5.0 mm/day",
+            "description": "Managed aquifer recharge operation"
+        }
+    },
+    
+    "physical_processes": {
+        "recharge_mechanism": "Surface infiltration to water table",
+        "spatial_distribution": "Cell-by-cell recharge rates",
+        "land_use_effects": "Different rates by land use type",
+        "water_balance": "Positive water input to system",
+        "infiltration_process": "Direct application to top model layer",
+        "flow_direction": "Vertically downward to water table"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Excellent with standard PCG criteria",
+        "numerical_stability": "Very stable with positive water input",
+        "mass_balance": "Good water balance achieved",
+        "recharge_effectiveness": "All zones actively contributing"
+    },
+    
+    "practical_applications": [
+        "Groundwater recharge assessment",
+        "Water budget studies",
+        "Aquifer vulnerability mapping", 
+        "Irrigation return flow analysis",
+        "Climate change impact studies",
+        "Drought management planning",
+        "Sustainable yield calculations",
+        "Managed aquifer recharge design",
+        "Stormwater infiltration systems",
+        "Land use change impacts"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Direct application to top layer",
+        "No unsaturated zone processes",
+        "Steady-state recharge rates",
+        "No evapotranspiration losses",
+        "Uniform infiltration within cells",
+        "No surface runoff generation"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "12x16x1 mixed land use domain",
+        "2_model_setup": "LPF unconfined aquifer",
+        "3_initial_conditions": "Gentle west-to-east gradient",
+        "4_boundary_conditions": "CHD boundaries + multi-zone RCH",
+        "5_solver": "PCG with standard criteria",
+        "6_visualization": "Recharge patterns and head response",
+        "7_post_processing": "Recharge budget and spatial analysis"
+    },
+    
+    "files_generated": [
+        "rch_demo.nam",
+        "rch_demo.dis",
+        "rch_demo.bas",
+        "rch_demo.lpf",
+        "rch_demo.rch",
+        "rch_demo.pcg",
+        "rch_demo.oc",
+        "rch_demo.list",
+        "rch_demo.hds",
+        "rch_demo.cbc"
+    ],
+    
+    "educational_value": "Very High - Demonstrates fundamental water budget component essential for all groundwater modeling, with realistic multi-zone land use scenarios",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}

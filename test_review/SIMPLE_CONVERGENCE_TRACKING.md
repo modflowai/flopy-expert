@@ -3,13 +3,13 @@
 ## Overview
 Simple tracking: Does the test run MODFLOW and converge?
 
-**Total Tests Processed**: 70/83
-**Tests That Run MODFLOW**: 34/70 (48.6%)
-**Educational Demos (No MODFLOW)**: 36/70 (51.4%)
+**Total Tests Processed**: 71/83
+**Tests That Run MODFLOW**: 35/71 (49.3%)
+**Educational Demos (No MODFLOW)**: 36/71 (50.7%)
 
 ---
 
-## Tests That Run MODFLOW (34 tests)
+## Tests That Run MODFLOW (35 tests)
 
 | # | Test Name | Package/Feature | Status |
 |---|-----------|----------------|--------|
@@ -49,6 +49,7 @@ Simple tracking: Does the test run MODFLOW and converge?
 | 34 | test_riv | River Package (RIV) | ✅ CONVERGES! |
 | 35 | test_ghb | General Head Boundary (GHB) | ✅ CONVERGES! |
 | 36 | test_chd | Constant Head Boundary (CHD) | ✅ CONVERGES! |
+| 37 | test_rch | Recharge Package (RCH) | ✅ CONVERGES! |
 
 ---
 
