@@ -1,0 +1,398 @@
+{
+  "summary": {
+    "total": 82,
+    "converged": 57,
+    "failed": 2,
+    "no_modflow": 10,
+    "no_listing": 13,
+    "convergence_rate": 96.61016949152543
+  },
+  "results": {
+    "converged": [
+      "test_binaryfile",
+      "test_binarygrid_util",
+      "test_cbc_full3D",
+      "test_cellbudgetfile",
+      "test_chd",
+      "test_compare",
+      "test_copy",
+      "test_datautil",
+      "test_dis_cases",
+      "test_drn",
+      "test_evt",
+      "test_example_notebooks",
+      "test_export",
+      "test_flopy_io",
+      "test_flopy_module",
+      "test_formattedfile",
+      "test_gage",
+      "test_geospatial_util",
+      "test_get_modflow",
+      "test_ghb",
+      "test_grid",
+      "test_grid_cases",
+      "test_gridgen",
+      "test_gridintersect",
+      "test_gridutil",
+      "test_headufile",
+      "test_hydmodfile",
+      "test_lak",
+      "test_lake_connections",
+      "test_lgr",
+      "test_listbudget",
+      "test_mbase",
+      "test_mf6",
+      "test_mfnwt",
+      "test_mfsimlist",
+      "test_mnw",
+      "test_model_dot_plot",
+      "test_model_splitter",
+      "test_modeltime",
+      "test_modflow",
+      "test_modflowoc",
+      "test_mp5",
+      "test_nwt_ag",
+      "test_obs",
+      "test_particledata",
+      "test_plotutil",
+      "test_rch",
+      "test_riv",
+      "test_sfr",
+      "test_shapefile_utils",
+      "test_str",
+      "test_subwt",
+      "test_swi2",
+      "test_swr_binaryread",
+      "test_util_2d_and_3d",
+      "test_uzf",
+      "test_wel"
+    ],
+    "failed": [
+      "test_modflowdis",
+      "test_mp6"
+    ],
+    "no_modflow": [
+      "test_binaryfile_reverse",
+      "test_lgrutil",
+      "test_plot_cross_section",
+      "test_plot_map_view",
+      "test_plot_quasi3d",
+      "test_structured_faceflows",
+      "test_triangle",
+      "test_util_array",
+      "test_util_geometry",
+      "test_zonbud_utility"
+    ],
+    "no_listing": [
+      "test_mfreadnam",
+      "test_modpathfile",
+      "test_mp7",
+      "test_mp7_cases",
+      "test_mt3d",
+      "test_particlegroup",
+      "test_pcg",
+      "test_plot_particle_tracks",
+      "test_postprocessing",
+      "test_rasters",
+      "test_seawat",
+      "test_specific_discharge",
+      "test_template_writer"
+    ],
+    "errors": []
+  },
+  "detailed": {
+    "test_binaryfile": {
+      "status": "converged",
+      "discrepancy": 0.07,
+      "files": 4
+    },
+    "test_binarygrid_util": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_cbc_full3D": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_cellbudgetfile": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 4
+    },
+    "test_chd": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_compare": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_copy": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 6
+    },
+    "test_datautil": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 4
+    },
+    "test_dis_cases": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_drn": {
+      "status": "converged",
+      "discrepancy": -0.04,
+      "files": 2
+    },
+    "test_evt": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_example_notebooks": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 6
+    },
+    "test_export": {
+      "status": "converged",
+      "discrepancy": null,
+      "files": 4
+    },
+    "test_flopy_io": {
+      "status": "converged",
+      "discrepancy": 0.15,
+      "files": 2
+    },
+    "test_flopy_module": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_formattedfile": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 6
+    },
+    "test_gage": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 8
+    },
+    "test_geospatial_util": {
+      "status": "converged",
+      "discrepancy": -200.0,
+      "files": 2
+    },
+    "test_get_modflow": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 3
+    },
+    "test_ghb": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_grid": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_grid_cases": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_gridgen": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_gridintersect": {
+      "status": "converged",
+      "discrepancy": -0.01,
+      "files": 6
+    },
+    "test_gridutil": {
+      "status": "converged",
+      "discrepancy": 0.01,
+      "files": 6
+    },
+    "test_headufile": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 1
+    },
+    "test_hydmodfile": {
+      "status": "converged",
+      "discrepancy": -0.03,
+      "files": 3
+    },
+    "test_lak": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_lake_connections": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_lgr": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_listbudget": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_mbase": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_mf6": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_mfnwt": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 1
+    },
+    "test_mfsimlist": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_mnw": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_model_dot_plot": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_model_splitter": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 7
+    },
+    "test_modeltime": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_modflow": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_modflowdis": {
+      "status": "failed",
+      "files": 3
+    },
+    "test_modflowoc": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_mp5": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_mp6": {
+      "status": "failed",
+      "files": 2
+    },
+    "test_nwt_ag": {
+      "status": "converged",
+      "discrepancy": -0.08,
+      "files": 2
+    },
+    "test_obs": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 4
+    },
+    "test_particledata": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_plotutil": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 1
+    },
+    "test_rch": {
+      "status": "converged",
+      "discrepancy": -0.01,
+      "files": 2
+    },
+    "test_riv": {
+      "status": "converged",
+      "discrepancy": 0.02,
+      "files": 2
+    },
+    "test_sfr": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 9
+    },
+    "test_shapefile_utils": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_str": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_subwt": {
+      "status": "converged",
+      "discrepancy": -0.01,
+      "files": 2
+    },
+    "test_swi2": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_swr_binaryread": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 2
+    },
+    "test_util_2d_and_3d": {
+      "status": "converged",
+      "discrepancy": -0.0,
+      "files": 2
+    },
+    "test_uzf": {
+      "status": "converged",
+      "discrepancy": -0.15,
+      "files": 2
+    },
+    "test_wel": {
+      "status": "converged",
+      "discrepancy": 0.0,
+      "files": 3
+    }
+  }
+}

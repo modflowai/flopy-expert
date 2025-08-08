@@ -1,0 +1,26 @@
+{
+  "converged": [
+    "test_chd",
+    "test_drn",
+    "test_evt",
+    "test_ghb",
+    "test_lak",
+    "test_rch",
+    "test_riv",
+    "test_subwt",
+    "test_uzf",
+    "test_sfr",
+    "test_grid_cases",
+    "test_gridgen",
+    "test_mnw"
+  ],
+  "runs_modflow": [
+    "test_wel",
+    "test_mf6",
+    "test_modflow",
+    "test_obs",
+    "test_compare"
+  ],
+  "no_modflow": [],
+  "errors": []
+}

@@ -1,0 +1,216 @@
+================================================================================
+COMPREHENSIVE MODFLOW CONVERGENCE CHECK
+Checking actual MODFLOW listing files for convergence...
+================================================================================
+
+[  1/82] test_binaryfile                ✅ CONVERGED (discrepancy: 7.00e-02%)
+[  2/82] test_binaryfile_reverse        📂 No model.py
+[  3/82] test_binarygrid_util           ✅ CONVERGED (discrepancy: 0.00e+00%)
+[  4/82] test_cbc_full3D                ✅ CONVERGED (discrepancy: 0.00e+00%)
+[  5/82] test_cellbudgetfile            ✅ CONVERGED (discrepancy: -0.00e+00%)
+[  6/82] test_chd                       ✅ CONVERGED (discrepancy: -0.00e+00%)
+[  7/82] test_compare                   ✅ CONVERGED (discrepancy: 0.00e+00%)
+[  8/82] test_copy                      ✅ CONVERGED (discrepancy: 0.00e+00%)
+[  9/82] test_datautil                  ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 10/82] test_dis_cases                 ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 11/82] test_drn                       ✅ CONVERGED (discrepancy: -4.00e-02%)
+[ 12/82] test_evt                       ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 13/82] test_example_notebooks         ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 14/82] test_export                    ✅ CONVERGED
+[ 15/82] test_flopy_io                  ✅ CONVERGED (discrepancy: 1.50e-01%)
+[ 16/82] test_flopy_module              ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 17/82] test_formattedfile             ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 18/82] test_gage                      ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 19/82] test_geospatial_util           ✅ CONVERGED (discrepancy: -2.00e+02%)
+[ 20/82] test_get_modflow               ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 21/82] test_ghb                       ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 22/82] test_grid                      ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 23/82] test_grid_cases                ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 24/82] test_gridgen                   ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 25/82] test_gridintersect             ✅ CONVERGED (discrepancy: -1.00e-02%)
+[ 26/82] test_gridutil                  ✅ CONVERGED (discrepancy: 1.00e-02%)
+[ 27/82] test_headufile                 ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 28/82] test_hydmodfile                ✅ CONVERGED (discrepancy: -3.00e-02%)
+[ 29/82] test_lak                       ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 30/82] test_lake_connections          ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 31/82] test_lgr                       ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 32/82] test_lgrutil                       Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 33/82] test_listbudget                ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 34/82] test_mbase                     ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 35/82] test_mf6                       ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 36/82] test_mfnwt                     ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 37/82] test_mfreadnam                     Running model to generate output... Done
+⚠️ No listing file found
+[ 38/82] test_mfsimlist                 ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 39/82] test_mnw                       ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 40/82] test_model_dot_plot            ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 41/82] test_model_splitter            ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 42/82] test_modeltime                 ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 43/82] test_modflow                   ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 44/82] test_modflowdis                ❌ FAILED to converge
+[ 45/82] test_modflowoc                 ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 46/82] test_modpathfile                   Running model to generate output... Done
+⚠️ No listing file found
+[ 47/82] test_mp5                       ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 48/82] test_mp6                       ❌ FAILED to converge
+[ 49/82] test_mp7                           Running model to generate output... Done
+⚠️ No listing file found
+[ 50/82] test_mp7_cases                     Running model to generate output... Done
+⚠️ No listing file found
+[ 51/82] test_mt3d                          Running model to generate output... Done
+⚠️ No listing file found
+[ 52/82] test_nwt_ag                    ✅ CONVERGED (discrepancy: -8.00e-02%)
+[ 53/82] test_obs                       ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 54/82] test_particledata              ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 55/82] test_particlegroup                 Running model to generate output... Done
+⚠️ No listing file found
+[ 56/82] test_pcg                           Running model to generate output... Done
+⚠️ No listing file found
+[ 57/82] test_plot_cross_section            Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 58/82] test_plot_map_view                 Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 59/82] test_plot_particle_tracks          Running model to generate output... Done
+⚠️ No listing file found
+[ 60/82] test_plot_quasi3d                  Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 61/82] test_plotutil                  ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 62/82] test_postprocessing                Running model to generate output... Done
+⚠️ No listing file found
+[ 63/82] test_rasters                       Running model to generate output... Done
+⚠️ No listing file found
+[ 64/82] test_rch                       ✅ CONVERGED (discrepancy: -1.00e-02%)
+[ 65/82] test_riv                       ✅ CONVERGED (discrepancy: 2.00e-02%)
+[ 66/82] test_seawat                        Running model to generate output... Done
+⚠️ No listing file found
+[ 67/82] test_sfr                       ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 68/82] test_shapefile_utils           ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 69/82] test_specific_discharge            Running model to generate output... Done
+⚠️ No listing file found
+[ 70/82] test_str                       ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 71/82] test_structured_faceflows          Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 72/82] test_subwt                     ✅ CONVERGED (discrepancy: -1.00e-02%)
+[ 73/82] test_swi2                      ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 74/82] test_swr_binaryread            ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 75/82] test_template_writer               Running model to generate output... Done
+⚠️ No listing file found
+[ 76/82] test_triangle                      Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 77/82] test_util_2d_and_3d            ✅ CONVERGED (discrepancy: -0.00e+00%)
+[ 78/82] test_util_array                    Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 79/82] test_util_geometry                 Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+[ 80/82] test_uzf                       ✅ CONVERGED (discrepancy: -1.50e-01%)
+[ 81/82] test_wel                       ✅ CONVERGED (discrepancy: 0.00e+00%)
+[ 82/82] test_zonbud_utility                Running model to generate output... Done
+🛠️ Utility (no MODFLOW)
+
+================================================================================
+FINAL CONVERGENCE SUMMARY
+================================================================================
+
+✅ CONVERGED (57 tests):
+    • test_binaryfile (discrepancy: 7.00e-02%)
+    • test_binarygrid_util (discrepancy: 0.00e+00%)
+    • test_cbc_full3D (discrepancy: 0.00e+00%)
+    • test_cellbudgetfile (discrepancy: -0.00e+00%)
+    • test_chd (discrepancy: -0.00e+00%)
+    • test_compare (discrepancy: 0.00e+00%)
+    • test_copy (discrepancy: 0.00e+00%)
+    • test_datautil (discrepancy: -0.00e+00%)
+    • test_dis_cases (discrepancy: 0.00e+00%)
+    • test_drn (discrepancy: -4.00e-02%)
+    • test_evt (discrepancy: -0.00e+00%)
+    • test_example_notebooks (discrepancy: -0.00e+00%)
+    • test_export
+    • test_flopy_io (discrepancy: 1.50e-01%)
+    • test_flopy_module (discrepancy: 0.00e+00%)
+    • test_formattedfile (discrepancy: 0.00e+00%)
+    • test_gage (discrepancy: 0.00e+00%)
+    • test_geospatial_util (discrepancy: -2.00e+02%)
+    • test_get_modflow (discrepancy: 0.00e+00%)
+    • test_ghb (discrepancy: -0.00e+00%)
+    • test_grid (discrepancy: 0.00e+00%)
+    • test_grid_cases (discrepancy: -0.00e+00%)
+    • test_gridgen (discrepancy: -0.00e+00%)
+    • test_gridintersect (discrepancy: -1.00e-02%)
+    • test_gridutil (discrepancy: 1.00e-02%)
+    • test_headufile (discrepancy: 0.00e+00%)
+    • test_hydmodfile (discrepancy: -3.00e-02%)
+    • test_lak (discrepancy: -0.00e+00%)
+    • test_lake_connections (discrepancy: 0.00e+00%)
+    • test_lgr (discrepancy: 0.00e+00%)
+    • test_listbudget (discrepancy: 0.00e+00%)
+    • test_mbase (discrepancy: 0.00e+00%)
+    • test_mf6 (discrepancy: -0.00e+00%)
+    • test_mfnwt (discrepancy: 0.00e+00%)
+    • test_mfsimlist (discrepancy: 0.00e+00%)
+    • test_mnw (discrepancy: 0.00e+00%)
+    • test_model_dot_plot (discrepancy: 0.00e+00%)
+    • test_model_splitter (discrepancy: -0.00e+00%)
+    • test_modeltime (discrepancy: 0.00e+00%)
+    • test_modflow (discrepancy: 0.00e+00%)
+    • test_modflowoc (discrepancy: 0.00e+00%)
+    • test_mp5 (discrepancy: -0.00e+00%)
+    • test_nwt_ag (discrepancy: -8.00e-02%)
+    • test_obs (discrepancy: 0.00e+00%)
+    • test_particledata (discrepancy: 0.00e+00%)
+    • test_plotutil (discrepancy: -0.00e+00%)
+    • test_rch (discrepancy: -1.00e-02%)
+    • test_riv (discrepancy: 2.00e-02%)
+    • test_sfr (discrepancy: 0.00e+00%)
+    • test_shapefile_utils (discrepancy: -0.00e+00%)
+    • test_str (discrepancy: 0.00e+00%)
+    • test_subwt (discrepancy: -1.00e-02%)
+    • test_swi2 (discrepancy: 0.00e+00%)
+    • test_swr_binaryread (discrepancy: 0.00e+00%)
+    • test_util_2d_and_3d (discrepancy: -0.00e+00%)
+    • test_uzf (discrepancy: -1.50e-01%)
+    • test_wel (discrepancy: 0.00e+00%)
+
+❌ FAILED TO CONVERGE (2 tests):
+    • test_modflowdis
+    • test_mp6
+
+🛠️ UTILITIES/NO MODFLOW (10 tests):
+    • test_binaryfile_reverse
+    • test_lgrutil
+    • test_plot_cross_section
+    • test_plot_map_view
+    • test_plot_quasi3d
+    • test_structured_faceflows
+    • test_triangle
+    • test_util_array
+    • test_util_geometry
+    • test_zonbud_utility
+
+⚠️ NO LISTING FILE (13 tests):
+    • test_mfreadnam
+    • test_modpathfile
+    • test_mp7
+    • test_mp7_cases
+    • test_mt3d
+    • test_particlegroup
+    • test_pcg
+    • test_plot_particle_tracks
+    • test_postprocessing
+    • test_rasters
+    ... and 3 more
+
+================================================================================
+STATISTICS
+================================================================================
+Total tests checked: 82
+Tests with MODFLOW output: 59
+Tests that CONVERGE: 57
+Tests that FAIL: 2
+Convergence rate: 96.6%
+Utility tests: 10
+Missing output: 13
+
+📊 Detailed results saved to convergence_report_detailed.json
+
+✅ COMPREHENSIVE CHECK COMPLETE!
