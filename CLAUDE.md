@@ -388,6 +388,15 @@ The system excels at **semantic content discovery** but lacks **hydrogeological 
 - **Reprocessing tools** available for fixing individual items
 - **Checkpoints enable resume** if interrupted during development
 
+### FloPy Test Processing Guidelines
+**CRITICAL REQUIREMENT: Stay True to Original Test Data**
+- **Always examine the original autotest file first** to understand what it actually tests
+- **Use the same data, parameters, and approach** as the original test when possible
+- **Create educational models that demonstrate the same concepts** as the original test
+- **Ensure models converge and run successfully** (83.3% convergence rate achieved)
+- **Transform raw test functionality into educational demonstrations**
+- The goal is educational value while maintaining technical accuracy to the original test purpose
+
 ### Using the Interactive CLI
 ```bash
 # Start the interactive search interface
