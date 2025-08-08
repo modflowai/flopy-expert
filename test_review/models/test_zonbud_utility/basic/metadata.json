@@ -1,0 +1,106 @@
+{
+    "test_name": "test_zonbud_utility",
+    "category": "Post-processing Utilities",
+    "subcategory": "Water Budget Analysis",
+    "description": "Demonstrates FloPy's ZoneBudget utilities for zone-based water budget analysis and inter-zone flow quantification",
+    "original_test": "test_zonbud_utility.py",
+    "model_type": "Utility (No MODFLOW execution)",
+    "packages_tested": ["utils.ZoneBudget", "utils.ZoneBudget6", "utils.ZoneFile6"],
+    
+    "key_concepts": [
+        "Zone definition and arrays",
+        "Water budget by zones",
+        "Inter-zone flow analysis",
+        "Zone file I/O",
+        "Budget component tracking",
+        "CSV export capabilities",
+        "Zone aliases",
+        "Regional water balance"
+    ],
+    
+    "model_characteristics": {
+        "grid": "N/A - Post-processing utility",
+        "layers": "N/A",
+        "stress_periods": "N/A",
+        "time_discretization": "N/A",
+        "solver": "N/A",
+        "model_execution": false,
+        "convergence": "NOT APPLICABLE - Post-processing tool"
+    },
+    
+    "zonebudget_features": {
+        "zone_definition": {
+            "methods": ["Integer arrays", "Layer-based", "Hydrogeologic units"],
+            "example_zones": 5,
+            "inactive_zone": 0
+        },
+        "budget_components": {
+            "tracked": ["Storage", "CHD", "Wells", "Rivers", "Recharge", "Inter-zone"],
+            "analysis": ["IN/OUT totals", "Net flow", "Mass balance"]
+        },
+        "export_options": {
+            "formats": ["CSV", "DataFrame", "NumPy array"],
+            "time_selection": "kstpkper or totim",
+            "zone_selection": "Individual or all"
+        }
+    },
+    
+    "practical_examples": {
+        "wellfield_capture": {
+            "description": "Analyze sources of water to pumping wells",
+            "zones": ["Wellfield", "River", "Background"],
+            "questions": ["River depletion", "Storage contribution", "Capture extent"]
+        },
+        "regional_balance": {
+            "description": "Water balance by management areas",
+            "zones": ["Counties", "Watersheds", "Aquifers"],
+            "outputs": ["Net recharge", "Inter-area flow", "Sustainability"]
+        }
+    },
+    
+    "workflow_steps": [
+        "Run MODFLOW with CBC output",
+        "Define analysis zones",
+        "Create zone file (.zbr)",
+        "Initialize ZoneBudget",
+        "Calculate budgets",
+        "Analyze results",
+        "Export to CSV/DataFrame"
+    ],
+    
+    "practical_applications": [
+        "Regional water balance analysis",
+        "Wellfield capture zone delineation",
+        "Contamination source tracking",
+        "Surface-groundwater interaction",
+        "Inter-aquifer leakage quantification",
+        "Model calibration targets",
+        "Water rights accounting",
+        "Sustainability assessments"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Requires cell-by-cell budget file",
+        "Zone array must match model grid",
+        "Zones are static (not time-varying)",
+        "Integer zone identifiers only",
+        "Post-processing only (not predictive)"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "N/A - Post-processing",
+        "2_model_setup": "N/A - Post-processing",
+        "3_initial_conditions": "N/A - Post-processing",
+        "4_boundary_conditions": "N/A - Post-processing",
+        "5_solver": "N/A - No model execution",
+        "6_visualization": "Zone-based budget results",
+        "7_post_processing": "Primary function - budget analysis"
+    },
+    
+    "files_generated": ["zones.zbr (temporary)"],
+    
+    "educational_value": "High - Essential post-processing tool for water resource management",
+    
+    "convergence_test": false,
+    "convergence_result": "NOT APPLICABLE - Post-processing utility"
+}
