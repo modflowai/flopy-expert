@@ -3,13 +3,13 @@
 ## Overview
 Simple tracking: Does the test run MODFLOW and converge?
 
-**Total Tests Processed**: 68/83
-**Tests That Run MODFLOW**: 32/68 (47.1%)
-**Educational Demos (No MODFLOW)**: 36/68 (52.9%)
+**Total Tests Processed**: 69/83
+**Tests That Run MODFLOW**: 33/69 (47.8%)
+**Educational Demos (No MODFLOW)**: 36/69 (52.2%)
 
 ---
 
-## Tests That Run MODFLOW (32 tests)
+## Tests That Run MODFLOW (33 tests)
 
 | # | Test Name | Package/Feature | Status |
 |---|-----------|----------------|--------|
@@ -47,6 +47,7 @@ Simple tracking: Does the test run MODFLOW and converge?
 | 32 | test_subwt | Subsidence/Compaction (SWT) | ✅ CONVERGES! |
 | 33 | test_drn | Drain Package (DRN) | ✅ CONVERGES! |
 | 34 | test_riv | River Package (RIV) | ✅ CONVERGES! |
+| 35 | test_ghb | General Head Boundary (GHB) | ✅ CONVERGES! |
 
 ---
 
@@ -66,7 +67,7 @@ These don't run MODFLOW - they demonstrate FloPy utilities, file I/O, plotting, 
 ### Medium Priority:
 5. ~~**test_drn** - Drain package~~ ✅ CONVERGES!
 6. ~~**test_riv** - River package~~ ✅ CONVERGES!  
-7. **test_ghb** - General Head Boundary
+7. ~~**test_ghb** - General Head Boundary~~ ✅ CONVERGES!
 8. **test_chd** - Constant Head
 
 All of these should run MODFLOW and test convergence.

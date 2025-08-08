@@ -1,0 +1,120 @@
+{
+    "test_name": "test_ghb",
+    "category": "Boundary Condition Package",
+    "subcategory": "Head-Dependent Boundaries",
+    "description": "Demonstrates FloPy's General Head Boundary (GHB) package for simulating flexible head-dependent boundary conditions",
+    "original_test": "test_ghb.py",
+    "model_type": "MODFLOW-2005 with GHB",
+    "packages_tested": ["DIS", "BAS", "LPF", "GHB", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Head-dependent boundary conditions",
+        "Bi-directional boundary flow",
+        "Boundary conductance specification",
+        "Multi-zone boundary systems",
+        "Coastal aquifer boundaries",
+        "Lake-aquifer interactions",
+        "Spring discharge simulation",
+        "Regional flow system boundaries"
+    ],
+    
+    "model_characteristics": {
+        "grid": "12x15x1 regional grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "ghb_cells": 42,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "boundary_features": {
+        "coastal_boundary": {
+            "cells": 12,
+            "head": "2.0 m (sea level)",
+            "conductance": "100.0 m²/day (high connectivity)"
+        },
+        "northern_boundary": {
+            "cells": 13,
+            "head": "8.0 m (elevated water body)",
+            "conductance": "50.0 m²/day (moderate connectivity)"
+        },
+        "southern_boundary": {
+            "cells": 13,
+            "head": "5.0 m (lower water body)",
+            "conductance": "30.0 m²/day (restricted connectivity)"
+        },
+        "interior_springs": {
+            "cells": 4,
+            "head": "12.0 m (spring discharge)",
+            "conductance": "20.0 m²/day (natural seepage)"
+        }
+    },
+    
+    "physical_processes": {
+        "boundary_mechanism": "Head-dependent bi-directional exchange",
+        "flow_control": "Head difference and conductance",
+        "exchange_flexibility": "Can flow in or out based on heads",
+        "conductance_role": "Controls flow rate for given head difference",
+        "boundary_types": "Coastal, lake, spring, regional",
+        "system_connectivity": "Multiple interconnected boundaries"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Excellent with standard PCG criteria",
+        "numerical_stability": "Very stable multi-boundary configuration",
+        "mass_balance": "Good (not captured in detail)",
+        "boundary_effectiveness": "Active multi-directional exchange"
+    },
+    
+    "practical_applications": [
+        "Coastal groundwater management",
+        "Seawater intrusion modeling",
+        "Lake-aquifer interaction studies",
+        "Regional flow system analysis",
+        "Water budget assessments",
+        "Climate change impact studies",
+        "Wellfield capture zone analysis",
+        "Submarine groundwater discharge",
+        "Nearshore contamination studies",
+        "Spring flow sustainability"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Linear head-flow relationship",
+        "Fixed boundary conductances",
+        "Steady-state boundary conditions",
+        "No boundary geometry changes",
+        "Simplified boundary representation",
+        "No density-dependent flow"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "12x15x1 regional coastal grid",
+        "2_model_setup": "LPF unconfined coastal aquifer",
+        "3_initial_conditions": "Inland-to-coast head gradient",
+        "4_boundary_conditions": "Multi-zone GHB system + inland CHD",
+        "5_solver": "PCG with standard criteria",
+        "6_visualization": "Boundary flows and regional heads",
+        "7_post_processing": "Boundary exchange analysis"
+    },
+    
+    "files_generated": [
+        "ghb_demo.nam",
+        "ghb_demo.dis",
+        "ghb_demo.bas",
+        "ghb_demo.lpf",
+        "ghb_demo.ghb",
+        "ghb_demo.pcg",
+        "ghb_demo.oc",
+        "ghb_demo.list",
+        "ghb_demo.hds",
+        "ghb_demo.cbc"
+    ],
+    
+    "educational_value": "Very High - Demonstrates the most flexible boundary condition package essential for coastal modeling, regional studies, and complex boundary scenarios",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}
