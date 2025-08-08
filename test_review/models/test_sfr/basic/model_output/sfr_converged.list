@@ -1,0 +1,15 @@
+                                  MODFLOW-2005     
+      U.S. GEOLOGICAL SURVEY MODULAR FINITE-DIFFERENCE GROUND-WATER FLOW MODEL
+                            VERSION 1.12.00 2/3/2017
+
+ LIST FILE: sfr_converged.list
+                         UNIT    2
+
+ OPENING sfr_converged.dis
+ FILE TYPE:DIS   UNIT   11   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING sfr_converged.bas
+ FILE TYPE:BAS6   UNIT   13   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+ ILLEGAL FILE TYPE IN NAME FILE: UPW

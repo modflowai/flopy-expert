@@ -1,0 +1,215 @@
+{
+  "model_info": {
+    "name": "test_sfr",
+    "title": "Stream Flow Routing (SFR2) Package Demonstration",
+    "description": "Comprehensive demonstration of FloPy's Stream Flow Routing (SFR2) package capabilities for stream-groundwater interaction modeling with complete MODFLOW simulation and convergence testing.",
+    "complexity": "advanced",
+    "model_type": "stream_flow_routing",
+    "modflow_version": "mf2005_sfr2",
+    "packages_demonstrated": ["SFR2", "stream_groundwater_interaction", "manning_equation", "channel_geometry", "flow_routing"]
+  },
+  "educational_content": {
+    "learning_objectives": [
+      "Master SFR2 package configuration for stream-groundwater interaction",
+      "Configure stream networks with reach and segment data",
+      "Implement channel geometry and hydraulic properties",
+      "Apply Manning's equation for flow routing calculations",
+      "Model streambed conductance and leakage processes",
+      "Understand stream-aquifer interaction mechanisms",
+      "Develop professional surface water-groundwater modeling skills"
+    ],
+    "key_concepts": [
+      "Stream flow routing and network connectivity",
+      "Stream-groundwater interaction modeling",
+      "Channel geometry and hydraulic properties",
+      "Manning's equation and flow calculations",
+      "Streambed conductance and leakage",
+      "Reach and segment data configuration",
+      "Professional surface water modeling"
+    ],
+    "skill_level": "advanced"
+  },
+  "sfr2_package_focus": {
+    "primary_function": "Stream flow routing with groundwater interaction modeling",
+    "stream_network": "Reach and segment configuration for stream networks",
+    "hydraulic_modeling": "Manning's equation flow routing and channel geometry",
+    "interaction_modeling": "Stream-aquifer interaction through streambed conductance",
+    "professional_features": "Complete surface water-groundwater integration"
+  },
+  "stream_network_configuration": {
+    "reach_data": {
+      "description": "Individual stream cells with hydraulic properties",
+      "parameters": [
+        "Layer, row, column coordinates (k, i, j)",
+        "Segment and reach identification (iseg, ireach)",
+        "Reach length and streambed geometry",
+        "Streambed elevation and thickness",
+        "Streambed hydraulic conductivity"
+      ]
+    },
+    "segment_data": {
+      "description": "Stream sections with uniform hydraulic properties",
+      "parameters": [
+        "Segment numbering and connectivity (nseg, outseg)",
+        "Flow rates and routing parameters",
+        "Manning's roughness coefficients",
+        "Channel geometry (depth, width)",
+        "Stream inflows and boundary conditions"
+      ]
+    }
+  },
+  "channel_geometry": {
+    "channel_type": "Rectangular channel geometry",
+    "width_specification": "5.0 meters average channel width",
+    "depth_specification": "1.0 meter channel depth",
+    "streambed_thickness": "0.5 meter streambed thickness",
+    "streambed_conductivity": "1.0 m/day hydraulic conductivity",
+    "professional_design": "Industry-standard open channel parameters"
+  },
+  "flow_routing": {
+    "manning_equation": {
+      "roughness_coefficient": "0.03 (typical for natural channels)",
+      "flow_velocity": "Calculated from Manning's equation",
+      "channel_slope": "Natural gradient from streambed elevations",
+      "flow_depth": "Stage-discharge relationship",
+      "professional_calculation": "Standard open channel flow analysis"
+    },
+    "stream_connectivity": {
+      "upstream_downstream": "Flow routing from reach to reach",
+      "outlet_conditions": "Stream leaves model domain (outseg = 0)",
+      "inflow_specification": "1000 m³/day upstream inflow",
+      "routing_method": "Manning's equation flow routing"
+    }
+  },
+  "stream_groundwater_interaction": {
+    "leakage_mechanism": {
+      "streambed_conductance": "Controls stream-aquifer exchange",
+      "head_difference": "Stream stage vs. groundwater head",
+      "gaining_losing": "Bidirectional flow based on head gradients",
+      "streambed_resistance": "Vertical hydraulic resistance"
+    },
+    "conductance_calculation": {
+      "streambed_k": "1.0 m/day streambed hydraulic conductivity",
+      "streambed_thickness": "0.5 m vertical flow path",
+      "stream_width": "5.0 m wetted perimeter",
+      "reach_length": "100.0 m stream cell length",
+      "conductance_formula": "K * W * L / M (conductivity * width * length / thickness)"
+    }
+  },
+  "model_setup": {
+    "domain_configuration": {
+      "grid_dimensions": "1 layer × 10 rows × 20 columns",
+      "cell_size": "100m × 100m cells",
+      "total_domain": "1000m × 2000m model area",
+      "stream_path": "Diagonal from northwest to southeast"
+    },
+    "boundary_conditions": {
+      "west_boundary": "Constant head (45.0 m)",
+      "east_boundary": "Constant head (40.0 m)",
+      "head_gradient": "5.0 m gradient across domain",
+      "stream_inflow": "1000 m³/day upstream boundary"
+    },
+    "hydraulic_properties": {
+      "aquifer_k": "10.0 m/day horizontal hydraulic conductivity",
+      "vertical_k": "1.0 m/day vertical hydraulic conductivity",
+      "streambed_k": "1.0 m/day streambed conductivity",
+      "professional_values": "Representative aquifer parameters"
+    }
+  },
+  "stress_periods": {
+    "period_0": {
+      "description": "Steady-state initialization",
+      "length": "1 day",
+      "purpose": "Establish initial flow conditions"
+    },
+    "period_1": {
+      "description": "Transient simulation",
+      "length": "365 days",
+      "purpose": "Long-term stream-groundwater interaction"
+    }
+  },
+  "professional_applications": {
+    "water_resources": [
+      "Stream depletion analysis for water rights assessment",
+      "Surface water-groundwater interaction studies",
+      "Riparian zone groundwater management and planning",
+      "Environmental flow requirement determination",
+      "Water allocation and conjunctive use planning",
+      "Stream-aquifer system yield analysis"
+    ],
+    "environmental_consulting": [
+      "Stream restoration and habitat modeling",
+      "Riparian ecosystem groundwater dependency assessment",
+      "Contamination transport via stream-groundwater exchange",
+      "Wetland hydrology and groundwater interaction",
+      "Environmental impact assessment for stream modifications",
+      "Ecological flow regime analysis and protection"
+    ],
+    "engineering_applications": [
+      "Stream channel design and modification analysis",
+      "Flood plain groundwater interaction modeling",
+      "Constructed wetland and treatment system design",
+      "Stream bank filtration system optimization",
+      "Agricultural drainage and return flow assessment",
+      "Urban stormwater-groundwater interaction analysis"
+    ],
+    "regulatory_compliance": [
+      "Water rights administration and stream call analysis",
+      "Environmental flow protection and management",
+      "Stream modification permit analysis",
+      "Groundwater-surface water interaction documentation",
+      "Water quality protection through flow management",
+      "Professional water resource impact assessment"
+    ]
+  },
+  "validation_framework": [
+    {
+      "test": "Stream network configuration",
+      "expected": "8 stream reaches in diagonal pattern from NW to SE",
+      "description": "Validates proper stream network geometry and connectivity"
+    },
+    {
+      "test": "SFR2 package creation and configuration",
+      "expected": "Complete reach and segment data with hydraulic properties",
+      "description": "Ensures proper SFR2 package setup and parameterization"
+    },
+    {
+      "test": "Channel geometry specification",
+      "expected": "Rectangular channels with 5m width and appropriate depth",
+      "description": "Confirms proper channel geometry and hydraulic parameters"
+    },
+    {
+      "test": "Manning's equation flow routing",
+      "expected": "Flow routing with roughness coefficient and channel properties",
+      "description": "Validates flow routing calculations and Manning's equation"
+    },
+    {
+      "test": "Stream-groundwater interaction",
+      "expected": "Streambed conductance for bidirectional flow exchange",
+      "description": "Ensures proper stream-aquifer interaction mechanisms"
+    },
+    {
+      "test": "MODFLOW convergence testing",
+      "expected": "Complete simulation with head and flow solutions",
+      "description": "Validates model convergence and solution quality"
+    }
+  ],
+  "file_structure": {
+    "model.py": "Main Stream Flow Routing demonstration with convergence testing",
+    "metadata.json": "This comprehensive metadata file",
+    "test_results.json": "SFR2 package validation and performance results"
+  },
+  "technical_notes": {
+    "sfr2_implementation": "Complete SFR2 package with reach and segment data",
+    "flow_routing": "Manning's equation flow routing with channel geometry",
+    "interaction_modeling": "Streambed conductance for stream-groundwater exchange",
+    "convergence_testing": "Full MODFLOW simulation with success/failure reporting",
+    "professional_standards": "Industry-standard surface water-groundwater modeling"
+  },
+  "qa_information": {
+    "model_runtime": "full_simulation",
+    "expected_convergence": "should_converge",
+    "common_issues": ["streambed_conductance", "manning_roughness", "channel_geometry", "flow_routing"],
+    "testing_notes": "Focuses on stream-groundwater interaction with complete MODFLOW simulation"
+  }
+}
