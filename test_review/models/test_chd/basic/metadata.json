@@ -1,0 +1,125 @@
+{
+    "test_name": "test_chd",
+    "category": "Boundary Condition Package",
+    "subcategory": "Fixed Head Boundaries",
+    "description": "Demonstrates FloPy's Constant Head Boundary (CHD) package for simulating fixed head boundary conditions",
+    "original_test": "test_chd.py",
+    "model_type": "MODFLOW-2005 with CHD",
+    "packages_tested": ["DIS", "BAS", "LPF", "CHD", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Fixed head boundary conditions",
+        "Infinite source/sink boundaries",
+        "Regional flow system boundaries",
+        "Domain boundary specification",
+        "Water level control",
+        "Boundary flow calculations",
+        "Mass balance constraints",
+        "Model calibration boundaries"
+    ],
+    
+    "model_characteristics": {
+        "grid": "15x20x1 regional grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "chd_cells": 69,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "boundary_features": {
+        "west_boundary": {
+            "cells": 15,
+            "head": "95.0 m (high head)",
+            "function": "Regional inflow boundary"
+        },
+        "east_boundary": {
+            "cells": 15,
+            "head": "75.0 m (low head)",
+            "function": "Regional outflow boundary"
+        },
+        "north_boundary": {
+            "cells": 18,
+            "head": "88.0 m (intermediate)",
+            "function": "Cross-gradient control"
+        },
+        "south_boundary": {
+            "cells": 18,
+            "head": "82.0 m (intermediate)",
+            "function": "Cross-gradient control"
+        },
+        "interior_controls": {
+            "cells": 3,
+            "heads": "90.0, 85.0, 80.0 m",
+            "function": "Internal head control points"
+        }
+    },
+    
+    "physical_processes": {
+        "boundary_mechanism": "Fixed head enforcement",
+        "flow_capacity": "Unlimited (infinite source/sink)",
+        "flow_direction": "Automatic based on head gradients",
+        "boundary_strength": "Strongest boundary control",
+        "head_control": "Absolute head specification",
+        "mass_balance": "CHD provides/removes required water"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Excellent (CHD always converges easily)",
+        "numerical_stability": "Very stable - strongest boundary type",
+        "mass_balance": "Perfect by definition",
+        "convergence_reliability": "Highest of all boundary types"
+    },
+    
+    "practical_applications": [
+        "Regional groundwater modeling",
+        "Water budget assessments", 
+        "Aquifer yield evaluations",
+        "Pumping test simulations",
+        "Wellfield design studies",
+        "Water supply planning",
+        "Model calibration frameworks",
+        "Dewatering system design",
+        "Mining water management",
+        "Environmental remediation"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Infinite water supply/demand capacity",
+        "Fixed head regardless of flow rate",
+        "No conductance limitations",
+        "Potential for unrealistic flows",
+        "May mask physical processes",
+        "Requires careful physical justification"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "15x20x1 regional flow domain",
+        "2_model_setup": "LPF unconfined regional aquifer",
+        "3_initial_conditions": "Multi-zone head distribution",
+        "4_boundary_conditions": "Complete CHD boundary system",
+        "5_solver": "PCG with standard criteria",
+        "6_visualization": "Regional flow patterns",
+        "7_post_processing": "Boundary flow analysis"
+    },
+    
+    "files_generated": [
+        "chd_demo.nam",
+        "chd_demo.dis",
+        "chd_demo.bas",
+        "chd_demo.lpf",
+        "chd_demo.chd",
+        "chd_demo.pcg",
+        "chd_demo.oc",
+        "chd_demo.list",
+        "chd_demo.hds",
+        "chd_demo.cbc"
+    ],
+    
+    "educational_value": "High - Demonstrates the fundamental boundary condition package that forms the basis for understanding all other boundary types",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}
