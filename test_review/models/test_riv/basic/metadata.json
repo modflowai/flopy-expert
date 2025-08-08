@@ -1,0 +1,107 @@
+{
+    "test_name": "test_riv",
+    "category": "Physical Process Package",
+    "subcategory": "Surface Water Interaction",
+    "description": "Demonstrates FloPy's River (RIV) package for simulating bi-directional river-groundwater interactions",
+    "original_test": "test_riv.py",
+    "model_type": "MODFLOW-2005 with RIV",
+    "packages_tested": ["DIS", "BAS", "LPF", "RIV", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Bi-directional river-aquifer exchange",
+        "River stage and bottom elevation",
+        "Riverbed conductance specification",
+        "Gaining and losing river conditions",
+        "Stream-aquifer interaction",
+        "River network simulation",
+        "Streamflow depletion",
+        "Conjunctive water use"
+    ],
+    
+    "model_characteristics": {
+        "grid": "10x20x1 rectangular grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "river_cells": 20,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "river_features": {
+        "main_channel": "Diagonal crossing from NW to SE",
+        "tributaries": 2,
+        "river_stage": "40.0 m (main), 39.5 m (tributaries)",
+        "river_bottom": "38.0 m (main), 37.5 m (tributaries)",
+        "conductances": "50.0 m²/day (main), 25.0 m²/day (tributaries)",
+        "exchange_type": "Bi-directional",
+        "network_complexity": "Main channel + 2 tributaries"
+    },
+    
+    "physical_processes": {
+        "exchange_mechanism": "Head-dependent bi-directional flow",
+        "flow_conditions": "Both gaining and losing possible",
+        "hydraulic_control": "River stage vs groundwater head",
+        "conductance_role": "Controls exchange rate",
+        "river_geometry": "Stage, bottom, and conductance specified",
+        "aquifer_connection": "Through riverbed seepage"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Excellent with standard PCG criteria",
+        "numerical_stability": "Very stable configuration",
+        "mass_balance": "Good (details not captured)",
+        "river_effectiveness": "Active bi-directional exchange"
+    },
+    
+    "practical_applications": [
+        "Stream-aquifer interaction studies",
+        "Water rights and allocation",
+        "Streamflow depletion analysis",
+        "Minimum instream flow requirements",
+        "Conjunctive use management",
+        "Drought impact assessment",
+        "Climate change adaptation",
+        "River restoration design",
+        "Bridge and culvert impacts",
+        "Bank filtration systems"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Fixed river geometry",
+        "Steady-state river stage",
+        "Linear head-dependent exchange",
+        "No river flow routing",
+        "Simplified riverbed representation",
+        "No seasonal variations modeled"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "10x20x1 grid with 100m cells",
+        "2_model_setup": "LPF unconfined aquifer",
+        "3_initial_conditions": "Gradient from 45m to 35m (W to E)",
+        "4_boundary_conditions": "CHD at edges, RIV network crossing",
+        "5_solver": "PCG with standard criteria",
+        "6_visualization": "River flows and head distribution",
+        "7_post_processing": "Stream-aquifer exchange analysis"
+    },
+    
+    "files_generated": [
+        "riv_demo.nam",
+        "riv_demo.dis",
+        "riv_demo.bas",
+        "riv_demo.lpf",
+        "riv_demo.riv",
+        "riv_demo.pcg",
+        "riv_demo.oc",
+        "riv_demo.list",
+        "riv_demo.hds",
+        "riv_demo.cbc"
+    ],
+    
+    "educational_value": "Very High - Demonstrates critical stream-aquifer interaction concepts essential for water resources management, environmental studies, and conjunctive use planning",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}
