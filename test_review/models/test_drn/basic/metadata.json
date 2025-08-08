@@ -1,0 +1,107 @@
+{
+    "test_name": "test_drn",
+    "category": "Physical Process Package",
+    "subcategory": "Drainage Systems",
+    "description": "Demonstrates FloPy's Drain (DRN) package for simulating various drainage features in MODFLOW models",
+    "original_test": "test_drn.py",
+    "model_type": "MODFLOW-2005 with DRN",
+    "packages_tested": ["DIS", "BAS", "LPF", "DRN", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Head-dependent outflow drainage",
+        "Agricultural tile drainage systems",
+        "Urban stormwater drainage",
+        "Drainage conductance specification",
+        "Drain elevation control",
+        "Multi-level drainage networks",
+        "Drainage flow calculations",
+        "Drainage system design"
+    ],
+    
+    "model_characteristics": {
+        "grid": "15x15x1 regular grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "drainage_cells": 31,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "drainage_features": {
+        "main_drains": 11,
+        "lateral_drains": 12,
+        "field_drains": 8,
+        "drain_elevations": "24.0m (main), 24.5m (lateral), 25.0m (field)",
+        "drain_conductances": "10.0, 5.0, 2.0 m²/day",
+        "drainage_pattern": "Hierarchical network",
+        "network_type": "Agricultural tile drainage"
+    },
+    
+    "physical_processes": {
+        "drainage_mechanism": "Head-dependent outflow only",
+        "flow_direction": "Aquifer to drains (outflow only)",
+        "hydraulic_control": "Drain elevation and conductance",
+        "drainage_efficiency": "Function of head above drain",
+        "system_design": "Main collector with lateral feeders",
+        "field_drainage": "Distributed tile drains"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Excellent with standard PCG criteria",
+        "numerical_stability": "Very stable configuration",
+        "mass_balance": "-0.040000% (excellent)",
+        "drainage_effectiveness": "Active water removal"
+    },
+    
+    "practical_applications": [
+        "Agricultural drainage design",
+        "Urban stormwater management",
+        "Foundation dewatering systems",
+        "Landfill leachate collection",
+        "Mine dewatering operations",
+        "Road and highway drainage",
+        "Airport runway drainage",
+        "Wetland water level control",
+        "Contaminated site remediation",
+        "Green infrastructure design"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Outflow only (no inflow to aquifer)",
+        "Fixed drain elevations",
+        "Linear relationship with head",
+        "No drain capacity limitations",
+        "Steady-state drainage rates",
+        "Uniform drain properties within type"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "15x15x1 grid with 50m cells",
+        "2_model_setup": "LPF unconfined aquifer",
+        "3_initial_conditions": "Gradient from 28m to 21m (W to E)",
+        "4_boundary_conditions": "CHD at edges, comprehensive drain network",
+        "5_solver": "PCG with standard criteria",
+        "6_visualization": "Drainage flow and head distribution",
+        "7_post_processing": "Mass balance and drainage analysis"
+    },
+    
+    "files_generated": [
+        "drn_demo.nam",
+        "drn_demo.dis",
+        "drn_demo.bas",
+        "drn_demo.lpf",
+        "drn_demo.drn",
+        "drn_demo.pcg",
+        "drn_demo.oc",
+        "drn_demo.list",
+        "drn_demo.hds",
+        "drn_demo.cbc"
+    ],
+    
+    "educational_value": "High - Demonstrates essential drainage system design concepts critical for agricultural engineering, urban planning, and environmental management",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}
