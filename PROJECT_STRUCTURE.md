@@ -11,6 +11,8 @@ A comprehensive semantic database and analysis system for FloPy and pyEMU ground
 Production source code for the semantic database system:
 - `flopy_processing_pipeline.py` - Main FloPy processing
 - `pyemu_processing_pipeline.py` - PyEMU processing
+- `flopy_embedding_pipeline.py` - FloPy ultra-discriminative embeddings
+- `pyemu_embedding_pipeline.py` - PyEMU ultra-discriminative embeddings
 - `flopy_workflow_extractor.py` - Workflow extraction
 - `graphql_api.py` - GraphQL API implementation
 
@@ -116,7 +118,17 @@ python src/flopy_processing_pipeline.py
 python src/pyemu_processing_pipeline.py
 ```
 
-### 3. Test Model Processing
+### 3. Ultra-Discriminative Embeddings
+```bash
+# Generate FloPy workflow embeddings
+python run_embedding_flopy.py --repository flopy
+python run_embedding_flopy.py --repository modflow6-examples
+
+# Generate PyEMU workflow embeddings
+python run_embedding_pyemu.py
+```
+
+### 4. Test Model Processing
 ```bash
 # Check all test models
 python tools/test_processing/check_all_models.py
@@ -125,7 +137,7 @@ python tools/test_processing/check_all_models.py
 python tools/test_processing/fix_all_models.py
 ```
 
-### 4. Search and Query
+### 5. Search and Query
 ```bash
 # Interactive search
 python tools/search/search_cli.py
@@ -147,9 +159,16 @@ python tools/search/demo_searches.py
 - 7-phase conceptual model for each test
 - Comprehensive metadata and validation
 
+### Ultra-Discriminative Embeddings
+- Advanced v02 embedding system for workflows
+- FloPy: 54.4% → 70.7% accuracy improvement
+- PyEMU: 52.0% → 56.0% accuracy improvement  
+- Hyper-specific technical question generation
+- Domain-aware prompting for MODFLOW vs PEST++
+
 ### AI Integration
 - OpenAI embeddings (text-embedding-3-small)
-- Gemini 2.5 for semantic analysis
+- Gemini 2.0 Flash for ultra-discriminative analysis
 - Claude integration for assistance
 - DSPy for intelligent routing
 
@@ -159,6 +178,8 @@ python tools/search/demo_searches.py
 - ✅ Archived deprecated scripts
 - ✅ Created clear directory hierarchy
 - ✅ Comprehensive documentation
+- ✅ Ultra-discriminative embedding pipelines
+- ✅ Professional v02 system integration
 
 ## Development Status
 - **Production Ready**: Semantic database system

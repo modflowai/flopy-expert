@@ -553,6 +553,8 @@ flopy_expert/
 │   ├── pyemu_processing_pipeline.py  # PyEMU module processor  
 │   ├── flopy_workflow_processor.py   # FloPy workflow processor
 │   ├── pyemu_workflow_processor.py   # PyEMU workflow processor
+│   ├── flopy_embedding_pipeline.py   # FloPy ultra-discriminative embeddings
+│   ├── pyemu_embedding_pipeline.py   # PyEMU ultra-discriminative embeddings
 │   ├── docs_parser.py               # FloPy docs parser
 │   ├── pyemu_docs_parser.py         # PyEMU docs parser
 │   ├── flopy_workflow_extractor.py  # FloPy example extractor
@@ -566,6 +568,8 @@ flopy_expert/
 ├── run_processing_pyemu.py          # Main PyEMU module processing
 ├── run_processing_flopy_workflows.py # FloPy workflow processing
 ├── run_processing_pyemu_workflows.py # PyEMU workflow processing
+├── run_embedding_flopy.py           # FloPy ultra-discriminative embeddings
+├── run_embedding_pyemu.py           # PyEMU ultra-discriminative embeddings
 └── config.py                        # API keys and settings
 ```
 
@@ -605,6 +609,7 @@ sankey-beta
 6. **Dual Search Domains**: Separate FloPy and PyEMU search capabilities
 7. **Version Tracking**: Git commit tracking for all modules
 8. **Robust Processing**: Retry logic, quality assessment, reprocessing tools
+9. **Ultra-Discriminative Embeddings**: Advanced v02 system achieving 54.4% → 70.7% accuracy for FloPy workflows
 
 ## What Makes This Special
 

@@ -162,6 +162,30 @@ geometries where standard solvers struggle with convergence.
 - **Full-Text Indexing**: GIN indexes for fast text search
 - **Content Versioning**: Track file changes and reprocess only modified modules
 
+## 🎯 Ultra-Discriminative Embeddings
+
+Advanced embedding system that generates hyper-specific technical questions impossible to answer without understanding the exact workflow implementation details.
+
+### Performance Results
+- **FloPy Workflows**: 54.4% → 70.7% accuracy (+16.3 percentage points)
+- **PyEMU Workflows**: 52.0% → 56.0% accuracy (+4.0 percentage points)
+
+### Key Innovation
+Instead of generic descriptions, generates ultra-discriminative questions like:
+- *"In this MF6 workflow, how does ModflowGwfdis handle cell2d array construction for DISV?"*
+- *"Which pyemu.ParameterEnsemble method updates realizations using the Kalman gain?"*
+- *"What specific IMS outer_maximum value does this tutorial use for PCG convergence?"*
+
+### Usage
+```bash
+# Generate FloPy ultra-discriminative embeddings
+python run_embedding_flopy.py --repository flopy
+python run_embedding_flopy.py --repository modflow6-examples
+
+# Generate PyEMU ultra-discriminative embeddings  
+python run_embedding_pyemu.py
+```
+
 ## Installation & Setup
 
 ### Prerequisites

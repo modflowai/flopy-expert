@@ -1,0 +1,131 @@
+{
+    "test_name": "test_evt",
+    "category": "Source/Sink Package",
+    "subcategory": "Evapotranspiration Losses",
+    "description": "Demonstrates FloPy's Evapotranspiration (EVT) package for simulating head-dependent ET losses from vegetation",
+    "original_test": "test_evt.py",
+    "model_type": "MODFLOW-2005 with EVT",
+    "packages_tested": ["DIS", "BAS", "LPF", "EVT", "RCH", "PCG", "OC"],
+    
+    "key_concepts": [
+        "Head-dependent evapotranspiration",
+        "Maximum ET rate specification",
+        "Extinction depth definition",
+        "Linear ET rate reduction",
+        "Multi-zone vegetation systems",
+        "Agricultural crop ET",
+        "Riparian forest uptake",
+        "Wetland evapotranspiration"
+    ],
+    
+    "model_characteristics": {
+        "grid": "14x18x1 vegetation system grid",
+        "layers": 1,
+        "stress_periods": 1,
+        "time_discretization": "Steady state",
+        "solver": "PCG",
+        "vegetation_zones": 5,
+        "convergence": "SUCCESSFUL"
+    },
+    
+    "vegetation_features": {
+        "agricultural_crops": {
+            "cells": 32,
+            "max_et_rate": "8.0 mm/day",
+            "extinction_depth": "3.0 m",
+            "description": "High ET irrigated crops with deep roots"
+        },
+        "riparian_forest": {
+            "cells": 48,
+            "max_et_rate": "12.0 mm/day",
+            "extinction_depth": "5.0 m",
+            "description": "Very high ET forest with very deep roots"
+        },
+        "grassland_pasture": {
+            "cells": 44,
+            "max_et_rate": "5.0 mm/day",
+            "extinction_depth": "2.0 m",
+            "description": "Moderate ET grassland with shallow roots"
+        },
+        "wetland_vegetation": {
+            "cells": 12,
+            "max_et_rate": "6.0 mm/day",
+            "extinction_depth": "1.5 m",
+            "description": "High ET wetland plants with shallow roots"
+        },
+        "desert_shrubs": {
+            "cells": 116,
+            "max_et_rate": "2.0 mm/day",
+            "extinction_depth": "4.0 m",
+            "description": "Low ET drought-adapted plants with deep tap roots"
+        }
+    },
+    
+    "physical_processes": {
+        "et_mechanism": "Head-dependent linear rate reduction",
+        "rate_calculation": "Maximum at surface, zero at extinction depth",
+        "root_zone_effects": "Variable extinction depths by vegetation",
+        "water_availability": "Limited by water table depth",
+        "atmospheric_demand": "Maximum ET rate represents demand",
+        "plant_adaptation": "Different strategies per vegetation type"
+    },
+    
+    "convergence_behavior": {
+        "status": "CONVERGED",
+        "solver_performance": "Excellent with balanced water budget",
+        "numerical_stability": "Stable with compensating recharge",
+        "mass_balance": "Good balance between recharge and ET",
+        "et_effectiveness": "All vegetation zones actively transpiring"
+    },
+    
+    "practical_applications": [
+        "Water budget assessments",
+        "Irrigation water use analysis", 
+        "Groundwater-dependent ecosystems",
+        "Wetland hydrology studies",
+        "Agricultural water management",
+        "Climate change impact assessment",
+        "Water rights quantification",
+        "Riparian zone management",
+        "Vegetation water requirements",
+        "Ecosystem service valuation"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Linear rate reduction with depth",
+        "No root distribution effects",
+        "Steady-state ET rates",
+        "No plant stress thresholds",
+        "No seasonal phenology",
+        "Simplified atmospheric demand"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "14x18x1 multi-vegetation domain",
+        "2_model_setup": "LPF unconfined shallow aquifer",
+        "3_initial_conditions": "Shallow water table (54-58m)",
+        "4_boundary_conditions": "CHD boundaries + multi-zone EVT + balancing RCH",
+        "5_solver": "PCG with standard criteria",
+        "6_visualization": "ET patterns and water table response",
+        "7_post_processing": "ET budget and vegetation analysis"
+    },
+    
+    "files_generated": [
+        "evt_demo.nam",
+        "evt_demo.dis",
+        "evt_demo.bas",
+        "evt_demo.lpf",
+        "evt_demo.evt",
+        "evt_demo.rch",
+        "evt_demo.pcg",
+        "evt_demo.oc",
+        "evt_demo.list",
+        "evt_demo.hds",
+        "evt_demo.cbc"
+    ],
+    
+    "educational_value": "Very High - Demonstrates critical water loss component essential for agricultural modeling, ecosystem studies, and complete water budget analysis",
+    
+    "convergence_test": true,
+    "convergence_result": "CONVERGED"
+}

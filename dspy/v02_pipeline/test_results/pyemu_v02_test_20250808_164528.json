@@ -1,0 +1,26 @@
+{
+  "summary": {
+    "repository": "pyemu",
+    "total_workflows": 13,
+    "total_questions": 0,
+    "baseline": {
+      "rank_1_accuracy": 0,
+      "mean_rank": 0,
+      "median_rank": 0,
+      "top_3_accuracy": 0
+    },
+    "v02": {
+      "rank_1_accuracy": 0,
+      "mean_rank": 0,
+      "median_rank": 0,
+      "top_3_accuracy": 0
+    },
+    "improvement": {
+      "rank_1_accuracy_gain": 0,
+      "mean_rank_improvement": 0,
+      "improved_queries": 0,
+      "degraded_queries": 0
+    }
+  },
+  "detailed_results": []
+}
