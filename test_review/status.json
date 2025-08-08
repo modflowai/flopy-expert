@@ -1,0 +1,167 @@
+{
+  "current_index": 36,
+  "total_tests": 74,
+  "completed": [
+    "test_binaryfile_reverse.py",
+    "test_binaryfile.py",
+    "test_binarygrid_util.py",
+    "test_cbc_full3D.py",
+    "test_compare.py",
+    "test_cellbudgetfile.py",
+    "test_copy.py",
+    "test_example_notebooks.py",
+    "test_export.py",
+    "test_flopy_io.py",
+    "test_flopy_module.py",
+    "test_formattedfile.py",
+    "test_gage.py",
+    "test_geospatial_util.py",
+    "test_get_modflow.py",
+    "test_grid.py",
+    "test_grid_cases.py",
+    "test_gridgen.py",
+    "test_gridintersect.py",
+    "test_datautil.py",
+    "test_gridutil.py",
+    "test_headufile.py",
+    "test_hydmodfile.py",
+    "test_dis_cases.py",
+    "test_lake_connections.py",
+    "test_lgr.py",
+    "test_lgrutil.py",
+    "test_listbudget.py",
+    "test_mbase.py",
+    "test_mf6.py",
+    "test_modflowdis.py",
+    "test_plotutil.py",
+    "test_mfnwt.py",
+    "test_mfreadnam.py",
+    "test_mfsimlist.py",
+    "test_mnw.py"
+  ],
+  "skipped": [],
+  "models_created": {
+    "test_binaryfile_reverse.py": [
+      "dis",
+      "disv"
+    ],
+    "test_binaryfile.py": [
+      "basic"
+    ],
+    "test_binarygrid_util.py": [
+      "basic"
+    ],
+    "test_cbc_full3D.py": [
+      "basic"
+    ],
+    "test_compare.py": [
+      "basic"
+    ],
+    "test_cellbudgetfile.py": [
+      "basic"
+    ],
+    "test_copy.py": [
+      "basic"
+    ],
+    "test_dis_cases.py": [
+      "basic",
+      "basic"
+    ],
+    "test_example_notebooks.py": [
+      "basic"
+    ],
+    "test_export.py": [
+      "basic",
+      "basic",
+      "basic"
+    ],
+    "test_flopy_io.py": [
+      "basic"
+    ],
+    "test_flopy_module.py": [
+      "basic",
+      "basic"
+    ],
+    "test_formattedfile.py": [
+      "basic"
+    ],
+    "test_gage.py": [
+      "basic"
+    ],
+    "test_geospatial_util.py": [
+      "basic"
+    ],
+    "test_get_modflow.py": [
+      "basic"
+    ],
+    "test_grid.py": [
+      "basic",
+      "basic",
+      "basic"
+    ],
+    "test_grid_cases.py": [
+      "basic",
+      "basic",
+      "basic"
+    ],
+    "test_gridgen.py": [
+      "basic",
+      "basic"
+    ],
+    "test_gridintersect.py": [
+      "basic"
+    ],
+    "test_datautil.py": [
+      "basic"
+    ],
+    "test_gridutil.py": [
+      "basic",
+      "basic",
+      "basic"
+    ],
+    "test_headufile.py": [
+      "basic"
+    ],
+    "test_hydmodfile.py": [
+      "basic"
+    ],
+    "test_lake_connections.py": [
+      "basic"
+    ],
+    "test_lgr.py": [
+      "basic"
+    ],
+    "test_lgrutil.py": [
+      "basic"
+    ],
+    "test_listbudget.py": [
+      "basic"
+    ],
+    "test_mbase.py": [
+      "basic"
+    ],
+    "test_mf6.py": [
+      "basic"
+    ],
+    "test_modflowdis.py": [
+      "basic"
+    ],
+    "test_plotutil.py": [
+      "basic"
+    ],
+    "test_mfnwt.py": [
+      "basic"
+    ],
+    "test_mfreadnam.py": [
+      "basic"
+    ],
+    "test_mfsimlist.py": [
+      "basic"
+    ],
+    "test_mnw.py": [
+      "mnw1",
+      "mnw2"
+    ]
+  },
+  "progress_percentage": 48.65
+}

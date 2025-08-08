@@ -1,0 +1,54 @@
+{
+  "source_test": "test_grid_cases",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Grid Cases - MF6 Demonstration",
+  "description": "Creates a vertex (DISV) grid with irregular cell geometry",
+  "phase": null,
+  "phase_name": null,
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Structured discretization"
+    },
+    {
+      "package": "DISV",
+      "file": "flopy.mf6.ModflowGwfdisv",
+      "phase": 1,
+      "purpose": "Vertex discretization"
+    },
+    {
+      "package": "DISU",
+      "file": "flopy.mf6.ModflowGwfdisu",
+      "phase": 1,
+      "purpose": "Unstructured discretization"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "DISV": "Vertex-based discretization for flexible grids",
+    "DISU": "Unstructured discretization for complex geometries"
+  },
+  "grid_type": "unstructured",
+  "grid_details": {
+    "nlay": "variable",
+    "nodes": "unstructured connectivity",
+    "cell_type": "mixed prisms/tetrahedra",
+    "top": 100.0,
+    "botm": "variable"
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Unstructured grid discretization",
+    "Grid manipulation and analysis"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Advanced grid manipulation techniques"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 10 seconds"
+}

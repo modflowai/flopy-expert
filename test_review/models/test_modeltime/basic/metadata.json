@@ -1,0 +1,135 @@
+{
+  "source_test": "test_modeltime",
+  "model_version": "both",
+  "variant": "basic",
+  "title": "Test ModelTime - MF2005/MF6 Demonstration",
+  "description": "Demonstrates FloPy's ModelTime class for handling temporal aspects of groundwater simulations including datetime parsing, time unit conversion, and transient boundary conditions",
+  "phase": 1,
+  "phase_name": "Grid Generation",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "MF2005 discretization with 12 monthly stress periods"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "MF2005 basic package with initial heads"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "MF2005 layer property flow with storage parameters"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.modflow.ModflowChd",
+      "phase": 4,
+      "purpose": "MF2005 seasonal constant head boundaries"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "MF2005 seasonal pumping wells"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "MF2005 output control for all stress periods"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "MF2005 preconditioned conjugate gradient solver"
+    },
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "MF6 time discretization with calendar dates"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "MF6 iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "MF6 structured discretization"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "MF6 initial conditions"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "MF6 node property flow"
+    },
+    {
+      "package": "STO",
+      "file": "flopy.mf6.ModflowGwfsto",
+      "phase": 2,
+      "purpose": "MF6 storage package for transient simulation"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "CHD": "Constant head boundary conditions",
+    "WEL": "Well package for pumping stress",
+    "OC": "Output control for heads and budgets",
+    "PCG": "Preconditioned conjugate gradient solver",
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "IC": "Initial hydraulic head conditions",
+    "STO": "Storage package for transient simulation"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 50.0,
+    "botm": [
+      0.0
+    ]
+  },
+  "key_features": [
+    "ModelTime class demonstration for temporal handling",
+    "DateTime parsing and conversion utilities",
+    "Time unit standardization and parsing",
+    "Transient simulation with 12 monthly stress periods",
+    "Seasonal boundary condition variations",
+    "Time intersection and calculation methods",
+    "Both MF2005 and MF6 time handling approaches"
+  ],
+  "learning_objectives": [
+    "Understanding ModelTime class functionality",
+    "Mastering datetime parsing and conversion",
+    "Creating transient MODFLOW simulations",
+    "Implementing time-varying boundary conditions",
+    "Using time intersection methods for analysis",
+    "Managing stress periods and timesteps",
+    "Handling calendar dates in groundwater models"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds"
+}

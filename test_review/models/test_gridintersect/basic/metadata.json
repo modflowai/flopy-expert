@@ -1,0 +1,99 @@
+{
+  "source_test": "test_gridintersect",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Gridintersect - MF6 Demonstration",
+  "description": "Demonstrates intersection of geometric shapes with an unstructured vertex (triangular) grid",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Spatial discretization"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries from shapefile"
+    },
+    {
+      "package": "RIV",
+      "file": "flopy.mf6.ModflowGwfriv",
+      "phase": 4,
+      "purpose": "River boundaries from shapefile"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "IC": "Initial hydraulic head conditions",
+    "CHD": "Constant head boundary conditions",
+    "RIV": "River package for surface water interaction",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Structured grid discretization",
+    "Grid manipulation and analysis",
+    "Geometric intersection operations"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing",
+    "Advanced grid manipulation techniques"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 1 minute"
+}

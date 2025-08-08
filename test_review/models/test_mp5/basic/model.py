@@ -35,7 +35,7 @@ def run_model():
     print("=== MODPATH-5 Particle Tracking Demonstration ===\n")
     
     # Create model workspace
-    model_ws = "mp5_output"
+    model_ws = "./model_output"
     
     # 1. MODPATH-5 Overview
     print("1. MODPATH-5 Overview")
@@ -62,7 +62,7 @@ def run_model():
     botm = [0.0]
     
     # Create model
-    mf = Modflow(model_name, model_ws=model_ws, exe_name=None)
+    mf = Modflow(model_name, model_ws=model_ws, exe_name="/home/danilopezmella/flopy_expert/bin/mf2005")
     
     # Discretization
     dis = ModflowDis(
@@ -323,6 +323,18 @@ def run_model():
     print("  MODPATH version comparison:")
     for version, description, features in version_comparison:
         print(f"    • {version}: {description} - {features}")
+    
+    # Write and run the model
+    print(f"\n14. Writing and Running MODFLOW Model")
+    print("-" * 40)
+    mf.write_input()
+    print("  ✓ Model files written")
+    
+    success, buff = mf.run_model(silent=True)
+    if success:
+        print("  ✓ Model ran successfully")
+    else:
+        print("  ⚠ Model failed to run")
     
     print(f"\n✓ MODPATH-5 Particle Tracking Demonstration Completed!")
     print(f"  - Explained MODPATH-5 file format and capabilities")

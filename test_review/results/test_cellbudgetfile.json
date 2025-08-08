@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "test_analysis": {
+      "true_purpose": "Testing the low-level _build_index() method of CellBudgetFile class for reading both classic and compact budget file formats",
+      "is_useful_example": true,
+      "example_demonstrates": "Reading and parsing MODFLOW budget files in different formats"
+    },
+    "documentation": {
+      "purpose": "Demonstrates how to read and parse MODFLOW cell budget files (.cbc) in both classic and compact formats. Shows how to access budget file metadata including dimensions, time steps, and record structure.",
+      "key_concepts": [
+        "CellBudgetFile class usage",
+        "Classic vs compact budget file formats",
+        "Budget file header parsing",
+        "Record array structure",
+        "Budget file indexing"
+      ],
+      "questions_answered": [
+        "How do I read a MODFLOW budget file?",
+        "What's the difference between classic and compact budget formats?",
+        "How can I access budget file metadata like dimensions and time steps?",
+        "How do I parse the record structure of a budget file?",
+        "What information is stored in the budget file headers?"
+      ],
+      "common_use_cases": [
+        "Post-processing MODFLOW simulation results",
+        "Analyzing water budget components",
+        "Extracting flow rates between model cells",
+        "Quality checking model output files",
+        "Building custom budget analysis tools"
+      ]
+    },
+    "classification": {
+      "primary_phase": 7,
+      "secondary_phases": [],
+      "modflow_version": "multiple",
+      "packages_used": [
+        "flopy.utils.binaryfile.CellBudgetFile"
+      ]
+    },
+    "search_metadata": {
+      "keywords": [
+        "cellbudgetfile",
+        "budget",
+        "cbc",
+        "binary file",
+        "compact budget",
+        "classic budget",
+        "post-processing",
+        "output",
+        "record array",
+        "budget analysis"
+      ],
+      "embedding_string": "This example demonstrates reading and parsing MODFLOW cell budget files using the CellBudgetFile class. It shows how to work with both classic and compact budget file formats, accessing important metadata like model dimensions, time steps, and record structures. The example is essential for post-processing MODFLOW results, analyzing water budgets, and extracting flow rates between cells. It answers key questions about reading budget files, understanding format differences, and accessing budget file headers and metadata. This is particularly useful for building custom analysis tools and quality checking model outputs."
+    }
+  },
+  "models": [
+    {
+      "name": "budget_file_reader",
+      "description": "Example of reading and analyzing MODFLOW budget files",
+      "code": "import os\nimport numpy as np\nimport flopy\nfrom flopy.utils.binaryfile import CellBudgetFile\n\n# Create a simple MODFLOW 6 model that will generate budget files\nname = 'budget_example'\nws = './temp'\nsim_ws = os.path.join(ws, 'sim')\n\nif not os.path.exists(sim_ws):\n    os.makedirs(sim_ws)\n\n# Phase 1: Discretization\nprint('Phase 1: Setting up model discretization')\nnlay, nrow, ncol = 3, 10, 10\ndelr = delc = 100.0\ntop = 100.0\nbotm = [80.0, 60.0, 40.0]\n\n# Create simulation\nsim = flopy.mf6.MFSimulation(\n    sim_name=name,\n    sim_ws=sim_ws,\n    exe_name='mf6'\n)\n\n# Create temporal discretization\nperlen = [1.0, 100.0]\nnper = len(perlen)\ntdis = flopy.mf6.ModflowTdis(\n    sim,\n    nper=nper,\n    perioddata=[(p, 1, 1.0) for p in perlen]\n)\n\n# Create groundwater flow model\ngwf = flopy.mf6.ModflowGwf(\n    sim,\n    modelname=name,\n    save_flows=True,\n    newtonoptions='NEWTON'\n)\n\n# Create iterative model solution\nims = flopy.mf6.ModflowIms(\n    sim,\n    complexity='SIMPLE',\n    outer_dvclose=1.0e-5,\n    inner_dvclose=1.0e-6\n)\nsim.register_ims_package(ims, [gwf.name])\n\n# Discretization package\ndis = flopy.mf6.ModflowGwfdis(\n    gwf,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delr=delr,\n    delc=delc,\n    top=top,\n    botm=botm\n)\n\n# Phase 2: Flow Properties\nprint('Phase 2: Setting flow properties')\nicelltype = 1  # Convertible layers\nk = [10.0, 5.0, 1.0]  # Hydraulic conductivity for each layer\n\nnpf = flopy.mf6.ModflowGwfnpf(\n    gwf,\n    save_flows=True,\n    icelltype=icelltype,\n    k=k\n)\n\n# Storage\nsto = flopy.mf6.ModflowGwfsto(\n    gwf,\n    save_flows=True,\n    iconvert=icelltype,\n    ss=1e-5,\n    sy=0.2\n)\n\n# Phase 3: Initial Conditions\nprint('Phase 3: Setting initial conditions')\nstrt = 95.0\nic = flopy.mf6.ModflowGwfic(gwf, strt=strt)\n\n# Phase 4: Boundary Conditions\nprint('Phase 4: Adding boundary conditions')\n# Add constant head boundaries\nchd_spd = []\nfor k in range(nlay):\n    for i in range(nrow):\n        # Left boundary\n        chd_spd.append([(k, i, 0), 95.0])\n        # Right boundary  \n        chd_spd.append([(k, i, ncol-1), 90.0])\n\nchd = flopy.mf6.ModflowGwfchd(\n    gwf,\n    stress_period_data=chd_spd,\n    save_flows=True\n)\n\n# Add wells\nwel_spd = [\n    [(1, 4, 4), -100.0],  # Layer 2, row 5, col 5\n    [(2, 7, 7), -50.0],   # Layer 3, row 8, col 8\n]\nwel = flopy.mf6.ModflowGwfwel(\n    gwf,\n    stress_period_data=wel_spd,\n    save_flows=True\n)\n\n# Phase 5: Solver Configuration\nprint('Phase 5: Configuring output')\n# Output control\nbudget_file = f'{name}.cbc'\nhead_file = f'{name}.hds'\noc = flopy.mf6.ModflowGwfoc(\n    gwf,\n    budget_filerecord=budget_file,\n    head_filerecord=head_file,\n    saverecord=[('HEAD', 'ALL'), ('BUDGET', 'ALL')]\n)\n\n# Write and run the model\nprint('\\nWriting and running model...')\nsim.write_simulation()\nsuccess, buff = sim.run_simulation(silent=True)\n\nif not success:\n    print('Model failed to run')\n    print(buff)\nelse:\n    print('Model ran successfully')\n    \n    # Phase 7: Post-processing - Read and analyze budget file\n    print('\\nPhase 7: Reading and analyzing budget file')\n    \n    budget_path = os.path.join(sim_ws, budget_file)\n    \n    if os.path.exists(budget_path):\n        # Open and read the budget file\n        with CellBudgetFile(budget_path) as cbc:\n            # Display budget file properties\n            print(f'\\nBudget File Properties:')\n            print(f'  Dimensions: {cbc.nlay} layers, {cbc.nrow} rows, {cbc.ncol} columns')\n            print(f'  Number of stress periods: {cbc.nper}')\n            print(f'  Total file size: {cbc.totalbytes:,} bytes')\n            print(f'  Number of records: {len(cbc.recordarray)}')\n            \n            # Display available budget terms\n            print(f'\\nAvailable budget terms:')\n            unique_texts = list(set(cbc.textlist))\n            for text in unique_texts:\n                print(f'  - {text.decode().strip()}')\n            \n            # Display time steps\n            print(f'\\nTime steps (kstp, kper):')\n            for kstp, kper in cbc.kstpkper[:5]:  # Show first 5\n                print(f'  Step {kstp}, Period {kper}')\n            if len(cbc.kstpkper) > 5:\n                print(f'  ... and {len(cbc.kstpkper) - 5} more')\n            \n            # Get data for a specific budget term\n            print(f'\\nReading FLOW-JA-FACE data for last time step...')\n            try:\n                flow_ja_face = cbc.get_data(text='FLOW-JA-FACE')[-1]\n                if isinstance(flow_ja_face, list):\n                    print(f'  Number of flow connections: {len(flow_ja_face[0])}')\n                    # Show first few connections\n                    for i, (node1, node2, q) in enumerate(flow_ja_face[0][:5]):\n                        print(f'    Connection {i+1}: Node {node1} -> Node {node2}, Flow = {q:.4f}')\n                else:\n                    print(f'  Flow array shape: {flow_ja_face.shape}')\n            except:\n                print('  FLOW-JA-FACE data not available')\n            \n            # Get data for CHD package\n            print(f'\\nReading CHD package flows...')\n            try:\n                chd_flows = cbc.get_data(text='CHD')[-1]\n                if isinstance(chd_flows, list):\n                    total_chd_flow = sum([q for _, _, q in chd_flows[0]])\n                    print(f'  Total CHD flow: {total_chd_flow:.4f}')\n                else:\n                    print(f'  CHD flow array shape: {chd_flows.shape}')\n                    print(f'  Total CHD flow: {np.sum(chd_flows):.4f}')\n            except:\n                print('  CHD data not available')\n            \n            # Get data for WEL package\n            print(f'\\nReading WEL package flows...')\n            try:\n                wel_flows = cbc.get_data(text='WEL')[-1]\n                if isinstance(wel_flows, list):\n                    total_wel_flow = sum([q for _, _, q in wel_flows[0]])\n                    print(f'  Total WEL flow: {total_wel_flow:.4f}')\n                else:\n                    print(f'  WEL flow array shape: {wel_flows.shape}')\n                    print(f'  Total WEL flow: {np.sum(wel_flows):.4f}')\n            except:\n                print('  WEL data not available')\n            \n            # Display headers dataframe if available\n            print(f'\\nBudget file headers summary:')\n            if hasattr(cbc, 'headers'):\n                print(f'  Number of header records: {len(cbc.headers)}')\n                print(f'  Header columns: {list(cbc.headers.columns)}')\n            \n            # Check if compact or classic format\n            print(f'\\nFile format detection:')\n            if any(i > 0 for i in cbc.imethlist):\n                print('  Format: COMPACT BUDGET')\n            else:\n                print('  Format: CLASSIC')\n    else:\n        print(f'Budget file not found: {budget_path}')\n\nprint('\\nExample complete!')"
+    }
+  ]
+}

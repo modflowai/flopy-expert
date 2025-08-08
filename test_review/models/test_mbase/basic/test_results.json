@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["mbase_demo.lst", "mbase_demo.hds", "mbase_demo.cbc", "mfsim.lst"],
+  "note": "Demonstrates FloPy mbase utilities including resolve_exe() and run_model() functions - shows executable path resolution, model execution, and workspace management capabilities"
+}

@@ -1,0 +1,117 @@
+{
+  "source_test": "test_mf6",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Mf6 - MF6 Demonstration",
+  "description": "Comprehensive MODFLOW 6 core functionality demonstration with multi-layer groundwater flow, time-dependent simulation, and advanced boundary conditions",
+  "phase": 2,
+  "phase_name": "Model Setup",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Discretization"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow"
+    },
+    {
+      "package": "STO",
+      "file": "flopy.mf6.ModflowGwfsto",
+      "phase": 2,
+      "purpose": "Storage package"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.mf6.ModflowGwfwel",
+      "phase": 4,
+      "purpose": "Well package"
+    },
+    {
+      "package": "RCH",
+      "file": "flopy.mf6.ModflowGwfrch",
+      "phase": 4,
+      "purpose": "Recharge package"
+    },
+    {
+      "package": "RIV",
+      "file": "flopy.mf6.ModflowGwfriv",
+      "phase": 4,
+      "purpose": "River package"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "STO": "Storage package",
+    "IC": "Initial hydraulic head conditions",
+    "CHD": "Constant head boundary conditions",
+    "WEL": "Well package for pumping/injection",
+    "RCH": "Recharge package for groundwater recharge",
+    "RIV": "River package for surface water interaction",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 30 seconds"
+}

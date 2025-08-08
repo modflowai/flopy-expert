@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "purpose": "Tests basic FloPy package instantiation and model construction for MODFLOW-2005 and MODFLOW-USG, verifying package imports, class creation, and file I/O operations work correctly",
+    "primary_phase": 1,
+    "modflow_version": "mf2005",
+    "packages_used": [
+      "Modflow",
+      "ModflowDis",
+      "ModflowBas",
+      "ModflowLpf",
+      "ModflowWel",
+      "ModflowOc",
+      "ModflowPcg",
+      "MfUsg",
+      "MfUsgDisU",
+      "MfUsgLpf",
+      "MfUsgWel",
+      "MfUsgSms",
+      "ModflowGhb"
+    ],
+    "keywords": [
+      "modflow",
+      "mfusg",
+      "unstructured",
+      "package creation",
+      "model setup",
+      "basic model",
+      "dis",
+      "disu",
+      "lpf",
+      "wel"
+    ]
+  },
+  "models": [
+    {
+      "name": "basic_modflow_model",
+      "description": "Basic MODFLOW-2005 model with standard packages (DIS, BAS, LPF, WEL, OC, PCG)",
+      "code": "import numpy as np\nimport flopy\nimport os\n\n# Create workspace\nws = './basic_modflow_model'\nif not os.path.exists(ws):\n    os.makedirs(ws)\n\n# Phase 1: Create model and discretization\nprint('Phase 1: Model Setup and Discretization')\nmf = flopy.modflow.Modflow(modelname='basic_model', model_ws=ws)\n\n# Define discretization\nnlay, nrow, ncol = 1, 10, 10\ndelr = delc = 100.0  # 100m cells\ntop = 10.0\nbotm = 0.0\n\ndis = flopy.modflow.ModflowDis(\n    mf,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delr=delr,\n    delc=delc,\n    top=top,\n    botm=botm,\n    nper=1,\n    perlen=1.0,\n    nstp=1,\n    steady=True\n)\n\n# Phase 2: Flow properties\nprint('Phase 2: Flow Properties')\nbas = flopy.modflow.ModflowBas(mf, ibound=1, strt=10.0)\nlpf = flopy.modflow.ModflowLpf(mf, hk=10.0, vka=10.0)\n\n# Phase 4: Boundary conditions\nprint('Phase 4: Boundary Conditions')\n# Add a well in the center\nwel_data = {0: [[0, 4, 4, -100.0]]}  # layer, row, col, flux\nwel = flopy.modflow.ModflowWel(mf, stress_period_data=wel_data)\n\n# Phase 5: Solver and output control\nprint('Phase 5: Solver Configuration')\noc = flopy.modflow.ModflowOc(mf)\npcg = flopy.modflow.ModflowPcg(mf, hclose=1e-6, rclose=1e-6)\n\n# Write and run model\nprint('\\nWriting model files...')\nmf.write_input()\n\n# Phase 7: Verification\nprint('\\nPhase 7: Model Verification')\nprint(f'Model name: {mf.name}')\nprint(f'Model has DIS package: {mf.has_package(\"DIS\")}')\nprint(f'Model has BAS package: {mf.has_package(\"BAS\")}')\nprint(f'Model has LPF package: {mf.has_package(\"LPF\")}')\nprint(f'Model has WEL package: {mf.has_package(\"WEL\")}')\nprint(f'Model has OC package: {mf.has_package(\"OC\")}')\nprint(f'Model has PCG package: {mf.has_package(\"PCG\")}')\nprint(f'Number of layers: {nlay}')\nprint(f'Grid dimensions: {nrow} rows x {ncol} columns')\nprint(f'Cell size: {delr} x {delc} m')\nprint('\\nModel successfully created!')"
+    },
+    {
+      "name": "unstructured_mfusg_model",
+      "description": "MODFLOW-USG unstructured grid model with DISU discretization and SMS solver",
+      "code": "import numpy as np\nimport flopy\nimport os\n\n# Create workspace\nws = './unstructured_mfusg_model'\nif not os.path.exists(ws):\n    os.makedirs(ws)\n\n# Phase 1: Create unstructured model and discretization\nprint('Phase 1: Unstructured Model Setup and DISU Discretization')\nmf = flopy.mfusg.MfUsg(modelname='usg_model', structured=False, model_ws=ws)\n\n# Simple 5-node unstructured grid\nnodes = 5\niac = [4, 3, 4, 3, 4]  # number of connections per node\njag = sum(iac)  # total number of connections\n\n# Connection array (0-based)\nja = np.array([\n    0, 1, 2, 3,     # node 0 connections\n    0, 1, 4,        # node 1 connections  \n    0, 2, 3, 4,     # node 2 connections\n    0, 2, 3,        # node 3 connections\n    1, 2, 3, 4      # node 4 connections\n])\n\n# Connection lengths and flow areas\ncl12 = np.ones(jag) * 50.0  # 50m between cell centers\nfahl = np.ones(jag) * 100.0  # 100m2 flow area\n\n# Cell properties\ntop = np.ones(nodes) * 10.0\nbot = np.zeros(nodes)\narea = np.ones(nodes) * 2500.0  # 50m x 50m cells\n\ndisu = flopy.mfusg.MfUsgDisU(\n    mf,\n    nodes=nodes,\n    nlay=1,\n    njag=jag,\n    ivsd=0,\n    nper=1,\n    iac=iac,\n    ja=ja,\n    cl12=cl12,\n    fahl=fahl,\n    top=top,\n    bot=bot,\n    area=area,\n    perlen=1.0,\n    nstp=1,\n    steady=True\n)\n\n# Phase 2: Flow properties\nprint('Phase 2: Flow Properties')\nbas = flopy.modflow.ModflowBas(mf, ibound=1, strt=10.0)\nlpf = flopy.mfusg.MfUsgLpf(mf, hk=10.0)\n\n# Phase 4: Boundary conditions\nprint('Phase 4: Boundary Conditions')\n# Add well at node 2 (center node)\nwel_data = {0: [[2, -100.0]]}  # node, flux\nwel = flopy.mfusg.MfUsgWel(mf, stress_period_data=wel_data)\n\n# Add general head boundary at node 0\nghb_data = {0: [[0, 5.0, 1000.0]]}  # node, head, conductance\nghb = flopy.modflow.ModflowGhb(mf, stress_period_data=ghb_data)\n\n# Phase 5: Solver configuration\nprint('Phase 5: SMS Solver Configuration')\noc = flopy.modflow.ModflowOc(mf)\nsms = flopy.mfusg.MfUsgSms(mf, hclose=1e-6, hiclose=1e-6, mxiter=100)\n\n# Write model files\nprint('\\nWriting model files...')\nmf.write_input()\n\n# Phase 7: Verification and file I/O test\nprint('\\nPhase 7: Model Verification and File I/O')\nprint(f'Model name: {mf.name}')\nprint(f'Model type: MODFLOW-USG (unstructured)')\nprint(f'Number of nodes: {nodes}')\nprint(f'Total connections: {jag}')\nprint(f'Model has DISU package: {mf.has_package(\"DISU\")}')\nprint(f'Model has BAS package: {mf.has_package(\"BAS\")}')\nprint(f'Model has LPF package: {mf.has_package(\"LPF\")}')\nprint(f'Model has WEL package: {mf.has_package(\"WEL\")}')\nprint(f'Model has GHB package: {mf.has_package(\"GHB\")}')\nprint(f'Model hasSMS package: {mf.has_package(\"SMS\")}')\n\n# Test file I/O - reload packages\nprint('\\nTesting file I/O...')\nwel_path = os.path.join(ws, f'{mf.name}.wel')\nif os.path.exists(wel_path):\n    wel2 = flopy.mfusg.MfUsgWel.load(wel_path, mf)\n    print(f'WEL file successfully reloaded')\n    print(f'Original well data: {wel.stress_period_data[0]}')\n    print(f'Reloaded well data: {wel2.stress_period_data[0]}')\n\nghb_path = os.path.join(ws, f'{mf.name}.ghb')\nif os.path.exists(ghb_path):\n    ghb2 = flopy.modflow.ModflowGhb.load(ghb_path, mf)\n    print(f'GHB file successfully reloaded')\n\nprint('\\nUnstructured model successfully created!')"
+    }
+  ]
+}

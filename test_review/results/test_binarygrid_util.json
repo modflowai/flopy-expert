@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "test_analysis": {
+      "true_purpose": "Tests reading and parsing MODFLOW 6 binary grid files (.grb) for structured (DIS), vertex (DISV), and unstructured (DISU) grids",
+      "is_useful_example": true,
+      "example_demonstrates": "Reading binary grid files and creating modelgrid objects from .grb files"
+    },
+    "documentation": {
+      "purpose": "Demonstrates how to read MODFLOW 6 binary grid files (.grb) and create appropriate grid objects (StructuredGrid, VertexGrid, UnstructuredGrid). Shows how to extract grid connectivity, vertices, and plot grid structures.",
+      "key_concepts": [
+        "Binary grid file reading with MfGrdFile",
+        "Creating modelgrid objects from .grb files",
+        "Structured grid (DIS) handling",
+        "Vertex grid (DISV) handling",
+        "Unstructured grid (DISU) handling",
+        "Grid connectivity arrays (ia, ja)",
+        "Grid vertices and cell centers",
+        "Grid plotting and visualization"
+      ],
+      "questions_answered": [
+        "How do I read a MODFLOW 6 binary grid file?",
+        "How can I create a modelgrid object from a .grb file?",
+        "How do I access grid connectivity information?",
+        "How can I plot different grid types?",
+        "How do I get grid extents and vertices?"
+      ],
+      "common_use_cases": [
+        "Post-processing MODFLOW 6 models with complex grids",
+        "Visualizing model discretization",
+        "Accessing grid connectivity for custom analysis",
+        "Working with unstructured and vertex grids",
+        "Grid validation and quality checking"
+      ]
+    },
+    "classification": {
+      "primary_phase": 1,
+      "phase_name": "Discretization",
+      "secondary_phases": [7],
+      "modflow_version": "mf6",
+      "packages_used": [
+        "flopy.mf6.utils.MfGrdFile",
+        "flopy.discretization.StructuredGrid",
+        "flopy.discretization.VertexGrid",
+        "flopy.discretization.UnstructuredGrid"
+      ]
+    },
+    "search_metadata": {
+      "keywords": [
+        "binary grid",
+        "grb file",
+        "MfGrdFile",
+        "StructuredGrid",
+        "VertexGrid",
+        "UnstructuredGrid",
+        "grid connectivity",
+        "ia ja arrays",
+        "modelgrid",
+        "discretization"
+      ],
+      "embedding_string": "This example demonstrates reading MODFLOW 6 binary grid files (.grb) and creating appropriate grid objects for different discretization types. It shows how to use MfGrdFile to read binary grid files, create StructuredGrid, VertexGrid, or UnstructuredGrid objects, access grid connectivity arrays (ia, ja), extract vertices and cell centers, and visualize grid structures. The example covers all three MODFLOW 6 discretization types (DIS, DISV, DISU) and is essential for post-processing models with complex grids or performing custom grid analysis."
+    }
+  },
+  "models": [
+    {
+      "variant": "basic",
+      "description": "Demonstrates creating and working with different grid types and exporting to binary grid files",
+      "code": "#!/usr/bin/env python3\n\"\"\"\nStandalone FloPy model demonstrating binary grid file operations\nExtracted from: test_binarygrid_util.py\n\nDemonstrates Phase 1: Discretization with focus on binary grid files\n\"\"\"\n\nimport flopy\nimport numpy as np\nfrom pathlib import Path\nimport matplotlib.pyplot as plt\nimport sys\nsys.path.append('/home/danilopezmella/flopy_expert/test_review')\nfrom mf6_config import get_mf6_exe\n\ndef create_structured_model(ws=\"./model_output/structured\", name=\"grid_dis_demo\"):\n    \"\"\"\n    Create a model with structured grid and demonstrate .grb file operations\n    \"\"\"\n    \n    Path(ws).mkdir(parents=True, exist_ok=True)\n    \n    print(\"\\n\" + \"=\"*60)\n    print(\"STRUCTURED GRID (DIS) DEMONSTRATION\")\n    print(\"=\"*60)\n    \n    # ========================================\n    # PHASE 1: DISCRETIZATION\n    # ========================================\n    print(\"\\nPhase 1: Creating structured discretization...\")\n    \n    # Create simulation\n    sim = flopy.mf6.MFSimulation(\n        sim_name=name,\n        sim_ws=ws,\n        exe_name=get_mf6_exe()\n    )\n    \n    # Time discretization\n    tdis = flopy.mf6.ModflowTdis(sim, nper=1, perioddata=[(1.0, 1, 1.0)])\n    \n    # Solver\n    ims = flopy.mf6.ModflowIms(sim, print_option=\"SUMMARY\")\n    \n    # Create groundwater flow model\n    gwf = flopy.mf6.ModflowGwf(sim, modelname=name, save_flows=True)\n    \n    # Structured discretization with varying layer thickness\n    dis = flopy.mf6.ModflowGwfdis(\n        gwf,\n        nlay=3,\n        nrow=20,\n        ncol=25,\n        delr=100.0,  # 100m cells\n        delc=100.0,\n        top=50.0,\n        botm=[20.0, 0.0, -30.0],\n        idomain=1  # All cells active\n    )\n    \n    # Simple flow packages for completeness\n    npf = flopy.mf6.ModflowGwfnpf(gwf, save_specific_discharge=True, icelltype=0, k=10.0)\n    ic = flopy.mf6.ModflowGwfic(gwf, strt=30.0)\n    \n    # Boundary conditions\n    chd = flopy.mf6.ModflowGwfchd(\n        gwf,\n        stress_period_data=[\n            [(0, 0, 0), 35.0],\n            [(2, 19, 24), 25.0]\n        ]\n    )\n    \n    # Output control\n    oc = flopy.mf6.ModflowGwfoc(\n        gwf,\n        head_filerecord=f\"{name}.hds\",\n        budget_filerecord=f\"{name}.cbb\",\n        saverecord=[(\"HEAD\", \"ALL\"), (\"BUDGET\", \"ALL\")]\n    )\n    \n    return sim, gwf\n\ndef create_vertex_model(ws=\"./model_output/vertex\", name=\"grid_disv_demo\"):\n    \"\"\"\n    Create a model with vertex grid and demonstrate .grb file operations\n    \"\"\"\n    \n    Path(ws).mkdir(parents=True, exist_ok=True)\n    \n    print(\"\\n\" + \"=\"*60)\n    print(\"VERTEX GRID (DISV) DEMONSTRATION\")\n    print(\"=\"*60)\n    \n    # ========================================\n    # PHASE 1: DISCRETIZATION\n    # ========================================\n    print(\"\\nPhase 1: Creating vertex discretization...\")\n    \n    # Create simulation\n    sim = flopy.mf6.MFSimulation(\n        sim_name=name,\n        sim_ws=ws,\n        exe_name=get_mf6_exe()\n    )\n    \n    # Time discretization\n    tdis = flopy.mf6.ModflowTdis(sim, nper=1, perioddata=[(1.0, 1, 1.0)])\n    \n    # Solver\n    ims = flopy.mf6.ModflowIms(sim, print_option=\"SUMMARY\")\n    \n    # Create groundwater flow model\n    gwf = flopy.mf6.ModflowGwf(sim, modelname=name, save_flows=True)\n    \n    # Create a simple vertex grid (quadrilateral cells)\n    from flopy.utils.gridutil import get_disv_kwargs\n    \n    # Create vertex grid arguments\n    disv_kwargs = get_disv_kwargs(\n        nlay=2,\n        nrow=10,\n        ncol=10,\n        delr=100.0,\n        delc=100.0,\n        top=10.0,\n        botm=[-10.0, -30.0]\n    )\n    \n    # Vertex discretization\n    disv = flopy.mf6.ModflowGwfdisv(gwf, **disv_kwargs)\n    \n    # Simple flow packages\n    npf = flopy.mf6.ModflowGwfnpf(gwf, save_specific_discharge=True, icelltype=0, k=5.0)\n    ic = flopy.mf6.ModflowGwfic(gwf, strt=5.0)\n    \n    # Boundary conditions\n    chd = flopy.mf6.ModflowGwfchd(\n        gwf,\n        stress_period_data=[\n            [(0, 0), 8.0],\n            [(1, 99), 2.0]\n        ]\n    )\n    \n    # Output control\n    oc = flopy.mf6.ModflowGwfoc(\n        gwf,\n        head_filerecord=f\"{name}.hds\",\n        budget_filerecord=f\"{name}.cbb\",\n        saverecord=[(\"HEAD\", \"ALL\"), (\"BUDGET\", \"ALL\")]\n    )\n    \n    return sim, gwf\n\ndef demonstrate_grid_operations(sim, gwf, grid_type=\"structured\"):\n    \"\"\"\n    Demonstrate binary grid file operations\n    \"\"\"\n    \n    print(f\"\\n\" + \"=\"*60)\n    print(f\"BINARY GRID FILE OPERATIONS - {grid_type.upper()}\")\n    print(\"=\"*60)\n    \n    from flopy.mf6.utils import MfGrdFile\n    \n    ws = Path(sim.sim_path)\n    \n    # After running, read the binary grid file\n    grb_file = ws / f\"{gwf.name}.dis.grb\" if grid_type == \"structured\" else ws / f\"{gwf.name}.disv.grb\"\n    \n    if grb_file.exists():\n        print(f\"\\n1. Reading binary grid file: {grb_file.name}\")\n        \n        # Read with MfGrdFile\n        grb = MfGrdFile(grb_file, verbose=False)\n        \n        # Get grid properties\n        print(f\"   Nodes: {grb.nodes}\")\n        print(f\"   Model grid type: {type(grb.modelgrid).__name__}\")\n        \n        # Get connectivity arrays\n        ia = grb.ia\n        ja = grb.ja\n        print(f\"   IA array shape: {ia.shape}\")\n        print(f\"   JA array shape: {ja.shape}\")\n        print(f\"   Number of connections (nnz): {ia[-1]}\")\n        \n        # Get modelgrid object\n        mg = grb.modelgrid\n        \n        # Grid properties\n        print(f\"\\n2. Grid properties:\")\n        print(f\"   Grid extent: {mg.extent}\")\n        \n        if hasattr(mg, 'ncpl'):\n            print(f\"   Cells per layer: {mg.ncpl}\")\n        \n        if grid_type == \"structured\":\n            print(f\"   Rows: {mg.nrow}, Columns: {mg.ncol}, Layers: {mg.nlay}\")\n        else:\n            print(f\"   Number of vertices: {mg.nvert}\")\n            print(f\"   Number of cells: {len(mg.iverts)}\")\n        \n        # Plot the grid\n        print(f\"\\n3. Plotting grid...\")\n        fig, ax = plt.subplots(figsize=(10, 8))\n        mg.plot(ax=ax)\n        ax.set_title(f\"{grid_type.title()} Grid Visualization\")\n        ax.set_xlabel(\"X (m)\")\n        ax.set_ylabel(\"Y (m)\")\n        plt.tight_layout()\n        \n        # Save plot\n        plot_file = ws / f\"{gwf.name}_grid.png\"\n        plt.savefig(plot_file, dpi=150, bbox_inches='tight')\n        print(f\"   Grid plot saved to: {plot_file.name}\")\n        plt.close()\n        \n        # Get cell centers\n        print(f\"\\n4. Cell center coordinates:\")\n        if grid_type == \"structured\":\n            xc, yc = mg.xyzcellcenters[0], mg.xyzcellcenters[1]\n            print(f\"   X centers shape: {xc.shape}\")\n            print(f\"   Y centers shape: {yc.shape}\")\n            print(f\"   Center of cell (0,0,0): ({xc[0,0,0]:.1f}, {yc[0,0,0]:.1f})\")\n        else:\n            cellxy = np.column_stack(mg.xyzcellcenters[:2])\n            print(f\"   Cell centers shape: {cellxy.shape}\")\n            print(f\"   Center of cell 0: ({cellxy[0,0]:.1f}, {cellxy[0,1]:.1f})\")\n        \n        # Vertices information\n        if hasattr(mg, 'verts'):\n            print(f\"\\n5. Vertices information:\")\n            verts = mg.verts\n            print(f\"   Total vertices: {len(verts)}\")\n            print(f\"   First vertex: {verts[0]}\")\n            print(f\"   Last vertex: {verts[-1]}\")\n    \n    else:\n        print(f\"\\nNote: Binary grid file will be created when model runs.\")\n\ndef run_demonstrations():\n    \"\"\"Run all grid type demonstrations\"\"\"\n    \n    print(\"=\"*70)\n    print(\"MODFLOW 6 BINARY GRID FILE DEMONSTRATIONS\")\n    print(\"=\"*70)\n    \n    # Structured grid demonstration\n    print(\"\\n\" + \"-\"*70)\n    print(\"PART 1: STRUCTURED GRID (DIS)\")\n    print(\"-\"*70)\n    \n    sim_dis, gwf_dis = create_structured_model()\n    print(\"\\nWriting and running structured model...\")\n    sim_dis.write_simulation()\n    success, _ = sim_dis.run_simulation()\n    \n    if success:\n        print(\"✓ Structured model ran successfully!\")\n        demonstrate_grid_operations(sim_dis, gwf_dis, \"structured\")\n    else:\n        print(\"✗ Structured model failed to run\")\n    \n    # Vertex grid demonstration\n    print(\"\\n\" + \"-\"*70)\n    print(\"PART 2: VERTEX GRID (DISV)\")\n    print(\"-\"*70)\n    \n    sim_disv, gwf_disv = create_vertex_model()\n    print(\"\\nWriting and running vertex model...\")\n    sim_disv.write_simulation()\n    success, _ = sim_disv.run_simulation()\n    \n    if success:\n        print(\"✓ Vertex model ran successfully!\")\n        demonstrate_grid_operations(sim_disv, gwf_disv, \"vertex\")\n    else:\n        print(\"✗ Vertex model failed to run\")\n    \n    print(\"\\n\" + \"=\"*70)\n    print(\"Binary grid file demonstrations complete!\")\n    print(\"Created models with DIS and DISV discretizations\")\n    print(\"Demonstrated reading .grb files and accessing grid properties\")\n    print(\"=\"*70)\n\nif __name__ == \"__main__\":\n    run_demonstrations()"
+    }
+  ]
+}

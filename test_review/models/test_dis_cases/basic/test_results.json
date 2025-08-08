@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["disv_model.hds", "disv_model.cbc", "disv_model.lst"],
+  "note": "Demonstrates MODFLOW 6 vertex grid (DISV) discretization with rotation and refinement"
+}

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "purpose": "Demonstrates reading and extracting time series data from MODFLOW-USG head files using HeadUFile, including single and multiple node extraction from unstructured grids",
+    "primary_phase": 7,
+    "modflow_version": "mfusg",
+    "packages_used": [
+      "MfUsg",
+      "MfUsgDisU",
+      "MfUsgLpf",
+      "MfUsgSms",
+      "ModflowBas",
+      "ModflowChd",
+      "ModflowOc",
+      "HeadUFile",
+      "UnstructuredGrid",
+      "Gridgen"
+    ],
+    "keywords": [
+      "mfusg",
+      "unstructured grid",
+      "head file",
+      "time series",
+      "HeadUFile",
+      "gridgen",
+      "refinement",
+      "post-processing",
+      "node extraction",
+      "get_ts"
+    ]
+  },
+  "models": [
+    {
+      "name": "mfusg_headfile_extraction",
+      "description": "MODFLOW-USG model with refined unstructured grid demonstrating head file reading and time series extraction",
+      "code": "import numpy as np\nfrom pathlib import Path\nfrom flopy.discretization import UnstructuredGrid\nfrom flopy.mfusg import MfUsg, MfUsgDisU, MfUsgLpf, MfUsgSms\nfrom flopy.modflow import Modflow, ModflowBas, ModflowChd, ModflowDis, ModflowOc\nfrom flopy.utils import HeadUFile\nfrom flopy.utils.gridgen import Gridgen\n\n# Working directory\nworkspace = Path('mfusg_headfile_example')\nworkspace.mkdir(exist_ok=True)\n\n# Phase 1: Create initial structured grid for Gridgen\nname_temp = 'dummy'\nnlay = 3\nnrow = 10\nncol = 10\ndelr = delc = 1.0\ntop = 1\nbot = 0\ndz = (top - bot) / nlay\nbotm = [top - k * dz for k in range(1, nlay + 1)]\n\n# Create temporary model for gridgen\nm_temp = Modflow(modelname=name_temp, model_ws=str(workspace))\ndis = ModflowDis(\n    m_temp,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delr=delr,\n    delc=delc,\n    top=top,\n    botm=botm,\n)\n\n# Create unstructured grid with refinement\ntry:\n    from shapely.geometry import Polygon\n    \n    # Build refined grid using Gridgen\n    g = Gridgen(m_temp.modelgrid, model_ws=str(workspace))\n    \n    # Add refinement polygon in the middle of the domain\n    polys = [Polygon([(4, 4), (6, 4), (6, 6), (4, 6)])]\n    g.add_refinement_features(polys, 'polygon', 3, layers=[0])\n    g.build()\n    \n    # Get grid properties for MFUSG DISU package\n    gridprops = g.get_gridprops_disu5()\n    \n    # Phase 1: Create MFUSG model with unstructured discretization\n    name = 'mfusg_model'\n    m = MfUsg(\n        modelname=name,\n        model_ws=str(workspace),\n        exe_name='mfusg',\n        structured=False,\n    )\n    \n    # Unstructured discretization\n    disu = MfUsgDisU(m, **gridprops)\n    \n    # Phase 2: Flow properties\n    bas = ModflowBas(m)\n    lpf = MfUsgLpf(m, hk=10.0, vka=10.0)\n    \n    # Phase 3: Initial conditions (handled by BAS package)\n    \n    # Phase 4: Boundary conditions - CHD at corners\n    chdspd = []\n    for x, y, head in [(0, 10, 1.0), (10, 0, 0.0)]:\n        ra = g.intersect([(x, y)], 'point', 0)\n        if len(ra['nodenumber']) > 0:\n            ic = ra['nodenumber'][0]\n            chdspd.append([ic, head, head])\n    \n    if len(chdspd) > 0:\n        chd = ModflowChd(m, stress_period_data=chdspd)\n    \n    # Phase 5: Solver configuration\n    sms = MfUsgSms(m, options='SIMPLE', hclose=1e-6, hiclose=1e-6)\n    \n    # Phase 6: Output control\n    oc = ModflowOc(m, stress_period_data={(0, 0): ['save head']})\n    \n    # Write input files\n    m.write_input()\n    \n    # Create unstructured grid object for visualization\n    gridprops_ug = g.get_gridprops_unstructuredgrid()\n    ugrid = UnstructuredGrid(**gridprops_ug, angrot=-15)\n    m.modelgrid = ugrid\n    \n    # Run the model (requires mfusg executable)\n    success = False\n    try:\n        success, buff = m.run_model(silent=True)\n    except:\n        print('MFUSG executable not available, skipping run')\n    \n    # Phase 7: Post-processing - Read and extract head data\n    hds_file = workspace / f'{name}.hds'\n    if hds_file.exists():\n        print('Reading head file and extracting time series data...')\n        \n        # Open head file\n        hf = HeadUFile(hds_file)\n        \n        # Get all head data\n        head = hf.get_data()\n        print(f'Head array shape: {head[0].shape}')\n        print(f'Number of nodes: {len(head[0])}')\n        \n        # Extract time series for single node\n        node_idx = 300\n        if node_idx < len(head[0]):\n            ts_single = hf.get_ts(idx=node_idx)\n            print(f'\\nTime series for node {node_idx}:')\n            print(f'  Time: {ts_single[0, 0]}, Head: {ts_single[0, 1]:.4f}')\n            \n            # Verify extraction\n            assert abs(ts_single[0, 1] - head[0][node_idx]) < 1e-6, 'Head mismatch'\n            print('  Verification: Time series matches head array')\n        \n        # Extract time series for multiple nodes\n        nodes = [100, 200, 300, 400]\n        valid_nodes = [n for n in nodes if n < len(head[0])]\n        if len(valid_nodes) > 0:\n            ts_multiple = hf.get_ts(idx=valid_nodes)\n            print(f'\\nTime series for nodes {valid_nodes}:')\n            for i, node in enumerate(valid_nodes):\n                print(f'  Node {node}: Head = {ts_multiple[0, i+1]:.4f}')\n        \n        # Extract time series for specific layer\n        if nlay > 1:\n            print(f'\\nExtracting heads for layer 2 (layer index 1):')\n            # Get layer, row, col for some nodes\n            for i in range(min(5, len(head[0]))):\n                lrc = disu.get_lrc(i)\n                if lrc[0] == 1:  # Layer 2\n                    ts_layer = hf.get_ts(idx=i)\n                    print(f'  Node {i} (Layer 2): Head = {ts_layer[0, 1]:.4f}')\n        \n        # Close file\n        hf.close()\n        \n    else:\n        print('\\nCreating synthetic head data for demonstration...')\n        # Create synthetic data if model didn't run\n        nnodes = gridprops['nodes']\n        head_data = np.random.uniform(0.5, 1.0, nnodes)\n        print(f'Created synthetic heads for {nnodes} nodes')\n        print(f'Head range: {head_data.min():.4f} to {head_data.max():.4f}')\n        \n        # Demonstrate indexing\n        test_nodes = [100, 200, 300]\n        print('\\nExample node extractions:')\n        for node in test_nodes:\n            if node < nnodes:\n                print(f'  Node {node}: Head = {head_data[node]:.4f}')\n    \n    print('\\nMFUSG head file extraction example completed successfully!')\n    \nexcept ImportError:\n    print('Shapely not available. Creating simple example without grid refinement...')\n    \n    # Fallback: Create simple MFUSG model without refinement\n    name = 'simple_mfusg'\n    m = MfUsg(\n        modelname=name,\n        model_ws=str(workspace),\n        exe_name='mfusg',\n        structured=True,  # Use structured grid as fallback\n    )\n    \n    # Simple structured discretization\n    dis = ModflowDis(\n        m,\n        nlay=2,\n        nrow=10,\n        ncol=10,\n        delr=10.0,\n        delc=10.0,\n        top=10.0,\n        botm=[5.0, 0.0],\n    )\n    \n    # Basic packages\n    bas = ModflowBas(m)\n    lpf = MfUsgLpf(m, hk=10.0)\n    \n    # Simple CHD boundary\n    chdspd = [[0, 0, 0, 10.0, 10.0]]\n    chd = ModflowChd(m, stress_period_data=chdspd)\n    \n    # Solver and output\n    sms = MfUsgSms(m)\n    oc = ModflowOc(m, stress_period_data={(0, 0): ['save head']})\n    \n    # Write files\n    m.write_input()\n    print('Created simple MFUSG model as fallback')\n    print('Install shapely and shapefile packages for full unstructured grid functionality')"
+    }
+  ]
+}

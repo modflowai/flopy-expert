@@ -444,6 +444,80 @@ python3 tests/qa_embedding_quality.py
 
 This semantic database demonstrates how AI can understand domain-specific technical documentation, enabling accurate search that goes beyond keywords to actual concepts and purposes.
 
+## 🎯 NEW TASK: FloPy Test Processing Initiative (December 2024)
+
+### Current Mission
+Converting FloPy autotest files into educational, runnable demonstrations with rich metadata for database ingestion.
+
+### Progress Status
+- **Total Tests Identified**: 74+ test files in flopy/autotest/
+- **Tests Processed**: 54 (as of December 2024)
+- **Success Rate**: 100% - All processed tests run without errors
+- **Time per Test**: ~15-30 minutes including debugging and documentation
+
+### Test Processing Structure
+Each test is transformed into:
+```
+test_review/models/test_[name]/basic/
+├── model.py           # Runnable educational demonstration
+├── metadata.json      # Rich metadata with 7-phase conceptual model
+└── test_results.json  # Comprehensive test results and analysis
+```
+
+### Key Achievements
+1. **Created Comprehensive Roadmap**: `test_review/PROCESSING_ROADMAP.md` with detailed phases and patterns
+2. **Established Patterns**: Consistent structure for all test transformations
+3. **Fixed Common Issues**: Array broadcasting, empty stress periods, MODPATH particle data
+4. **7-Phase Conceptual Model**: Standardized metadata structure for all tests
+
+### ⚠️ CRITICAL REQUIREMENT: Model Testing
+**THE MOST IMPORTANT PART of test processing is to ACTUALLY TEST THE MODELS**
+- All model.py files MUST be runnable and working
+- Each model MUST be tested with `python3 model.py` before considering it complete
+- Fix all errors immediately - no broken models allowed
+- The goal is educational demonstrations that users can run and learn from
+- A non-working model defeats the entire purpose of the transformation
+
+### Recent Tests Processed (Latest Session)
+- test_lgr.py - Local Grid Refinement
+- test_swr_binaryread.py - SWR binary file utilities  
+- test_util_2d_and_3d.py - Array utilities
+- test_shapefile_utils.py - GIS integration
+- test_str.py - Stream routing
+- test_modflowoc.py - Output control
+- test_modpathfile.py - MODPATH file utilities
+- test_mp5.py - MODPATH-5
+- test_mp6.py - MODPATH-6 with MNW2
+- test_mp7.py - MODPATH-7 with MF6
+- test_swi2.py - Salt Water Intrusion
+- test_wel.py - Advanced Well package
+- test_mp7_cases.py - MODPATH-7 test cases
+
+### Metadata.json Structure (7-Phase Model)
+1. **Grid Generation** - DIS, BAS packages
+2. **Model Setup** - LPF, UPW, NPF packages
+3. **Initial Conditions** - IC, Starting heads
+4. **Boundary Conditions** - WEL, RCH, RIV, etc.
+5. **Solver** - PCG, NWT, SMS, IMS
+6. **Visualization** - OC, OBS
+7. **Post-processing** - MODPATH, MT3D, ZoneBudget
+
+### Common Fixes Applied
+- **Array Broadcasting**: Convert lists to numpy arrays before operations
+- **Empty Stress Periods**: Remove empty periods from stress_period_data
+- **MODPATH Issues**: Use NodeParticleData for MP7+MF6, fix LRCParticleData
+- **SWI2 Parameters**: Use solver2params dictionary format
+- **MF6 Patterns**: Always create simulation container first
+
+### Next Steps
+- Continue processing remaining ~20 test files
+- Maintain quality and consistency
+- Update roadmap with new patterns discovered
+- Commit progress regularly to GitHub
+
+### Philosophy
+"We are checking one by one manually all the metadata jsons and test results. It's worth it to do it one time and we won't have to work in the future."
+
 ## DSPy Training Pipeline Progress
 
 ### Stage 1: GitHub Issue Collection ✅

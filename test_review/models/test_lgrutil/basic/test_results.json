@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": false,
+  "output_exists": false,
+  "error": null,
+  "outputs": [],
+  "note": "Demonstrates FloPy LGR utilities for local grid refinement - pure utility functions without MODFLOW execution that handle grid refinement calculations, parent-child relationships, and DISV conversion"
+}

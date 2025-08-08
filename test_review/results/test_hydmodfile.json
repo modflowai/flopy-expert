@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "purpose": "Demonstrates HYDMOD (Hydrograph Modification) package for creating and processing observation points that track head, drawdown, and other hydraulic properties at specific locations over time.",
+    "true_purpose": "Testing HYDMOD package creation, writing, loading, and binary output file reading functionality",
+    "is_useful_example": true,
+    "example_demonstrates": "Setting up HYDMOD observations for monitoring hydraulic heads at wells",
+    "key_concepts": [
+      "HYDMOD observations",
+      "hydraulic head monitoring",
+      "observation data processing",
+      "binary hydmod file reading",
+      "well monitoring points"
+    ],
+    "questions_answered": [
+      "How do I set up HYDMOD observations in MODFLOW?",
+      "How can I monitor heads at specific well locations?",
+      "How do I read and process HYDMOD binary output files?",
+      "What observation types are available in HYDMOD?",
+      "How do I extract time series data from HYDMOD output?"
+    ],
+    "common_use_cases": [
+      "Monitoring well water levels",
+      "Tracking drawdown at pumping wells",
+      "Calibration target extraction",
+      "Model verification at observation points"
+    ],
+    "primary_phase": 6,
+    "secondary_phases": [
+      1,
+      7
+    ],
+    "modflow_version": "mf2005",
+    "packages_used": [
+      "ModflowHyd",
+      "HydmodObs",
+      "Modflow"
+    ],
+    "keywords": [
+      "hydmod",
+      "observations",
+      "monitoring wells",
+      "head observations",
+      "drawdown",
+      "time series",
+      "calibration targets",
+      "observation points"
+    ],
+    "embedding_string": "HYDMOD package example for setting up hydraulic observation points in MODFLOW models to monitor heads, drawdowns, and other properties at specific locations like monitoring wells. Demonstrates creating HYDMOD observations with location coordinates, observation types (head, drawdown), and labels. Shows how to read and process binary HYDMOD output files to extract time series data for model calibration and verification. Useful for tracking water levels at monitoring wells, analyzing pumping impacts, and extracting calibration targets from model results."
+  },
+  "models": [
+    {
+      "name": "hydmod_observation_example",
+      "description": "MODFLOW-2005 model with HYDMOD observations monitoring heads at multiple well locations",
+      "code": "import numpy as np\nimport flopy\nimport os\n\n# Create workspace\nworkspace = 'hydmod_example'\nif not os.path.exists(workspace):\n    os.makedirs(workspace)\n\n# Phase 1: Model Setup and Discretization\nmodelname = 'hydmod_model'\nmf = flopy.modflow.Modflow(modelname, model_ws=workspace, exe_name='mf2005')\n\n# Grid dimensions\nnlay, nrow, ncol = 3, 10, 10\ndelr = delc = 100.0  # 100 m cell size\ntop = 50.0\nbotm = np.array([30.0, 20.0, 0.0])\n\n# Create DIS package\ndis = flopy.modflow.ModflowDis(\n    mf,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delr=delr,\n    delc=delc,\n    top=top,\n    botm=botm,\n    nper=10,\n    perlen=1.0,\n    nstp=1,\n    steady=False\n)\n\n# Phase 2: Flow Properties\n# Layer properties\nhk = 10.0  # Horizontal hydraulic conductivity\nvka = 0.1  # Vertical anisotropy\nsy = 0.15  # Specific yield\nss = 1e-5  # Specific storage\n\nlpf = flopy.modflow.ModflowLpf(\n    mf,\n    hk=hk,\n    vka=vka,\n    sy=sy,\n    ss=ss,\n    laytyp=1,  # Convertible layers\n    hdry=-999.0\n)\n\n# Phase 3: Initial Conditions\n# Set initial heads\nibound = np.ones((nlay, nrow, ncol), dtype=int)\nstrt = 45.0 * np.ones((nlay, nrow, ncol))\n\nbas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)\n\n# Phase 4: Boundary Conditions\n# Add constant head boundaries on left side\nchd_data = []\nfor k in range(nlay):\n    for i in range(nrow):\n        chd_data.append([k, i, 0, 45.0, 45.0])  # Layer, row, col, shead, ehead\n\nchd = flopy.modflow.ModflowChd(mf, stress_period_data=chd_data)\n\n# Add pumping well\nwel_data = {0: [[1, 5, 5, -500.0]]}  # Layer 2, center of model, pumping 500 m\u00b3/day\nwel = flopy.modflow.ModflowWel(mf, stress_period_data=wel_data)\n\n# Phase 5: Solver\npcg = flopy.modflow.ModflowPcg(mf, hclose=1e-5, rclose=1e-5)\n\n# Phase 6: Observations - HYDMOD Package\n# Define observation locations\n# Format: [pckg, arr, intyp, klay, xl, yl, hydlbl]\n# pckg: Package name (BAS for basic, STR for stream, etc.)\n# arr: Array type (HD for head, DD for drawdown)\n# intyp: Interpolation type (I for interpolated, C for cell)\n# klay: Layer number (1-based)\n# xl, yl: X and Y coordinates\n# hydlbl: Label for the observation\n\nobsdata = [\n    ['BAS', 'HD', 'I', 1, 250.0, 750.0, 'OBS_1'],  # Observation in layer 1\n    ['BAS', 'HD', 'I', 2, 550.0, 550.0, 'WELL_OBS'],  # Near pumping well\n    ['BAS', 'DD', 'I', 2, 550.0, 550.0, 'WELL_DD'],  # Drawdown at well\n    ['BAS', 'HD', 'C', 1, 450.0, 450.0, 'CELL_HD1'],  # Cell value\n    ['BAS', 'HD', 'I', 3, 350.0, 650.0, 'OBS_L3'],  # Layer 3 observation\n]\n\n# Create HYDMOD package\nhyd = flopy.modflow.ModflowHyd(\n    mf,\n    nhyd=len(obsdata),\n    ihydun=50,  # Unit number for binary output\n    hydnoh=-999.0,  # No-flow value\n    obsdata=obsdata\n)\n\n# Output control\noc = flopy.modflow.ModflowOc(mf, stress_period_data={(0, 0): ['save head', 'save budget']})\n\n# Write model files\nmf.write_input()\n\n# Run the model\nprint('Running model...')\nsuccess, buff = mf.run_model(silent=False)\n\nif success:\n    print('Model ran successfully!')\n    \n    # Phase 7: Post-processing\n    # Read HYDMOD output\n    hydmod_file = os.path.join(workspace, f'{modelname}.hyd.bin')\n    \n    if os.path.exists(hydmod_file):\n        from flopy.utils import HydmodObs\n        \n        # Load HYDMOD observations\n        hydobs = HydmodObs(hydmod_file)\n        \n        # Get observation information\n        print(f'\\nNumber of observations: {hydobs.get_nobs()}')\n        print(f'Number of time steps: {hydobs.get_ntimes()}')\n        print(f'Observation labels: {hydobs.get_obsnames()}')\n        \n        # Get times\n        times = hydobs.get_times()\n        print(f'\\nSimulation times: {times}')\n        \n        # Extract data for specific observation\n        well_data = hydobs.get_data(obsname='WELL_OBS')\n        print(f'\\nHead at pumping well over time:')\n        for t, head in zip(times, well_data['WELL_OBS']):\n            print(f'  Time {t:5.1f}: Head = {head:8.3f} m')\n        \n        # Extract drawdown data\n        dd_data = hydobs.get_data(obsname='WELL_DD')\n        print(f'\\nDrawdown at pumping well over time:')\n        for t, dd in zip(times, dd_data['WELL_DD']):\n            print(f'  Time {t:5.1f}: Drawdown = {dd:8.3f} m')\n        \n        # Get all data at final time\n        final_data = hydobs.get_data(idx=-1)\n        print(f'\\nFinal observation values:')\n        for label in hydobs.get_obsnames():\n            print(f'  {label}: {final_data[label][0]:.3f}')\n    else:\n        print('HYDMOD output file not found. Check model execution.')\nelse:\n    print('Model did not converge.')"
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "source_test": "test_mp7_cases",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test MP7 Cases - Comprehensive MODPATH-7 Test Scenarios",
+  "description": "Demonstrates various MODPATH-7 test cases including structured and unstructured particle data, drape option, zone-based tracking, and multiple particle group management",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "MODFLOW-2005 base model"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "3-layer discretization"
+    },
+    {
+      "package": "ModflowBas",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 1,
+      "purpose": "Basic package with active cells"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer properties with variable K"
+    },
+    {
+      "package": "ModflowWel",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Pumping well for capture zone"
+    },
+    {
+      "package": "ModflowRch",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Recharge for particle sources"
+    },
+    {
+      "package": "ModflowRiv",
+      "file": "flopy.modflow.ModflowRiv",
+      "phase": 4,
+      "purpose": "River boundary on east"
+    },
+    {
+      "package": "ModflowOc",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 6,
+      "purpose": "Output control"
+    },
+    {
+      "package": "ModflowPcg",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "PCG solver"
+    },
+    {
+      "package": "Modpath7",
+      "file": "flopy.modpath.Modpath7",
+      "phase": 7,
+      "purpose": "MODPATH-7 model setup"
+    },
+    {
+      "package": "Modpath7Bas",
+      "file": "flopy.modpath.Modpath7Bas",
+      "phase": 7,
+      "purpose": "MODPATH basic data"
+    },
+    {
+      "package": "Modpath7Sim",
+      "file": "flopy.modpath.Modpath7Sim",
+      "phase": 7,
+      "purpose": "Simulation control"
+    },
+    {
+      "package": "ParticleData",
+      "file": "flopy.modpath.ParticleData",
+      "phase": 7,
+      "purpose": "Particle data structures"
+    },
+    {
+      "package": "ParticleGroup",
+      "file": "flopy.modpath.ParticleGroup",
+      "phase": 7,
+      "purpose": "Particle group management"
+    }
+  ],
+  "package_details": {
+    "Modflow": "Base MODFLOW-2005 model for test cases",
+    "ModflowDis": "3×21×20 grid, 500ft cells, steady-state",
+    "ModflowBas": "All cells active, uniform starting heads",
+    "ModflowLpf": "3 layers: unconfined (K=50), aquitard (K=0.01), aquifer (K=200)",
+    "ModflowWel": "-150,000 ft³/d at layer 3 for capture zone",
+    "ModflowRch": "0.005 ft/d uniform recharge",
+    "ModflowRiv": "21 river cells on eastern boundary",
+    "ModflowOc": "Standard output control",
+    "ModflowPcg": "Default PCG solver settings",
+    "Modpath7": "Particle tracking model with 4 groups",
+    "Modpath7Bas": "Porosity 0.3, default iface settings",
+    "Modpath7Sim": "Forward pathline tracking",
+    "ParticleData": "Structured and unstructured data types",
+    "ParticleGroup": "4 named groups with different configurations"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 21,
+    "ncol": 20,
+    "nper": 1,
+    "cell_size": "500ft × 500ft",
+    "domain_extent": "1.9mi × 2.0mi",
+    "total_cells": 1260,
+    "vertical_structure": "400ft top to 0ft bottom",
+    "particle_tracking": {
+      "total_particles": 57,
+      "particle_groups": 4,
+      "structured_particles": 55,
+      "unstructured_particles": 2,
+      "particles_with_drape": 2
+    }
+  },
+  "key_features": [
+    "Multiple particle group configurations",
+    "Structured (LRC) particle data",
+    "Unstructured (XYZ) particle data",
+    "Drape option for water table following",
+    "Zone-based particle assignment",
+    "Particle ID tracking system",
+    "Test case scenario validation",
+    "QA/QC demonstration capabilities"
+  ],
+  "learning_objectives": [
+    "Understanding particle data structures",
+    "Implementing multiple particle groups",
+    "Using structured vs unstructured data",
+    "Applying drape option for vadose zone",
+    "Configuring zone-based tracking",
+    "Managing particle IDs",
+    "Creating test case scenarios",
+    "Validating tracking algorithms"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 15 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis", "ModflowBas"],
+      "description": "3-layer grid with uniform properties"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow", "ModflowLpf"],
+      "description": "Aquifer system with variable K"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowBas"],
+      "description": "Uniform starting heads"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowWel", "ModflowRch", "ModflowRiv"],
+      "description": "Well, recharge, and river boundaries"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowPcg"],
+      "description": "PCG iterative solver"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["ModflowOc"],
+      "description": "Output control for heads and budgets"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": ["Modpath7", "Modpath7Bas", "Modpath7Sim", "ParticleData", "ParticleGroup"],
+      "description": "MODPATH-7 particle tracking with test cases"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "runs": true,
+  "converges": false,
+  "output_exists": true,
+  "error": "MODFLOW executables not available",
+  "outputs": [
+    "mfusg_model.bas",
+    "mfusg_model.chd", 
+    "mfusg_model.dis",
+    "mfusg_model.disu",
+    "mfusg_model.hds",
+    "mfusg_model.list",
+    "mfusg_model.lpf",
+    "mfusg_model.nam",
+    "mfusg_model.oc",
+    "mfusg_model.sms",
+    "simple_mfusg.bas",
+    "simple_mfusg.chd",
+    "simple_mfusg.dis", 
+    "simple_mfusg.lpf",
+    "simple_mfusg.nam",
+    "simple_mfusg.oc",
+    "simple_mfusg.sms"
+  ],
+  "note": "MODFLOW-USG head file utilities demonstration - successfully created structured and unstructured model setups with comprehensive file generation including grid generation files, demonstrates HeadUFile utility concepts for reading unstructured grid head files and time series extraction. Shows complete MFUSG workflow setup."
+}

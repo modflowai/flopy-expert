@@ -1,0 +1,307 @@
+{
+  "timestamp": "2025-08-07 18:59:06",
+  "summary": {
+    "total_models": 56,
+    "models_with_hds": 28,
+    "models_with_listing": 28,
+    "models_converged": 24,
+    "models_needing_fix": 32
+  },
+  "converged_models": [
+    {
+      "name": "test_binaryfile",
+      "discrepancy": 0.07
+    },
+    {
+      "name": "test_binarygrid_util",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_cbc_full3D",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_cellbudgetfile",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_compare",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_copy",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_datautil",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_example_notebooks",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_flopy_io",
+      "discrepancy": 0.15
+    },
+    {
+      "name": "test_flopy_module",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_gage",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_grid",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_lgr",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_model_dot_plot",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_model_splitter",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_modeltime",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_modflow",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_mp5",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_shapefile_utils",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_str",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_swi2",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_swr_binaryread",
+      "discrepancy": 0.0
+    },
+    {
+      "name": "test_util_2d_and_3d",
+      "discrepancy": -0.0
+    },
+    {
+      "name": "test_wel",
+      "discrepancy": 0.0
+    }
+  ],
+  "models_with_issues": [
+    {
+      "name": "test_binaryfile_reverse",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_dis_cases",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_export",
+      "has_hds": true,
+      "has_listing": true,
+      "issue": "unknown"
+    },
+    {
+      "name": "test_formattedfile",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_geospatial_util",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_get_modflow",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_grid_cases",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_gridgen",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_gridintersect",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_gridutil",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_headufile",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_hydmodfile",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_lake_connections",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_lgrutil",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_listbudget",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mbase",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mf6",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mfnwt",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mfreadnam",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mfsimlist",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mnw",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_modflowdis",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_modflowoc",
+      "has_hds": true,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_modpathfile",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mp6",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mp7",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mp7_cases",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_mt3d",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    },
+    {
+      "name": "test_nwt_ag",
+      "has_hds": true,
+      "has_listing": true,
+      "issue": "unknown"
+    },
+    {
+      "name": "test_obs",
+      "has_hds": false,
+      "has_listing": true,
+      "issue": "unknown"
+    },
+    {
+      "name": "test_particledata",
+      "has_hds": true,
+      "has_listing": true,
+      "issue": "unknown"
+    },
+    {
+      "name": "test_plotutil",
+      "has_hds": false,
+      "has_listing": false,
+      "issue": "missing output"
+    }
+  ],
+  "improvements_from_initial": {
+    "hds_files_added": 14,
+    "listing_files_added": 16,
+    "convergence_fixed": 13
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["hydmod_model.hds", "hydmod_model.list", "hydmod_model.hyd", "hydmod_model.hyd.bin"],
+  "note": "Demonstrates MODFLOW-2005 HYDMOD package for observation well monitoring - produces hydrograph data for head and drawdown analysis"
+}

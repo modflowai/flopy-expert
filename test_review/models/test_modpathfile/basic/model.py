@@ -23,6 +23,16 @@ import numpy as np
 import os
 import flopy
 from flopy.mf6 import MFSimulation, ModflowGwf, ModflowGwfdis, ModflowGwfic, ModflowGwfnpf, ModflowGwfoc, ModflowGwfrcha, ModflowGwfriv, ModflowGwfwel, ModflowIms, ModflowTdis
+
+# Write and run simulation
+print("Writing and running model...")
+sim.write_simulation()
+success, buff = sim.run_simulation(silent=True)
+if success:
+    print("  ✓ Model ran successfully")
+else:
+    print("  ⚠ Model run failed")
+
 from flopy.modpath import Modpath7
 from flopy.utils import PathlineFile, EndpointFile
 
@@ -35,7 +45,7 @@ def run_model():
     print("=== MODPATH File Utilities Demonstration ===\n")
     
     # Create model workspace
-    model_ws = "modpath_output"
+    model_ws = "./model_output"
     
     # 1. MODPATH File Utilities Overview
     print("1. MODPATH File Utilities Overview")

@@ -56,4 +56,5 @@ pyemu/
 
 # Database
 *.db
-*.sqlite
+*.sqlite*.zip
+bin/mf6.5.0_linux/

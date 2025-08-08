@@ -5,3 +5,6 @@ DIS               11  child_grid.dis
 BAS6              13  child_grid.bas
 LPF               15  child_grid.lpf
 WEL               20  child_grid.wel
+PCG               27  child_grid.pcg
+OC                14  child_grid.oc
+DATA(BINARY)      51  child_grid.hds REPLACE

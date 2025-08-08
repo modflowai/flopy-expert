@@ -1,0 +1,105 @@
+{
+  "source_test": "test_modflow",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test Modflow - MF2005 Demonstration",
+  "description": "Comprehensive MODFLOW model demonstration showcasing fundamental FloPy capabilities including model creation, package setup, spatial reference systems, and file I/O operations",
+  "phase": 2,
+  "phase_name": "Model Setup",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "3-layer transient discretization with spatial reference"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with inactive cells and starting heads"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Heterogeneous hydraulic properties with layered conductivity"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Transient pumping wells with seasonal variation"
+    },
+    {
+      "package": "RCH",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Seasonal recharge with wet/dry season variation"
+    },
+    {
+      "package": "GHB",
+      "file": "flopy.modflow.ModflowGhb",
+      "phase": 4,
+      "purpose": "General head boundary representing distant aquifer"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control for heads and budget files"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "WEL": "Well package for pumping stress",
+    "RCH": "Recharge package for surface infiltration",
+    "GHB": "General head boundary for distant connections",
+    "OC": "Output control for heads and budgets",
+    "PCG": "Preconditioned conjugate gradient solver"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 15,
+    "ncol": 15,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      25.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-2005 classic simulation framework",
+    "Comprehensive model creation and validation workflow",
+    "Heterogeneous hydraulic conductivity distribution",
+    "Multiple boundary condition types (wells, recharge, GHB)",
+    "Transient simulation with seasonal variations",
+    "Spatial reference system with coordinate offsets",
+    "Model file I/O and loading validation",
+    "Package integration and verification"
+  ],
+  "learning_objectives": [
+    "Understanding MODFLOW model creation fundamentals",
+    "Mastering FloPy package setup and configuration",
+    "Implementing spatial reference systems",
+    "Creating heterogeneous hydraulic property distributions", 
+    "Setting up transient boundary conditions",
+    "Configuring model output and solver parameters",
+    "Validating model file operations and loading",
+    "Understanding package integration workflows"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds"
+}

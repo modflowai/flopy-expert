@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "test_analysis": {
+      "true_purpose": "Tests binary file reading, writing, indexing, and precision handling for head files, concentration files, and cell budget files",
+      "is_useful_example": true,
+      "example_demonstrates": "Comprehensive binary file operations including reading, writing, indexing, and precision detection"
+    },
+    "documentation": {
+      "purpose": "Demonstrates reading and writing MODFLOW binary output files (heads, concentrations, budgets) with different precisions and formats. Shows how to extract time series data, build indices, and handle both structured and unstructured grids.",
+      "key_concepts": [
+        "Binary file reading with HeadFile, UcnFile, CellBudgetFile",
+        "Binary file writing with BinaryHeader and Util2d",
+        "Single vs double precision handling",
+        "Time series extraction from binary files",
+        "Index building for efficient data access",
+        "Context manager usage for file handling",
+        "Unstructured grid support with HeadUFile"
+      ],
+      "questions_answered": [
+        "How do I read MODFLOW binary output files?",
+        "How can I write custom binary files compatible with MODFLOW?",
+        "How do I detect if a binary file is single or double precision?",
+        "How can I extract time series data from specific cells?",
+        "How do I handle unstructured grid binary files?"
+      ],
+      "common_use_cases": [
+        "Post-processing MODFLOW simulation results",
+        "Converting between single and double precision files",
+        "Extracting time series for specific observation points",
+        "Creating custom binary files for model input",
+        "Analyzing transient model outputs"
+      ]
+    },
+    "classification": {
+      "primary_phase": 7,
+      "phase_name": "Post-processing",
+      "secondary_phases": [],
+      "modflow_version": "mf6",
+      "packages_used": [
+        "flopy.utils.binaryfile",
+        "flopy.utils.HeadFile",
+        "flopy.utils.CellBudgetFile",
+        "flopy.utils.UcnFile",
+        "flopy.utils.HeadUFile",
+        "flopy.utils.BinaryHeader",
+        "flopy.utils.Util2d"
+      ]
+    },
+    "search_metadata": {
+      "keywords": [
+        "binary file",
+        "HeadFile",
+        "CellBudgetFile",
+        "UcnFile",
+        "precision",
+        "time series",
+        "post-processing",
+        "output files",
+        "index building",
+        "binaryread"
+      ],
+      "embedding_string": "This example demonstrates comprehensive binary file operations in FloPy for post-processing MODFLOW outputs. It shows how to read and write binary files with different precisions (single/double), extract time series data from specific cells, build indices for efficient data access, handle both structured and unstructured grids, and use context managers for proper file handling. The test covers HeadFile for hydraulic heads, UcnFile for concentrations, CellBudgetFile for flow budgets, and demonstrates creating custom binary files using BinaryHeader and Util2d utilities. This is essential for anyone working with MODFLOW output analysis, time series extraction, or custom binary file creation."
+    }
+  },
+  "models": [
+    {
+      "variant": "basic",
+      "description": "Demonstrates binary file writing and reading with both single and double precision",
+      "code": "#!/usr/bin/env python3\n\"\"\"\nStandalone FloPy model demonstrating binary file operations\nExtracted from: test_binaryfile.py\n\nDemonstrates Phase 7: Post-processing with focus on binary file I/O\n\"\"\"\n\nimport flopy\nimport numpy as np\nfrom pathlib import Path\nimport sys\nsys.path.append('/home/danilopezmella/flopy_expert/test_review')\nfrom mf6_config import get_mf6_exe\n\ndef build_model(ws=\"./model_output\", name=\"binary_demo\"):\n    \"\"\"\n    Build a simple MODFLOW 6 model to generate binary output files\n    for demonstrating reading/writing operations.\n    \"\"\"\n    \n    # Ensure workspace exists\n    Path(ws).mkdir(exist_ok=True)\n    \n    # ========================================\n    # PHASE 1: DISCRETIZATION\n    # ========================================\n    print(\"Phase 1: Setting up discretization...\")\n    \n    # Create simulation\n    sim = flopy.mf6.MFSimulation(\n        sim_name=name, \n        sim_ws=ws, \n        exe_name=get_mf6_exe()\n    )\n    \n    # Time discretization - transient with multiple steps\n    tdis = flopy.mf6.ModflowTdis(\n        sim, \n        nper=2,\n        perioddata=[\n            (10.0, 5, 1.0),  # 10 days, 5 steps\n            (10.0, 5, 1.0),  # 10 days, 5 steps\n        ]\n    )\n    \n    # ========================================\n    # PHASE 5: SOLVER CONFIGURATION\n    # ========================================\n    print(\"Phase 5: Configuring solver...\")\n    \n    ims = flopy.mf6.ModflowIms(\n        sim,\n        print_option=\"SUMMARY\",\n        complexity=\"SIMPLE\"\n    )\n    \n    # Create groundwater flow model\n    gwf = flopy.mf6.ModflowGwf(sim, modelname=name, save_flows=True)\n    \n    # Structured discretization\n    dis = flopy.mf6.ModflowGwfdis(\n        gwf,\n        nlay=2,\n        nrow=10,\n        ncol=10,\n        delr=100.0,\n        delc=100.0,\n        top=0.0,\n        botm=[-10.0, -20.0]\n    )\n    \n    # ========================================\n    # PHASE 2: PROPERTIES\n    # ========================================\n    print(\"Phase 2: Setting hydraulic properties...\")\n    \n    npf = flopy.mf6.ModflowGwfnpf(\n        gwf,\n        save_specific_discharge=True,\n        icelltype=1,  # Convertible\n        k=[10.0, 5.0]  # Different K for each layer\n    )\n    \n    # Storage for transient simulation\n    sto = flopy.mf6.ModflowGwfsto(\n        gwf,\n        steady_state=False,\n        transient=True,\n        ss=1e-5,\n        sy=0.1\n    )\n    \n    # ========================================\n    # PHASE 3: INITIAL CONDITIONS\n    # ========================================\n    print(\"Phase 3: Setting initial conditions...\")\n    \n    ic = flopy.mf6.ModflowGwfic(gwf, strt=0.0)\n    \n    # ========================================\n    # PHASE 4: BOUNDARY CONDITIONS\n    # ========================================\n    print(\"Phase 4: Setting boundary conditions...\")\n    \n    # Constant head boundaries\n    chd = flopy.mf6.ModflowGwfchd(\n        gwf,\n        stress_period_data=[\n            [(0, 0, 0), 10.0],   # High head\n            [(1, 9, 9), -5.0],   # Low head\n        ]\n    )\n    \n    # Recharge\n    rch = flopy.mf6.ModflowGwfrcha(\n        gwf,\n        recharge=0.001  # 1 mm/day\n    )\n    \n    # ========================================\n    # OUTPUT CONTROL\n    # ========================================\n    print(\"Setting up output control...\")\n    \n    oc = flopy.mf6.ModflowGwfoc(\n        gwf,\n        budget_filerecord=f\"{name}.cbb\",\n        head_filerecord=f\"{name}.hds\",\n        saverecord=[(\"HEAD\", \"ALL\"), (\"BUDGET\", \"ALL\")]\n    )\n    \n    return sim, gwf\n\ndef demonstrate_binary_operations(sim, gwf):\n    \"\"\"\n    PHASE 7: POST-PROCESSING\n    Demonstrate various binary file operations\n    \"\"\"\n    print(\"\\n\" + \"=\"*60)\n    print(\"Phase 7: Post-processing - Binary File Operations\")\n    print(\"=\"*60)\n    \n    from flopy.utils import HeadFile, CellBudgetFile, BinaryHeader, Util2d\n    from flopy.utils.binaryfile import get_headfile_precision\n    \n    ws = Path(sim.sim_path)\n    \n    # ========================================\n    # 1. READ BINARY OUTPUT FILES\n    # ========================================\n    print(\"\\n1. Reading binary output files...\")\n    \n    # Head file\n    head_file = ws / f\"{gwf.name}.hds\"\n    hf = HeadFile(head_file)\n    \n    # Get times and stress periods\n    times = hf.get_times()\n    kstpkper = hf.get_kstpkper()\n    print(f\"   Times: {times[:5]}... (showing first 5)\")\n    print(f\"   (kstp, kper): {kstpkper[:3]}... (showing first 3)\")\n    \n    # Get head data different ways\n    head_by_time = hf.get_data(totim=times[0])\n    head_by_kstpkper = hf.get_data(kstpkper=kstpkper[0])\n    head_by_idx = hf.get_data(idx=0)\n    \n    print(f\"   Head shape: {head_by_time.shape}\")\n    print(f\"   Head range: {head_by_time.min():.2f} to {head_by_time.max():.2f}\")\n    \n    # Budget file\n    budget_file = ws / f\"{gwf.name}.cbb\"\n    bf = CellBudgetFile(budget_file)\n    \n    print(f\"\\n   Budget records: {bf.get_unique_record_names()}\")\n    \n    # ========================================\n    # 2. EXTRACT TIME SERIES\n    # ========================================\n    print(\"\\n2. Extracting time series data...\")\n    \n    # Time series for specific cell\n    ts = hf.get_ts((0, 5, 5))  # Layer 0, row 5, col 5\n    print(f\"   Time series shape: {ts.shape}\")\n    print(f\"   Cell (0,5,5) head evolution:\")\n    for i in range(min(3, len(ts))):\n        print(f\"     Time {ts[i,0]:.1f}: {ts[i,1]:.3f} m\")\n    \n    # ========================================\n    # 3. DETECT PRECISION\n    # ========================================\n    print(\"\\n3. Detecting file precision...\")\n    \n    precision = get_headfile_precision(head_file)\n    print(f\"   Head file precision: {precision}\")\n    \n    # ========================================\n    # 4. WRITE CUSTOM BINARY FILE\n    # ========================================\n    print(\"\\n4. Writing custom binary files...\")\n    \n    # Write double precision file\n    custom_data = np.random.randn(10, 10) * 5.0  # Random heads\n    \n    # Create header for double precision\n    header_double = BinaryHeader.create(\n        bintype=\"HEAD\",\n        precision=\"double\",\n        text=\"HEAD\",\n        nrow=10,\n        ncol=10,\n        ilay=1,\n        pertim=1.0,\n        totim=1.0,\n        kstp=1,\n        kper=1,\n    )\n    \n    double_file = ws / \"custom_double.hds\"\n    Util2d.write_bin(\n        custom_data.shape, \n        double_file, \n        custom_data.astype(np.float64),\n        header_data=header_double\n    )\n    print(f\"   Written double precision file: {double_file.name}\")\n    \n    # Create header for single precision\n    header_single = BinaryHeader.create(\n        bintype=\"HEAD\",\n        precision=\"single\",\n        text=\"HEAD\",\n        nrow=10,\n        ncol=10,\n        ilay=1,\n        pertim=1.0,\n        totim=1.0,\n        kstp=1,\n        kper=1,\n    )\n    \n    single_file = ws / \"custom_single.hds\"\n    Util2d.write_bin(\n        custom_data.shape,\n        single_file,\n        custom_data.astype(np.float32),\n        header_data=header_single\n    )\n    print(f\"   Written single precision file: {single_file.name}\")\n    \n    # ========================================\n    # 5. VERIFY CUSTOM FILES\n    # ========================================\n    print(\"\\n5. Verifying custom binary files...\")\n    \n    # Read back and verify\n    hf_double = HeadFile(double_file, precision=\"double\")\n    hf_single = HeadFile(single_file, precision=\"single\")\n    \n    data_double = hf_double.get_data()\n    data_single = hf_single.get_data()\n    \n    print(f\"   Double precision data range: {data_double.min():.6f} to {data_double.max():.6f}\")\n    print(f\"   Single precision data range: {data_single.min():.6f} to {data_single.max():.6f}\")\n    print(f\"   Precision difference max: {np.abs(data_double - data_single).max():.9f}\")\n    \n    # ========================================\n    # 6. USE CONTEXT MANAGERS\n    # ========================================\n    print(\"\\n6. Demonstrating context manager usage...\")\n    \n    with HeadFile(head_file) as hf_context:\n        data = hf_context.get_data(idx=0)\n        print(f\"   Read data with context manager: shape {data.shape}\")\n        print(f\"   File automatically closed after context\")\n    \n    # Verify file is closed\n    try:\n        hf_context.get_data()\n    except ValueError as e:\n        print(f\"   Confirmed: {e}\")\n    \n    print(\"\\n\" + \"=\"*60)\n    print(\"Binary file operations demonstration complete!\")\n    print(\"=\"*60)\n\ndef run_model():\n    \"\"\"Run the model and demonstrate binary file operations\"\"\"\n    \n    print(\"=\"*70)\n    print(\"MODFLOW 6 Binary File Operations Demonstration\")\n    print(\"=\"*70 + \"\\n\")\n    \n    # Build model\n    sim, gwf = build_model()\n    \n    # Write and run\n    print(\"\\nWriting and running simulation...\")\n    sim.write_simulation()\n    success, buff = sim.run_simulation()\n    \n    if not success:\n        print(\"ERROR: Model failed to converge!\")\n        return None\n    \n    print(\"✓ Model ran successfully!\\n\")\n    \n    # Demonstrate binary operations\n    demonstrate_binary_operations(sim, gwf)\n    \n    return sim, gwf\n\nif __name__ == \"__main__\":\n    run_model()"
+    }
+  ]
+}

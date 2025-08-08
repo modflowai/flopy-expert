@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["listbudget.lst", "listbudget.hds", "listbudget.cbc", "mfsim.lst"],
+  "note": "Demonstrates FloPy list budget utilities for processing MODFLOW budget data - creates MODFLOW 6 model then analyzes budget output using Mf6ListBudget with 12 budget components over 5 time steps"
+}

@@ -31,7 +31,7 @@ def run_model():
     print("=== MODFLOW Output Control (OC) Package Demonstration ===\n")
     
     # Create model workspace
-    model_ws = "model_output"
+    model_ws = "./model_output"
     
     # 1. OC Package Overview
     print("1. OC Package Overview")
@@ -58,7 +58,7 @@ def run_model():
     botm = [20.0, 0.0]
     
     # Create model
-    mf = Modflow(model_name, model_ws=model_ws, exe_name=None)
+    mf = Modflow(model_name, model_ws=model_ws, exe_name="/home/danilopezmella/flopy_expert/bin/mf2005")
     
     # Discretization with multiple stress periods for output demonstration
     dis = ModflowDis(
@@ -281,6 +281,23 @@ def run_model():
     try:
         mf.write_input()
         print("  ✓ Model files written successfully")
+        
+        # Run the model
+        print("\n  Running MODFLOW...")
+        success, buff = mf.run_model(silent=True)
+        if success:
+            print("  ✓ Model ran successfully")
+            
+            # Check for output files
+            hds_file = os.path.join(model_ws, f"{model_name}.hds")
+            list_file = os.path.join(model_ws, f"{model_name}.list")
+            
+            if os.path.exists(hds_file):
+                print(f"  ✓ Head file created: {os.path.getsize(hds_file)} bytes")
+            if os.path.exists(list_file):
+                print(f"  ✓ Listing file created: {os.path.getsize(list_file)} bytes")
+        else:
+            print("  ⚠ Model run failed")
         
         # List generated files
         files = [f for f in os.listdir(model_ws) 

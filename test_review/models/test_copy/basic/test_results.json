@@ -1,0 +1,16 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "original_model.hds",
+    "original_model.hds",
+    "original_model.cbc",
+    "original_model.cbc",
+    "original_model.lst",
+    "mfsim.lst",
+    "original_model.lst",
+    "mfsim.lst"
+  ]
+}

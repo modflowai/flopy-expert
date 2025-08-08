@@ -1,0 +1,100 @@
+{
+  "source_test": "test_model_splitter",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Model Splitter - MF6 Demonstration",
+  "description": "Demonstrates FloPy's Mf6Splitter utility for dividing large MODFLOW 6 models into smaller sub-models for parallel processing and memory optimization",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization for steady-state simulation"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution with simple complexity"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Single layer structured discretization"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial hydraulic head conditions"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow with uniform hydraulic conductivity"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries on left and right edges"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.mf6.ModflowGwfwel",
+      "phase": 4,
+      "purpose": "Well boundaries in different model regions"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control for heads and budgets"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "IC": "Initial hydraulic head conditions",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "CHD": "Constant head boundary conditions",
+    "WEL": "Well package for pumping stress",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 50.0,
+    "botm": [
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Model splitting demonstration using Mf6Splitter",
+    "Automatic sub-model generation",
+    "Domain decomposition for parallel processing",
+    "Result reconstruction from split models",
+    "Comparison of original vs split model results"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering model splitting concepts",
+    "Using Mf6Splitter utility for domain decomposition",
+    "Creating splitting arrays for model partitioning",
+    "Managing split model simulations",
+    "Reconstructing results from sub-models",
+    "Optimizing large model computation"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 1 minute"
+}

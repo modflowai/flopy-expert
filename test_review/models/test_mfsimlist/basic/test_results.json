@@ -1,0 +1,13 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "mfsim.lst",
+    "flow_model.hds",
+    "flow_model.cbc",
+    "flow_model.lst",
+    "simlist_demo.ims"
+  ]
+}

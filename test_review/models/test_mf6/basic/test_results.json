@@ -1,0 +1,26 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "mf6_demo.hds",
+    "mf6_demo.cbc",
+    "mf6_demo.dis.grb",
+    "mf6_demo.lst",
+    "mf6_demo.chd", 
+    "mf6_demo.dis", 
+    "mf6_demo.ic", 
+    "mf6_demo.ims", 
+    "mf6_demo.nam", 
+    "mf6_demo.npf", 
+    "mf6_demo.oc", 
+    "mf6_demo.rch", 
+    "mf6_demo.sto", 
+    "mf6_demo.tdis", 
+    "mf6_demo.wel", 
+    "mfsim.nam",
+    "mfsim.lst"
+  ],
+  "note": "Comprehensive MODFLOW 6 demonstration successfully executed with MODFLOW 6 v6.6.2. Multi-layer model with time-dependent simulation and multiple boundary conditions. Model converged with normal termination. Generated head file (6 time steps, heads 85-96.5m) and budget file for complete post-processing capabilities."
+}

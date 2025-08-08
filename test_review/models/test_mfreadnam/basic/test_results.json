@@ -1,0 +1,15 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "metadata_demo.nam",
+    "mf6/gwf_model.nam",
+    "mf6/mfsim.nam",
+    "metadata_demo.dis",
+    "mf6/gwf_model.dis",
+    "metadata_demo.bas",
+    "mfsim.nam"
+  ]
+}

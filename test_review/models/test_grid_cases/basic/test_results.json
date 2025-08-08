@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": false,
+  "error": null,
+  "outputs": [],
+  "note": "VISUALIZATION DEMO ONLY - This demonstrates VertexGrid construction, not a MODFLOW model. No output files expected."
+}

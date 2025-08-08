@@ -1,0 +1,81 @@
+{
+  "source_test": "test_mfreadnam",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test Mfreadnam - MF2005 Demonstration",
+  "description": "Demonstrates reading and extracting metadata from MODFLOW namefiles including CRS, rotation, and spatial reference information",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "Namefile",
+      "file": "flopy.utils.mfreadnam",
+      "phase": 7,
+      "purpose": "Parse namefile headers for metadata extraction"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Basic discretization for demonstration"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Solver"
+    }
+  ],
+  "package_details": {
+    "Namefile": "Parse namefile headers for metadata extraction",
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "OC": "Output control for heads and budgets",
+    "PCG": "Preconditioned conjugate gradient solver"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-2005 classic simulation",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF2005 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 30 seconds"
+}

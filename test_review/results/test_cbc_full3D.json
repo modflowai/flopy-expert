@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "true_purpose": "Tests the full3D=True option in CellBudgetFile reader to ensure proper 3D array reconstruction from cell-by-cell budget files for both MODFLOW-2005 and MODFLOW 6 models with different discretization types",
+    "is_useful_example": true,
+    "example_demonstrates": "Reading and reshaping cell-by-cell budget data into full 3D arrays",
+    "purpose": "Demonstrates how to read cell-by-cell budget files and reconstruct full 3D arrays from the budget data, handling both structured and unstructured grids.",
+    "key_concepts": [
+      "Cell-by-cell budget file reading",
+      "Full 3D array reconstruction",
+      "Budget data shape validation",
+      "Cross-version compatibility (MF2005/MF6)",
+      "Handling different discretization types"
+    ],
+    "questions_answered": [
+      "How do I read cell-by-cell budget files with full 3D arrays?",
+      "How do I ensure budget data shapes match model grid dimensions?",
+      "How do I work with CBC files from both MODFLOW-2005 and MODFLOW 6?",
+      "How do I extract specific budget components like flow terms?",
+      "How do I validate CBC data dimensions against model grid?"
+    ],
+    "common_use_cases": [
+      "Post-processing water budget analysis",
+      "Extracting flow terms for visualization",
+      "Validating model output dimensions",
+      "Converting budget data to 3D arrays for analysis"
+    ],
+    "primary_phase": 7,
+    "secondary_phases": [
+      1
+    ],
+    "modflow_version": "mf6",
+    "packages_used": [
+      "flopy.mf6.MFSimulation",
+      "flopy.mf6.ModflowGwfoc",
+      "flopy.mf6.ModflowGwf",
+      "flopy.mf6.ModflowGwfdis",
+      "flopy.mf6.ModflowGwfnpf",
+      "flopy.mf6.ModflowGwfic",
+      "flopy.mf6.ModflowGwfchd",
+      "flopy.mf6.ModflowIms",
+      "flopy.mf6.ModflowTdis",
+      "flopy.utils.CellBudgetFile"
+    ],
+    "keywords": [
+      "cell-by-cell",
+      "budget",
+      "CBC",
+      "full3D",
+      "array reconstruction",
+      "post-processing",
+      "flow terms",
+      "budget analysis",
+      "3D arrays"
+    ],
+    "embedding_string": "This example demonstrates reading and processing cell-by-cell budget files from MODFLOW simulations, with emphasis on reconstructing full 3D arrays from the budget data. The script shows how to use the CellBudgetFile class with the full3D=True option to extract budget terms and reshape them into the original model grid dimensions. It handles both MODFLOW-2005 and MODFLOW 6 formats, validating that the extracted data shapes match the expected grid dimensions. This is essential for post-processing workflows where budget data needs to be visualized or analyzed in its spatial context, ensuring proper alignment with model discretization."
+  },
+  "models": [
+    {
+      "name": "cbc_full3d_example",
+      "description": "Example demonstrating cell-by-cell budget file reading with full 3D array reconstruction",
+      "code": "import os\nimport numpy as np\nimport flopy\nfrom flopy.utils import CellBudgetFile\n\n# Create workspace\nws = './cbc_full3d_example'\nif not os.path.exists(ws):\n    os.makedirs(ws)\n\nname = 'model'\n\n# =====================================\n# Phase 1: Discretization\n# =====================================\nprint('Phase 1: Setting up model discretization...')\n\n# Create simulation\nsim = flopy.mf6.MFSimulation(\n    sim_name=name,\n    sim_ws=ws,\n    exe_name='mf6'\n)\n\n# Time discretization\ntdis = flopy.mf6.ModflowTdis(\n    sim,\n    nper=1,\n    perioddata=[(1.0, 1, 1.0)]\n)\n\n# Create groundwater flow model\ngwf = flopy.mf6.ModflowGwf(\n    sim,\n    modelname=name,\n    save_flows=True  # Important for CBC output\n)\n\n# Spatial discretization\nnlay, nrow, ncol = 3, 10, 10\ndelr = delc = 100.0\ntop = 50.0\nbotm = [20.0, 0.0, -30.0]\n\ndis = flopy.mf6.ModflowGwfdis(\n    gwf,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delr=delr,\n    delc=delc,\n    top=top,\n    botm=botm\n)\n\n# Store grid shape for validation\nshape3d = (nlay, nrow, ncol)\nnnodes = nlay * nrow * ncol\nprint(f'  Model grid: {nlay} layers, {nrow} rows, {ncol} columns')\nprint(f'  Total nodes: {nnodes}')\n\n# =====================================\n# Phase 2: Flow Properties\n# =====================================\nprint('\\nPhase 2: Setting flow properties...')\n\n# Node property flow\nicelltype = 1  # Convertible\nk = 10.0  # Hydraulic conductivity\n\nnpf = flopy.mf6.ModflowGwfnpf(\n    gwf,\n    icelltype=icelltype,\n    k=k\n)\n\n# =====================================\n# Phase 3: Initial Conditions\n# =====================================\nprint('\\nPhase 3: Setting initial conditions...')\n\nstrt = 40.0  # Starting head\nic = flopy.mf6.ModflowGwfic(gwf, strt=strt)\n\n# =====================================\n# Phase 4: Boundary Conditions\n# =====================================\nprint('\\nPhase 4: Setting boundary conditions...')\n\n# Constant head boundaries on left and right\nchd_data = []\n# Left boundary (column 0)\nfor k in range(nlay):\n    for i in range(nrow):\n        chd_data.append([(k, i, 0), 45.0])\n\n# Right boundary (last column)\nfor k in range(nlay):\n    for i in range(nrow):\n        chd_data.append([(k, i, ncol-1), 35.0])\n\nchd = flopy.mf6.ModflowGwfchd(\n    gwf,\n    stress_period_data=chd_data\n)\n\nprint(f'  Added {len(chd_data)} constant head cells')\n\n# =====================================\n# Phase 5: Solver Configuration\n# =====================================\nprint('\\nPhase 5: Configuring solver...')\n\nims = flopy.mf6.ModflowIms(\n    sim,\n    complexity='simple',\n    print_option='summary',\n    outer_dvclose=1.0e-6,\n    inner_dvclose=1.0e-6\n)\n\n# =====================================\n# Phase 6: Output Control\n# =====================================\nprint('\\nPhase 6: Setting output control...')\n\n# Output control - save all budget terms\nbudget_file = f'{name}.cbc'\noc = flopy.mf6.ModflowGwfoc(\n    gwf,\n    budget_filerecord=budget_file,\n    saverecord=[('BUDGET', 'ALL')],\n    printrecord=[('BUDGET', 'ALL')]\n)\n\n# =====================================\n# Run the Model\n# =====================================\nprint('\\nRunning simulation...')\nsim.write_simulation()\nsuccess, buff = sim.run_simulation(silent=False)\n\nif not success:\n    raise Exception('Model failed to run')\n\nprint('\\nSimulation complete!')\n\n# =====================================\n# Phase 7: Post-processing with CBC\n# =====================================\nprint('\\n' + '='*50)\nprint('Phase 7: Post-processing Cell-by-Cell Budget')\nprint('='*50)\n\n# Open the CBC file\ncbc_path = os.path.join(ws, budget_file)\ncbc = CellBudgetFile(cbc_path)\n\n# Validate CBC dimensions\nprint(f'\\nCBC file information:')\nprint(f'  Number of nodes: {cbc.nnodes}')\nprint(f'  Shape: {cbc.shape}')\nprint(f'  Expected shape: {shape3d}')\n\n# Check that dimensions match\nassert cbc.nnodes == nnodes, f'Node count mismatch: {cbc.nnodes} != {nnodes}'\nassert cbc.shape == shape3d, f'Shape mismatch: {cbc.shape} != {shape3d}'\n\nprint('\\n\u00e2\u009c\u0093 CBC dimensions validated successfully!')\n\n# Get available budget terms\nprint('\\nAvailable budget terms:')\nrecord_names = cbc.get_unique_record_names(decode=True)\nfor i, name in enumerate(record_names, 1):\n    print(f'  {i}. {name.strip()}')\n\n# Get times\ntimes = cbc.get_times()\nprint(f'\\nAvailable times: {times}')\n\n# Extract and validate each budget term with full3D\nprint('\\nExtracting budget data with full3D=True:')\nprint('-' * 40)\n\nfor record_name in record_names:\n    text = record_name.strip()\n    print(f'\\n{text}:')\n    \n    # Get data with full3D=True\n    data = cbc.get_data(text=text, totim=times[0], full3D=True)\n    \n    if data:\n        arr = np.squeeze(data[0])\n        print(f'  Shape: {arr.shape}')\n        print(f'  Min: {arr.min():.6f}')\n        print(f'  Max: {arr.max():.6f}')\n        print(f'  Mean: {arr.mean():.6f}')\n        \n        # Validate shape for non-FLOW-JA-FACE terms\n        if text != 'FLOW-JA-FACE':\n            if arr.shape != shape3d:\n                print(f'  \u00e2\u009a\u00a0 Warning: Shape {arr.shape} does not match grid {shape3d}')\n            else:\n                print(f'  \u00e2\u009c\u0093 Shape matches grid dimensions')\n\n# Example: Extract specific budget component\nprint('\\n' + '='*50)\nprint('Example: Extracting CHD flow rates')\nprint('='*50)\n\nif 'CHD' in [r.strip() for r in record_names]:\n    chd_flow = cbc.get_data(text='CHD', totim=times[0], full3D=True)[0]\n    print(f'\\nCHD flow array shape: {chd_flow.shape}')\n    \n    # Sum flows by layer\n    for k in range(nlay):\n        layer_flow = chd_flow[k, :, :].sum()\n        print(f'  Layer {k+1} total CHD flow: {layer_flow:.6f}')\n    \n    # Total CHD flow\n    total_chd = chd_flow.sum()\n    print(f'\\nTotal CHD flow: {total_chd:.6f}')\n\n# Close the CBC file\ncbc.close()\n\nprint('\\n' + '='*50)\nprint('CBC processing complete!')\nprint('='*50)\n\nprint('\\nKey takeaways:')\nprint('  1. Use full3D=True to get budget data as 3D arrays')\nprint('  2. Validate array shapes against model grid')\nprint('  3. FLOW-JA-FACE has different shape (connection-based)')\nprint('  4. Budget arrays preserve model grid structure')"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "source_test": "test_flopy_io",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test Flopy Io - MF2005 Demonstration",
+  "description": "Demonstrates line parsing for MODFLOW input files and safe relative path handling",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "Utilities",
+      "file": "flopy.utils",
+      "phase": 7,
+      "purpose": "I/O utility functions testing"
+    }
+  ],
+  "package_details": {
+    "Utilities": "I/O utility functions testing"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-2005 classic simulation",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF2005 model setup and execution"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 10 seconds"
+}

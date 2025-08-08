@@ -1,0 +1,93 @@
+{
+  "model_name": "test_mbase",
+  "variant": "basic",
+  "title": "FloPy Base Model Utilities - Model Execution and Executable Resolution",
+  "description": "Demonstrates FloPy's core base model utilities for MODFLOW executable resolution and model execution. Shows resolve_exe(), run_model(), path handling, and workspace management.",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "model_version": "mf6",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Discretization"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control"
+    }
+  ],
+  "package_details": {
+    "DIS": "1 layer, 5\u00d75 grid, uniform 100m spacing",
+    "IC": "Initial head of 50m",
+    "NPF": "Uniform hydraulic conductivity K=10 m/d",
+    "CHD": "Constant head boundaries on left/right edges",
+    "OC": "Head and budget output for model testing"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 5,
+    "ncol": 5,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      0.0
+    ]
+  },
+  "key_features": [
+    "resolve_exe() executable path resolution",
+    "run_model() model execution utility",
+    "Cross-platform executable handling",
+    "Path validation and error handling",
+    "Workspace and file management",
+    "Multiple executable specification methods",
+    "Error handling for missing executables",
+    "Output file analysis and verification"
+  ],
+  "learning_objectives": [
+    "Understanding FloPy's base model utilities",
+    "Executable resolution and path handling",
+    "Model execution with run_model()",
+    "Error handling in model execution",
+    "Workspace management and file organization",
+    "Cross-platform compatibility considerations"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds",
+  "source_test": "test_mbase.py::test_resolve_exe_by_name, test_run_model"
+}

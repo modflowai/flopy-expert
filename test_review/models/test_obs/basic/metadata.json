@@ -1,0 +1,153 @@
+{
+  "source_test": "test_obs",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test OBS - MODFLOW Observation Packages",
+  "description": "Demonstrates MODFLOW observation packages (HOB and FLWOB) for model calibration, validation, and performance monitoring with head and flow observations",
+  "phase": 6,
+  "phase_name": "Visualization",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "MODFLOW-2005 model container"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Single layer discretization"
+    },
+    {
+      "package": "ModflowBas",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 1,
+      "purpose": "Basic package with constant head"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow package"
+    },
+    {
+      "package": "ModflowPcg",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    },
+    {
+      "package": "ModflowDrn",
+      "file": "flopy.modflow.ModflowDrn",
+      "phase": 4,
+      "purpose": "Drain package for flow observations"
+    },
+    {
+      "package": "HeadObservation",
+      "file": "flopy.modflow.HeadObservation",
+      "phase": 6,
+      "purpose": "Head observation data structure"
+    },
+    {
+      "package": "ModflowHob",
+      "file": "flopy.modflow.ModflowHob",
+      "phase": 6,
+      "purpose": "Head observation package"
+    },
+    {
+      "package": "ModflowFlwob",
+      "file": "flopy.modflow.ModflowFlwob",
+      "phase": 6,
+      "purpose": "Flow observation package"
+    }
+  ],
+  "package_details": {
+    "Modflow": "MODFLOW-2005 base model for observation demonstration",
+    "ModflowDis": "1 layer × 11×11 grid, 2 steady-state periods",
+    "ModflowBas": "Constant head boundary at (0,0), initial heads 10m",
+    "ModflowLpf": "K=10 m/day, unconfined layer",
+    "ModflowPcg": "Default PCG solver settings",
+    "ModflowDrn": "2 drain cells with time-varying elevations",
+    "HeadObservation": "3 monitoring wells with time series data",
+    "ModflowHob": "Head observation package, output unit 51",
+    "ModflowFlwob": "Flow observation package for drain monitoring"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 11,
+    "ncol": 11,
+    "nper": 2,
+    "cell_size": "100m × 100m",
+    "domain_extent": "1.1km × 1.1km",
+    "total_cells": 121,
+    "active_cells": 120,
+    "vertical_structure": "50m top to 0m bottom",
+    "observation_features": {
+      "head_observation_wells": 3,
+      "flow_observation_points": 2,
+      "total_observations": 5,
+      "time_series_periods": 2
+    }
+  },
+  "key_features": [
+    "Head observation networks (HOB)",
+    "Flow observation networks (FLWOB)",
+    "Time series observation data",
+    "Multiple observation locations",
+    "Model calibration framework",
+    "Residual analysis support",
+    "Custom observation naming",
+    "Weighted observation system"
+  ],
+  "learning_objectives": [
+    "Understanding observation package functionality",
+    "Creating head observation networks",
+    "Configuring flow observation systems",
+    "Managing time series observation data",
+    "Implementing model calibration support",
+    "Designing observation network layouts",
+    "Processing observation output data",
+    "Applying calibration frameworks"
+  ],
+  "complexity": "intermediate-advanced",
+  "run_time": "< 10 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis", "ModflowBas"],
+      "description": "Simple grid with constant head boundary"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow", "ModflowLpf"],
+      "description": "Basic flow model configuration"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowBas"],
+      "description": "Initial heads at 10m"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowDrn"],
+      "description": "Drain boundaries for flow observations"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowPcg"],
+      "description": "PCG iterative solver"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["HeadObservation", "ModflowHob", "ModflowFlwob"],
+      "description": "Observation networks for model monitoring"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": [],
+      "description": "Calibration analysis and validation"
+    }
+  }
+}

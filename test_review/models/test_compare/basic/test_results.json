@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["comparison_model.hds", "comparison_model.cbc"],
+  "note": "MODFLOW-2005 model demonstrating wells with auxiliary variables, model saving/loading, and workspace management"
+}

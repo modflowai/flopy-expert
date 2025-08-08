@@ -1,0 +1,102 @@
+{
+  "model_name": "test_listbudget",
+  "variant": "basic",
+  "title": "List Budget Utilities with FloPy - Budget Data Processing",
+  "description": "Demonstrates FloPy's list budget utilities for reading and processing MODFLOW budget data from list files. Shows budget analysis, time series processing, dataframe conversion, and model diagnostics.",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "model_version": "mf6",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Discretization"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.mf6.ModflowGwfwel",
+      "phase": 4,
+      "purpose": "Well package"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control with list-based budget"
+    }
+  ],
+  "package_details": {
+    "DIS": "3 layers, 10\u00d710 grid, uniform 100m spacing",
+    "IC": "Initial head of 75m",
+    "NPF": "Uniform hydraulic conductivity K=10 m/d",
+    "CHD": "Constant head boundaries on north/south edges",
+    "WEL": "Time-varying pumping wells with increasing rates",
+    "OC": "Comprehensive budget output for list file analysis"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      50.0,
+      0.0,
+      -50.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 model with comprehensive budget output",
+    "Mf6ListBudget utility for list file processing",
+    "Budget component identification and extraction",
+    "Time series analysis with incremental/cumulative data",
+    "Pandas DataFrame export for analysis",
+    "Model performance and runtime analysis",
+    "Mass balance verification",
+    "Multiple list budget utility classes demonstration"
+  ],
+  "learning_objectives": [
+    "Understanding FloPy list budget utility classes",
+    "Processing MODFLOW budget data from list files",
+    "Budget component analysis and time series extraction",
+    "Converting budget data to pandas DataFrames",
+    "Model performance assessment and diagnostics",
+    "Mass balance verification techniques"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds",
+  "source_test": "test_listbudget.py::test_mf6listfile"
+}

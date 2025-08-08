@@ -1,0 +1,140 @@
+{
+  "source_test": "test_wel",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test WEL - Advanced Well Package Demonstration",
+  "description": "Demonstrates the WEL package with auxiliary variables, get_empty() method, time-varying pumping schedules, and binary output options for comprehensive well field management",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "MODFLOW-2005 model container"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "3-layer discretization with time steps"
+    },
+    {
+      "package": "ModflowBas",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 1,
+      "purpose": "Basic package with boundary conditions"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer properties with decreasing K"
+    },
+    {
+      "package": "ModflowWel",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Well package with auxiliary variables"
+    },
+    {
+      "package": "ModflowOc",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 6,
+      "purpose": "Output control for heads and budgets"
+    },
+    {
+      "package": "ModflowPcg",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "PCG solver for flow equations"
+    }
+  ],
+  "package_details": {
+    "Modflow": "Base MODFLOW-2005 model for well field simulation",
+    "ModflowDis": "3 layers × 10 rows × 10 columns, 3 stress periods",
+    "ModflowBas": "Constant head boundaries on all edges",
+    "ModflowLpf": "Unconfined top layer, confined deeper layers",
+    "ModflowWel": "5-6 wells with 4 auxiliary variables, time-varying rates",
+    "ModflowOc": "Save heads and budgets at period ends",
+    "ModflowPcg": "Iterative solver with standard convergence"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "nper": 3,
+    "cell_size": "100m × 100m",
+    "domain_extent": "1km × 1km",
+    "total_cells": 300,
+    "active_cells": 192,
+    "vertical_structure": "50m top to -10m bottom",
+    "wel_features": {
+      "total_wells": "4 to 6 (varies by period)",
+      "auxiliary_variables": 4,
+      "well_categories": 5,
+      "depth_range": "20-55m",
+      "rate_range": "-2000 to +500 m³/day"
+    }
+  },
+  "key_features": [
+    "WEL package with auxiliary variable support",
+    "get_empty() method for structured data creation",
+    "Time-varying pumping schedules across periods",
+    "Multi-layer well placement strategy",
+    "Binary vs ASCII output format options",
+    "Injection and extraction well types",
+    "Well efficiency tracking system",
+    "Seasonal pumping variations"
+  ],
+  "learning_objectives": [
+    "Understanding WEL package configuration",
+    "Mastering auxiliary variable implementation",
+    "Using get_empty() for data structure creation",
+    "Implementing time-varying pumping schedules",
+    "Managing multi-layer well systems",
+    "Choosing appropriate output formats",
+    "Tracking well attributes and metadata",
+    "Applying seasonal pumping patterns"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 10 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis", "ModflowBas"],
+      "description": "3-layer grid with edge boundaries"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow", "ModflowLpf"],
+      "description": "Aquifer properties with depth variation"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowBas"],
+      "description": "Uniform initial heads at 45m"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowWel"],
+      "description": "Wells with auxiliary variables and time-varying rates"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowPcg"],
+      "description": "PCG solver for iterative solution"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["ModflowOc"],
+      "description": "Output control for analysis"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": [],
+      "description": "Well performance and efficiency analysis"
+    }
+  }
+}

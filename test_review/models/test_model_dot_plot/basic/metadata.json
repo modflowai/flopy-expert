@@ -1,0 +1,95 @@
+{
+  "source_test": "test_model_dot_plot",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test Model Dot Plot - MF2005 Demonstration",
+  "description": "Demonstrates FloPy's model plotting capabilities including model.plot() method, dataset plotting, layer-specific visualization, and export functionality",
+  "phase": 6,
+  "phase_name": "Visualization",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "3-layer transient discretization for plotting demonstration"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with initial heads"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow with variable hydraulic conductivity zones"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Wells for stress visualization in multiple locations"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.modflow.ModflowChd",
+      "phase": 4,
+      "purpose": "Constant head boundaries on left and right edges"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control for plotting data"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "WEL": "Well package for pumping stress",
+    "CHD": "Constant head boundary conditions",
+    "OC": "Output control for heads and budgets",
+    "PCG": "Preconditioned conjugate gradient solver"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      25.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-2005 classic simulation",
+    "Structured grid discretization",
+    "Variable hydraulic conductivity zones for visualization",
+    "Model plotting with matplotlib integration",
+    "Dataset-specific plotting capabilities",
+    "Export functionality for saving plots"
+  ],
+  "learning_objectives": [
+    "Understanding MF2005 model setup and execution",
+    "Mastering FloPy plotting capabilities",
+    "Creating effective model visualizations",
+    "Using model.plot() method for comprehensive visualization",
+    "Implementing dataset-specific plotting",
+    "Exporting plots to image files",
+    "Handling plotting in different environments"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 1 minute"
+}

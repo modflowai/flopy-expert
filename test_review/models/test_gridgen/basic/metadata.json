@@ -1,0 +1,85 @@
+{
+  "source_test": "test_gridgen",
+  "model_version": "mfusg",
+  "variant": "basic",
+  "title": "Test Gridgen - MFUSG Demonstration",
+  "description": "Demonstrates conceptual unstructured grid creation with refinement areas",
+  "phase": 1,
+  "phase_name": "Discretization",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Structured grid for base"
+    },
+    {
+      "package": "DISU",
+      "file": "flopy.mfusg.MfusgDisu",
+      "phase": 1,
+      "purpose": "Unstructured grid from gridgen"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.modflow.ModflowChd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Solver"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "DISU": "Unstructured discretization for complex geometries",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "CHD": "Constant head boundary conditions",
+    "OC": "Output control for heads and budgets",
+    "PCG": "Preconditioned conjugate gradient solver"
+  },
+  "grid_type": "unstructured",
+  "grid_details": {
+    "nlay": "variable",
+    "nodes": "unstructured connectivity",
+    "cell_type": "mixed prisms/tetrahedra",
+    "top": 100.0,
+    "botm": "variable"
+  },
+  "key_features": [
+    "MODFLOW-USG unstructured grid support",
+    "Unstructured grid discretization",
+    "Grid manipulation and analysis"
+  ],
+  "learning_objectives": [
+    "Understanding MFUSG model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing",
+    "Advanced grid manipulation techniques"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 1 minute"
+}

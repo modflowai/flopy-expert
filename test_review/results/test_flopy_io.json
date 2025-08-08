@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "purpose": "Demonstrates FloPy's I/O utility functions for line parsing and safe relative path handling across different operating systems and path configurations",
+    "primary_phase": 7,
+    "modflow_version": "mf6",
+    "packages_used": [
+      "flopy.utils.flopy_io"
+    ],
+    "keywords": [
+      "line_parse",
+      "relpath_safe",
+      "path_handling",
+      "cross_platform",
+      "io_utilities",
+      "file_paths",
+      "comment_parsing",
+      "MNW2"
+    ]
+  },
+  "models": [
+    {
+      "name": "flopy_io_utilities_example",
+      "description": "Demonstrates line parsing for MODFLOW input files and safe relative path handling",
+      "code": "import os\nimport numpy as np\nfrom pathlib import Path\nimport flopy\nfrom flopy.utils.flopy_io import line_parse, relpath_safe\n\n# Working directory setup\nworkspace = Path('temp_io_example')\nworkspace.mkdir(exist_ok=True)\n\n# ============================================\n# Phase 7: Post-processing - I/O Utilities\n# ============================================\n\n# Demonstrate line_parse functionality\nprint(\"\\n=== Line Parse Examples ===\")\nprint(\"Line parsing is used internally by FloPy to read MODFLOW input files\")\nprint(\"It handles comments and splits lines into tokens\\n\")\n\n# Example 1: Parse a line with comment (MNW2 format)\nline1 = \"Well-A  -1                   ; 2a. WELLID,NNODES\"\nparsed1 = line_parse(line1)\nprint(f\"Input line: {line1}\")\nprint(f\"Parsed tokens: {parsed1}\")\nprint(f\"Well ID: {parsed1[0]}, Number of nodes: {parsed1[1]}\\n\")\n\n# Example 2: Parse a line without comment\nline2 = \"100.0  200.0  50.0\"\nparsed2 = line_parse(line2)\nprint(f\"Input line: {line2}\")\nprint(f\"Parsed tokens: {parsed2}\\n\")\n\n# Example 3: Parse with multiple spaces and tabs\nline3 = \"LAYER\\t1\\t\\t10    20    ;comment here\"\nparsed3 = line_parse(line3)\nprint(f\"Input line with tabs: {line3}\")\nprint(f\"Parsed tokens: {parsed3}\\n\")\n\n# Demonstrate relpath_safe functionality\nprint(\"\\n=== Safe Relative Path Examples ===\")\nprint(\"relpath_safe handles cross-platform path issues\\n\")\n\n# Create some test directories\nmodel_dir = workspace / 'model'\nmodel_dir.mkdir(exist_ok=True)\noutput_dir = workspace / 'output'\noutput_dir.mkdir(exist_ok=True)\n\n# Example 1: Get relative path from parent\nrel_path1 = relpath_safe(str(model_dir), str(workspace))\nprint(f\"Full path: {model_dir}\")\nprint(f\"Relative to parent: {rel_path1}\\n\")\n\n# Example 2: Get relative path from different directory\nrel_path2 = relpath_safe(str(output_dir), str(model_dir))\nprint(f\"Output dir: {output_dir}\")\nprint(f\"Relative to model dir: {rel_path2}\\n\")\n\n# Example 3: Handle Path objects\nrel_path3 = relpath_safe(output_dir, workspace)\nprint(f\"Using Path objects:\")\nprint(f\"Output dir relative to workspace: {rel_path3}\\n\")\n\n# Create a simple MODFLOW 6 model to demonstrate practical usage\nprint(\"\\n=== Practical Example with MODFLOW 6 Model ===\")\nprint(\"Creating a simple model to show how these utilities are used\\n\")\n\nname = 'io_demo'\nsim = flopy.mf6.MFSimulation(\n    sim_name=name,\n    sim_ws=str(model_dir),\n    exe_name='mf6'\n)\n\n# Phase 1: Time discretization\ntdis = flopy.mf6.ModflowTdis(\n    sim,\n    time_units='DAYS',\n    nper=1,\n    perioddata=[(1.0, 1, 1.0)]\n)\n\n# Create groundwater flow model\ngwf = flopy.mf6.ModflowGwf(sim, modelname=name)\n\n# Phase 1: Spatial discretization\ndis = flopy.mf6.ModflowGwfdis(\n    gwf,\n    nlay=1,\n    nrow=10,\n    ncol=10,\n    delr=100.0,\n    delc=100.0,\n    top=10.0,\n    botm=0.0\n)\n\n# Phase 2: Flow properties\nnpf = flopy.mf6.ModflowGwfnpf(\n    gwf,\n    save_flows=True,\n    icelltype=1,\n    k=10.0\n)\n\n# Phase 3: Initial conditions\nic = flopy.mf6.ModflowGwfic(gwf, strt=5.0)\n\n# Phase 4: Boundary conditions\nchd_spd = [[(0, 0, 0), 5.0], [(0, 9, 9), 4.0]]\nchd = flopy.mf6.ModflowGwfchd(gwf, stress_period_data=chd_spd)\n\n# Phase 5: Solver\nims = flopy.mf6.ModflowIms(\n    sim,\n    print_option='SUMMARY',\n    complexity='SIMPLE'\n)\n\n# Phase 7: Output control\noc = flopy.mf6.ModflowGwfoc(\n    gwf,\n    budget_filerecord=f'{name}.cbc',\n    head_filerecord=f'{name}.hds',\n    saverecord=[('HEAD', 'ALL'), ('BUDGET', 'ALL')]\n)\n\n# Write model files\nsim.write_simulation()\n\n# Demonstrate how FloPy uses these utilities internally\nprint(f\"Model workspace: {model_dir}\")\nprint(f\"Relative path handling is used for file references in name files\")\n\n# Show how line_parse would be used to read a package file\nname_file = model_dir / f'{name}.nam'\nif name_file.exists():\n    print(f\"\\nReading name file to demonstrate line parsing:\")\n    with open(name_file, 'r') as f:\n        for i, line in enumerate(f):\n            if i < 5 and line.strip() and not line.startswith('#'):\n                parsed = line_parse(line)\n                if parsed:\n                    print(f\"  Line {i+1}: {parsed}\")\n\nprint(\"\\n=== Summary ===\")\nprint(\"1. line_parse() handles comment removal and tokenization\")\nprint(\"2. relpath_safe() provides cross-platform path handling\")\nprint(\"3. These utilities are used internally by FloPy for file I/O\")\nprint(\"4. Understanding them helps with debugging and custom file operations\")\n\n# Cleanup\nimport shutil\nif workspace.exists():\n    shutil.rmtree(workspace)\n    print(\"\\nTemporary files cleaned up.\")"
+    }
+  ]
+}

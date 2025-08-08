@@ -1,0 +1,60 @@
+{
+  "model_name": "test_lgrutil",
+  "variant": "basic",
+  "title": "LGR Utilities with FloPy - Local Grid Refinement Tools",
+  "description": "Demonstrates FloPy's Local Grid Refinement (LGR) utilities for creating refined grids within parent grids. Shows grid refinement calculations, parent-child relationships, and conversion to DISV format.",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "model_version": "mf6",
+  "packages": [
+    {
+      "package": "LGR",
+      "file": "flopy.mflgr.MfLgr",
+      "phase": 1,
+      "purpose": "Local grid refinement configuration"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Parent model discretization"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Child model discretization"
+    }
+  ],
+  "package_details": {
+    "LGR": "Local Grid Refinement utility class for nested grids",
+    "DISV": "Conversion to discretization by vertices format"
+  },
+  "grid_type": "lgr_utilities",
+  "grid_details": {
+    "parent_grid": "5\u00d75 structured grid",
+    "child_refinement": "3\u00d73 cells per parent cell",
+    "child_layers": "Variable per parent layer",
+    "variable_spacing": "Supported for parent grid",
+    "disv_conversion": "Convert refined grid to unstructured format"
+  },
+  "key_features": [
+    "Local grid refinement calculations",
+    "Parent-child grid relationship management",
+    "Variable cell spacing handling",
+    "Exchange data generation for grid connections",
+    "DISV format conversion for unstructured modeling",
+    "No MODFLOW execution - pure utility functions",
+    "Grid visualization capabilities"
+  ],
+  "learning_objectives": [
+    "Understanding local grid refinement concepts",
+    "Using FloPy LGR utility classes",
+    "Managing parent-child grid relationships",
+    "Converting refined grids to DISV format",
+    "Generating exchange data for grid connections"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 10 seconds",
+  "source_test": "test_lgrutil.py::test_lgrutil, test_lgrutil2, test_lgrutil3"
+}

@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["model.hds", "model.lst", "mfsim.lst"],
+  "note": "Demonstrates grid intersection utilities for boundary condition placement - model runs successfully using geometric intersections"
+}

@@ -37,8 +37,22 @@ def run_model():
     print("-" * 40)
     
     # Create basic MODFLOW model for context
-    ml = flopy.modflow.Modflow("array_demo", model_ws=model_ws)
-    dis = flopy.modflow.ModflowDis(ml, nlay=3, nrow=15, ncol=20, nper=4)
+    ml = flopy.modflow.Modflow("array_demo", 
+                              model_ws=model_ws,
+                              exe_name="/home/danilopezmella/flopy_expert/bin/mf2005")
+    
+    # Fix layer geometry - ensure proper thickness
+    dis = flopy.modflow.ModflowDis(
+        ml, 
+        nlay=3, 
+        nrow=15, 
+        ncol=20, 
+        nper=4,
+        top=50.0,           # Top at 50m
+        botm=[40.0, 20.0, 0.0],  # Layer bottoms with proper thickness
+        delr=1.0,
+        delc=1.0
+    )
     
     # Create 2D array with constant value
     u2d_constant = Util2d(ml, (ml.nrow, ml.ncol), np.float32, 25.0, "hydraulic_conductivity")
@@ -156,11 +170,11 @@ def run_model():
     print(f"\n5. MfList - Boundary Condition Data Structures")
     print("-" * 40)
     
-    # Create well data using MfList structure
+    # Create well data using MfList structure - FIXED: Reduced pumping rates
     wel_data = {
-        0: [[0, 7, 10, -1500.0], [1, 8, 12, -800.0]],  # Period 0: 2 wells
-        1: [[0, 7, 10, -2000.0], [1, 8, 12, -1200.0], [2, 5, 15, -500.0]],  # Period 1: 3 wells
-        2: [[0, 7, 10, -1000.0]]  # Period 2: 1 well
+        0: [[0, 7, 10, -50.0], [1, 8, 12, -30.0]],  # Period 0: 2 wells
+        1: [[0, 7, 10, -60.0], [1, 8, 12, -40.0], [2, 5, 15, -20.0]],  # Period 1: 3 wells
+        2: [[0, 7, 10, -35.0]]  # Period 2: 1 well
         # Period 3: use previous data (default behavior)
     }
     
@@ -227,8 +241,23 @@ def run_model():
     print(f"\n8. Model Integration and Best Practices")
     print("-" * 40)
     
-    # Create complete model with all utilities
-    bas = flopy.modflow.ModflowBas(ml, ibound=1, strt=50.0)
+    # Create complete model with all utilities - FIXED: Add constant head boundaries
+    ibound = np.ones((ml.nlay, ml.nrow, ml.ncol), dtype=int)
+    # Add constant head boundaries on edges for water source - only on layer 1
+    # Set higher head boundaries to provide water source
+    ibound[0, 0, :] = -1  # Top edge - layer 1 only
+    ibound[0, -1, :] = -1  # Bottom edge - layer 1 only
+    ibound[0, :, 0] = -1  # Left edge - layer 1 only
+    ibound[0, :, -1] = -1  # Right edge - layer 1 only
+    
+    # Set initial heads lower than boundaries - match new geometry
+    strt = np.ones((ml.nlay, ml.nrow, ml.ncol)) * 45.0
+    strt[0, 0, :] = 48.0  # Constant head boundaries at 48m (within layer 1: 40-50m)
+    strt[0, -1, :] = 48.0
+    strt[0, :, 0] = 48.0
+    strt[0, :, -1] = 48.0
+    
+    bas = flopy.modflow.ModflowBas(ml, ibound=ibound, strt=strt)
     lpf = flopy.modflow.ModflowLpf(
         ml, 
         hk=u3d_hk,           # 3D hydraulic conductivity
@@ -240,24 +269,64 @@ def run_model():
     # Add transient recharge
     rch = flopy.modflow.ModflowRch(ml, rech=t2d_rch)
     
+    # Add solver and output control (required for running model)
+    pcg = flopy.modflow.ModflowPcg(ml, mxiter=100, iter1=50)
+    oc = flopy.modflow.ModflowOc(ml)
+    
     print("  Complete model created with:")
     print(f"    - 3D hydraulic conductivity field ({ml.nlay} layers)")
     print(f"    - Transient specific storage (4 periods)")
     print(f"    - Transient recharge rates (seasonal variation)")
     print(f"    - Well boundary conditions ({sum(len(data) for data in wel_data.values())} total wells)")
+    print(f"    - PCG solver and output control")
     
-    # Write model files
+    # Write and run model
     try:
-        ml.write_input()
-        print(f"\n✓ Model files written successfully")
+        print(f"\n11. Model Execution")
+        print("-" * 40)
         
-        # Count generated files
-        files = os.listdir(model_ws)
-        model_files = [f for f in files if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.wel', '.rch'))]
-        print(f"  Generated {len(model_files)} model files")
+        print(f"  Writing model input files...")
+        ml.write_input()
+        
+        print(f"  Running MODFLOW simulation...")
+        success, buff = ml.run_model(silent=True)
+        
+        if success:
+            print(f"  ✓ Model run completed successfully")
+            
+            # Check output files created
+            files = os.listdir(model_ws)
+            input_files = [f for f in files if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.wel', '.rch', '.pcg', '.oc'))]
+            output_files = [f for f in files if f.endswith(('.hds', '.cbc', '.lst', '.list'))]
+            
+            print(f"  Input files: {len(input_files)}")
+            print(f"  Output files: {len(output_files)}")
+            
+            if output_files:
+                print(f"    • Head file (.hds): {'✓' if any('.hds' in f for f in output_files) else '✗'}")
+                print(f"    • Budget file (.cbc): {'✓' if any('.cbc' in f for f in output_files) else '✗'}")
+                print(f"    • Listing file (.lst/.list): {'✓' if any(('.lst' in f or '.list' in f) for f in output_files) else '✗'}")
+                
+        else:
+            print(f"  ⚠ Model run failed")
+            if buff:
+                print(f"    Last error: {buff[-1] if buff else 'Unknown error'}")
+            
+            # Still check input files were created
+            files = os.listdir(model_ws)
+            input_files = [f for f in files if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.wel', '.rch', '.pcg', '.oc'))]
+            print(f"  Input files created: {len(input_files)}")
         
     except Exception as e:
-        print(f"  ⚠ Model writing error: {str(e)}")
+        print(f"  ⚠ Model execution error: {str(e)}")
+        
+        # Still try to show what files were created
+        try:
+            files = os.listdir(model_ws)
+            input_files = [f for f in files if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.wel', '.rch', '.pcg', '.oc'))]
+            print(f"  Input files created: {len(input_files)}")
+        except:
+            pass
     
     # 9. Advanced Array Operations
     print(f"\n9. Advanced Array Operations and Utilities")

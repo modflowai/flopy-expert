@@ -1,0 +1,86 @@
+{
+  "test_name": "test_binaryfile_reverse.py",
+  "metadata": {
+    "true_purpose": "Tests the HeadFile.reverse() and CellBudgetFile.reverse() methods to verify correct reversal of time order in MODFLOW binary output files, including proper handling of asymmetric time steps and budget value negation",
+    "is_useful_example": true,
+    "example_demonstrates": "How to reverse time order in MODFLOW 6 binary output files for analyzing aquifer recovery, creating reverse animations, or debugging from steady state",
+    "documentation": {
+      "purpose": "Demonstrates reversing the chronological order of MODFLOW 6 binary output files (heads and budgets) for post-processing analysis and visualization.",
+      "key_concepts": [
+        "Binary file manipulation with HeadFile and CellBudgetFile classes",
+        "Time series reversal in MODFLOW outputs",
+        "Budget value negation during reversal",
+        "Handling symmetric and asymmetric time steps",
+        "Post-processing binary outputs"
+      ],
+      "questions_answered": [
+        "How do I reverse the time order in MODFLOW binary output files?",
+        "What is the HeadFile.reverse() method and how does it work?",
+        "Why are budget values negated when reversed?",
+        "How can I analyze aquifer recovery after pumping stops?",
+        "How do I create reverse-time animations from MODFLOW results?"
+      ],
+      "common_use_cases": [
+        "Analyzing aquifer recovery after pumping cessation",
+        "Creating reverse-time animations for presentations",
+        "Debugging model convergence from final steady state",
+        "Understanding transient response when starting from equilibrium",
+        "Visualizing drawdown recovery patterns"
+      ]
+    },
+    "classification": {
+      "primary_phase": 7,
+      "phase_name": "Post-processing",
+      "secondary_phases": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modflow_version": "mf6",
+      "packages_used": [
+        "flopy.mf6.MFSimulation",
+        "flopy.mf6.ModflowTdis",
+        "flopy.mf6.ModflowIms",
+        "flopy.mf6.ModflowGwf",
+        "flopy.mf6.ModflowGwfdis",
+        "flopy.mf6.ModflowGwfdisv",
+        "flopy.mf6.ModflowGwfic",
+        "flopy.mf6.ModflowGwfnpf",
+        "flopy.mf6.ModflowGwfchd",
+        "flopy.mf6.ModflowGwfoc",
+        "flopy.utils.HeadFile",
+        "flopy.utils.CellBudgetFile",
+        "flopy.utils.gridutil.get_disv_kwargs"
+      ]
+    },
+    "search_metadata": {
+      "keywords": [
+        "binary file",
+        "reverse time",
+        "HeadFile",
+        "CellBudgetFile",
+        "time series",
+        "post-processing",
+        "reverse animation",
+        "aquifer recovery",
+        "budget negation",
+        "output reversal"
+      ],
+      "embedding_string": "Reverse time order in MODFLOW 6 binary output files using HeadFile.reverse() and CellBudgetFile.reverse() methods for post-processing analysis. Demonstrates how to reverse chronological order of heads and budgets, with automatic negation of budget values to maintain flow consistency. Useful for analyzing aquifer recovery after pumping stops, creating reverse-time animations, debugging convergence from steady state conditions. Shows handling of symmetric and asymmetric time steps, multiple stress periods, and proper reversal of both head and budget files. Essential technique for understanding transient responses when starting from equilibrium, visualizing drawdown recovery patterns, and creating presentation materials showing model evolution in reverse."
+    }
+  },
+  "models": [
+    {
+      "variant": "dis",
+      "description": "Structured grid (DIS) version demonstrating binary file reversal",
+      "code": "#!/usr/bin/env python3\n\"\"\"\nStandalone FloPy model demonstrating binary file reversal with structured grid (DIS)\nExtracted from: test_binaryfile_reverse.py\n\nDemonstrates all 7 conceptual phases with focus on Post-processing (Phase 7)\n\"\"\"\n\nimport flopy\nimport numpy as np\nfrom pathlib import Path\n\ndef build_model(ws=\"./model_output\", name=\"reverse_demo_dis\"):\n    \"\"\"\n    Build a simple MODFLOW 6 model with structured grid for demonstrating \n    binary file reversal post-processing.\n    \"\"\"\n    \n    # Ensure workspace exists\n    Path(ws).mkdir(exist_ok=True)\n    \n    # ========================================\n    # PHASE 1: DISCRETIZATION\n    # ========================================\n    print(\"Phase 1: Setting up discretization...\")\n    \n    # Create simulation\n    sim = flopy.mf6.MFSimulation(sim_name=name, sim_ws=ws, exe_name=\"mf6\")\n    \n    # Time discretization - 3 stress periods with different configurations\n    # This creates asymmetric time steps to demonstrate reversal handling\n    tdis = flopy.mf6.ModflowTdis(\n        sim, \n        nper=3,\n        perioddata=[\n            (1.0, 2, 1.0),  # Period 1: 1 day, 2 steps (0.5 day each)\n            (1.0, 1, 1.0),  # Period 2: 1 day, 1 step\n            (1.0, 1, 1.0),  # Period 3: 1 day, 1 step\n        ]\n    )\n    \n    # ========================================\n    # PHASE 5: SOLVER CONFIGURATION\n    # ========================================\n    print(\"Phase 5: Configuring solver...\")\n    \n    # Iterative Model Solver\n    ims = flopy.mf6.ModflowIms(\n        sim,\n        print_option=\"SUMMARY\",\n        complexity=\"SIMPLE\"\n    )\n    \n    # Create groundwater flow model\n    gwf = flopy.mf6.ModflowGwf(sim, modelname=name, save_flows=True)\n    \n    # Structured discretization (DIS)\n    dis = flopy.mf6.ModflowGwfdis(\n        gwf,\n        nlay=2,      # 2 layers\n        nrow=10,     # 10 rows\n        ncol=10,     # 10 columns\n        delr=10.0,   # Cell width\n        delc=10.0,   # Cell height\n        top=0.0,     # Top elevation\n        botm=[-1.0, -2.0]  # Bottom of each layer\n    )\n    \n    # ========================================\n    # PHASE 2: PROPERTIES\n    # ========================================\n    print(\"Phase 2: Setting hydraulic properties...\")\n    \n    # Node Property Flow package\n    npf = flopy.mf6.ModflowGwfnpf(\n        gwf,\n        save_specific_discharge=True,\n        icelltype=0,  # Confined\n        k=10.0        # Hydraulic conductivity\n    )\n    \n    # ========================================\n    # PHASE 3: INITIAL CONDITIONS\n    # ========================================\n    print(\"Phase 3: Setting initial conditions...\")\n    \n    # Initial conditions - gradient from left to right\n    ic = flopy.mf6.ModflowGwfic(gwf, strt=1.0)\n    \n    # ========================================\n    # PHASE 4: BOUNDARY CONDITIONS\n    # ========================================\n    print(\"Phase 4: Setting boundary conditions...\")\n    \n    # Constant head boundaries\n    chd = flopy.mf6.ModflowGwfchd(\n        gwf,\n        stress_period_data=[\n            [(0, 0, 0), 1.0],  # Upper-left corner\n            [(0, 9, 9), 0.0],  # Lower-right corner\n        ]\n    )\n    \n    # ========================================\n    # OUTPUT CONTROL\n    # ========================================\n    print(\"Setting up output control...\")\n    \n    oc = flopy.mf6.ModflowGwfoc(\n        gwf,\n        budget_filerecord=f\"{name}.bud\",\n        head_filerecord=f\"{name}.hds\",\n        saverecord=[(\"HEAD\", \"ALL\"), (\"BUDGET\", \"ALL\")]\n    )\n    \n    return sim, gwf\n\ndef demonstrate_reversal(sim, gwf):\n    \"\"\"\n    PHASE 7: POST-PROCESSING\n    Demonstrate binary file reversal functionality\n    \"\"\"\n    print(\"\\n\" + \"=\"*50)\n    print(\"Phase 7: Post-processing - Binary File Reversal\")\n    print(\"=\"*50)\n    \n    from flopy.utils import HeadFile, CellBudgetFile\n    \n    # Get output file paths\n    ws = Path(sim.sim_path)\n    head_file_path = ws / gwf.oc.head_filerecord.get_data()[0][0]\n    budget_file_path = ws / gwf.oc.budget_filerecord.get_data()[0][0]\n    \n    # Load original files\n    print(\"\\n1. Loading original binary files...\")\n    hf = HeadFile(head_file_path)\n    bf = CellBudgetFile(budget_file_path)\n    \n    # Get original data\n    orig_times = hf.get_times()\n    orig_kstpkper = hf.get_kstpkper()\n    print(f\"   Original times: {orig_times}\")\n    print(f\"   Original (kstp, kper): {orig_kstpkper}\")\n    \n    # Reverse head file\n    print(\"\\n2. Reversing head file...\")\n    rev_head_path = ws / f\"{head_file_path.stem}_reversed.hds\"\n    hf.reverse(filename=rev_head_path)\n    \n    # Load reversed file\n    hf_rev = HeadFile(rev_head_path)\n    rev_times = hf_rev.get_times()\n    rev_kstpkper = hf_rev.get_kstpkper()\n    print(f\"   Reversed times: {rev_times}\")\n    print(f\"   Reversed (kstp, kper): {rev_kstpkper}\")\n    \n    # Reverse budget file\n    print(\"\\n3. Reversing budget file...\")\n    rev_budget_path = ws / f\"{budget_file_path.stem}_reversed.cbb\"\n    bf.reverse(rev_budget_path)\n    print(f\"   Budget file reversed (values negated)\")\n    \n    # Verify reversal\n    print(\"\\n4. Verifying reversal...\")\n    orig_heads = hf.get_alldata()\n    rev_heads = hf_rev.get_alldata()\n    \n    for i, t in enumerate(orig_times):\n        # Check head reversal\n        if np.allclose(orig_heads[i], rev_heads[-(i+1)]):\n            print(f\"   Time {t:.1f}: Head values match \u2713\")\n    \n    print(\"\\n\" + \"=\"*50)\n    print(\"Binary file reversal demonstration complete!\")\n    print(\"Files created:\")\n    print(f\"  - Original: {head_file_path.name}, {budget_file_path.name}\")\n    print(f\"  - Reversed: {rev_head_path.name}, {rev_budget_path.name}\")\n    print(\"=\"*50)\n\ndef run_model():\n    \"\"\"Run the model and demonstrate binary file reversal\"\"\"\n    \n    print(\"=\"*60)\n    print(\"MODFLOW 6 Binary File Reversal Demonstration (DIS)\")\n    print(\"=\"*60 + \"\\n\")\n    \n    # Build model\n    sim, gwf = build_model()\n    \n    # Write and run\n    print(\"\\nWriting and running simulation...\")\n    sim.write_simulation()\n    success, buff = sim.run_simulation()\n    \n    if not success:\n        print(\"ERROR: Model failed to converge!\")\n        return None\n    \n    print(\"\u2713 Model ran successfully!\")\n    \n    # Get final heads\n    head = gwf.output.head().get_data()\n    print(f\"\\nFinal head range: {head.min():.3f} to {head.max():.3f} m\")\n    \n    # Demonstrate reversal\n    demonstrate_reversal(sim, gwf)\n    \n    return sim, gwf\n\nif __name__ == \"__main__\":\n    run_model()"
+    },
+    {
+      "variant": "disv",
+      "description": "Vertex grid (DISV) version demonstrating binary file reversal",
+      "code": "#!/usr/bin/env python3\n\"\"\"\nStandalone FloPy model demonstrating binary file reversal with vertex grid (DISV)\nExtracted from: test_binaryfile_reverse.py\n\nDemonstrates all 7 conceptual phases with focus on Post-processing (Phase 7)\n\"\"\"\n\nimport flopy\nimport numpy as np\nfrom pathlib import Path\nfrom flopy.utils.gridutil import get_disv_kwargs\n\ndef build_model(ws=\"./model_output\", name=\"reverse_demo_disv\"):\n    \"\"\"\n    Build a simple MODFLOW 6 model with vertex grid for demonstrating \n    binary file reversal post-processing.\n    \"\"\"\n    \n    # Ensure workspace exists\n    Path(ws).mkdir(exist_ok=True)\n    \n    # ========================================\n    # PHASE 1: DISCRETIZATION\n    # ========================================\n    print(\"Phase 1: Setting up discretization...\")\n    \n    # Create simulation\n    sim = flopy.mf6.MFSimulation(sim_name=name, sim_ws=ws, exe_name=\"mf6\")\n    \n    # Time discretization - symmetric for simplicity\n    tdis = flopy.mf6.ModflowTdis(\n        sim, \n        nper=3,\n        perioddata=[\n            (1.0, 1, 1.0),  # Period 1: 1 day\n            (1.0, 1, 1.0),  # Period 2: 1 day\n            (1.0, 1, 1.0),  # Period 3: 1 day\n        ]\n    )\n    \n    # ========================================\n    # PHASE 5: SOLVER CONFIGURATION\n    # ========================================\n    print(\"Phase 5: Configuring solver...\")\n    \n    # Iterative Model Solver\n    ims = flopy.mf6.ModflowIms(\n        sim,\n        print_option=\"SUMMARY\",\n        complexity=\"SIMPLE\"\n    )\n    \n    # Create groundwater flow model\n    gwf = flopy.mf6.ModflowGwf(sim, modelname=name, save_flows=True)\n    \n    # Vertex discretization (DISV)\n    # Using helper function to create vertex grid\n    dis = flopy.mf6.ModflowGwfdisv(\n        gwf,\n        **get_disv_kwargs(\n            nlay=2,      # 2 layers\n            nrow=10,     # 10 rows\n            ncol=10,     # 10 columns\n            delr=1.0,    # Cell width\n            delc=1.0,    # Cell height\n            top=25.0,    # Top elevation\n            botm=[20.0, 15.0]  # Bottom of each layer\n        )\n    )\n    \n    # ========================================\n    # PHASE 2: PROPERTIES\n    # ========================================\n    print(\"Phase 2: Setting hydraulic properties...\")\n    \n    # Node Property Flow package\n    npf = flopy.mf6.ModflowGwfnpf(\n        gwf,\n        save_specific_discharge=True,\n        icelltype=0,  # Confined\n        k=10.0        # Hydraulic conductivity\n    )\n    \n    # ========================================\n    # PHASE 3: INITIAL CONDITIONS\n    # ========================================\n    print(\"Phase 3: Setting initial conditions...\")\n    \n    # Initial conditions\n    ic = flopy.mf6.ModflowGwfic(gwf, strt=1.0)\n    \n    # ========================================\n    # PHASE 4: BOUNDARY CONDITIONS\n    # ========================================\n    print(\"Phase 4: Setting boundary conditions...\")\n    \n    # Constant head boundaries\n    # Note: For DISV, we use cell IDs instead of (layer, row, col)\n    chd = flopy.mf6.ModflowGwfchd(\n        gwf,\n        stress_period_data=[\n            [(0, 0), 1.0],   # First cell, layer 0\n            [(0, 99), 0.0],  # Last cell, layer 0\n        ]\n    )\n    \n    # ========================================\n    # OUTPUT CONTROL\n    # ========================================\n    print(\"Setting up output control...\")\n    \n    oc = flopy.mf6.ModflowGwfoc(\n        gwf,\n        budget_filerecord=f\"{name}.bud\",\n        head_filerecord=f\"{name}.hds\",\n        saverecord=[(\"HEAD\", \"ALL\"), (\"BUDGET\", \"ALL\")]\n    )\n    \n    return sim, gwf\n\ndef demonstrate_reversal(sim, gwf):\n    \"\"\"\n    PHASE 7: POST-PROCESSING\n    Demonstrate binary file reversal functionality\n    \"\"\"\n    print(\"\\n\" + \"=\"*50)\n    print(\"Phase 7: Post-processing - Binary File Reversal\")\n    print(\"=\"*50)\n    \n    from flopy.utils import HeadFile, CellBudgetFile\n    \n    # Get output file paths\n    ws = Path(sim.sim_path)\n    head_file_path = ws / gwf.oc.head_filerecord.get_data()[0][0]\n    budget_file_path = ws / gwf.oc.budget_filerecord.get_data()[0][0]\n    \n    # Load and reverse files\n    print(\"\\n1. Processing head file...\")\n    hf = HeadFile(head_file_path)\n    orig_times = hf.get_times()\n    print(f\"   Original times: {orig_times}\")\n    \n    # Reverse\n    rev_head_path = ws / f\"{head_file_path.stem}_reversed.hds\"\n    hf.reverse(filename=rev_head_path)\n    hf_rev = HeadFile(rev_head_path)\n    rev_times = hf_rev.get_times()\n    print(f\"   Reversed times: {rev_times}\")\n    \n    print(\"\\n2. Processing budget file...\")\n    bf = CellBudgetFile(budget_file_path)\n    rev_budget_path = ws / f\"{budget_file_path.stem}_reversed.cbb\"\n    bf.reverse(rev_budget_path)\n    print(f\"   Budget reversed (with value negation)\")\n    \n    print(\"\\n\" + \"=\"*50)\n    print(\"DISV model with binary reversal complete!\")\n    print(\"=\"*50)\n\ndef run_model():\n    \"\"\"Run the model and demonstrate binary file reversal\"\"\"\n    \n    print(\"=\"*60)\n    print(\"MODFLOW 6 Binary File Reversal Demonstration (DISV)\")\n    print(\"=\"*60 + \"\\n\")\n    \n    # Build model\n    sim, gwf = build_model()\n    \n    # Write and run\n    print(\"\\nWriting and running simulation...\")\n    sim.write_simulation()\n    success, buff = sim.run_simulation()\n    \n    if not success:\n        print(\"ERROR: Model failed to converge!\")\n        return None\n    \n    print(\"\u2713 Model ran successfully!\")\n    \n    # Demonstrate reversal\n    demonstrate_reversal(sim, gwf)\n    \n    return sim, gwf\n\nif __name__ == \"__main__\":\n    run_model()"
+    }
+  ]
+}

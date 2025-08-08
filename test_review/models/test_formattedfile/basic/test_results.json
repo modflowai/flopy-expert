@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["formhead.hds", "formhead.cbc", "formhead.lst"],
+  "note": "Demonstrates formatted head file processing - model converges and produces binary head/budget files for post-processing analysis"
+}

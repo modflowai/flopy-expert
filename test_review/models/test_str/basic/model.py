@@ -59,7 +59,7 @@ def run_model():
     botm = [0.0]
     
     # Create model
-    mf = Modflow(model_name, model_ws=model_ws, exe_name=None)
+    mf = Modflow(model_name, model_ws=model_ws, exe_name="/home/danilopezmella/flopy_expert/bin/mf2005")
     
     # Discretization
     dis = ModflowDis(
@@ -393,15 +393,36 @@ def run_model():
         mf.write_input()
         print("  ✓ Model files written successfully")
         
-        # List generated files
-        files = [f for f in os.listdir(model_ws) 
-                if f.startswith(model_name) and f.endswith(('.nam', '.dis', '.bas', '.lpf', '.oc', '.pcg'))]
-        print(f"  Generated {len(files)} model files:")
-        for f in sorted(files):
+        # Run MODFLOW model
+        print("  Running MODFLOW simulation...")
+        success, buff = mf.run_model(silent=True)
+        
+        if success:
+            print("  ✓ Model run completed successfully")
+        else:
+            print("  ⚠ Model run failed")
+            if buff:
+                print(f"    Error: {buff[-1] if buff else 'Unknown error'}")
+        
+        # List all files (input + output)
+        all_files = os.listdir(model_ws)
+        input_files = [f for f in all_files if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.oc', '.pcg'))]
+        output_files = [f for f in all_files if f.endswith(('.hds', '.cbc', '.lst', '.list'))]
+        
+        print(f"  Generated {len(input_files)} input files:")
+        for f in sorted(input_files):
             print(f"    - {f}")
             
+        if output_files:
+            print(f"  Generated {len(output_files)} output files:")
+            print(f"    • Head file (.hds): {'✓' if any('.hds' in f for f in output_files) else '✗'}")
+            print(f"    • Budget file (.cbc): {'✓' if any('.cbc' in f for f in output_files) else '✗'}")
+            print(f"    • Listing file (.lst/.list): {'✓' if any(('.lst' in f or '.list' in f) for f in output_files) else '✗'}")
+        else:
+            print(f"  ⚠ No output files generated")
+            
     except Exception as e:
-        print(f"  ⚠ Model writing error: {str(e)}")
+        print(f"  ⚠ Model execution error: {str(e)}")
     
     print(f"\n✓ MODFLOW STR Package Demonstration Completed!")
     print(f"  - Explained STR package capabilities and stream routing")

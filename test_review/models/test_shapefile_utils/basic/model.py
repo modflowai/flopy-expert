@@ -52,7 +52,7 @@ def run_model():
     
     # Create structured grid model for demonstration
     model_name = "shapefile_demo"
-    ml = Modflow(model_name, model_ws=model_ws)
+    ml = Modflow(model_name, model_ws=model_ws, exe_name="/home/danilopezmella/flopy_expert/bin/mf2005")
     
     # Grid dimensions
     nlay, nrow, ncol = 3, 20, 25
@@ -119,10 +119,10 @@ def run_model():
     bas = ModflowBas(ml, ibound=ibound, strt=strt)
     lpf = ModflowLpf(ml, hk=hk, vka=hk*0.1)
     
-    # Wells with different pumping rates
+    # Wells with sustainable pumping rates (reduced for water balance)
     wel_data = {
-        0: [[0, 8, 12, -800.0], [1, 15, 8, -500.0]],  # Steady state
-        1: [[0, 8, 12, -1200.0], [1, 15, 8, -700.0], [2, 12, 18, -300.0]]  # Transient
+        0: [[0, 8, 12, -80.0], [1, 15, 8, -50.0]],  # Steady state: 130 m³/d total
+        1: [[0, 8, 12, -120.0], [1, 15, 8, -70.0], [2, 12, 18, -30.0]]  # Transient: 220 m³/d total
     }
     wel = ModflowWel(ml, stress_period_data=wel_data)
     
@@ -134,6 +134,14 @@ def run_model():
     
     print(f"    - {len(wel_data[0])} wells in steady state, {len(wel_data[1])} in transient")
     print(f"    - Recharge variation: {rech.min():.4f} - {rech.max():.3f} m/d")
+    
+    # Add PCG solver package - Essential for model convergence
+    pcg = flopy.modflow.ModflowPcg(ml, mxiter=100, iter1=50, hclose=1e-4, rclose=1e-3)
+    
+    # Add Output Control package - Essential for saving results
+    oc = flopy.modflow.ModflowOc(ml, stress_period_data={(0,0): ['save head', 'save budget'],
+                                                        (1,11): ['save head', 'save budget']})
+    print(f"    - Added PCG solver and OC package for model convergence")
     
     # 4. Grid Shapefile Export
     print(f"\n4. Grid-Based Shapefile Export")
@@ -320,14 +328,51 @@ def run_model():
         ml.write_input()
         print(f"  ✓ Model files written successfully")
         
-        # List generated files
-        files = [f for f in os.listdir(model_ws) if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.wel', '.rch'))]
-        print(f"  Generated {len(files)} model files:")
-        for f in files:
+        # Run MODFLOW model
+        print("  Running MODFLOW simulation...")
+        success, buff = ml.run_model(silent=True)
+        
+        if success:
+            print("  ✓ Model run completed successfully")
+            
+            # Check convergence in listing file
+            list_file = os.path.join(model_ws, f"{model_name}.list")
+            if os.path.exists(list_file):
+                with open(list_file, 'r') as f:
+                    content = f.read()
+                    if "BUDGET PERCENT DISCREPANCY" in content:
+                        # Extract budget discrepancy
+                        for line in content.split('\n'):
+                            if "BUDGET PERCENT DISCREPANCY" in line:
+                                print(f"    Budget discrepancy: {line.split()[-1]}%")
+                                break
+                    if "FAILURE TO MEET SOLVER CONVERGENCE" in content:
+                        print("    ⚠ Warning: Model did not converge")
+                    
+        else:
+            print("  ⚠ Model run failed")
+            if buff:
+                print(f"    Error: {buff[-1] if buff else 'Unknown error'}")
+        
+        # List all files (input + output)
+        all_files = os.listdir(model_ws)
+        input_files = [f for f in all_files if f.endswith(('.nam', '.dis', '.bas', '.lpf', '.wel', '.rch', '.oc', '.pcg'))]
+        output_files = [f for f in all_files if f.endswith(('.hds', '.cbc', '.lst', '.list'))]
+        
+        print(f"  Generated {len(input_files)} input files:")
+        for f in sorted(input_files):
             print(f"    - {f}")
             
+        if output_files:
+            print(f"  Generated {len(output_files)} output files:")
+            print(f"    • Head file (.hds): {'✓' if any('.hds' in f for f in output_files) else '✗'}")
+            print(f"    • Budget file (.cbc): {'✓' if any('.cbc' in f for f in output_files) else '✗'}")
+            print(f"    • Listing file (.lst/.list): {'✓' if any(('.lst' in f or '.list' in f) for f in output_files) else '✗'}")
+        else:
+            print(f"  ⚠ No output files generated")
+            
     except Exception as e:
-        print(f"  ⚠ Model writing error: {str(e)}")
+        print(f"  ⚠ Model execution error: {str(e)}")
     
     print(f"\n✓ FloPy Shapefile Utilities Demonstration Completed!")
     print(f"  - Explained grid-based shapefile export capabilities")

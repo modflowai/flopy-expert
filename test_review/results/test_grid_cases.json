@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "purpose": "Demonstrates creation and usage of different grid types (structured, vertex, and unstructured) in FloPy, including grids with confining beds and offset coordinates",
+    "primary_phase": 1,
+    "modflow_version": "mf6",
+    "packages_used": [
+      "StructuredGrid",
+      "VertexGrid",
+      "UnstructuredGrid",
+      "Triangle",
+      "VoronoiGrid"
+    ],
+    "keywords": [
+      "grid",
+      "discretization",
+      "structured",
+      "vertex",
+      "unstructured",
+      "voronoi",
+      "triangle",
+      "confining bed",
+      "grid offset",
+      "mesh generation"
+    ]
+  },
+  "models": [
+    {
+      "name": "structured_grid_example",
+      "description": "Creates a simple 3-layer structured grid with offset coordinates",
+      "code": "import numpy as np\nfrom flopy.discretization import StructuredGrid\nimport matplotlib.pyplot as plt\n\n# Phase 1: Discretization - Create structured grid\nnlay, nrow, ncol = 3, 2, 3\ndelc = 1.0 * np.ones(nrow, dtype=float)  # Cell width along columns (y-direction)\ndelr = 1.0 * np.ones(ncol, dtype=float)  # Cell width along rows (x-direction)\ntop = 10.0 * np.ones((nrow, ncol), dtype=float)\nidomain = np.ones((nlay, nrow, ncol), dtype=int)\n\n# Define layer bottoms\nbotm = np.zeros((nlay, nrow, ncol), dtype=float)\nbotm[0, :, :] = 5.0   # Layer 1 bottom\nbotm[1, :, :] = 0.0   # Layer 2 bottom\nbotm[2, :, :] = -5.0  # Layer 3 bottom\n\n# Create grid with offset\nxoff = 100.0  # X-coordinate offset\nyoff = 200.0  # Y-coordinate offset\n\ngrid = StructuredGrid(\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delc=delc,\n    delr=delr,\n    top=top,\n    botm=botm,\n    idomain=idomain,\n    xoff=xoff,\n    yoff=yoff,\n)\n\n# Phase 7: Post-processing - Display grid properties\nprint(f\"Grid dimensions: {grid.nlay} layers, {grid.nrow} rows, {grid.ncol} columns\")\nprint(f\"Total cells: {grid.ncpl * grid.nlay}\")\nprint(f\"Grid extent: X [{grid.xoffset}, {grid.xoffset + grid.extent[1]}]\")\nprint(f\"            Y [{grid.yoffset}, {grid.yoffset + grid.extent[3]}]\")\nprint(f\"Cell centers shape: {grid.xyzcellcenters[0].shape}\")\n\n# Visualize the grid\nfig, ax = plt.subplots(figsize=(8, 6))\ngrid.plot(ax=ax)\nax.set_title('Structured Grid with Offset')\nax.set_xlabel('X coordinate')\nax.set_ylabel('Y coordinate')\nplt.show()\n\n# Access grid properties\nprint(\"\\nGrid cell centers (X):\")\nprint(grid.xcellcenters)\nprint(\"\\nGrid cell centers (Y):\")\nprint(grid.ycellcenters)"
+    },
+    {
+      "name": "structured_grid_with_confining_beds",
+      "description": "Creates a structured grid with quasi-3D confining bed layers",
+      "code": "import numpy as np\nfrom flopy.discretization import StructuredGrid\nimport matplotlib.pyplot as plt\n\n# Phase 1: Discretization - Create structured grid with confining beds\nnlay = 3\nnrow = ncol = 15\n\n# Define confining beds: 1 = has confining bed below, 0 = no confining bed\nlaycbd = np.array([1, 2, 0], dtype=int)  # Layer 1 has 1 CB, Layer 2 has 2 CBs, Layer 3 has none\nncb = np.count_nonzero(laycbd)  # Total number of confining beds\n\n# Grid spacing\ndx = dy = 150\ndelc = np.array([dy] * nrow)\ndelr = np.array([dx] * ncol)\n\n# Top elevation\ntop = np.ones((nrow, ncol))\n\n# Bottom elevations for layers and confining beds\nbotm = np.ones((nlay + ncb, nrow, ncol))\nelevations = np.array([-10, -20, -40, -50, -70])[:, np.newaxis]\nbotm *= elevations[:, None]\n\n# Create the grid\ngrid = StructuredGrid(\n    delc=delc,\n    delr=delr,\n    top=top,\n    botm=botm,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    laycbd=laycbd,\n)\n\n# Phase 7: Post-processing - Display grid properties\nprint(f\"Grid dimensions: {grid.nlay} model layers, {grid.nrow} rows, {grid.ncol} columns\")\nprint(f\"Confining bed configuration: {laycbd}\")\nprint(f\"Total confining beds: {ncb}\")\nprint(f\"Total array layers (including CBs): {grid.botm.shape[0]}\")\nprint(f\"Grid extent: {grid.extent}\")\n\n# Display layer elevations\nprint(\"\\nLayer structure (at cell 0,0):\")\nprint(f\"Top: {grid.top[0, 0]:.1f}\")\nfor i in range(grid.botm.shape[0]):\n    if i < nlay:\n        cb_count = laycbd[i]\n        if cb_count > 0:\n            print(f\"Layer {i+1} bottom: {grid.botm[i, 0, 0]:.1f}\")\n            for j in range(cb_count):\n                print(f\"  Confining bed {j+1}: (quasi-3D layer)\")\n        else:\n            print(f\"Layer {i+1} bottom: {grid.botm[i, 0, 0]:.1f}\")\n\n# Calculate layer thicknesses\nprint(\"\\nLayer thicknesses (at cell 0,0):\")\nfor k in range(nlay):\n    if k == 0:\n        thickness = grid.top[0, 0] - grid.botm[k, 0, 0]\n    else:\n        # Find the index in botm array accounting for confining beds\n        prev_idx = k - 1 + sum(laycbd[:k])\n        curr_idx = k + sum(laycbd[:k+1])\n        thickness = grid.botm[prev_idx, 0, 0] - grid.botm[curr_idx, 0, 0]\n    print(f\"Layer {k+1}: {thickness:.1f}\")"
+    },
+    {
+      "name": "vertex_grid_example",
+      "description": "Creates a vertex (DISV) grid with irregular cell geometry",
+      "code": "import numpy as np\nfrom flopy.discretization import VertexGrid\nimport matplotlib.pyplot as plt\n\n# Phase 1: Discretization - Create vertex grid\nnlay = 3  # Number of layers\nncpl = 5  # Number of cells per layer\n\n# Define vertices (node points)\nvertices = [\n    [0, 0.0, 3.0],\n    [1, 1.0, 3.0],\n    [2, 2.0, 3.0],\n    [3, 0.0, 2.0],\n    [4, 1.0, 2.0],\n    [5, 2.0, 2.0],\n    [6, 0.0, 1.0],\n    [7, 1.0, 1.0],\n    [8, 2.0, 1.0],\n    [9, 0.0, 0.0],\n    [10, 1.0, 0.0],\n]\n\n# Define cells using vertices (cell_id, xcenter, ycenter, nvert, vert1, vert2, ...)\ncell2d = [\n    [0, 0.5, 2.5, 4, 0, 1, 4, 3],   # Cell 0: quadrilateral\n    [1, 1.5, 2.5, 4, 1, 2, 5, 4],   # Cell 1: quadrilateral\n    [2, 0.5, 1.5, 4, 3, 4, 7, 6],   # Cell 2: quadrilateral\n    [3, 1.5, 1.5, 4, 4, 5, 8, 7],   # Cell 3: quadrilateral\n    [4, 0.5, 0.5, 4, 6, 7, 10, 9],  # Cell 4: quadrilateral\n]\n\n# Define active domain\nidomain = np.ones((nlay, ncpl), dtype=int)\n\n# Define top and bottom elevations\ntop = np.ones(ncpl, dtype=float) * 10.0\nbotm = np.zeros((nlay, ncpl), dtype=float)\nbotm[0, :] = 5.0   # Layer 1 bottom\nbotm[1, :] = 0.0   # Layer 2 bottom\nbotm[2, :] = -5.0  # Layer 3 bottom\n\n# Create the vertex grid\ngrid = VertexGrid(\n    nlay=nlay,\n    ncpl=ncpl,\n    vertices=vertices,\n    cell2d=cell2d,\n    top=top,\n    botm=botm,\n    idomain=idomain,\n)\n\n# Phase 7: Post-processing - Display grid properties\nprint(f\"Vertex grid dimensions: {grid.nlay} layers, {grid.ncpl} cells per layer\")\nprint(f\"Total cells: {grid.nnodes}\")\nprint(f\"Number of vertices: {len(vertices)}\")\nprint(f\"Grid extent: {grid.extent}\")\n\n# Display cell information\nprint(\"\\nCell information:\")\nfor i, cell in enumerate(cell2d):\n    cell_id = cell[0]\n    xcenter = cell[1]\n    ycenter = cell[2]\n    nvert = cell[3]\n    print(f\"Cell {cell_id}: center=({xcenter}, {ycenter}), vertices={nvert}\")\n\n# Visualize the grid\nfig, ax = plt.subplots(figsize=(8, 6))\ngrid.plot(ax=ax)\nax.set_title('Vertex Grid (DISV)')\nax.set_xlabel('X coordinate')\nax.set_ylabel('Y coordinate')\nax.set_aspect('equal')\n\n# Add cell numbers\nfor i in range(ncpl):\n    x, y = grid.xcellcenters[i], grid.ycellcenters[i]\n    ax.text(x, y, str(i), ha='center', va='center')\n\nplt.show()\n\n# Access grid properties\nprint(\"\\nCell areas:\")\nfor i in range(ncpl):\n    print(f\"Cell {i}: {grid.get_cell_vertices(i)}\")"
+    }
+  ]
+}

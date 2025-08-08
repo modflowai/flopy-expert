@@ -1,0 +1,14 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "binary_demo.hds",
+    "custom_double.hds",
+    "custom_single.hds",
+    "binary_demo.cbb",
+    "binary_demo.lst",
+    "mfsim.lst"
+  ]
+}

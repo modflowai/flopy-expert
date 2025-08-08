@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "purpose": "Demonstrates deep copying of FloPy model objects and packages, ensuring that copied models are independent with no shared references between original and copy",
+    "primary_phase": 1,
+    "modflow_version": "mf6",
+    "packages_used": [
+      "mf6",
+      "simulation",
+      "gwf",
+      "dis",
+      "npf",
+      "ic",
+      "chd",
+      "ims",
+      "oc"
+    ],
+    "keywords": [
+      "copy",
+      "deepcopy",
+      "model copying",
+      "object independence",
+      "reference handling",
+      "model duplication",
+      "package copying"
+    ]
+  },
+  "models": [
+    {
+      "name": "model_copy_example",
+      "description": "Demonstrates how to properly copy a MODFLOW 6 model and verify that the copy is independent",
+      "code": "import copy\nimport os\nimport numpy as np\nimport flopy\n\n# Set up workspace\nworkspace = 'model_copy_example'\nif not os.path.exists(workspace):\n    os.makedirs(workspace)\n\n# Phase 1: Create simulation and discretization\nprint('Phase 1: Setting up simulation and discretization')\nsim = flopy.mf6.MFSimulation(\n    sim_name='original',\n    sim_ws=workspace,\n    exe_name='/home/danilopezmella/flopy_expert/bin/mf6'\n)\n\n# Time discretization\ntdis = flopy.mf6.ModflowTdis(\n    sim,\n    time_units='DAYS',\n    nper=2,\n    perioddata=[(1.0, 1, 1.0), (1.0, 1, 1.0)]\n)\n\n# Create groundwater flow model\ngwf = flopy.mf6.ModflowGwf(\n    sim,\n    modelname='original_model',\n    save_flows=True\n)\n\n# Spatial discretization\nnlay, nrow, ncol = 2, 10, 10\ndis = flopy.mf6.ModflowGwfdis(\n    gwf,\n    nlay=nlay,\n    nrow=nrow,\n    ncol=ncol,\n    delr=100.0,\n    delc=100.0,\n    top=10.0,\n    botm=[5.0, 0.0]\n)\n\n# Phase 2: Flow properties\nprint('Phase 2: Setting flow properties')\nk_values = [10.0, 5.0]  # Different K for each layer\nicelltype = 0  # Confined\nnpf = flopy.mf6.ModflowGwfnpf(\n    gwf,\n    icelltype=icelltype,\n    k=k_values,\n    save_specific_discharge=True\n)\n\n# Phase 3: Initial conditions\nprint('Phase 3: Setting initial conditions')\nstrt = 10.0\nic = flopy.mf6.ModflowGwfic(gwf, strt=strt)\n\n# Phase 4: Boundary conditions\nprint('Phase 4: Adding boundary conditions')\n# Add constant head boundaries on left side\nchd_cells = []\nfor k in range(nlay):\n    for i in range(nrow):\n        chd_cells.append([(k, i, 0), 10.0])\n\nchd = flopy.mf6.ModflowGwfchd(\n    gwf,\n    stress_period_data=chd_cells\n)\n\n# Add wells - different rates in each stress period\nwel_sp1 = [[(0, 4, 4), -100.0], [(1, 7, 7), -50.0]]\nwel_sp2 = [[(0, 4, 4), -150.0], [(1, 7, 7), -75.0]]\nwel = flopy.mf6.ModflowGwfwel(\n    gwf,\n    stress_period_data={0: wel_sp1, 1: wel_sp2}\n)\n\n# Phase 5: Solver settings\nprint('Phase 5: Configuring solver')\nims = flopy.mf6.ModflowIms(\n    sim,\n    print_option='SUMMARY',\n    complexity='SIMPLE',\n    outer_maximum=100,\n    inner_maximum=50,\n    outer_dvclose=1e-6,\n    inner_dvclose=1e-8\n)\n\n# Output control\noc = flopy.mf6.ModflowGwfoc(\n    gwf,\n    budget_filerecord=f'{gwf.name}.cbc',\n    head_filerecord=f'{gwf.name}.hds',\n    saverecord=[('HEAD', 'ALL'), ('BUDGET', 'ALL')]\n)\n\n# Register solver\nsim.register_ims_package(ims, [gwf.name])\n\n# Create a deep copy of the model\nprint('\\nCreating deep copy of the model...')\nsim_copy = copy.deepcopy(sim)\n\n# Modify the copy to demonstrate independence\nprint('Modifying the copy to verify independence...')\nsim_copy.name = 'copied_sim'\ngwf_copy = sim_copy.get_model('original_model')\ngwf_copy.name = 'copied_model'\n\n# Change some properties in the copy\nnpf_copy = gwf_copy.get_package('NPF')\nnpf_copy.k.set_data([20.0, 10.0])  # Double the K values\n\nwel_copy = gwf_copy.get_package('WEL')\nnew_wel_data = [[(0, 4, 4), -200.0], [(1, 7, 7), -100.0]]\nwel_copy.stress_period_data.set_data({0: new_wel_data})\n\n# Verify that original model is unchanged\nprint('\\nVerifying model independence:')\noriginal_npf = gwf.get_package('NPF')\noriginal_k = original_npf.k.get_data()\ncopy_k = npf_copy.k.get_data()\n\nprint(f'Original K values: {original_k}')\nprint(f'Copy K values: {copy_k}')\nprint(f'Models are independent: {not np.array_equal(original_k, copy_k)}')\n\noriginal_wel = gwf.get_package('WEL')\noriginal_wel_data = original_wel.stress_period_data.get_data(0)\ncopy_wel_data = wel_copy.stress_period_data.get_data(0)\n\nprint(f'\\nOriginal well rates (SP1): {original_wel_data[\"q\"]}')\nprint(f'Copy well rates (SP1): {copy_wel_data[\"q\"]}')\nprint(f'Well data is independent: {not np.array_equal(original_wel_data[\"q\"], copy_wel_data[\"q\"])}')\n\n# Write and run both models\nprint('\\nWriting input files...')\nsim.write_simulation()\n\n# Change workspace for copy\nsim_copy.set_sim_path(os.path.join(workspace, 'copy'))\nsim_copy.write_simulation()\n\nprint('\\nRunning original model...')\nsuccess, buff = sim.run_simulation(silent=True)\nif success:\n    print('Original model ran successfully')\n\nprint('\\nRunning copied model...')\nsuccess, buff = sim_copy.run_simulation(silent=True)\nif success:\n    print('Copied model ran successfully')\n\n# Phase 7: Compare results\nprint('\\nPhase 7: Comparing results')\noriginal_head_file = os.path.join(workspace, f'{gwf.name}.hds')\ncopy_head_file = os.path.join(workspace, 'copy', f'{gwf_copy.name}.hds')\n\nif os.path.exists(original_head_file) and os.path.exists(copy_head_file):\n    hds_original = flopy.utils.HeadFile(original_head_file)\n    hds_copy = flopy.utils.HeadFile(copy_head_file)\n    \n    head_original = hds_original.get_data(totim=1.0)\n    head_copy = hds_copy.get_data(totim=1.0)\n    \n    print(f'\\nOriginal model max head: {np.max(head_original):.2f}')\n    print(f'Copy model max head: {np.max(head_copy):.2f}')\n    print(f'Results differ (as expected): {not np.allclose(head_original, head_copy)}')\n    \n    hds_original.close()\n    hds_copy.close()\n\nprint('\\nModel copying demonstration complete!')\nprint('Successfully demonstrated:')\nprint('1. Deep copying creates independent model objects')\nprint('2. Modifications to copy do not affect original')\nprint('3. Both models can run independently with different parameters')"
+    }
+  ]
+}

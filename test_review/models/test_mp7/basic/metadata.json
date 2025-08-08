@@ -1,0 +1,209 @@
+{
+  "source_test": "test_mp7",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test MODPATH-7 - Next-Generation Particle Tracking with MODFLOW 6",
+  "description": "Demonstrates MODPATH-7 particle tracking with MODFLOW 6 native integration, NodeParticleData for unstructured grid compatibility, and advanced particle group configurations",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "MFSimulation",
+      "file": "flopy.mf6.MFSimulation",
+      "phase": 1,
+      "purpose": "MODFLOW 6 simulation container"
+    },
+    {
+      "package": "ModflowGwf",
+      "file": "flopy.mf6.ModflowGwf",
+      "phase": 2,
+      "purpose": "Groundwater flow model in MF6 framework"
+    },
+    {
+      "package": "ModflowGwfdis",
+      "file": "flopy.mf6.modflow.mfgwfdis.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Structured discretization for MF6"
+    },
+    {
+      "package": "ModflowGwfic",
+      "file": "flopy.mf6.modflow.mfgwfic.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions for MF6 model"
+    },
+    {
+      "package": "ModflowGwfnpf",
+      "file": "flopy.mf6.modflow.mfgwfnpf.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow package for MF6"
+    },
+    {
+      "package": "ModflowGwfrcha",
+      "file": "flopy.mf6.modflow.mfgwfrcha.ModflowGwfrcha",
+      "phase": 4,
+      "purpose": "Array-based recharge for forward tracking"
+    },
+    {
+      "package": "ModflowGwfriv",
+      "file": "flopy.mf6.modflow.mfgwfriv.ModflowGwfriv",
+      "phase": 4,
+      "purpose": "River boundary condition package"
+    },
+    {
+      "package": "ModflowGwfwel",
+      "file": "flopy.mf6.modflow.mfgwfwel.ModflowGwfwel",
+      "phase": 4,
+      "purpose": "Well package for backward tracking"
+    },
+    {
+      "package": "ModflowGwfoc",
+      "file": "flopy.mf6.modflow.mfgwfoc.ModflowGwfoc",
+      "phase": 6,
+      "purpose": "Output control for heads and budgets"
+    },
+    {
+      "package": "ModflowIms",
+      "file": "flopy.mf6.modflow.mfims.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution for MF6"
+    },
+    {
+      "package": "ModflowTdis",
+      "file": "flopy.mf6.modflow.mftdis.ModflowTdis",
+      "phase": 1,
+      "purpose": "Temporal discretization for MF6"
+    },
+    {
+      "package": "Modpath7",
+      "file": "flopy.modpath.Modpath7",
+      "phase": 7,
+      "purpose": "MODPATH-7 model with MF6 integration"
+    },
+    {
+      "package": "Modpath7Bas",
+      "file": "flopy.modpath.Modpath7Bas",
+      "phase": 7,
+      "purpose": "Basic package for MODPATH-7"
+    },
+    {
+      "package": "Modpath7Sim",
+      "file": "flopy.modpath.Modpath7Sim",
+      "phase": 7,
+      "purpose": "Simulation control for particle tracking"
+    },
+    {
+      "package": "NodeParticleData",
+      "file": "flopy.modpath.mp7particledata.NodeParticleData",
+      "phase": 7,
+      "purpose": "Node-based particle specification for unstructured grids"
+    },
+    {
+      "package": "ParticleGroupNodeTemplate",
+      "file": "flopy.modpath.mp7particlegroup.ParticleGroupNodeTemplate",
+      "phase": 7,
+      "purpose": "Particle group template for node-based data"
+    },
+    {
+      "package": "CellDataType",
+      "file": "flopy.modpath.mp7particledata.CellDataType",
+      "phase": 7,
+      "purpose": "Cell subdivision specification for particles"
+    }
+  ],
+  "package_details": {
+    "MFSimulation": "Main container for MODFLOW 6 simulation",
+    "ModflowGwf": "Groundwater flow model with MF6 capabilities",
+    "ModflowGwfdis": "3-layer structured discretization",
+    "ModflowGwfic": "Initial head conditions",
+    "ModflowGwfnpf": "Node property flow with K tensors",
+    "ModflowGwfrcha": "Uniform recharge for particle sources",
+    "ModflowGwfriv": "River cells on east boundary",
+    "ModflowGwfwel": "Pumping well for backward tracking",
+    "ModflowGwfoc": "Output control for MP7 requirements",
+    "ModflowIms": "IMS solver with SIMPLE complexity",
+    "ModflowTdis": "Time discretization with 1 period",
+    "Modpath7": "MODPATH-7 with native MF6 support",
+    "Modpath7Bas": "Porosity and iface definitions",
+    "Modpath7Sim": "Forward and backward simulations",
+    "NodeParticleData": "Node-based particle placement",
+    "ParticleGroupNodeTemplate": "Particle group management",
+    "CellDataType": "Particle subdivision control"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 21,
+    "ncol": 20,
+    "nper": 1,
+    "cell_size": "500ft × 500ft",
+    "domain_extent": "1.9mi × 2.0mi",
+    "total_cells": 1260,
+    "vertical_extent": "400ft top to 0ft bottom",
+    "particle_tracking": {
+      "well_particles": 243,
+      "recharge_particles": 121,
+      "tracking_modes": "Forward and backward",
+      "simulation_types": "Combined and pathline",
+      "mf6_integration": "Native support"
+    }
+  },
+  "key_features": [
+    "MODPATH-7 with MODFLOW 6 native integration",
+    "NodeParticleData for unstructured grid compatibility",
+    "CellDataType for particle subdivision specification",
+    "ParticleGroupNodeTemplate for node-based groups",
+    "Forward tracking from recharge areas",
+    "Backward tracking from pumping wells",
+    "MF6 simulation framework with IMS solver",
+    "Advanced particle tracking algorithms"
+  ],
+  "learning_objectives": [
+    "Understanding MODPATH-7 and MODFLOW 6 integration",
+    "Mastering node-based particle specification",
+    "Implementing particle groups with templates",
+    "Configuring forward and backward tracking",
+    "Using CellDataType for particle subdivisions",
+    "Setting up MF6 models for particle tracking",
+    "Understanding version evolution of MODPATH",
+    "Applying professional particle tracking workflows"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 20 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["MFSimulation", "ModflowGwfdis", "ModflowTdis"],
+      "description": "MF6 simulation with 3×21×20 structured grid"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["ModflowGwf", "ModflowGwfnpf"],
+      "description": "Groundwater flow model with node properties"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowGwfic"],
+      "description": "Initial head distribution"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowGwfrcha", "ModflowGwfriv", "ModflowGwfwel"],
+      "description": "Recharge, river, and well boundaries"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowIms"],
+      "description": "IMS solver with SIMPLE complexity"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["ModflowGwfoc"],
+      "description": "Output control for heads and budgets"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": ["Modpath7", "Modpath7Bas", "Modpath7Sim", "NodeParticleData", "ParticleGroupNodeTemplate", "CellDataType"],
+      "description": "MODPATH-7 particle tracking analysis"
+    }
+  }
+}

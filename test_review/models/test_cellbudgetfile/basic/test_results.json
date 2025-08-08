@@ -1,0 +1,12 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "budget_example.hds",
+    "budget_example.cbc",
+    "budget_example.lst",
+    "mfsim.lst"
+  ]
+}

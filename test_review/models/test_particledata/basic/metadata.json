@@ -1,0 +1,298 @@
+{
+  "source_test": "test_particledata",
+  "model_version": "modpath",
+  "variant": "basic",
+  "title": "Test ParticleData - MODPATH Particle Data Creation",
+  "description": "Demonstrates MODPATH particle data creation and manipulation for various grid types, coordinate systems, and particle release configurations used in groundwater flow and transport modeling",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "Base MODFLOW model container"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "3-layer discretization for particle tracking"
+    },
+    {
+      "package": "ParticleData",
+      "file": "flopy.modpath.ParticleData",
+      "phase": 7,
+      "purpose": "Basic particle location specification"
+    },
+    {
+      "package": "LRCParticleData",
+      "file": "flopy.modpath.LRCParticleData",
+      "phase": 7,
+      "purpose": "Layer-row-column particle data with subdivisions"
+    },
+    {
+      "package": "NodeParticleData",
+      "file": "flopy.modpath.NodeParticleData",
+      "phase": 7,
+      "purpose": "Node-based particle data for unstructured grids"
+    },
+    {
+      "package": "CellDataType",
+      "file": "flopy.modpath.CellDataType",
+      "phase": 7,
+      "purpose": "Cell subdivision configuration"
+    }
+  ],
+  "package_details": {
+    "Modflow": "Base MODFLOW model for grid structure",
+    "ModflowDis": "3 layers × 5 rows × 4 columns, single period",
+    "ParticleData": "4 structured + 2 custom + 4 unstructured particles",
+    "LRCParticleData": "144 particles with 3×3×2 cell subdivisions",
+    "NodeParticleData": "Default node-based particle placement",
+    "CellDataType": "Cell subdivision parameters and configuration"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 5,
+    "ncol": 4,
+    "nper": 1,
+    "cell_size": "100m × 100m",
+    "domain_extent": "0.4km × 0.5km",
+    "total_cells": 60,
+    "active_cells": 60,
+    "vertical_structure": "50m top to 0m bottom via 30m, 10m",
+    "particle_features": {
+      "particle_types": 5,
+      "coordinate_systems": 2,
+      "subdivision_strategies": 4,
+      "total_particles_demonstrated": 154
+    }
+  },
+  "key_features": [
+    "MODPATH particle data creation",
+    "Structured grid LRC coordinates",
+    "Unstructured grid node coordinates", 
+    "Custom local coordinate specification",
+    "Cell subdivision strategies",
+    "Coordinate transformation methods",
+    "Multiple particle data types",
+    "Integration with flow models"
+  ],
+  "learning_objectives": [
+    "Understanding particle data structures",
+    "Creating structured grid particle sets",
+    "Configuring unstructured grid particles",
+    "Implementing custom coordinate systems",
+    "Applying cell subdivision techniques",
+    "Managing coordinate transformations",
+    "Optimizing particle placement strategies",
+    "Integrating with MODPATH workflows"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 10 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis"],
+      "description": "3-layer structured grid for particle demonstrations"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow"],
+      "description": "Base model container and grid structure"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": [],
+      "description": "Grid-based coordinate system establishment"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": [],
+      "description": "Particle release zone definition"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": [],
+      "description": "Coordinate transformation algorithms"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": [],
+      "description": "Particle location visualization support"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": ["ParticleData", "LRCParticleData", "NodeParticleData", "CellDataType"],
+      "description": "Particle data creation and coordinate management"
+    }
+  },
+  "particle_data_analysis": {
+    "structured_basic": {
+      "particle_count": 4,
+      "coordinate_type": "LRC (Layer-Row-Column)",
+      "locations": "[(0,1,1), (0,1,2), (1,2,2), (2,3,1)]",
+      "coordinate_format": "Integer indices"
+    },
+    "structured_custom": {
+      "particle_count": 2,
+      "coordinate_type": "LRC with local coordinates",
+      "local_x": "[0.25, 0.75] (cell fractions)",
+      "local_y": "[0.3, 0.7] (cell fractions)",
+      "local_z": "[0.2, 0.8] (cell fractions)",
+      "time_offsets": "[0.0, 10.0] days"
+    },
+    "unstructured_nodes": {
+      "particle_count": 4,
+      "coordinate_type": "Node numbers",
+      "node_numbers": "[5, 12, 18, 25]",
+      "grid_compatibility": "Unstructured grids"
+    },
+    "lrc_subdivided": {
+      "particle_count": 144,
+      "subdivision_type": "3×3×2 per cell",
+      "row_divisions": 3,
+      "column_divisions": 3,
+      "layer_divisions": 2,
+      "particles_per_cell": 18,
+      "region_cells": 8
+    },
+    "node_default": {
+      "particle_count": "Variable (all active cells)",
+      "placement_strategy": "Default cell centers",
+      "grid_coverage": "Complete model domain"
+    }
+  },
+  "coordinate_systems": {
+    "local_coordinates": {
+      "range": "[0-1] fractional within cell",
+      "localx": "Fraction across cell width (columns)",
+      "localy": "Fraction across cell depth (rows)",
+      "localz": "Fraction through cell height (layers)",
+      "applications": "Precise particle placement within cells"
+    },
+    "global_coordinates": {
+      "system": "Real-world X, Y, Z coordinates",
+      "transformation": "Grid geometry-based conversion",
+      "intersection": "Cell containment algorithms",
+      "applications": "Absolute positioning and visualization"
+    },
+    "grid_indices": {
+      "structured": "k (layer), i (row), j (column)",
+      "unstructured": "node (cell number)",
+      "conversion": "Index to coordinate transformation",
+      "validation": "Boundary checking and intersection"
+    }
+  },
+  "subdivision_strategies": {
+    "single_point": {
+      "particles_per_cell": 1,
+      "placement": "Cell center",
+      "use_case": "Simple tracking studies"
+    },
+    "grid_pattern": {
+      "particles_per_cell": "r × c × l subdivisions",
+      "placement": "Regular grid within cell",
+      "use_case": "Detailed flow field analysis"
+    },
+    "face_based": {
+      "particles_per_face": "User-defined divisions",
+      "placement": "Cell face centers or subdivisions",
+      "use_case": "Boundary flux analysis"
+    },
+    "custom_locations": {
+      "particles_per_cell": "Variable",
+      "placement": "User-specified coordinates",
+      "use_case": "Targeted analysis locations"
+    }
+  },
+  "professional_applications": [
+    "Contaminant transport pathway delineation",
+    "Wellhead protection zone mapping",
+    "Groundwater age dating and residence time analysis",
+    "Flow field visualization and model verification",
+    "Capture zone analysis for water supply wells",
+    "Remediation system design and optimization",
+    "Source identification and forensics",
+    "Tracer test simulation and interpretation"
+  ],
+  "integration_workflows": {
+    "mf6_prt_integration": {
+      "purpose": "Direct MF6 PRT particle release",
+      "format": "PRP package compatible data",
+      "workflow": "ParticleData → to_prp() → PRT input"
+    },
+    "modpath7_integration": {
+      "purpose": "MODPATH 7 particle tracking",
+      "format": "MP7 starting location files",
+      "workflow": "ParticleData → write() → MP7 input"
+    },
+    "visualization_support": {
+      "purpose": "Particle location plotting",
+      "format": "Coordinate arrays for mapping",
+      "workflow": "ParticleData → to_coords() → Visualization"
+    }
+  },
+  "technical_specifications": {
+    "data_structures": {
+      "structured_dtype": "k, i, j, localx, localy, localz, timeoffset, drape",
+      "unstructured_dtype": "node, localx, localy, localz, timeoffset, drape",
+      "storage_format": "Pandas DataFrame with numpy arrays"
+    },
+    "coordinate_validation": {
+      "range_checking": "Local coordinates [0-1]",
+      "grid_intersection": "Cell containment verification",
+      "boundary_handling": "Edge and corner case management"
+    },
+    "performance_characteristics": {
+      "memory_usage": "Proportional to particle count",
+      "computation_time": "Linear with coordinate transformations",
+      "scalability": "Efficient for typical particle densities"
+    }
+  },
+  "best_practices": {
+    "particle_density": [
+      "Balance accuracy vs computational cost",
+      "Consider grid resolution relative to particle spacing",
+      "Account for velocity variations across domain",
+      "Validate with analytical solutions where possible"
+    ],
+    "coordinate_management": [
+      "Validate local coordinates within [0-1] range",
+      "Check grid intersections for accuracy",
+      "Document coordinate system assumptions",
+      "Test transformations with known locations"
+    ],
+    "data_organization": [
+      "Use meaningful particle group names",
+      "Document release strategies and assumptions",
+      "Maintain consistent coordinate systems",
+      "Validate particle counts against expectations"
+    ]
+  },
+  "educational_progression": {
+    "beginner_concepts": [
+      "Basic particle location specification",
+      "Structured grid coordinate systems",
+      "Simple LRC index usage"
+    ],
+    "intermediate_concepts": [
+      "Custom local coordinate placement",
+      "Cell subdivision strategies",
+      "Unstructured grid node systems"
+    ],
+    "advanced_concepts": [
+      "Coordinate transformation algorithms",
+      "Integration with flow models",
+      "Performance optimization techniques"
+    ]
+  },
+  "validation_methods": {
+    "coordinate_accuracy": "Grid intersection testing",
+    "particle_counts": "Subdivision math verification",
+    "transformation_correctness": "Local to global conversion checks",
+    "integration_compatibility": "MODPATH/PRT format validation"
+  }
+}

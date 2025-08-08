@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["rev_disv.hds", "rev_disv.cbc", "rev_disv_reversed.hds", "rev_disv_reversed.cbb"],
+  "note": "Model demonstrates binary file reversal with DISV grid. Creates both original and reversed output files."
+}

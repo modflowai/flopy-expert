@@ -1,0 +1,394 @@
+{
+  "total_tests": 74,
+  "completed": 36,
+  "successful": 36,
+  "failed": 0,
+  "test_results": {
+    "test_grid": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "model.hds",
+        "model.cbc",
+        "model.lst"
+      ]
+    },
+    "test_cbc_full3D": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "model.cbc",
+        "model.lst",
+        "mfsim.lst"
+      ]
+    },
+    "test_cellbudgetfile": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "budget_example.hds",
+        "budget_example.cbc",
+        "budget_example.lst",
+        "mfsim.lst"
+      ]
+    },
+    "test_gridintersect": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "model.hds",
+        "model.lst",
+        "mfsim.lst"
+      ]
+    },
+    "test_formattedfile": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "formhead.hds",
+        "formhead.cbc",
+        "formhead.lst"
+      ]
+    },
+    "test_grid_cases": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "grid_demo.hds",
+        "grid_demo.cbc"
+      ]
+    },
+    "test_binaryfile_reverse": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "reverse_demo_disv_reversed.hds",
+        "reverse_demo_disv.hds"
+      ]
+    },
+    "test_geospatial_util": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "geospatial_demo.hds",
+        "geospatial_demo.lst",
+        "mfsim.lst"
+      ]
+    },
+    "test_export": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "export_demo.hds",
+        "export_demo.lst",
+        "mfsim.lst"
+      ]
+    },
+    "test_binaryfile": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "binary_demo.hds",
+        "binary_demo.cbc"
+      ]
+    },
+    "test_binarygrid_util": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "bgrid_demo.hds",
+        "bgrid_demo.grb"
+      ]
+    },
+    "test_compare": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "compare_demo.hds",
+        "compare_demo.cbc"
+      ]
+    },
+    "test_copy": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "copy_demo.hds",
+        "copy_demo.cbc"
+      ]
+    },
+    "test_dis_cases": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "dis_demo.hds",
+        "dis_demo.cbc"
+      ]
+    },
+    "test_example_notebooks": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "notebook_demo.hds",
+        "notebook_demo.cbc"
+      ]
+    },
+    "test_flopy_io": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "flopy_io_demo.hds",
+        "flopy_io_demo.cbc"
+      ]
+    },
+    "test_flopy_module": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "flopy_module_demo.hds",
+        "flopy_module_demo.cbc"
+      ]
+    },
+    "test_gage": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "gage_demo.hds",
+        "gage_demo.cbc",
+        "gage_demo.gag1",
+        "gage_demo.gag2"
+      ]
+    },
+    "test_get_modflow": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "getmodflow_demo.hds",
+        "getmodflow_demo.cbc"
+      ]
+    },
+    "test_gridgen": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "gridgen_demo.hds",
+        "gridgen_demo.cbc"
+      ]
+    },
+    "test_datautil": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "datautil_demo.hds",
+        "datautil_demo.cbc"
+      ]
+    },
+    "test_gridutil": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "gridutil_demo.hds",
+        "gridutil_demo.cbc"
+      ]
+    },
+    "test_headufile": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "headu_demo.hds",
+        "headu_demo.cbc"
+      ]
+    },
+    "test_hydmodfile": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "hydmod_demo.hds",
+        "hydmod_demo.hyd"
+      ]
+    },
+    "test_lake_connections": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "lake_demo.hds",
+        "lake_demo.cbc",
+        "lake_demo.lak.obs.csv"
+      ]
+    },
+    "test_lgr": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "lgr_parent.hds",
+        "lgr_child.hds"
+      ]
+    },
+    "test_lgrutil": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "lgrutil_demo.hds",
+        "lgrutil_demo.cbc"
+      ]
+    },
+    "test_listbudget": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "listbud_demo.hds",
+        "listbud_demo.cbc",
+        "listbud_demo.lst"
+      ]
+    },
+    "test_mbase": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "mbase_demo.hds",
+        "mbase_demo.cbc"
+      ]
+    },
+    "test_mf6": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "model.hds",
+        "model.cbc",
+        "mfsim.lst"
+      ]
+    },
+    "test_modflowdis": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "model.hds",
+        "model.cbc",
+        "model.lst"
+      ]
+    },
+    "test_plotutil": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "plotutil.hds",
+        "plotutil.cbc",
+        "plotutil.lst",
+        "mfsim.lst"
+      ]
+    },
+    "test_mfnwt": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "watertable.hds",
+        "watertable.list"
+      ]
+    },
+    "test_mfreadnam": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "namefile_demo.hds",
+        "namefile_demo.cbc",
+        "namefile_demo.list"
+      ]
+    },
+    "test_mfsimlist": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": [
+        "simlist_demo.hds",
+        "simlist_demo.cbc",
+        "mfsim.lst"
+      ]
+    },
+    "test_mnw": {
+      "status": "success",
+      "runs": true,
+      "converges": true,
+      "output_exists": true,
+      "outputs": {
+        "mnw1": [
+          "mnw1_example.hds",
+          "mnw1_example.cbc",
+          "mnw1_example.list"
+        ],
+        "mnw2": [
+          "mnw2_example.hds",
+          "mnw2_example.cbc",
+          "mnw2_example.list"
+        ]
+      }
+    }
+  }
+}

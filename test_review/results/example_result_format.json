@@ -1,0 +1,85 @@
+{
+  "test_name": "test_binaryfile_reverse.py",
+  
+  "metadata": {
+    "true_purpose": "Tests HeadFile.reverse() and CellBudgetFile.reverse() methods for reversing chronological order in binary output files",
+    "is_useful_example": true,
+    "example_demonstrates": "How to reverse time order in MODFLOW binary output files for reverse-time analysis",
+    
+    "documentation": {
+      "purpose": "Demonstrates reversing the time order of MODFLOW 6 binary output files (heads and budgets) for analyzing model spin-down or creating reverse animations.",
+      "key_concepts": [
+        "Binary file manipulation",
+        "Time series reversal",
+        "HeadFile and CellBudgetFile classes",
+        "Budget value negation in reversal"
+      ],
+      "questions_answered": [
+        "How do I reverse the time order in MODFLOW binary output files?",
+        "What is the HeadFile.reverse() method and how does it work?",
+        "Why are budget values negated when reversed?",
+        "How can I analyze model spin-down from steady state?",
+        "How do I create reverse-time animations of model results?"
+      ],
+      "common_use_cases": [
+        "Analyzing aquifer recovery after pumping stops",
+        "Creating reverse-time animations for presentations",
+        "Debugging convergence issues from final conditions",
+        "Understanding transient response from steady state"
+      ]
+    },
+    
+    "classification": {
+      "primary_phase": 7,
+      "phase_name": "Post-processing",
+      "secondary_phases": [1, 2, 3, 4, 5],
+      "modflow_version": "mf6",
+      "packages_used": [
+        "flopy.mf6.MFSimulation",
+        "flopy.mf6.ModflowTdis",
+        "flopy.mf6.ModflowIms",
+        "flopy.mf6.ModflowGwf",
+        "flopy.mf6.ModflowGwfdis",
+        "flopy.mf6.ModflowGwfdisv",
+        "flopy.mf6.ModflowGwfic",
+        "flopy.mf6.ModflowGwfnpf",
+        "flopy.mf6.ModflowGwfchd",
+        "flopy.mf6.ModflowGwfoc",
+        "flopy.utils.HeadFile",
+        "flopy.utils.CellBudgetFile"
+      ]
+    },
+    
+    "search_metadata": {
+      "keywords": [
+        "binary file",
+        "reverse time",
+        "HeadFile",
+        "CellBudgetFile",
+        "time series",
+        "output processing",
+        "reverse animation",
+        "spin-down analysis"
+      ],
+      "embedding_string": "Reverse time order in MODFLOW 6 binary output files using HeadFile.reverse() and CellBudgetFile.reverse() methods. Demonstrates post-processing techniques for analyzing model results in reverse chronological order. Useful for aquifer recovery analysis, creating reverse animations, and debugging convergence from final steady state. Shows how budget values are negated during reversal to maintain flow consistency. Essential for spin-down simulations and understanding transient responses when starting from equilibrium conditions."
+    }
+  },
+  
+  "models": [
+    {
+      "variant": "dis",
+      "description": "Structured grid version",
+      "code": "#!/usr/bin/env python3\n\"\"\"\nStandalone model with DIS discretization\nDemonstrates binary file reversal\n\"\"\"\n\nimport flopy\nimport numpy as np\nfrom pathlib import Path\n\ndef build_model(ws='./output'):\n    # Full model code here...\n    pass\n\nif __name__ == '__main__':\n    build_model()"
+    },
+    {
+      "variant": "disv", 
+      "description": "Vertex grid version",
+      "code": "#!/usr/bin/env python3\n# DISV version..."
+    },
+    {
+      "variant": "disu",
+      "description": "Unstructured grid version", 
+      "code": "#!/usr/bin/env python3\n# DISU version..."
+    }
+  ]
+}

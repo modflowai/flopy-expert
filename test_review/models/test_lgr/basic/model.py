@@ -53,7 +53,7 @@ def run_model():
     parent_mf = flopy.modflow.Modflow(
         modelname="parent_grid",
         model_ws=model_ws,
-        exe_name="mf2005" if False else None  # Skip execution for demo
+        exe_name="/home/danilopezmella/flopy_expert/bin/mf2005"  # Enable execution
     )
     
     # Parent discretization
@@ -90,6 +90,10 @@ def run_model():
         hk=parent_hk,
         vka=1.0
     )
+    
+    # Add solver and output control for parent model
+    parent_pcg = flopy.modflow.ModflowPcg(parent_mf, mxiter=50, hclose=1e-4)
+    parent_oc = flopy.modflow.ModflowOc(parent_mf, stress_period_data={(0,0): ['save head', 'save budget']})
     
     # 2. Child Grid Definition
     print(f"\n2. Defining Child Grid Refinement Area")
@@ -149,7 +153,8 @@ def run_model():
     
     child_mf = flopy.modflow.Modflow(
         modelname="child_grid",
-        model_ws=model_ws
+        model_ws=model_ws,
+        exe_name="/home/danilopezmella/flopy_expert/bin/mf2005"  # Enable execution
     )
     
     # Child discretization  
@@ -220,6 +225,10 @@ def run_model():
         stress_period_data={0: wel_data}
     )
     
+    # Add solver and output control for child model
+    child_pcg = flopy.modflow.ModflowPcg(child_mf, mxiter=100, hclose=1e-4, rclose=1e-3)
+    child_oc = flopy.modflow.ModflowOc(child_mf, stress_period_data={(0,0): ['save head', 'save budget']})
+    
     print(f"  Child model created with detailed features:")
     print(f"    - High-K channel through center")  
     print(f"    - Low-K clay lens for heterogeneity")
@@ -244,17 +253,35 @@ def run_model():
     print(f"  Child grid cells: {child_cells}")
     print(f"  Net cell increase: {child_cells - refined_parent_cells}")
     
-    # 6. Write Models
-    print(f"\n6. Writing Model Files")
+    # 6. Write and Run Models
+    print(f"\n6. Writing and Running Model Files")
     print("-" * 40)
     
     print("  Writing parent model...")
     parent_mf.write_input()
     
+    print("  Running parent model...")
+    success, buff = parent_mf.run_model(silent=True)
+    if success:
+        print("  ✓ Parent model completed successfully")
+    else:
+        print("  ⚠ Parent model failed to run")
+        if buff:
+            print(f"    Error: {buff[-1] if buff else 'Unknown error'}")
+    
     print("  Writing child model...")
     child_mf.write_input()
     
-    print("  ✓ Both models written successfully")
+    print("  Running child model...")
+    success, buff = child_mf.run_model(silent=True)
+    if success:
+        print("  ✓ Child model completed successfully")
+    else:
+        print("  ⚠ Child model failed to run")
+        if buff:
+            print(f"    Error: {buff[-1] if buff else 'Unknown error'}")
+    
+    print("  ✓ Both models written and executed")
     
     # 7. LGR Applications and Benefits
     print(f"\n7. LGR Applications Demonstrated")

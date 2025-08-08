@@ -1,0 +1,16 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "grid_dis_demo.hds",
+    "grid_disv_demo.hds",
+    "grid_dis_demo.cbb",
+    "grid_disv_demo.cbb",
+    "grid_dis_demo.lst",
+    "mfsim.lst",
+    "mfsim.lst",
+    "grid_disv_demo.lst"
+  ]
+}

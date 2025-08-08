@@ -1,0 +1,77 @@
+{
+  "source_test": "test_headufile",
+  "model_version": "mfusg",
+  "variant": "basic",
+  "title": "Test Headufile - MFUSG Demonstration",
+  "description": "MODFLOW-USG head file utilities demonstration with unstructured grid setup and HeadUFile time series extraction capabilities",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "DISU",
+      "file": "flopy.mfusg.MfusgDisu",
+      "phase": 1,
+      "purpose": "Unstructured discretization"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.mfusg.MfusgLpf",
+      "phase": 2,
+      "purpose": "Layer property flow"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.modflow.ModflowChd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control"
+    },
+    {
+      "package": "SMS",
+      "file": "flopy.mfusg.MfusgSms",
+      "phase": 5,
+      "purpose": "Sparse matrix solver"
+    }
+  ],
+  "package_details": {
+    "DISU": "Unstructured discretization for complex geometries",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "CHD": "Constant head boundary conditions",
+    "OC": "Output control for heads and budgets",
+    "SMS": "Sparse matrix solver for unstructured grids"
+  },
+  "grid_type": "unstructured",
+  "grid_details": {
+    "nlay": "variable",
+    "nodes": "unstructured connectivity",
+    "cell_type": "mixed prisms/tetrahedra",
+    "top": 100.0,
+    "botm": "variable"
+  },
+  "key_features": [
+    "MODFLOW-USG unstructured grid support",
+    "Unstructured grid discretization",
+    "Hydraulic head data processing"
+  ],
+  "learning_objectives": [
+    "Understanding MFUSG model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 30 seconds"
+}

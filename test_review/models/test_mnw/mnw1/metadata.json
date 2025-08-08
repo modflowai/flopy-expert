@@ -1,0 +1,89 @@
+{
+  "source_test": "test_mnw",
+  "model_version": "mf2005",
+  "variant": "mnw1",
+  "title": "Test Mnw - MF2005 Demonstration",
+  "description": "Demonstrates Multi-Node Well Version 1 (MNW1) for basic multi-layer well simulation with skin effects",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "2-layer discretization for multi-layer well"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with initial heads"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow"
+    },
+    {
+      "package": "WEL",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Well package simulating multi-node well"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.modflow.ModflowChd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control"
+    },
+    {
+      "package": "PCG",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Preconditioned conjugate gradient solver"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "LPF": "Layer property flow for confined/unconfined layers",
+    "WEL": "Well package for pumping/injection",
+    "CHD": "Constant head boundary conditions",
+    "OC": "Output control for heads and budgets",
+    "PCG": "Preconditioned conjugate gradient solver"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-2005 classic simulation",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF2005 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 30 seconds"
+}

@@ -1,0 +1,103 @@
+{
+  "source_test": "test_mfsimlist",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Mfsimlist - MF6 Demonstration",
+  "description": "Demonstrates parsing MODFLOW 6 simulation listing files to extract runtime statistics, iterations, memory usage, and convergence information",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization with multiple stress periods"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution with detailed output"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Spatial discretization (2 layers, 20x25 grid)"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions with variable heads"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow with heterogeneous K"
+    },
+    {
+      "package": "STO",
+      "file": "flopy.mf6.ModflowGwfsto",
+      "phase": 2,
+      "purpose": "Storage for transient simulation"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "RCHA",
+      "file": "flopy.mf6.ModflowGwfrcha",
+      "phase": 4,
+      "purpose": "Recharge varying by stress period"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "IC": "Initial hydraulic head conditions",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "STO": "Storage for transient simulation",
+    "CHD": "Constant head boundary conditions",
+    "RCHA": "Recharge varying by stress period",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 30 seconds"
+}

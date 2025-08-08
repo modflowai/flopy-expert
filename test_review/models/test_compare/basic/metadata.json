@@ -1,0 +1,43 @@
+{
+  "source_test": "test_compare",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test Compare - MF2005 Demonstration",
+  "description": "Simple 3-layer MODFLOW-2005 model with wells",
+  "phase": 4,
+  "phase_name": null,
+  "packages": [
+    {
+      "package": "Utilities",
+      "file": "flopy.utils",
+      "phase": 7,
+      "purpose": "Model comparison utilities"
+    }
+  ],
+  "package_details": {
+    "Utilities": "Model comparison utilities"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-2005 classic simulation",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF2005 model setup and execution"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 10 seconds"
+}

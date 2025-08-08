@@ -1,0 +1,11 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "model.cbc",
+    "model.lst",
+    "mfsim.lst"
+  ]
+}

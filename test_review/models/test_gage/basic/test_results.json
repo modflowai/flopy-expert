@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["gage_model.hds", "gage_model.list", "gage1_heads.out"],
+  "note": "MODFLOW-2005 GAGE package demonstration - produces head file plus specific gage observation outputs"
+}

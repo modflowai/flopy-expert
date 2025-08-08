@@ -1,0 +1,209 @@
+{
+  "source_test": "test_mt3d",
+  "model_version": "mt3dms",
+  "variant": "basic",
+  "title": "Test MT3D - Multi-Species Transport Modeling",
+  "description": "Demonstrates MT3D-MS for multi-species contaminant transport with advection, dispersion, reactions, and sorption coupled with MODFLOW groundwater flow",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "MODFLOW-2005 flow model"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "2-layer transient discretization"
+    },
+    {
+      "package": "ModflowBas",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 1,
+      "purpose": "Basic package with CH boundaries"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer properties for flow"
+    },
+    {
+      "package": "ModflowWel",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Injection and extraction wells"
+    },
+    {
+      "package": "ModflowRch",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Recharge with concentration"
+    },
+    {
+      "package": "ModflowRiv",
+      "file": "flopy.modflow.ModflowRiv",
+      "phase": 4,
+      "purpose": "River boundary condition"
+    },
+    {
+      "package": "ModflowPcg",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "Flow solver"
+    },
+    {
+      "package": "ModflowLmt",
+      "file": "flopy.modflow.ModflowLmt",
+      "phase": 7,
+      "purpose": "Link to MT3D-MS"
+    },
+    {
+      "package": "Mt3dms",
+      "file": "flopy.mt3d.Mt3dms",
+      "phase": 7,
+      "purpose": "MT3D-MS transport model"
+    },
+    {
+      "package": "Mt3dBtn",
+      "file": "flopy.mt3d.Mt3dBtn",
+      "phase": 7,
+      "purpose": "Basic transport with 3 species"
+    },
+    {
+      "package": "Mt3dAdv",
+      "file": "flopy.mt3d.Mt3dAdv",
+      "phase": 7,
+      "purpose": "Advection with TVD scheme"
+    },
+    {
+      "package": "Mt3dDsp",
+      "file": "flopy.mt3d.Mt3dDsp",
+      "phase": 7,
+      "purpose": "Dispersion parameters"
+    },
+    {
+      "package": "Mt3dSsm",
+      "file": "flopy.mt3d.Mt3dSsm",
+      "phase": 7,
+      "purpose": "Source/sink mixing"
+    },
+    {
+      "package": "Mt3dRct",
+      "file": "flopy.mt3d.Mt3dRct",
+      "phase": 7,
+      "purpose": "Reactions and sorption"
+    },
+    {
+      "package": "Mt3dGcg",
+      "file": "flopy.mt3d.Mt3dGcg",
+      "phase": 7,
+      "purpose": "Transport solver"
+    },
+    {
+      "package": "Mt3dTob",
+      "file": "flopy.mt3d.Mt3dTob",
+      "phase": 7,
+      "purpose": "Transport observations"
+    }
+  ],
+  "package_details": {
+    "Modflow": "Base MODFLOW-2005 model for flow simulation",
+    "ModflowDis": "2 layers, 15×15 grid, 3 stress periods of 365 days",
+    "ModflowBas": "Constant heads on north/south boundaries",
+    "ModflowLpf": "K=50 and 25 m/day, unconfined/confined layers",
+    "ModflowWel": "Extraction (-500 to -800) and injection (200-300) m³/day",
+    "ModflowRch": "1 mm/day with species concentrations",
+    "ModflowRiv": "Eastern boundary with concentrations",
+    "ModflowPcg": "Iterative flow solver",
+    "ModflowLmt": "Creates link file for MT3D coupling",
+    "Mt3dms": "Transport model with 3 species",
+    "Mt3dBtn": "Porosity 0.3, initial contamination 100 mg/L",
+    "Mt3dAdv": "Third-order TVD (ULTIMATE) scheme",
+    "Mt3dDsp": "Dispersivity 10m longitudinal, 0.1 transverse ratio",
+    "Mt3dSsm": "Time-varying source concentrations",
+    "Mt3dRct": "First-order decay, linear sorption",
+    "Mt3dGcg": "Modified Incomplete Cholesky solver",
+    "Mt3dTob": "4 observation points for monitoring"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 2,
+    "nrow": 15,
+    "ncol": 15,
+    "nper": 3,
+    "cell_size": "100m × 100m",
+    "domain_extent": "1.5km × 1.5km",
+    "total_cells": 450,
+    "active_cells": 420,
+    "vertical_structure": "50m top to 0m bottom",
+    "transport_features": {
+      "species_count": 3,
+      "porosity": 0.3,
+      "bulk_density": "1.8 kg/L",
+      "simulation_time": "1095 days"
+    }
+  },
+  "key_features": [
+    "Multi-species transport modeling",
+    "Advection-dispersion-reaction processes",
+    "Linear equilibrium sorption",
+    "First-order decay reactions",
+    "Time-varying source concentrations",
+    "Transport observation network",
+    "MODFLOW-MT3D coupling via LMT",
+    "Conservative tracer comparison"
+  ],
+  "learning_objectives": [
+    "Understanding contaminant transport processes",
+    "Implementing multi-species systems",
+    "Configuring advection schemes",
+    "Setting dispersion parameters",
+    "Defining chemical reactions",
+    "Implementing sorption isotherms",
+    "Managing source/sink concentrations",
+    "Designing monitoring networks"
+  ],
+  "complexity": "intermediate-advanced",
+  "run_time": "< 30 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis", "ModflowBas"],
+      "description": "2-layer grid with boundaries"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow", "ModflowLpf"],
+      "description": "Flow properties and model container"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowBas", "Mt3dBtn"],
+      "description": "Initial heads and concentrations"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowWel", "ModflowRch", "ModflowRiv", "Mt3dSsm"],
+      "description": "Flow and transport boundaries"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowPcg", "Mt3dGcg"],
+      "description": "Flow and transport solvers"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["ModflowOc"],
+      "description": "Output control for results"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": ["Mt3dms", "Mt3dBtn", "Mt3dAdv", "Mt3dDsp", "Mt3dRct", "Mt3dTob"],
+      "description": "Transport simulation and analysis"
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "source_test": "test_lake_connections",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Lake Connections - MF6 Demonstration",
+  "description": "Demonstrates how to create and connect lakes in MODFLOW 6 using FloPy's get_lak_connections utility function. Sets up an embedded lake system with proper connection data between lake cells and surrounding groundwater cells.",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Discretization with lake cells (5 layers, 17x17 grid)"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow with convertible cells"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions (uniform head 115 ft)"
+    },
+    {
+      "package": "LAK",
+      "file": "flopy.mf6.ModflowGwflak",
+      "phase": 4,
+      "purpose": "Lake package with embedded lake connections"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries around perimeter"
+    },
+    {
+      "package": "RCH",
+      "file": "flopy.mf6.ModflowGwfrch",
+      "phase": 4,
+      "purpose": "Recharge (0.116e-1 ft/d)"
+    },
+    {
+      "package": "EVT",
+      "file": "flopy.mf6.ModflowGwfevt",
+      "phase": 4,
+      "purpose": "Evapotranspiration with 15 ft extinction depth"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control for heads and budgets"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "IC": "Initial hydraulic head conditions",
+    "LAK": "Lake package for surface water bodies",
+    "CHD": "Constant head boundary conditions",
+    "RCH": "Recharge package for groundwater recharge",
+    "EVT": "Evapotranspiration package for water loss",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Structured grid discretization",
+    "Lake-groundwater interaction"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 1 minute"
+}

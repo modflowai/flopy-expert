@@ -1,0 +1,14 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "reverse_demo_dis_reversed.hds",
+    "reverse_demo_dis.hds",
+    "reverse_demo_dis.bud",
+    "reverse_demo_dis_reversed.cbb",
+    "reverse_demo_dis.lst",
+    "mfsim.lst"
+  ]
+}

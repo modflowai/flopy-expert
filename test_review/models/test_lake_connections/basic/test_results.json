@@ -1,0 +1,14 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "lakeconnect.hds",
+    "lakeconnect.cbc", 
+    "lakeconnect.lst",
+    "lakeconnect.lak",
+    "mfsim.lst"
+  ],
+  "note": "Demonstrates MODFLOW 6 lake package with automatic connection generation using get_lak_connections utility - creates embedded multi-layer lake system with 57 connections between lake and groundwater cells. Model now properly saves head and budget files for post-processing."
+}

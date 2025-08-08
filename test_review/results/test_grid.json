@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "purpose": "Tests grid discretization objects including StructuredGrid, UnstructuredGrid, and VertexGrid with various coordinate transformations, rotations, and projections",
+    "primary_phase": 1,
+    "modflow_version": "mf6",
+    "packages_used": [
+      "DIS",
+      "DISV",
+      "DISU",
+      "IMS",
+      "IC",
+      "NPF",
+      "CHD",
+      "OC"
+    ],
+    "keywords": [
+      "grid",
+      "discretization",
+      "rotation",
+      "coordinates",
+      "structured",
+      "unstructured",
+      "vertex",
+      "projection",
+      "epsg",
+      "transform"
+    ]
+  },
+  "models": [
+    {
+      "name": "structured_grid_rotation",
+      "description": "Demonstrates StructuredGrid with coordinate rotation and transformation",
+      "code": "import numpy as np\nimport flopy\nfrom flopy.discretization import StructuredGrid\n\n# Phase 1: Create model and discretization\nmodel_name = 'structured_rotation'\nmodel_ws = 'temp'\n\n# Create MODFLOW model\nmf = flopy.modflow.Modflow(modelname=model_name, model_ws=model_ws, rotation=20.0)\n\n# Define discretization\nnlay, nrow, ncol = 1, 40, 20\ndelr, delc = 250.0, 250.0\ntop, botm = 10.0, 0.0\n\ndis = flopy.modflow.ModflowDis(\n    mf, nlay=nlay, nrow=nrow, ncol=ncol,\n    delr=delr, delc=delc, top=top, botm=botm\n)\n\n# Create StructuredGrid with rotation\nmg = StructuredGrid(delc=mf.dis.delc.array, delr=mf.dis.delr.array)\n\n# Set coordinate info with 45 degree rotation\nxul, yul = 500000, 2934000  # Upper left coordinates\nmg._angrot = 45.0\nmg.set_coord_info(mg._xul_to_xll(xul), mg._yul_to_yll(yul), angrot=45.0)\n\nprint(f'Grid rotation: {mg.angrot} degrees')\nprint(f'Grid origin (xoffset, yoffset): ({mg.xoffset}, {mg.yoffset})')\nprint(f'Upper left corner: ({mg.xvertices[0, 0]}, {mg.yvertices[0, 0]})')\nprint(f'Grid extent: {mg.extent}')\nprint(f'Number of cells: {mg.ncpl}')\n\n# Demonstrate coordinate transformations\nmodel_coords = [(0, 0), (nrow-1, ncol-1)]  # Model corners\nfor row, col in model_coords:\n    x, y = mg.get_coords(row, col)\n    print(f'Cell ({row}, {col}) center: ({x:.2f}, {y:.2f})')\n\n# Get vertices for visualization\nxv, yv = mg.xvertices, mg.yvertices\nprint(f'\\nGrid vertices shape: {xv.shape}')\nprint(f'Min X: {xv.min():.2f}, Max X: {xv.max():.2f}')\nprint(f'Min Y: {yv.min():.2f}, Max Y: {yv.max():.2f}')"
+    },
+    {
+      "name": "unstructured_grid_voronoi",
+      "description": "Demonstrates UnstructuredGrid creation using Voronoi tessellation",
+      "code": "import numpy as np\nfrom flopy.discretization import UnstructuredGrid\nfrom flopy.utils.voronoi import VoronoiGrid\n\n# Phase 1: Create Voronoi grid discretization\nprint('Creating Voronoi grid...')\n\n# Define domain and points\nxmin, xmax = 0.0, 100.0\nymin, ymax = 0.0, 100.0\n\n# Create random points for Voronoi centers\nnp.random.seed(42)\nnpoints = 20\nxpoints = np.random.uniform(xmin + 10, xmax - 10, npoints)\nypoints = np.random.uniform(ymin + 10, ymax - 10, npoints)\npoints = list(zip(xpoints, ypoints))\n\n# Create Voronoi grid\nvor = VoronoiGrid(points)\nvertices = vor.get_vertices()\niverts = vor.get_iverts()\n\n# Get cell centers\nxcenters = []\nycenters = []\nfor ivs in iverts:\n    if ivs is not None:\n        xverts = [vertices[iv][0] for iv in ivs]\n        yverts = [vertices[iv][1] for iv in ivs]\n        xcenters.append(np.mean(xverts))\n        ycenters.append(np.mean(yverts))\n\n# Create UnstructuredGrid\nncpl = len(iverts)\nnverts = len(vertices)\ntop = np.ones(ncpl) * 10.0\nbotm = np.zeros(ncpl)\n\n# Convert vertices to required format\nverts_list = [[i, v[0], v[1]] for i, v in enumerate(vertices)]\n\n# Filter valid cells\nvalid_iverts = [iv for iv in iverts if iv is not None]\nvalid_xcenters = xcenters[:len(valid_iverts)]\nvalid_ycenters = ycenters[:len(valid_iverts)]\n\ngrid = UnstructuredGrid(\n    vertices=verts_list,\n    iverts=valid_iverts,\n    xcenters=valid_xcenters,\n    ycenters=valid_ycenters,\n    top=top[:len(valid_iverts)],\n    botm=botm[:len(valid_iverts)],\n    ncpl=len(valid_iverts)\n)\n\nprint(f'Number of cells: {grid.ncpl}')\nprint(f'Number of vertices: {len(vertices)}')\nprint(f'Grid extent: {grid.extent}')\nprint(f'Cell areas range: {grid.area.min():.2f} to {grid.area.max():.2f}')\n\n# Demonstrate cell properties\nfor i in range(min(5, grid.ncpl)):\n    print(f'\\nCell {i}:')\n    print(f'  Center: ({grid.xcellcenters[i]:.2f}, {grid.ycellcenters[i]:.2f})')\n    print(f'  Area: {grid.area[i]:.2f}')\n    print(f'  Number of vertices: {len(valid_iverts[i])}')"
+    },
+    {
+      "name": "vertex_grid_disv",
+      "description": "Demonstrates VertexGrid for DISV discretization with cell2d connectivity",
+      "code": "import numpy as np\nimport flopy\nfrom flopy.discretization import VertexGrid\n\n# Phase 1: Create vertex grid discretization\nprint('Creating Vertex Grid for DISV...')\n\n# Define a simple rectangular grid with vertex numbering\nnrow, ncol = 3, 4\ndx, dy = 10.0, 10.0\n\n# Create vertices\nvertices = []\niv = 0\nfor j in range(nrow + 1):\n    for i in range(ncol + 1):\n        x = i * dx\n        y = j * dy\n        vertices.append([iv, x, y])\n        iv += 1\n\n# Create cell2d connectivity\ncell2d = []\nicell = 0\nfor j in range(nrow):\n    for i in range(ncol):\n        # Vertices for this cell (counter-clockwise)\n        iv1 = j * (ncol + 1) + i\n        iv2 = iv1 + 1\n        iv3 = iv2 + ncol + 1\n        iv4 = iv3 - 1\n        \n        # Cell center\n        xc = (i + 0.5) * dx\n        yc = (j + 0.5) * dy\n        \n        # cell2d format: [icell, xc, yc, nvert, iv1, iv2, iv3, iv4]\n        cell2d.append([icell, xc, yc, 4, iv1, iv2, iv3, iv4])\n        icell += 1\n\n# Create VertexGrid\nncpl = len(cell2d)\nnlay = 2\ntop = np.ones(ncpl) * 100.0\nbotm = np.array([np.ones(ncpl) * 50.0, np.zeros(ncpl)])\n\ngrid = VertexGrid(\n    vertices=vertices,\n    cell2d=cell2d,\n    ncpl=ncpl,\n    nlay=nlay,\n    top=top,\n    botm=botm\n)\n\nprint(f'Number of layers: {grid.nlay}')\nprint(f'Number of cells per layer: {grid.ncpl}')\nprint(f'Total number of cells: {grid.nnodes}')\nprint(f'Grid extent: {grid.extent}')\n\n# Display cell information\nprint('\\nFirst 5 cells:')\nfor i in range(min(5, ncpl)):\n    cell = cell2d[i]\n    print(f'Cell {cell[0]}: center=({cell[1]:.1f}, {cell[2]:.1f}), nverts={cell[3]}')\n\n# Demonstrate 3D indexing\nprint('\\n3D cell indexing:')\nfor k in range(nlay):\n    for i in range(min(3, ncpl)):\n        node = grid.get_node([k, i])[0]\n        print(f'Layer {k}, Cell {i} -> Node {node}')\n\n# Get cell vertices for first cell\ncell_verts = grid.get_cell_vertices(0)\nprint(f'\\nVertices for cell 0: {cell_verts}')"
+    }
+  ]
+}

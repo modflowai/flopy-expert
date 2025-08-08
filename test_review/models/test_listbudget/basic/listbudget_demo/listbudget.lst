@@ -1,0 +1,767 @@
+                                   MODFLOW 6
+                U.S. GEOLOGICAL SURVEY MODULAR HYDROLOGIC MODEL
+                          GROUNDWATER FLOW MODEL (GWF)
+                            VERSION 6.6.2 05/12/2025
+
+   MODFLOW 6 compiled May 24 2025 11:41:46 with Intel(R) Fortran Intel(R) 64
+   Compiler Classic for applications running on Intel(R) 64, Version 2021.7.0
+                             Build 20220726_000000
+
+This software has been approved for release by the U.S. Geological 
+Survey (USGS). Although the software has been subjected to rigorous 
+review, the USGS reserves the right to update the software as needed 
+pursuant to further analysis and review. No warranty, expressed or 
+implied, is made by the USGS or the U.S. Government as to the 
+functionality of the software and related material nor shall the 
+fact of release constitute any such warranty. Furthermore, the 
+software is released on condition that neither the USGS nor the U.S. 
+Government shall be held liable for any damages resulting from its 
+authorized or unauthorized use. Also refer to the USGS Water 
+Resources Software User Rights Notice for complete use, copyright, 
+and distribution information.
+
+
+As a work of the United States Government, this USGS product is 
+in the public domain within the United States. You can copy, 
+modify, distribute, and perform the work, even for commercial 
+purposes, all without asking permission. Additionally, USGS 
+waives copyright and related rights in the work worldwide 
+through CC0 1.0 Universal Public Domain Dedication 
+(https://creativecommons.org/publicdomain/zero/1.0/).
+
+The following GNU Lesser General Public License (LGPL) libraries
+are used in this USGS product:
+
+    SPARSKIT version 2.0
+      ilut, luson, and qsplit 
+      (https://www-users.cse.umn.edu/~saad/software/SPARSKIT/)
+
+    RCM - Reverse Cuthill McKee Ordering
+      (https://people.math.sc.edu/Burkardt/f_src/rcm/rcm.html)
+
+    BLAS - Basic Linear Algebra Subprograms Level 1
+      (https://people.math.sc.edu/Burkardt/f_src/blas1_d/blas1_d.html)
+
+    SPARSEKIT - Sparse Matrix Utility Package
+      amux, dperm, dvperm, rperm, and cperm
+      (https://people.sc.fsu.edu/~jburkardt/f77_src/sparsekit/sparsekit.html)
+
+The following BSD-3 License libraries are used in this USGS product:
+
+    Modern Fortran DAG Library
+      Copyright (c) 2018, Jacob Williams
+      All rights reserved.
+      (https://github.com/jacobwilliams/daglib)
+
+MODFLOW 6 compiler options: -Ilinux/obj_mf6 -O2 -no-heap-arrays -fpe0
+-traceback -Qdiag-disable:7416 -Qdiag-disable:7025 -Qdiag-disable:5268 -fpp
+-module linux/mod_mf6/ -c -o linux/obj_mf6/compilerversion.o
+
+System command used to initiate simulation:
+/home/danilopezmella/flopy_expert/bin/mf6
+
+MODFLOW was compiled using uniform precision.
+
+Real Variables
+  KIND: 8
+  TINY (smallest non-zero value):    2.225074-308
+  HUGE (largest value):    1.797693+308
+  PRECISION: 15
+  SIZE IN BITS: 64
+
+Integer Variables
+  KIND: 4
+  HUGE (largest value): 2147483647
+  SIZE IN BITS: 32
+
+Long Integer Variables
+  KIND: 8
+  HUGE (largest value): 9223372036854775807
+  SIZE IN BITS: 64
+
+Logical Variables
+  KIND: 4
+  SIZE IN BITS: 32
+ 
+ NAMEFILE OPTIONS:
+    STRESS PACKAGE INPUT WILL BE PRINTED FOR ALL MODEL STRESS PACKAGES
+    FLOWS WILL BE SAVED TO BUDGET FILE SPECIFIED IN OUTPUT CONTROL
+ END NAMEFILE OPTIONS:
+
+ DIS -- STRUCTURED GRID DISCRETIZATION PACKAGE, VERSION 2 : 3/27/2014 - INPUT READ FROM MEMPATH: __INPUT__/LISTBUDGET/DIS                          
+
+
+ NPF -- NODE PROPERTY FLOW PACKAGE, VERSION 1, 3/30/2015 INPUT READ FROM MEMPATH: __INPUT__/LISTBUDGET/NPF                          
+
+
+ IC -- Initial Conditions Package, Version 8, 3/28/2015 input read from mempath: __INPUT__/LISTBUDGET/IC                           
+
+
+ Setting Discretization Options
+ End Setting Discretization Options
+
+ Setting Discretization Dimensions
+    NLAY = 3
+    NROW = 10
+    NCOL = 10
+ End Setting Discretization Dimensions
+
+ Setting Discretization Griddata
+    DELR set from input file
+    DELC set from input file
+    TOP set from input file
+    BOTM set from input file
+ End Setting Discretization Griddata
+
+ Setting NPF Options
+ End Setting NPF Options
+
+ Setting NPF Griddata
+    ICELLTYPE set from input file
+    K set from input file
+    K33 not provided.  Setting K33 = K.
+    K22 not provided.  Setting K22 = K.
+ End Setting NPF Griddata
+
+
+ WEL   -- WEL PACKAGE, VERSION 8, 2/22/2014 INPUT READ FROM MEMPATH: __INPUT__/LISTBUDGET/WEL_0                        
+
+ PROCESSING WEL BASE OPTIONS
+ END OF WEL BASE OPTIONS
+
+ PROCESSING WEL OPTIONS
+ END OF WEL OPTIONS
+
+ PROCESSING WEL BASE DIMENSIONS
+    MAXBOUND =       2
+ END OF WEL BASE DIMENSIONS
+
+ CHD   -- CHD PACKAGE, VERSION 8, 2/22/2014 INPUT READ FROM MEMPATH: __INPUT__/LISTBUDGET/CHD_0                        
+
+ PROCESSING CHD BASE OPTIONS
+ END OF CHD BASE OPTIONS
+
+ PROCESSING CHD BASE DIMENSIONS
+    MAXBOUND =      60
+ END OF CHD BASE DIMENSIONS
+    STRT set from input file
+    BINARY GRID INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1012
+      FILE NAME: listbudget.dis.grb
+
+ OPENED listbudget.dis.grb
+ FILE TYPE:DATA(BINARY)   UNIT 1012   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+      THE LAST TIME STEP WILL BE PRINTED
+      THE LAST TIME STEP WILL BE PRINTED
+ # File generated by Flopy version 3.9.3 on 08/07/2025 at 01:54:29.
+
+ PROCESSING OC OPTIONS
+
+    BUDGET INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1013
+      FILE NAME: listbudget.cbc
+
+ OPENED listbudget.cbc
+ FILE TYPE:DATA(BINARY)   UNIT 1013   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+    HEAD INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1014
+      FILE NAME: listbudget.hds
+
+ OPENED listbudget.hds
+ FILE TYPE:DATA(BINARY)   UNIT 1014   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+ END OF OC OPTIONS
+
+start timestep kper="1" kstp="1" mode="normal"
+
+
+ BEGIN READING OUTPUT CONTROL FOR STRESS PERIOD 1
+      ALL TIME STEPS WILL BE SAVED
+      ALL TIME STEPS WILL BE SAVED
+      ALL TIME STEPS WILL BE PRINTED
+      ALL TIME STEPS WILL BE PRINTED
+
+ END READING OUTPUT CONTROL FOR STRESS PERIOD 1
+ ----------------------------------
+  WEL NO.    LAYER    ROW     COL  
+ ----------------------------------
+     1         2       6       6   
+     2         3       4       8   
+ ----------------------------------
+
+
+ ----------------------------------
+  CHD NO.    LAYER    ROW     COL  
+ ----------------------------------
+     1         1       1       1   
+     2         1       1       2   
+     3         1       1       3   
+     4         1       1       4   
+     5         1       1       5   
+     6         1       1       6   
+     7         1       1       7   
+     8         1       1       8   
+     9         1       1       9   
+     10        1       1      10   
+     11        1      10       1   
+     12        1      10       2   
+     13        1      10       3   
+     14        1      10       4   
+     15        1      10       5   
+     16        1      10       6   
+     17        1      10       7   
+     18        1      10       8   
+     19        1      10       9   
+     20        1      10      10   
+     21        2       1       1   
+     22        2       1       2   
+     23        2       1       3   
+     24        2       1       4   
+     25        2       1       5   
+     26        2       1       6   
+     27        2       1       7   
+     28        2       1       8   
+     29        2       1       9   
+     30        2       1      10   
+     31        2      10       1   
+     32        2      10       2   
+     33        2      10       3   
+     34        2      10       4   
+     35        2      10       5   
+     36        2      10       6   
+     37        2      10       7   
+     38        2      10       8   
+     39        2      10       9   
+     40        2      10      10   
+     41        3       1       1   
+     42        3       1       2   
+     43        3       1       3   
+     44        3       1       4   
+     45        3       1       5   
+     46        3       1       6   
+     47        3       1       7   
+     48        3       1       8   
+     49        3       1       9   
+     50        3       1      10   
+     51        3      10       1   
+     52        3      10       2   
+     53        3      10       3   
+     54        3      10       4   
+     55        3      10       5   
+     56        3      10       6   
+     57        3      10       7   
+     58        3      10       8   
+     59        3      10       9   
+     60        3      10      10   
+ ----------------------------------
+
+
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV06 SAVING              WEL IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE WEL_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV06 SAVING              CHD IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE CHD_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      1
+1
+  HEAD IN LAYER   1 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.99       86.99       86.98       86.97       86.96       86.95       86.95       86.94       86.95       86.95    
+   3    83.90       83.89       83.88       83.86       83.84       83.82       83.80       83.78       83.80       83.82    
+   4    80.73       80.72       80.70       80.67       80.64       80.60       80.57       80.54       80.60       80.63    
+   5    77.49       77.48       77.46       77.42       77.35       77.28       77.30       77.32       77.36       77.39    
+   6    74.19       74.17       74.14       74.09       73.99       73.79       73.96       74.03       74.07       74.09    
+   7    70.80       70.79       70.76       70.72       70.66       70.59       70.64       70.68       70.71       70.72    
+   8    67.33       67.32       67.30       67.28       67.25       67.22       67.23       67.25       67.27       67.27    
+   9    63.75       63.75       63.74       63.73       63.72       63.71       63.71       63.72       63.72       63.73    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   2 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.96       86.96       86.95       86.94       86.93       86.92       86.91       86.91       86.92       86.92    
+   3    83.86       83.85       83.84       83.82       83.80       83.78       83.76       83.74       83.77       83.78    
+   4    80.69       80.68       80.66       80.63       80.60       80.55       80.53       80.48       80.55       80.58    
+   5    77.45       77.44       77.41       77.37       77.31       77.23       77.26       77.27       77.32       77.34    
+   6    74.14       74.13       74.10       74.05       73.94       73.66       73.91       73.98       74.02       74.04    
+   7    70.75       70.74       70.72       70.68       70.62       70.55       70.59       70.63       70.66       70.67    
+   8    67.27       67.27       67.25       67.22       67.19       67.17       67.18       67.20       67.21       67.22    
+   9    63.70       63.69       63.69       63.67       63.66       63.65       63.65       63.66       63.67       63.67    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   3 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.95       86.94       86.94       86.93       86.92       86.91       86.90       86.89       86.90       86.91    
+   3    83.84       83.84       83.82       83.81       83.78       83.76       83.74       83.71       83.75       83.76    
+   4    80.67       80.66       80.64       80.61       80.58       80.53       80.50       80.36       80.52       80.56    
+   5    77.43       77.42       77.39       77.35       77.29       77.22       77.24       77.24       77.30       77.32    
+   6    74.12       74.10       74.08       74.02       73.93       73.78       73.90       73.96       74.00       74.02    
+   7    70.73       70.72       70.69       70.65       70.59       70.53       70.57       70.61       70.64       70.65    
+   8    67.25       67.24       67.22       67.20       67.17       67.15       67.15       67.17       67.19       67.20    
+   9    63.67       63.67       63.66       63.65       63.64       63.63       63.63       63.64       63.64       63.65    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+
+ HEAD WILL BE SAVED ON UNIT 1014 AT END OF TIME STEP    1, STRESS PERIOD    1
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    1, STRESS PERIOD   1
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+                 WEL =           0.0000                   WEL =           0.0000     WEL_0                            
+                 CHD =       42399.3587                   CHD =       42399.3587     CHD_0                            
+
+            TOTAL IN =       42399.3587              TOTAL IN =       42399.3587
+
+          OUT:                                     OUT:
+          ----                                     ----
+                 WEL =        1500.0000                   WEL =        1500.0000     WEL_0                            
+                 CHD =       40899.7076                   CHD =       40899.7076     CHD_0                            
+
+           TOTAL OUT =       42399.7076             TOTAL OUT =       42399.7076
+
+            IN - OUT =          -0.3489              IN - OUT =          -0.3489
+
+ PERCENT DISCREPANCY =          -0.00     PERCENT DISCREPANCY =          -0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    1 IN STRESS PERIOD    1
+                          TIME STEP LENGTH =    1.00000    
+                        STRESS PERIOD TIME =    1.00000    
+                     TOTAL SIMULATION TIME =    1.00000    
+
+end timestep
+
+
+start timestep kper="2" kstp="1" mode="normal"
+
+
+ END OF FILE DETECTED IN OUTPUT CONTROL.
+ CURRENT OUTPUT CONTROL SETTINGS WILL BE 
+ REPEATED UNTIL THE END OF THE SIMULATION.
+
+ OUTPUT CONTROL FOR STRESS PERIOD 2 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ ----------------------------------
+  WEL NO.    LAYER    ROW     COL  
+ ----------------------------------
+     1         2       6       6   
+     2         3       4       8   
+ ----------------------------------
+
+
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      2
+ UBDSV06 SAVING              WEL IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE WEL_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      2
+ UBDSV06 SAVING              CHD IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE CHD_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      2
+1
+  HEAD IN LAYER   1 AT END OF TIME STEP   1 IN STRESS PERIOD    2
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.96       86.96       86.95       86.93       86.91       86.89       86.87       86.86       86.87       86.89    
+   3    83.84       83.83       83.80       83.77       83.72       83.68       83.64       83.62       83.66       83.69    
+   4    80.65       80.63       80.59       80.54       80.46       80.38       80.33       80.28       80.38       80.44    
+   5    77.40       77.38       77.32       77.24       77.12       76.97       77.02       77.05       77.13       77.18    
+   6    74.09       74.06       74.00       73.90       73.70       73.30       73.63       73.77       73.85       73.89    
+   7    70.71       70.69       70.64       70.56       70.44       70.30       70.39       70.47       70.53       70.55    
+   8    67.26       67.24       67.21       67.16       67.09       67.04       67.07       67.10       67.13       67.15    
+   9    63.72       63.71       63.69       63.67       63.64       63.62       63.62       63.64       63.65       63.66    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   2 AT END OF TIME STEP   1 IN STRESS PERIOD    2
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.93       86.93       86.91       86.90       86.88       86.86       86.84       86.83       86.84       86.85    
+   3    83.80       83.79       83.77       83.73       83.69       83.64       83.60       83.57       83.61       83.65    
+   4    80.61       80.59       80.55       80.50       80.42       80.34       80.28       80.18       80.33       80.40    
+   5    77.36       77.33       77.28       77.20       77.07       76.92       76.97       77.00       77.09       77.14    
+   6    74.04       74.01       73.96       73.85       73.65       73.08       73.58       73.73       73.81       73.85    
+   7    70.66       70.64       70.59       70.51       70.39       70.25       70.34       70.42       70.48       70.51    
+   8    67.21       67.19       67.16       67.11       67.05       67.00       67.02       67.05       67.08       67.10    
+   9    63.66       63.65       63.64       63.61       63.59       63.57       63.57       63.58       63.60       63.61    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   3 AT END OF TIME STEP   1 IN STRESS PERIOD    2
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.92       86.91       86.90       86.88       86.86       86.84       86.82       86.81       86.83       86.84    
+   3    83.78       83.77       83.75       83.71       83.67       83.62       83.58       83.53       83.59       83.63    
+   4    80.59       80.57       80.53       80.48       80.40       80.32       80.24       79.97       80.29       80.38    
+   5    77.33       77.31       77.26       77.18       77.05       76.91       76.95       76.96       77.06       77.12    
+   6    74.02       73.99       73.94       73.83       73.65       73.34       73.58       73.70       73.78       73.83    
+   7    70.64       70.61       70.57       70.49       70.37       70.25       70.32       70.40       70.46       70.48    
+   8    67.18       67.16       67.13       67.08       67.02       66.97       66.99       67.03       67.06       67.07    
+   9    63.64       63.63       63.61       63.59       63.56       63.54       63.55       63.56       63.57       63.58    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+
+ HEAD WILL BE SAVED ON UNIT 1014 AT END OF TIME STEP    1, STRESS PERIOD    2
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    1, STRESS PERIOD   2
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+                 WEL =           0.0000                   WEL =           0.0000     WEL_0                            
+                 CHD =      474179.0112                   CHD =       43177.9652     CHD_0                            
+
+            TOTAL IN =      474179.0112              TOTAL IN =       43177.9652
+
+          OUT:                                     OUT:
+          ----                                     ----
+                 WEL =       31500.0000                   WEL =        3000.0000     WEL_0                            
+                 CHD =      442672.1839                   CHD =       40177.2476     CHD_0                            
+
+           TOTAL OUT =      474172.1839             TOTAL OUT =       43177.2476
+
+            IN - OUT =           6.8273              IN - OUT =           0.7176
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    1 IN STRESS PERIOD    2
+                          TIME STEP LENGTH =    10.0000    
+                        STRESS PERIOD TIME =    10.0000    
+                     TOTAL SIMULATION TIME =    11.0000    
+
+end timestep
+
+
+start timestep kper="3" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 3 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ ----------------------------------
+  WEL NO.    LAYER    ROW     COL  
+ ----------------------------------
+     1         2       6       6   
+     2         3       4       8   
+ ----------------------------------
+
+
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      3
+ UBDSV06 SAVING              WEL IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE WEL_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      3
+ UBDSV06 SAVING              CHD IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE CHD_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      3
+1
+  HEAD IN LAYER   1 AT END OF TIME STEP   1 IN STRESS PERIOD    3
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.93       86.92       86.91       86.88       86.85       86.82       86.80       86.78       86.80       86.82    
+   3    83.78       83.76       83.73       83.68       83.61       83.54       83.49       83.45       83.51       83.55    
+   4    80.57       80.54       80.49       80.40       80.29       80.17       80.10       80.01       80.17       80.25    
+   5    77.30       77.27       77.19       77.07       76.88       76.66       76.73       76.78       76.90       76.98    
+   6    73.99       73.95       73.86       73.70       73.41       72.80       73.30       73.51       73.63       73.70    
+   7    70.62       70.58       70.51       70.39       70.21       70.00       70.14       70.26       70.34       70.39    
+   8    67.19       67.16       67.11       67.04       66.94       66.87       66.90       66.96       67.00       67.03    
+   9    63.68       63.66       63.64       63.60       63.56       63.53       63.54       63.56       63.58       63.59    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   2 AT END OF TIME STEP   1 IN STRESS PERIOD    3
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.90       86.89       86.88       86.85       86.82       86.79       86.76       86.75       86.77       86.78    
+   3    83.74       83.73       83.69       83.64       83.57       83.50       83.44       83.39       83.46       83.51    
+   4    80.53       80.50       80.45       80.36       80.24       80.12       80.04       79.88       80.11       80.21    
+   5    77.26       77.23       77.15       77.02       76.83       76.60       76.68       76.73       76.86       76.93    
+   6    73.94       73.90       73.82       73.66       73.35       72.49       73.25       73.47       73.59       73.65    
+   7    70.57       70.54       70.46       70.34       70.16       69.95       70.09       70.21       70.30       70.34    
+   8    67.14       67.11       67.06       66.99       66.90       66.82       66.85       66.91       66.95       66.98    
+   9    63.62       63.61       63.59       63.55       63.51       63.48       63.49       63.51       63.53       63.54    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   3 AT END OF TIME STEP   1 IN STRESS PERIOD    3
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.89       86.88       86.86       86.84       86.81       86.77       86.75       86.73       86.75       86.77    
+   3    83.73       83.71       83.67       83.62       83.55       83.48       83.41       83.34       83.44       83.49    
+   4    80.51       80.48       80.43       80.34       80.22       80.10       79.99       79.57       80.06       80.19    
+   5    77.24       77.20       77.13       77.00       76.82       76.61       76.66       76.68       76.83       76.91    
+   6    73.92       73.88       73.79       73.64       73.36       72.90       73.26       73.45       73.57       73.63    
+   7    70.55       70.51       70.44       70.32       70.15       69.97       70.08       70.19       70.27       70.32    
+   8    67.11       67.09       67.04       66.96       66.87       66.80       66.83       66.88       66.93       66.95    
+   9    63.60       63.59       63.56       63.53       63.49       63.46       63.47       63.49       63.51       63.52    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+
+ HEAD WILL BE SAVED ON UNIT 1014 AT END OF TIME STEP    1, STRESS PERIOD    3
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    1, STRESS PERIOD   3
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+                 WEL =           0.0000                   WEL =           0.0000     WEL_0                            
+                 CHD =      913743.7979                   CHD =       43956.4787     CHD_0                            
+
+            TOTAL IN =      913743.7979              TOTAL IN =       43956.4787
+
+          OUT:                                     OUT:
+          ----                                     ----
+                 WEL =       76500.0000                   WEL =        4500.0000     WEL_0                            
+                 CHD =      837226.6887                   CHD =       39455.4505     CHD_0                            
+
+           TOTAL OUT =      913726.6887             TOTAL OUT =       43955.4505
+
+            IN - OUT =          17.1092              IN - OUT =           1.0282
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    1 IN STRESS PERIOD    3
+                          TIME STEP LENGTH =    10.0000    
+                        STRESS PERIOD TIME =    10.0000    
+                     TOTAL SIMULATION TIME =    21.0000    
+
+end timestep
+
+
+start timestep kper="4" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 4 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ ----------------------------------
+  WEL NO.    LAYER    ROW     COL  
+ ----------------------------------
+     1         2       6       6   
+     2         3       4       8   
+ ----------------------------------
+
+
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      4
+ UBDSV06 SAVING              WEL IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE WEL_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      4
+ UBDSV06 SAVING              CHD IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE CHD_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      4
+1
+  HEAD IN LAYER   1 AT END OF TIME STEP   1 IN STRESS PERIOD    4
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.90       86.89       86.87       86.84       86.80       86.76       86.72       86.71       86.73       86.75    
+   3    83.73       83.70       83.65       83.58       83.50       83.41       83.33       83.28       83.36       83.42    
+   4    80.49       80.45       80.38       80.26       80.11       79.95       79.86       79.74       79.95       80.07    
+   5    77.21       77.16       77.06       76.89       76.64       76.35       76.44       76.51       76.68       76.77    
+   6    73.89       73.84       73.72       73.51       73.11       72.30       72.97       73.25       73.42       73.50    
+   7    70.53       70.48       70.38       70.22       69.98       69.70       69.88       70.05       70.16       70.22    
+   8    67.12       67.09       67.02       66.92       66.79       66.69       66.73       66.81       66.87       66.90    
+   9    63.64       63.62       63.59       63.54       63.48       63.45       63.45       63.48       63.51       63.53    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   2 AT END OF TIME STEP   1 IN STRESS PERIOD    4
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.87       86.86       86.84       86.80       86.76       86.72       86.69       86.67       86.69       86.72    
+   3    83.69       83.66       83.62       83.54       83.46       83.36       83.28       83.21       83.31       83.38    
+   4    80.45       80.41       80.34       80.22       80.07       79.90       79.79       79.58       79.89       80.02    
+   5    77.16       77.12       77.02       76.85       76.59       76.28       76.39       76.45       76.63       76.73    
+   6    73.84       73.79       73.68       73.46       73.05       71.91       72.91       73.21       73.37       73.45    
+   7    70.48       70.43       70.34       70.18       69.94       69.66       69.84       70.00       70.12       70.17    
+   8    67.07       67.04       66.97       66.87       66.75       66.65       66.69       66.76       66.82       66.86    
+   9    63.58       63.57       63.54       63.49       63.44       63.40       63.41       63.43       63.46       63.48    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   3 AT END OF TIME STEP   1 IN STRESS PERIOD    4
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.86       86.85       86.82       86.79       86.75       86.71       86.67       86.65       86.67       86.70    
+   3    83.67       83.64       83.60       83.52       83.44       83.34       83.25       83.15       83.28       83.36    
+   4    80.43       80.39       80.32       80.20       80.04       79.88       79.73       79.18       79.83       80.00    
+   5    77.14       77.10       76.99       76.83       76.58       76.30       76.36       76.39       76.60       76.71    
+   6    73.82       73.77       73.65       73.45       73.08       72.45       72.94       73.19       73.35       73.43    
+   7    70.46       70.41       70.31       70.15       69.92       69.68       69.83       69.98       70.09       70.15    
+   8    67.04       67.01       66.95       66.85       66.72       66.63       66.67       66.74       66.80       66.83    
+   9    63.56       63.54       63.51       63.47       63.41       63.38       63.39       63.41       63.44       63.45    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+
+ HEAD WILL BE SAVED ON UNIT 1014 AT END OF TIME STEP    1, STRESS PERIOD    4
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    1, STRESS PERIOD   4
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+                 WEL =           0.0000                   WEL =           0.0000     WEL_0                            
+                 CHD =     1361090.5196                   CHD =       44734.6722     CHD_0                            
+
+            TOTAL IN =     1361090.5196              TOTAL IN =       44734.6722
+
+          OUT:                                     OUT:
+          ----                                     ----
+                 WEL =      136500.0000                   WEL =        6000.0000     WEL_0                            
+                 CHD =     1224564.3608                   CHD =       38733.7672     CHD_0                            
+
+           TOTAL OUT =     1361064.3608             TOTAL OUT =       44733.7672
+
+            IN - OUT =          26.1588              IN - OUT =           0.9050
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    1 IN STRESS PERIOD    4
+                          TIME STEP LENGTH =    10.0000    
+                        STRESS PERIOD TIME =    10.0000    
+                     TOTAL SIMULATION TIME =    31.0000    
+
+end timestep
+
+
+start timestep kper="5" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 5 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ ----------------------------------
+  WEL NO.    LAYER    ROW     COL  
+ ----------------------------------
+     1         2       6       6   
+     2         3       4       8   
+ ----------------------------------
+
+
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      5
+ UBDSV06 SAVING              WEL IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE WEL_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      5
+ UBDSV06 SAVING              CHD IN MODEL LISTBUDGET       PACKAGE LISTBUDGET      CONNECTED TO MODEL LISTBUDGET       PACKAGE CHD_0            ON UNIT   1013 AT TIME STEP      1, STRESS PERIOD      5
+1
+  HEAD IN LAYER   1 AT END OF TIME STEP   1 IN STRESS PERIOD    5
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.88       86.86       86.83       86.79       86.74       86.69       86.65       86.63       86.66       86.68    
+   3    83.67       83.64       83.58       83.49       83.38       83.27       83.18       83.11       83.21       83.29    
+   4    80.41       80.36       80.27       80.13       79.94       79.74       79.62       79.47       79.73       79.88    
+   5    77.11       77.05       76.93       76.72       76.40       76.04       76.15       76.24       76.45       76.57    
+   6    73.79       73.72       73.58       73.32       72.81       71.79       72.64       72.99       73.20       73.30    
+   7    70.44       70.38       70.26       70.05       69.75       69.40       69.63       69.84       69.98       70.05    
+   8    67.05       67.01       66.93       66.80       66.64       66.51       66.57       66.66       66.74       66.78    
+   9    63.60       63.58       63.54       63.47       63.41       63.36       63.37       63.41       63.44       63.46    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   2 AT END OF TIME STEP   1 IN STRESS PERIOD    5
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.84       86.83       86.80       86.76       86.71       86.66       86.61       86.59       86.62       86.65    
+   3    83.63       83.60       83.54       83.45       83.34       83.22       83.12       83.04       83.16       83.24    
+   4    80.37       80.32       80.23       80.08       79.89       79.68       79.55       79.29       79.67       79.84    
+   5    77.07       77.01       76.88       76.67       76.36       75.96       76.10       76.18       76.40       76.52    
+   6    73.74       73.68       73.53       73.27       72.76       71.32       72.58       72.95       73.16       73.26    
+   7    70.39       70.33       70.21       70.01       69.71       69.36       69.59       69.79       69.93       70.00    
+   8    67.00       66.96       66.88       66.75       66.60       66.47       66.52       66.62       66.69       66.73    
+   9    63.55       63.53       63.48       63.43       63.36       63.31       63.32       63.36       63.39       63.41    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+1
+  HEAD IN LAYER   3 AT END OF TIME STEP   1 IN STRESS PERIOD    5
+  ---------------------------------------------------------------------------
+
+            1           2           3           4           5           6           7           8           9          10
+ ........................................................................................................................
+   1    90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00       90.00    
+   2    86.83       86.81       86.78       86.74       86.69       86.64       86.59       86.56       86.60       86.63    
+   3    83.61       83.58       83.52       83.43       83.32       83.20       83.09       82.96       83.13       83.22    
+   4    80.35       80.30       80.21       80.06       79.87       79.66       79.47       78.79       79.59       79.81    
+   5    77.05       76.99       76.86       76.65       76.34       75.99       76.07       76.11       76.37       76.50    
+   6    73.72       73.65       73.51       73.25       72.79       72.01       72.61       72.93       73.13       73.24    
+   7    70.37       70.31       70.19       69.99       69.70       69.40       69.58       69.77       69.91       69.98    
+   8    66.97       66.93       66.85       66.73       66.58       66.46       66.50       66.59       66.67       66.71    
+   9    63.52       63.50       63.46       63.40       63.34       63.30       63.30       63.34       63.37       63.39    
+  10    60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00       60.00    
+
+ HEAD WILL BE SAVED ON UNIT 1014 AT END OF TIME STEP    1, STRESS PERIOD    5
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    1, STRESS PERIOD   5
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+                 WEL =           0.0000                   WEL =           0.0000     WEL_0                            
+                 CHD =     1406603.7685                   CHD =       45513.2489     CHD_0                            
+
+            TOTAL IN =     1406603.7685              TOTAL IN =       45513.2489
+
+          OUT:                                     OUT:
+          ----                                     ----
+                 WEL =      144000.0000                   WEL =        7500.0000     WEL_0                            
+                 CHD =     1262575.8729                   CHD =       38011.5121     CHD_0                            
+
+           TOTAL OUT =     1406575.8729             TOTAL OUT =       45511.5121
+
+            IN - OUT =          27.8956              IN - OUT =           1.7368
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    1 IN STRESS PERIOD    5
+                          TIME STEP LENGTH =    1.00000    
+                        STRESS PERIOD TIME =    1.00000    
+                     TOTAL SIMULATION TIME =    32.0000    
+
+end timestep
+

@@ -4,3 +4,6 @@ LIST               2  parent_grid.list
 DIS               11  parent_grid.dis
 BAS6              13  parent_grid.bas
 LPF               15  parent_grid.lpf
+PCG               27  parent_grid.pcg
+OC                14  parent_grid.oc
+DATA(BINARY)      51  parent_grid.hds REPLACE

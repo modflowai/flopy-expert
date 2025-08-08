@@ -1,0 +1,1195 @@
+                                   MODFLOW 6
+                U.S. GEOLOGICAL SURVEY MODULAR HYDROLOGIC MODEL
+                          GROUNDWATER FLOW MODEL (GWF)
+                            VERSION 6.6.2 05/12/2025
+
+   MODFLOW 6 compiled May 24 2025 11:41:46 with Intel(R) Fortran Intel(R) 64
+   Compiler Classic for applications running on Intel(R) 64, Version 2021.7.0
+                             Build 20220726_000000
+
+This software has been approved for release by the U.S. Geological 
+Survey (USGS). Although the software has been subjected to rigorous 
+review, the USGS reserves the right to update the software as needed 
+pursuant to further analysis and review. No warranty, expressed or 
+implied, is made by the USGS or the U.S. Government as to the 
+functionality of the software and related material nor shall the 
+fact of release constitute any such warranty. Furthermore, the 
+software is released on condition that neither the USGS nor the U.S. 
+Government shall be held liable for any damages resulting from its 
+authorized or unauthorized use. Also refer to the USGS Water 
+Resources Software User Rights Notice for complete use, copyright, 
+and distribution information.
+
+
+As a work of the United States Government, this USGS product is 
+in the public domain within the United States. You can copy, 
+modify, distribute, and perform the work, even for commercial 
+purposes, all without asking permission. Additionally, USGS 
+waives copyright and related rights in the work worldwide 
+through CC0 1.0 Universal Public Domain Dedication 
+(https://creativecommons.org/publicdomain/zero/1.0/).
+
+The following GNU Lesser General Public License (LGPL) libraries
+are used in this USGS product:
+
+    SPARSKIT version 2.0
+      ilut, luson, and qsplit 
+      (https://www-users.cse.umn.edu/~saad/software/SPARSKIT/)
+
+    RCM - Reverse Cuthill McKee Ordering
+      (https://people.math.sc.edu/Burkardt/f_src/rcm/rcm.html)
+
+    BLAS - Basic Linear Algebra Subprograms Level 1
+      (https://people.math.sc.edu/Burkardt/f_src/blas1_d/blas1_d.html)
+
+    SPARSEKIT - Sparse Matrix Utility Package
+      amux, dperm, dvperm, rperm, and cperm
+      (https://people.sc.fsu.edu/~jburkardt/f77_src/sparsekit/sparsekit.html)
+
+The following BSD-3 License libraries are used in this USGS product:
+
+    Modern Fortran DAG Library
+      Copyright (c) 2018, Jacob Williams
+      All rights reserved.
+      (https://github.com/jacobwilliams/daglib)
+
+MODFLOW 6 compiler options: -Ilinux/obj_mf6 -O2 -no-heap-arrays -fpe0
+-traceback -Qdiag-disable:7416 -Qdiag-disable:7025 -Qdiag-disable:5268 -fpp
+-module linux/mod_mf6/ -c -o linux/obj_mf6/compilerversion.o
+
+System command used to initiate simulation:
+/home/danilopezmella/flopy_expert/bin/mf6
+
+MODFLOW was compiled using uniform precision.
+
+Real Variables
+  KIND: 8
+  TINY (smallest non-zero value):    2.225074-308
+  HUGE (largest value):    1.797693+308
+  PRECISION: 15
+  SIZE IN BITS: 64
+
+Integer Variables
+  KIND: 4
+  HUGE (largest value): 2147483647
+  SIZE IN BITS: 32
+
+Long Integer Variables
+  KIND: 8
+  HUGE (largest value): 9223372036854775807
+  SIZE IN BITS: 64
+
+Logical Variables
+  KIND: 4
+  SIZE IN BITS: 32
+ 
+ NAMEFILE OPTIONS:
+    FLOWS WILL BE SAVED TO BUDGET FILE SPECIFIED IN OUTPUT CONTROL
+ END NAMEFILE OPTIONS:
+
+ DIS -- STRUCTURED GRID DISCRETIZATION PACKAGE, VERSION 2 : 3/27/2014 - INPUT READ FROM MEMPATH: __INPUT__/TIME_DEMO/DIS                           
+
+
+ NPF -- NODE PROPERTY FLOW PACKAGE, VERSION 1, 3/30/2015 INPUT READ FROM MEMPATH: __INPUT__/TIME_DEMO/NPF                           
+
+
+ IC -- Initial Conditions Package, Version 8, 3/28/2015 input read from mempath: __INPUT__/TIME_DEMO/IC                            
+
+
+ Setting Discretization Options
+ End Setting Discretization Options
+
+ Setting Discretization Dimensions
+    NLAY = 1
+    NROW = 10
+    NCOL = 10
+ End Setting Discretization Dimensions
+
+ Setting Discretization Griddata
+    DELR set from input file
+    DELC set from input file
+    TOP set from input file
+    BOTM set from input file
+ End Setting Discretization Griddata
+
+ Setting NPF Options
+ End Setting NPF Options
+
+ Setting NPF Griddata
+    ICELLTYPE set from input file
+    K set from input file
+    K33 not provided.  Setting K33 = K.
+    K22 not provided.  Setting K22 = K.
+ End Setting NPF Griddata
+
+    STRT set from input file
+
+ STO -- STORAGE PACKAGE, VERSION 1, 5/19/2014 INPUT READ FROM MEMPATH: __INPUT__/TIME_DEMO/STO                           
+
+
+ PROCESSING STORAGE OPTIONS
+ END OF STORAGE OPTIONS
+    BINARY GRID INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1011
+      FILE NAME: time_demo.dis.grb
+
+ OPENED time_demo.dis.grb
+ FILE TYPE:DATA(BINARY)   UNIT 1011   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+      THE LAST TIME STEP WILL BE PRINTED
+      THE LAST TIME STEP WILL BE PRINTED
+ # File generated by Flopy version 3.9.3 on 08/07/2025 at 16:14:22.
+
+ PROCESSING OC OPTIONS
+
+    BUDGET INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1012
+      FILE NAME: time_demo.cbc
+
+ OPENED time_demo.cbc
+ FILE TYPE:DATA(BINARY)   UNIT 1012   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+    HEAD INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1013
+      FILE NAME: time_demo.hds
+
+ OPENED time_demo.hds
+ FILE TYPE:DATA(BINARY)   UNIT 1013   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+ END OF OC OPTIONS
+
+start timestep kper="1" kstp="1" mode="normal"
+
+
+ BEGIN READING OUTPUT CONTROL FOR STRESS PERIOD 1
+      ALL TIME STEPS WILL BE SAVED
+      ALL TIME STEPS WILL BE SAVED
+
+ END READING OUTPUT CONTROL FOR STRESS PERIOD 1
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      1
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    1
+
+end timestep
+
+
+start timestep kper="1" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      1
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      1
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    1
+
+end timestep
+
+
+start timestep kper="1" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      1
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      1
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    1
+
+end timestep
+
+
+start timestep kper="1" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      1
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      1
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    1
+
+end timestep
+
+
+start timestep kper="1" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      1
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      1
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    1
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   1
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    1
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+
+
+end timestep
+
+
+start timestep kper="2" kstp="1" mode="normal"
+
+
+ END OF FILE DETECTED IN OUTPUT CONTROL.
+ CURRENT OUTPUT CONTROL SETTINGS WILL BE 
+ REPEATED UNTIL THE END OF THE SIMULATION.
+
+ OUTPUT CONTROL FOR STRESS PERIOD 2 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      2
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      2
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    2
+
+end timestep
+
+
+start timestep kper="2" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      2
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      2
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    2
+
+end timestep
+
+
+start timestep kper="2" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      2
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      2
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    2
+
+end timestep
+
+
+start timestep kper="2" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      2
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      2
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    2
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    4, STRESS PERIOD   2
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    4 IN STRESS PERIOD    2
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 6.04800E+05  10080.      168.00      7.0000     1.91650E-02
+ STRESS PERIOD TIME 2.41920E+06  40320.      672.00      28.000     7.66598E-02
+         TOTAL TIME 5.09760E+06  84960.      1416.0      59.000     0.16153    
+
+
+end timestep
+
+
+start timestep kper="3" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 3 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      3
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      3
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    3
+
+end timestep
+
+
+start timestep kper="3" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      3
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      3
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    3
+
+end timestep
+
+
+start timestep kper="3" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      3
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      3
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    3
+
+end timestep
+
+
+start timestep kper="3" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      3
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      3
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    3
+
+end timestep
+
+
+start timestep kper="3" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      3
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      3
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    3
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   3
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    3
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 7.77600E+06 1.29600E+05  2160.0      90.000     0.24641    
+
+
+end timestep
+
+
+start timestep kper="4" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 4 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      4
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      4
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    4
+
+end timestep
+
+
+start timestep kper="4" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      4
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      4
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    4
+
+end timestep
+
+
+start timestep kper="4" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      4
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      4
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    4
+
+end timestep
+
+
+start timestep kper="4" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      4
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      4
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    4
+
+end timestep
+
+
+start timestep kper="4" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      4
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      4
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    4
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   4
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    4
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.18400E+05  8640.0      144.00      6.0000     1.64271E-02
+ STRESS PERIOD TIME 2.59200E+06  43200.      720.00      30.000     8.21355E-02
+         TOTAL TIME 1.03680E+07 1.72800E+05  2880.0      120.00     0.32854    
+
+
+end timestep
+
+
+start timestep kper="5" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 5 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      5
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      5
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    5
+
+end timestep
+
+
+start timestep kper="5" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      5
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      5
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    5
+
+end timestep
+
+
+start timestep kper="5" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      5
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      5
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    5
+
+end timestep
+
+
+start timestep kper="5" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      5
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      5
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    5
+
+end timestep
+
+
+start timestep kper="5" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      5
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      5
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    5
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   5
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    5
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 1.30464E+07 2.17440E+05  3624.0      151.00     0.41342    
+
+
+end timestep
+
+
+start timestep kper="6" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 6 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      6
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      6
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    6
+
+end timestep
+
+
+start timestep kper="6" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      6
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      6
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    6
+
+end timestep
+
+
+start timestep kper="6" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      6
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      6
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    6
+
+end timestep
+
+
+start timestep kper="6" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      6
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      6
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    6
+
+end timestep
+
+
+start timestep kper="6" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      6
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      6
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    6
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   6
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    6
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.18400E+05  8640.0      144.00      6.0000     1.64271E-02
+ STRESS PERIOD TIME 2.59200E+06  43200.      720.00      30.000     8.21355E-02
+         TOTAL TIME 1.56384E+07 2.60640E+05  4344.0      181.00     0.49555    
+
+
+end timestep
+
+
+start timestep kper="7" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 7 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      7
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      7
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    7
+
+end timestep
+
+
+start timestep kper="7" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      7
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      7
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    7
+
+end timestep
+
+
+start timestep kper="7" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      7
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      7
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    7
+
+end timestep
+
+
+start timestep kper="7" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      7
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      7
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    7
+
+end timestep
+
+
+start timestep kper="7" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      7
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      7
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    7
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   7
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    7
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 1.83168E+07 3.05280E+05  5088.0      212.00     0.58042    
+
+
+end timestep
+
+
+start timestep kper="8" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 8 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      8
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      8
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    8
+
+end timestep
+
+
+start timestep kper="8" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      8
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      8
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    8
+
+end timestep
+
+
+start timestep kper="8" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      8
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      8
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    8
+
+end timestep
+
+
+start timestep kper="8" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      8
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      8
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    8
+
+end timestep
+
+
+start timestep kper="8" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      8
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      8
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    8
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   8
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    8
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 2.09952E+07 3.49920E+05  5832.0      243.00     0.66530    
+
+
+end timestep
+
+
+start timestep kper="9" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 9 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      9
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD      9
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD    9
+
+end timestep
+
+
+start timestep kper="9" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      9
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD      9
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD    9
+
+end timestep
+
+
+start timestep kper="9" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      9
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD      9
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD    9
+
+end timestep
+
+
+start timestep kper="9" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      9
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD      9
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD    9
+
+end timestep
+
+
+start timestep kper="9" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      9
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD      9
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD    9
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD   9
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD    9
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.18400E+05  8640.0      144.00      6.0000     1.64271E-02
+ STRESS PERIOD TIME 2.59200E+06  43200.      720.00      30.000     8.21355E-02
+         TOTAL TIME 2.35872E+07 3.93120E+05  6552.0      273.00     0.74743    
+
+
+end timestep
+
+
+start timestep kper="10" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 10 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD     10
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD     10
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD   10
+
+end timestep
+
+
+start timestep kper="10" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD     10
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD     10
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD   10
+
+end timestep
+
+
+start timestep kper="10" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD     10
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD     10
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD   10
+
+end timestep
+
+
+start timestep kper="10" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD     10
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD     10
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD   10
+
+end timestep
+
+
+start timestep kper="10" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD     10
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD     10
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD   10
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD  10
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD   10
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 2.62656E+07 4.37760E+05  7296.0      304.00     0.83231    
+
+
+end timestep
+
+
+start timestep kper="11" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 11 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD     11
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD     11
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD   11
+
+end timestep
+
+
+start timestep kper="11" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD     11
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD     11
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD   11
+
+end timestep
+
+
+start timestep kper="11" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD     11
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD     11
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD   11
+
+end timestep
+
+
+start timestep kper="11" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD     11
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD     11
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD   11
+
+end timestep
+
+
+start timestep kper="11" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD     11
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD     11
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD   11
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD  11
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD   11
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.18400E+05  8640.0      144.00      6.0000     1.64271E-02
+ STRESS PERIOD TIME 2.59200E+06  43200.      720.00      30.000     8.21355E-02
+         TOTAL TIME 2.88576E+07 4.80960E+05  8016.0      334.00     0.91444    
+
+
+end timestep
+
+
+start timestep kper="12" kstp="1" mode="normal"
+
+
+ OUTPUT CONTROL FOR STRESS PERIOD 12 IS REPEATED USING SETTINGS FROM A PREVIOUS STRESS PERIOD.
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD     12
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      1, STRESS PERIOD     12
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    1, STRESS PERIOD   12
+
+end timestep
+
+
+start timestep kper="12" kstp="2" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD     12
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      2, STRESS PERIOD     12
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    2, STRESS PERIOD   12
+
+end timestep
+
+
+start timestep kper="12" kstp="3" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD     12
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      3, STRESS PERIOD     12
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    3, STRESS PERIOD   12
+
+end timestep
+
+
+start timestep kper="12" kstp="4" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD     12
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      4, STRESS PERIOD     12
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    4, STRESS PERIOD   12
+
+end timestep
+
+
+start timestep kper="12" kstp="5" mode="normal"
+
+ UBDSV1 SAVING           STO-SS ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD     12
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1012 AT TIME STEP      5, STRESS PERIOD     12
+
+ HEAD WILL BE SAVED ON UNIT 1013 AT END OF TIME STEP    5, STRESS PERIOD   12
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    5, STRESS PERIOD  12
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+              STO-SS =           0.0000                STO-SS =           0.0000     STORAGE                          
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    5 IN STRESS PERIOD   12
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 5.35680E+05  8928.0      148.80      6.2000     1.69747E-02
+ STRESS PERIOD TIME 2.67840E+06  44640.      744.00      31.000     8.48734E-02
+         TOTAL TIME 3.15360E+07 5.25600E+05  8760.0      365.00     0.99932    
+
+
+end timestep
+

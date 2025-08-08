@@ -1,0 +1,91 @@
+{
+  "source_test": "test_grid",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Grid - MF6 Demonstration",
+  "description": "Demonstrates MODFLOW 6 structured grid (DIS) discretization and grid analysis utilities. Shows how to create, analyze, and extract grid properties including cell centers, extents, and connectivity for spatial modeling.",
+  "phase": 1,
+  "phase_name": "Discretization",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization for steady-state simulation"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Structured grid discretization with 2 layers, 10x10 cells"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow with hydraulic conductivity"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions with starting heads"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control for heads and budgets"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "IC": "Initial hydraulic head conditions",
+    "CHD": "Constant head boundary conditions",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Structured grid discretization",
+    "Grid manipulation and analysis"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing",
+    "Advanced grid manipulation techniques"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 30 seconds"
+}

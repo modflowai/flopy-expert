@@ -1,0 +1,18 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "watertable.hds",
+    "watertable.list",
+    "watertable.nwt",
+    "watertable.upw",
+    "watertable.bas",
+    "watertable.oc",
+    "watertable.ghb",
+    "watertable.rch",
+    "watertable.dis",
+    "watertable.nam"
+  ]
+}

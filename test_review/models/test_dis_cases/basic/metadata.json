@@ -1,0 +1,93 @@
+{
+  "source_test": "test_dis_cases",
+  "model_version": "mf6",
+  "variant": "basic",
+  "title": "Test Dis Cases - MF6 Demonstration",
+  "description": "Creates an unstructured vertex (DISV) grid with rotation and origin offset",
+  "phase": 1,
+  "phase_name": "Discretization",
+  "packages": [
+    {
+      "package": "TDIS",
+      "file": "flopy.mf6.ModflowTdis",
+      "phase": 1,
+      "purpose": "Time discretization"
+    },
+    {
+      "package": "IMS",
+      "file": "flopy.mf6.ModflowIms",
+      "phase": 5,
+      "purpose": "Iterative model solution"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.mf6.ModflowGwfdis",
+      "phase": 1,
+      "purpose": "Structured discretization"
+    },
+    {
+      "package": "DISV",
+      "file": "flopy.mf6.ModflowGwfdisv",
+      "phase": 1,
+      "purpose": "Vertex discretization"
+    },
+    {
+      "package": "NPF",
+      "file": "flopy.mf6.ModflowGwfnpf",
+      "phase": 2,
+      "purpose": "Node property flow"
+    },
+    {
+      "package": "IC",
+      "file": "flopy.mf6.ModflowGwfic",
+      "phase": 3,
+      "purpose": "Initial conditions"
+    },
+    {
+      "package": "CHD",
+      "file": "flopy.mf6.ModflowGwfchd",
+      "phase": 4,
+      "purpose": "Constant head boundaries"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.mf6.ModflowGwfoc",
+      "phase": 7,
+      "purpose": "Output control"
+    }
+  ],
+  "package_details": {
+    "TDIS": "Time discretization for transient simulation",
+    "IMS": "Iterative linear solver with BICGSTAB/CG methods",
+    "DIS": "Structured discretization with regular grid",
+    "DISV": "Vertex-based discretization for flexible grids",
+    "NPF": "Node property flow with hydraulic conductivity",
+    "IC": "Initial hydraulic head conditions",
+    "CHD": "Constant head boundary conditions",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "vertex",
+  "grid_details": {
+    "nlay": 2,
+    "ncpl": 121,
+    "vertices": "irregular triangular/quadrilateral mesh",
+    "top": 100.0,
+    "botm": [
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW 6 modern simulation framework",
+    "Vertex grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MF6 model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "beginner",
+  "run_time": "< 30 seconds"
+}

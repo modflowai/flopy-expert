@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "purpose": "Tests the get_modflow utility for downloading MODFLOW executables from GitHub releases, including version selection, binary directory management, and platform-specific installations.",
+    "primary_phase": 7,
+    "modflow_version": "mf6",
+    "packages_used": [
+      "flopy.utils.get_modflow"
+    ],
+    "keywords": [
+      "download",
+      "executables",
+      "binaries",
+      "installation",
+      "get_modflow",
+      "GitHub",
+      "releases",
+      "platform",
+      "utilities"
+    ]
+  },
+  "models": [
+    {
+      "name": "download_modflow_executables",
+      "description": "Downloads and installs MODFLOW executables using the get_modflow utility",
+      "code": "import os\nimport sys\nfrom pathlib import Path\nfrom platform import system\nimport flopy\nfrom flopy.utils import get_modflow\n\ndef download_modflow_executables():\n    \"\"\"Example demonstrating how to download MODFLOW executables.\"\"\"\n    \n    # Phase 7: Post-processing and Utilities\n    # This example shows how to use the get_modflow utility\n    # to download MODFLOW executables for your platform\n    \n    print(\"Downloading MODFLOW executables...\")\n    print(f\"Platform: {system()}\")\n    print(f\"Python version: {sys.version}\")\n    print(f\"FloPy version: {flopy.__version__}\")\n    \n    # Define where to save the executables\n    # Using a local directory for this example\n    bindir = Path(\"./modflow_bin\")\n    bindir.mkdir(exist_ok=True)\n    \n    # Get available releases for MODFLOW 6\n    print(\"\\nFetching available MODFLOW 6 releases...\")\n    try:\n        releases = get_modflow.get_releases(repo=\"modflow6\")\n        print(f\"Found {len(releases)} releases\")\n        \n        # Show first 5 releases\n        print(\"\\nAvailable releases (first 5):\")\n        for i, release in enumerate(releases[:5]):\n            print(f\"  {i+1}. {release}\")\n        \n        # Get the latest release info\n        latest_release = get_modflow.get_release(\"latest\", repo=\"modflow6\")\n        print(f\"\\nLatest release: {latest_release['tag']}\")\n        \n    except Exception as e:\n        print(f\"Error fetching releases: {e}\")\n        print(\"This may be due to GitHub API rate limiting.\")\n        return\n    \n    # Download MODFLOW 6 executables\n    print(f\"\\nDownloading MODFLOW 6 to: {bindir.absolute()}\")\n    try:\n        # Download the latest MODFLOW 6 release\n        get_modflow.get_modflow(\n            bindir=str(bindir),\n            repo=\"modflow6\"\n        )\n        print(\"Download successful!\")\n        \n        # List downloaded files\n        print(\"\\nDownloaded executables:\")\n        for file in bindir.iterdir():\n            if file.is_file():\n                # Check if it's an executable\n                if system() == \"Windows\":\n                    if file.suffix in [\".exe\", \".dll\"]:\n                        print(f\"  - {file.name}\")\n                else:\n                    # On Unix-like systems, check if executable\n                    if os.access(file, os.X_OK) or file.suffix in [\".so\", \".dylib\"]:\n                        print(f\"  - {file.name}\")\n        \n    except Exception as e:\n        print(f\"Error downloading executables: {e}\")\n        print(\"This may be due to network issues or GitHub API limits.\")\n        return\n    \n    # Demonstrate platform-specific binary directory selection\n    print(\"\\n\" + \"=\"*50)\n    print(\"Platform-specific default binary directories:\")\n    print(\"=\"*50)\n    \n    if system() == \"Windows\":\n        default_dirs = [\n            Path(os.path.expandvars(r\"%LOCALAPPDATA%\\flopy\")) / \"bin\",\n            Path(sys.prefix) / \"Scripts\",\n            Path(os.path.expandvars(r\"%LOCALAPPDATA%\\Microsoft\\WindowsApps\"))\n        ]\n    else:\n        default_dirs = [\n            Path.home() / \".local\" / \"share\" / \"flopy\" / \"bin\",\n            Path(sys.prefix) / \"bin\",\n            Path(\"/usr\") / \"local\" / \"bin\"\n        ]\n    \n    for dir_path in default_dirs:\n        exists = \"exists\" if dir_path.exists() else \"does not exist\"\n        print(f\"  {dir_path}: {exists}\")\n    \n    # Show how to select appropriate binary directory\n    selected_bindir = get_modflow.select_bindir()\n    print(f\"\\nSelected binary directory: {selected_bindir}\")\n    \n    print(\"\\n\" + \"=\"*50)\n    print(\"Example complete!\")\n    print(\"=\"*50)\n    print(\"\\nNotes:\")\n    print(\"- Executables are downloaded based on your platform\")\n    print(\"- The get_modflow utility handles platform-specific details\")\n    print(\"- You can specify custom directories or use defaults\")\n    print(\"- GitHub API has rate limits (60 requests/hour unauthenticated)\")\n\nif __name__ == \"__main__\":\n    download_modflow_executables()"
+    }
+  ]
+}

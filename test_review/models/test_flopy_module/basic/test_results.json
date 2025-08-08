@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["usg_model.hds", "usg_model.list"],
+  "note": "MODFLOW-USG unstructured grid model with DISU discretization and SMS solver - produces head file for unstructured grid"
+}

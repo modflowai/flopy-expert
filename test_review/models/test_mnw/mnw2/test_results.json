@@ -1,0 +1,11 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "mnw2_example.hds",
+    "mnw2_example.cbc",
+    "mnw2_example.list"
+  ]
+}

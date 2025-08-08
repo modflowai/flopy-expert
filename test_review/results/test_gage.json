@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "purpose": "Demonstrates how to use the GAGE package in MODFLOW to monitor groundwater heads at specific observation points and write output to separate files",
+    "primary_phase": 6,
+    "modflow_version": "mf2005",
+    "packages_used": [
+      "Modflow",
+      "ModflowDis",
+      "ModflowGage",
+      "ModflowOc"
+    ],
+    "keywords": [
+      "gage",
+      "observation",
+      "monitoring",
+      "head observation",
+      "output files",
+      "groundwater monitoring",
+      "observation points",
+      "gage output"
+    ]
+  },
+  "models": [
+    {
+      "name": "gage_monitoring_example",
+      "description": "Basic MODFLOW model with GAGE package for monitoring heads at two observation points with separate output files",
+      "code": "import os\nimport numpy as np\nfrom flopy.modflow import Modflow, ModflowDis, ModflowGage, ModflowOc, ModflowBas, ModflowLpf, ModflowPcg\n\n# Create model workspace\nmodel_ws = 'gage_example'\nif not os.path.exists(model_ws):\n    os.makedirs(model_ws)\n\n# Phase 1: Model setup and discretization\nprint('Phase 1: Setting up model and discretization...')\nmf = Modflow(modelname='gage_model', model_ws=model_ws, exe_name='mf2005')\n\n# Define grid dimensions\nnlay, nrow, ncol = 1, 10, 10\ndelr = delc = 100.0  # 100 m spacing\ntop = 10.0\nbotm = [0.0]\n\n# Create discretization package\ndis = ModflowDis(mf, nlay=nlay, nrow=nrow, ncol=ncol,\n                 delr=delr, delc=delc, top=top, botm=botm,\n                 nper=10, perlen=100.0, nstp=10, steady=False)\n\n# Phase 2: Flow properties\nprint('Phase 2: Setting flow properties...')\n# Basic package with initial heads and active cells\nibound = np.ones((nlay, nrow, ncol), dtype=int)\nibound[0, 0, :] = -1  # Constant head boundary on one side\nibound[0, -1, :] = -1  # Constant head boundary on other side\n\nstrt = np.ones((nlay, nrow, ncol), dtype=float) * 5.0\nstrt[0, 0, :] = 10.0  # Higher head on one side\nstrt[0, -1, :] = 2.0  # Lower head on other side\n\nbas = ModflowBas(mf, ibound=ibound, strt=strt)\n\n# Layer property flow package\nlpf = ModflowLpf(mf, hk=10.0, vka=10.0, sy=0.1, ss=1e-5, laytyp=1)\n\n# Phase 3: Initial conditions handled by BAS package strt array\nprint('Phase 3: Initial conditions set in BAS package')\n\n# Phase 4: Boundary conditions set through ibound in BAS\nprint('Phase 4: Boundary conditions defined through ibound')\n\n# Phase 5: Solver configuration\nprint('Phase 5: Configuring solver...')\npcg = ModflowPcg(mf, hclose=1e-6, rclose=1e-6)\n\n# Phase 6: Observations - GAGE package setup\nprint('Phase 6: Setting up GAGE observations...')\n# Define output control for specific stress periods\nspd = {\n    (0, 0): ['print head'],\n    (2, 0): ['print head'],\n    (4, 0): ['print head', 'save head'],\n    (6, 0): ['print head'],\n    (9, 0): ['print head', 'save head', 'save budget']\n}\noc = ModflowOc(mf, stress_period_data=spd)\n\n# GAGE package - monitor two observation points\n# Format: [gage_num, gage_unit, layer] for head observations\n# Negative gage_num indicates head observation\n# gage_unit is the unit number for output file (must be negative for separate file)\ngages = [\n    [-1, -26, 1],  # Gage 1: monitor head at layer 1, output to unit 26\n    [-2, -27, 1]   # Gage 2: monitor head at layer 1, output to unit 27\n]\n\n# Specify output file names for each gage\nfiles = ['gage1_heads.out', 'gage2_heads.out']\n\n# Create GAGE package\ngage = ModflowGage(mf, numgage=2, gage_data=gages, files=files)\n\nprint(f'  Added {len(gages)} observation gages')\nprint(f'  Gage 1 will output to: {files[0]}')\nprint(f'  Gage 2 will output to: {files[1]}')\n\n# Write input files\nprint('\\nWriting model input files...')\nmf.write_input()\n\n# Phase 7: Run model and post-processing\nprint('\\nPhase 7: Running model and checking outputs...')\nsuccess = False\ntry:\n    success, buff = mf.run_model(silent=False)\nexcept:\n    print('Note: Model run requires MODFLOW executable')\n    print('Input files have been created successfully')\n\nif success:\n    print('\\nModel run completed successfully!')\n    \n    # Check for gage output files\n    for i, fname in enumerate(files):\n        fpath = os.path.join(model_ws, fname)\n        if os.path.exists(fpath):\n            print(f'  Gage {i+1} output file created: {fname}')\n            # Read first few lines to verify output\n            with open(fpath, 'r') as f:\n                lines = f.readlines()[:5]\n                print(f'    First line: {lines[0].strip()}')\nelse:\n    print('\\nModel input files created. Run with MODFLOW executable to generate gage outputs.')\n\n# Verify that gage entries are in the name file\nprint('\\nVerifying GAGE configuration in name file...')\nnam_file = os.path.join(model_ws, 'gage_model.nam')\nif os.path.exists(nam_file):\n    with open(nam_file, 'r') as f:\n        nam_contents = f.read()\n        if 'GAGE' in nam_contents:\n            print('  GAGE package successfully added to name file')\n        for fname in files:\n            if fname in nam_contents:\n                print(f'  Output file {fname} registered in name file')\n\nprint('\\nGAGE example completed!')\nprint('The GAGE package allows monitoring of heads at specific locations')\nprint('and writes time-series output to separate files for analysis.')"
+    }
+  ]
+}

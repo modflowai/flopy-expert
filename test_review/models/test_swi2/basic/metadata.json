@@ -1,0 +1,154 @@
+{
+  "source_test": "test_swi2",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test SWI2 - Salt Water Intrusion Package Demonstration",
+  "description": "Demonstrates the SWI2 package for density-dependent groundwater flow modeling in coastal aquifers with sharp interface approximation between freshwater and seawater",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "Main MODFLOW-2005 model container"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Discretization for coastal cross-section"
+    },
+    {
+      "package": "ModflowBas",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 1,
+      "purpose": "Basic package with ocean boundary"
+    },
+    {
+      "package": "ModflowLpf",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Layer property flow for coastal aquifer"
+    },
+    {
+      "package": "ModflowRch",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Recharge on land cells"
+    },
+    {
+      "package": "ModflowWel",
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Pumping well near coast"
+    },
+    {
+      "package": "ModflowSwi2",
+      "file": "flopy.modflow.ModflowSwi2",
+      "phase": 4,
+      "purpose": "Salt water intrusion with interface tracking"
+    },
+    {
+      "package": "ModflowPcg",
+      "file": "flopy.modflow.ModflowPcg",
+      "phase": 5,
+      "purpose": "PCG solver for flow equations"
+    },
+    {
+      "package": "ModflowOc",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 6,
+      "purpose": "Output control for heads and interface"
+    }
+  ],
+  "package_details": {
+    "Modflow": "MODFLOW-2005 base model for coastal aquifer",
+    "ModflowDis": "1×1×50 grid, 2.5km cross-section, 2 stress periods",
+    "ModflowBas": "Ocean boundary as constant head, gradient inland",
+    "ModflowLpf": "K=10 m/d, confined aquifer, 40m thick",
+    "ModflowRch": "1 mm/day on land cells, no recharge on ocean",
+    "ModflowWel": "50 m³/day pumping 500m from coast",
+    "ModflowSwi2": "2 density zones, sharp interface, stratified flow",
+    "ModflowPcg": "Iterative solver for coupled flow equations",
+    "ModflowOc": "Save heads, budgets, and interface positions"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 1,
+    "ncol": 50,
+    "nper": 2,
+    "cell_size": "50m × 1m",
+    "domain_extent": "2.5km cross-section",
+    "total_cells": 50,
+    "active_cells": 49,
+    "vertical_extent": "40m below sea level",
+    "swi2_features": {
+      "density_zones": 2,
+      "interfaces": 1,
+      "freshwater_density": "1000 kg/m³",
+      "seawater_density": "1025 kg/m³",
+      "interface_tracking": "Sharp interface"
+    }
+  },
+  "key_features": [
+    "SWI2 salt water intrusion package implementation",
+    "Density-dependent flow in coastal aquifer",
+    "Sharp interface approximation method",
+    "Ghyben-Herzberg relation for interface",
+    "Transient interface movement simulation",
+    "Stratified flow approximation",
+    "Climate change impact assessment capability",
+    "Coastal aquifer management scenarios"
+  ],
+  "learning_objectives": [
+    "Understanding SWI2 package configuration",
+    "Implementing density-dependent flow models",
+    "Applying sharp interface approximation",
+    "Simulating seawater intrusion dynamics",
+    "Analyzing pumping impacts on intrusion",
+    "Evaluating coastal aquifer sustainability",
+    "Designing monitoring strategies",
+    "Assessing climate change impacts"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 15 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis", "ModflowBas"],
+      "description": "Coastal cross-section grid with ocean boundary"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow", "ModflowLpf"],
+      "description": "Confined coastal aquifer properties"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowBas"],
+      "description": "Initial heads with freshwater gradient"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowRch", "ModflowWel", "ModflowSwi2"],
+      "description": "Recharge, pumping, and salt water interface"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowPcg"],
+      "description": "PCG solver for density-dependent flow"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["ModflowOc"],
+      "description": "Output heads, budgets, and interface"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": [],
+      "description": "Interface analysis and management evaluation"
+    }
+  }
+}

@@ -6,4 +6,7 @@ WEL               20  array_demo.wel
 BAS6              13  array_demo.bas
 LPF               15  array_demo.lpf
 RCH               19  array_demo.rch
+PCG               27  array_demo.pcg
+OC                14  array_demo.oc
 DATA            1001  demo_array.ref
+DATA(BINARY)      51  array_demo.hds REPLACE

@@ -1,0 +1,115 @@
+{
+  "source_test": "test_mp6",
+  "model_version": "mf2005",
+  "variant": "basic",
+  "title": "Test MODPATH-6 - Advanced Particle Tracking Demonstration",
+  "description": "Demonstrates MODPATH-6 particle tracking with simulation configuration, starting locations, package-specific tracking, and multi-node well (MNW2) integration",
+  "phase": 7,
+  "phase_name": "Post-processing",
+  "packages": [
+    {
+      "package": "Modpath6",
+      "file": "flopy.modpath.Modpath6",
+      "phase": 7,
+      "purpose": "MODPATH-6 particle tracking model setup"
+    },
+    {
+      "package": "Modpath6Bas",
+      "file": "flopy.modpath.Modpath6Bas",
+      "phase": 7,
+      "purpose": "Basic package with porosity and boundary data"
+    },
+    {
+      "package": "Modpath6Sim",
+      "file": "flopy.modpath.mp6sim.Modpath6Sim",
+      "phase": 7,
+      "purpose": "Simulation control for particle tracking"
+    },
+    {
+      "package": "StartingLocationsFile",
+      "file": "flopy.modpath.mp6sim.StartingLocationsFile", 
+      "phase": 7,
+      "purpose": "Custom particle starting locations configuration"
+    },
+    {
+      "package": "MNW2",
+      "file": "flopy.modflow.ModflowMnw2",
+      "phase": 4,
+      "purpose": "Multi-node well for realistic well representation"
+    },
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "5-layer discretization for complex aquifer system"
+    },
+    {
+      "package": "LPF",
+      "file": "flopy.modflow.ModflowLpf",
+      "phase": 2,
+      "purpose": "Alternating aquifer-aquitard layer properties"
+    },
+    {
+      "package": "RCH",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Recharge package for forward particle tracking"
+    },
+    {
+      "package": "WEL", 
+      "file": "flopy.modflow.ModflowWel",
+      "phase": 4,
+      "purpose": "Standard well for backward tracking comparison"
+    }
+  ],
+  "package_details": {
+    "Modpath6": "Main MODPATH-6 model class for particle tracking",
+    "Modpath6Bas": "Basic data including porosity and active cells",
+    "Modpath6Sim": "Simulation control with tracking direction and type",
+    "StartingLocationsFile": "Custom particle placement and labeling",
+    "MNW2": "Multi-node well with screen intervals and skin effects",
+    "DIS": "5-layer system with 20m layer thickness",
+    "LPF": "Alternating K values for aquifer-aquitard sequence",
+    "RCH": "Uniform recharge for forward tracking source",
+    "WEL": "Single-node well for comparison with MNW2"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 5,
+    "nrow": 21,
+    "ncol": 21,
+    "nper": 3,
+    "cell_size": "500m × 500m",
+    "domain_extent": "10.5km × 10.5km",
+    "total_cells": 2205,
+    "vertical_extent": "100m (5 layers × 20m)",
+    "particle_tracking": {
+      "custom_particles": 10,
+      "tracking_modes": "Forward and backward",
+      "simulation_types": "Endpoint, pathline, timeseries",
+      "package_tracking": "RCH, WEL, MNW2"
+    }
+  },
+  "key_features": [
+    "MODPATH-6 advanced particle tracking capabilities",
+    "Modpath6Sim simulation file creation and configuration",
+    "StartingLocationsFile for custom particle placement",
+    "Package-specific particle tracking (RCH, WEL, MNW2)",
+    "Multi-node well (MNW2) integration with MODPATH-6",
+    "Forward and backward tracking demonstration",
+    "Multiple simulation types (endpoint, pathline, timeseries)",
+    "5-layer aquifer-aquitard system for realistic flow"
+  ],
+  "learning_objectives": [
+    "Understanding MODPATH-6 setup and configuration",
+    "Mastering simulation file creation with Modpath6Sim",
+    "Implementing custom starting locations for particles",
+    "Applying package-specific particle tracking techniques",
+    "Integrating MNW2 multi-node wells with particle tracking",
+    "Comparing tracking directions and simulation types",
+    "Understanding professional particle tracking applications",
+    "Learning version differences between MODPATH 5, 6, and 7"
+  ],
+  "complexity": "advanced",
+  "run_time": "< 30 seconds"
+}

@@ -1,0 +1,12 @@
+{
+  "runs": true,
+  "converges": false,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "tutorial_model.hds",
+    "tutorial_model.cbc",
+    "mfsim.lst",
+    "tutorial_model.lst"
+  ]
+}

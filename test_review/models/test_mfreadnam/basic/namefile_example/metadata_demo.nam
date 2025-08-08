@@ -1,0 +1,13 @@
+# MODFLOW Name File with Metadata
+# xul:619653.0  yul:3353277.0  rotation:15.0
+# crs:EPSG:26916
+# start_datetime:1/1/2015
+
+LIST          2  metadata_demo.list
+DIS          11  metadata_demo.dis
+BAS6         13  metadata_demo.bas
+LPF          15  metadata_demo.lpf
+OC           14  metadata_demo.oc
+PCG          27  metadata_demo.pcg
+DATA(BINARY) 51  metadata_demo.hds REPLACE
+DATA(BINARY) 53  metadata_demo.cbc REPLACE

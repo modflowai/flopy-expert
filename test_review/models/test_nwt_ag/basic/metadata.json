@@ -1,0 +1,139 @@
+{
+  "source_test": "test_nwt_ag",
+  "model_version": "mfnwt",
+  "variant": "basic",
+  "title": "Test NWT AG - MODFLOW-NWT Agricultural Package",
+  "description": "Demonstrates the MODFLOW-NWT Agricultural (AG) package for simulating agricultural water demand, irrigation systems, and crop water use management",
+  "phase": 4,
+  "phase_name": "Boundary Conditions",
+  "packages": [
+    {
+      "package": "Modflow",
+      "file": "flopy.modflow.Modflow",
+      "phase": 2,
+      "purpose": "MODFLOW-NWT model container"
+    },
+    {
+      "package": "ModflowDis",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "Single layer discretization"
+    },
+    {
+      "package": "ModflowBas",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 1,
+      "purpose": "Basic package with active domain"
+    },
+    {
+      "package": "ModflowUpw",
+      "file": "flopy.modflow.ModflowUpw",
+      "phase": 2,
+      "purpose": "Upstream weighting package"
+    },
+    {
+      "package": "ModflowAg",
+      "file": "flopy.modflow.ModflowAg",
+      "phase": 4,
+      "purpose": "Agricultural water use simulation"
+    },
+    {
+      "package": "ModflowNwt",
+      "file": "flopy.modflow.ModflowNwt",
+      "phase": 5,
+      "purpose": "Newton-Raphson solver"
+    },
+    {
+      "package": "ModflowOc",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 6,
+      "purpose": "Output control"
+    }
+  ],
+  "package_details": {
+    "Modflow": "MODFLOW-NWT base model for agricultural simulation",
+    "ModflowDis": "1 layer × 15 rows × 10 columns, 49 weekly periods",
+    "ModflowBas": "Active domain with 45m initial heads",
+    "ModflowUpw": "K=10 m/day, specific yield=0.15, unconfined",
+    "ModflowAg": "Agricultural package for irrigation and crop use",
+    "ModflowNwt": "Newton solver for nonlinear problems",
+    "ModflowOc": "Standard output control settings"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 1,
+    "nrow": 15,
+    "ncol": 10,
+    "nper": 49,
+    "cell_size": "100m × 100m",
+    "domain_extent": "1.0km × 1.5km",
+    "total_cells": 150,
+    "active_cells": 150,
+    "vertical_structure": "50m top to 0m bottom",
+    "agricultural_features": {
+      "irrigated_zone": 1,
+      "irrigated_cells": 54,
+      "coverage_percent": 36.0,
+      "crop_types": 4
+    }
+  },
+  "key_features": [
+    "MODFLOW-NWT Agricultural package",
+    "Empty AG package creation",
+    "Basic agricultural zone definition",
+    "Irrigation parameter concepts",
+    "Crop type management",
+    "Water source prioritization",
+    "Newton-Raphson solver integration",
+    "Package validation and testing"
+  ],
+  "learning_objectives": [
+    "Understanding AG package functionality",
+    "Creating agricultural water models",
+    "Configuring irrigation systems",
+    "Managing crop water demand",
+    "Implementing water source priorities",
+    "Using Newton solver for stability",
+    "Validating package integration",
+    "Testing file I/O operations"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 10 seconds",
+  "conceptual_model": {
+    "1_grid_generation": {
+      "phase": 1,
+      "components": ["ModflowDis", "ModflowBas"],
+      "description": "Single-layer grid for agricultural area"
+    },
+    "2_model_setup": {
+      "phase": 2,
+      "components": ["Modflow", "ModflowUpw"],
+      "description": "NWT model with upstream weighting"
+    },
+    "3_initial_conditions": {
+      "phase": 3,
+      "components": ["ModflowBas"],
+      "description": "Initial heads at 45m"
+    },
+    "4_boundary_conditions": {
+      "phase": 4,
+      "components": ["ModflowAg"],
+      "description": "Agricultural water demand and irrigation"
+    },
+    "5_solver": {
+      "phase": 5,
+      "components": ["ModflowNwt"],
+      "description": "Newton-Raphson solver"
+    },
+    "6_visualization": {
+      "phase": 6,
+      "components": ["ModflowOc"],
+      "description": "Output control for results"
+    },
+    "7_post_processing": {
+      "phase": 7,
+      "components": [],
+      "description": "Agricultural water balance analysis"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["geospatial_demo.hds", "geospatial_demo.lst", "mfsim.lst"],
+  "note": "Demonstrates geospatial utilities with MODFLOW 6 integration - geometric shapes for spatial analysis and modeling workflows"
+}

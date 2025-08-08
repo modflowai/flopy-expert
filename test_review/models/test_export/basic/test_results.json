@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["model.hds", "model.lst", "unstructured.vtu", "unstructured_grid.shp", "qtgrid.shp", "qtg.vtu"],
+  "note": "Demonstrates unstructured grid creation with Gridgen and exports to VTK and shapefile formats"
+}

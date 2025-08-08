@@ -1,0 +1,8 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": ["io_demo.hds", "io_demo.cbc", "io_demo.lst"],
+  "note": "Demonstrates FloPy I/O utility functions for parsing input files and handling file paths"
+}

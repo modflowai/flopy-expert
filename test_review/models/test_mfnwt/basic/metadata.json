@@ -1,0 +1,89 @@
+{
+  "source_test": "test_mfnwt",
+  "model_version": "mfnwt",
+  "variant": "basic",
+  "title": "Test Mfnwt - MFNWT Demonstration",
+  "description": "Demonstrates MODFLOW-NWT Newton-Raphson solver for unconfined aquifer problems with analytical solution comparison",
+  "phase": 5,
+  "phase_name": "Solver Configuration",
+  "packages": [
+    {
+      "package": "DIS",
+      "file": "flopy.modflow.ModflowDis",
+      "phase": 1,
+      "purpose": "1D model discretization (100 cells)"
+    },
+    {
+      "package": "BAS",
+      "file": "flopy.modflow.ModflowBas",
+      "phase": 3,
+      "purpose": "Basic package with initial heads"
+    },
+    {
+      "package": "UPW",
+      "file": "flopy.modflow.ModflowUpw",
+      "phase": 2,
+      "purpose": "Upstream weighting flow package for unconfined layers"
+    },
+    {
+      "package": "GHB",
+      "file": "flopy.modflow.ModflowGhb",
+      "phase": 4,
+      "purpose": "General head boundaries at model ends"
+    },
+    {
+      "package": "RCH",
+      "file": "flopy.modflow.ModflowRch",
+      "phase": 4,
+      "purpose": "Recharge to water table"
+    },
+    {
+      "package": "NWT",
+      "file": "flopy.modflow.ModflowNwt",
+      "phase": 5,
+      "purpose": "Newton-Raphson solver with GMRES linear solver"
+    },
+    {
+      "package": "OC",
+      "file": "flopy.modflow.ModflowOc",
+      "phase": 7,
+      "purpose": "Output control for heads and budgets"
+    }
+  ],
+  "package_details": {
+    "DIS": "Structured discretization with regular grid",
+    "BAS": "Basic package with active/inactive cells",
+    "UPW": "Upstream weighting for unconfined aquifers",
+    "GHB": "General head boundaries with conductance",
+    "RCH": "Recharge package for groundwater recharge",
+    "NWT": "Newton-Raphson solver for nonlinear problems",
+    "OC": "Output control for heads and budgets"
+  },
+  "grid_type": "structured",
+  "grid_details": {
+    "nlay": 3,
+    "nrow": 10,
+    "ncol": 10,
+    "delr": 100.0,
+    "delc": 100.0,
+    "top": 100.0,
+    "botm": [
+      75.0,
+      50.0,
+      0.0
+    ]
+  },
+  "key_features": [
+    "MODFLOW-NWT Newton-Raphson solver",
+    "Structured grid discretization"
+  ],
+  "learning_objectives": [
+    "Understanding MFNWT model setup and execution",
+    "Mastering spatial discretization techniques",
+    "Implementing boundary conditions effectively",
+    "Configuring appropriate solver settings",
+    "Managing model outputs and post-processing"
+  ],
+  "complexity": "intermediate",
+  "run_time": "< 1 minute"
+}

@@ -1,0 +1,19 @@
+{
+  "runs": true,
+  "converges": true,
+  "output_exists": true,
+  "error": null,
+  "outputs": [
+    "particle_demo.hds",
+    "particle_demo.list",
+    "particle_demo.bas",
+    "particle_demo.chd", 
+    "particle_demo.dis",
+    "particle_demo.lpf",
+    "particle_demo.nam",
+    "particle_demo.oc",
+    "particle_demo.pcg",
+    "plotting_example.py"
+  ],
+  "note": "FloPy plotting utilities demonstration - successfully imported and tested data conversion functions for particle tracking, demonstrated data type structures for MP7 and PRT formats, created and RAN groundwater flow model with MODFLOW 2005. Model converged and generated head file for particle tracking base flow field. Shows complete workflow for particle tracking data format conversions with actual model execution."
+}

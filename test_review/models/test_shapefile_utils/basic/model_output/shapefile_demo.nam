@@ -6,3 +6,6 @@ BAS6              13  shapefile_demo.bas
 LPF               15  shapefile_demo.lpf
 WEL               20  shapefile_demo.wel
 RCH               19  shapefile_demo.rch
+PCG               27  shapefile_demo.pcg
+OC                14  shapefile_demo.oc
+DATA(BINARY)      51  shapefile_demo.hds REPLACE

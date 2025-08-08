@@ -1,0 +1,40 @@
+                                  MODFLOW-2005     
+      U.S. GEOLOGICAL SURVEY MODULAR FINITE-DIFFERENCE GROUND-WATER FLOW MODEL
+                            VERSION 1.12.00 2/3/2017
+
+ LIST FILE: gage_model.list
+                         UNIT    2
+
+ OPENING gage_model.dis
+ FILE TYPE:DIS   UNIT   11   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING gage_model.bas
+ FILE TYPE:BAS6   UNIT   13   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING gage_model.lpf
+ FILE TYPE:LPF   UNIT   15   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING gage_model.pcg
+ FILE TYPE:PCG   UNIT   27   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING gage_model.oc
+ FILE TYPE:OC   UNIT   14   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING gage_model.gage
+ FILE TYPE:GAGE   UNIT  120   STATUS:OLD    
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ OPENING gage_model.hds
+ FILE TYPE:DATA(BINARY)   UNIT   51   STATUS:REPLACE
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+
+ OPENING gage1_heads.out
+ FILE TYPE:DATA   UNIT   26   STATUS:UNKNOWN
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+
+ CANNOT OPEN gage2_heads.out ON UNIT  27 BECAUSE UNIT IS ALREADY BEING USED
