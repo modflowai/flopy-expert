@@ -1,0 +1,100 @@
+{
+    "test_name": "test_template_writer",
+    "category": "Calibration Utilities",
+    "subcategory": "PEST Template Generation",
+    "description": "Demonstrates FloPy's PEST template writing capabilities for model parameterization and calibration workflows",
+    "original_test": "test_template_writer.py",
+    "model_type": "Utility (No MODFLOW execution)",
+    "packages_tested": ["pest.Params", "pest.TemplateWriter", "pest.zonearray2params"],
+    
+    "key_concepts": [
+        "PEST template file generation",
+        "Parameter definition and bounds",
+        "Constant parameterization",
+        "Layered parameterization",
+        "Zoned parameterization",
+        "Parameter transformations",
+        "Calibration workflow setup",
+        "Template substitution"
+    ],
+    
+    "model_characteristics": {
+        "grid": "20x20x3 demonstration grid",
+        "layers": 3,
+        "stress_periods": "N/A",
+        "time_discretization": "N/A",
+        "solver": "N/A",
+        "model_execution": false,
+        "convergence": "NOT APPLICABLE - Utility test"
+    },
+    
+    "parameterization_features": {
+        "constant_template": {
+            "parameter": "HK_LAYER_1",
+            "type": "Hydraulic conductivity",
+            "application": "Single layer",
+            "bounds": "[0.001, 1000.0]"
+        },
+        "layered_template": {
+            "parameter": "HK_LAYERS_1_3",
+            "type": "Hydraulic conductivity",
+            "application": "Multiple layers",
+            "layers_affected": [1, 3]
+        },
+        "zoned_template": {
+            "zones": 4,
+            "parameter_type": "Hydraulic conductivity",
+            "values": [1.0, 56.777, 78.999, 99.0],
+            "transform": "log"
+        }
+    },
+    
+    "pest_workflow": {
+        "template_creation": "Automated .tpl file generation",
+        "parameter_bounds": "Lower and upper bounds specified",
+        "transformations": "Log transformation support",
+        "zone_arrays": "Spatial parameterization zones",
+        "calibration_ready": "Files ready for PEST execution"
+    },
+    
+    "practical_applications": [
+        "Automated model calibration",
+        "Parameter estimation",
+        "Uncertainty quantification",
+        "Sensitivity analysis",
+        "History matching",
+        "Predictive uncertainty",
+        "Data worth analysis",
+        "Optimization problems",
+        "Monte Carlo analysis",
+        "GLUE uncertainty assessment"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Requires PEST/PEST++ installation for calibration",
+        "Template syntax must match PEST requirements",
+        "Parameter bounds should be physically realistic",
+        "Zone definitions affect calibration efficiency"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "20x20x3 demonstration grid",
+        "2_model_setup": "Basic LPF package configuration",
+        "3_initial_conditions": "N/A - Template generation only",
+        "4_boundary_conditions": "N/A - Template generation only",
+        "5_solver": "N/A - No model execution",
+        "6_visualization": "N/A - Template files only",
+        "7_post_processing": "Template files for PEST calibration"
+    },
+    
+    "files_generated": [
+        "tpl_constant.lpf.tpl",
+        "tpl_layered.lpf.tpl",
+        "tpl_zoned.lpf.tpl"
+    ],
+    
+    "educational_value": "High - Essential for understanding model calibration workflows and parameter estimation",
+    
+    "convergence_test": false,
+    "convergence_result": "NOT APPLICABLE - Utility demonstration"
+}

@@ -1,0 +1,90 @@
+{
+    "test_name": "test_util_array",
+    "category": "Core Utilities",
+    "subcategory": "Array Input/Output",
+    "description": "Demonstrates FloPy's array utility functions for parsing various MODFLOW input array formats",
+    "original_test": "test_util_array.py",
+    "model_type": "Utility (No MODFLOW execution)",
+    "packages_tested": ["utils.util_array.Util2d"],
+    
+    "key_concepts": [
+        "FREE format array parsing",
+        "FIXED format array parsing",
+        "BLOCK format array parsing",
+        "Array multiplication syntax",
+        "Scientific notation handling",
+        "Format control records",
+        "Mixed delimiter parsing",
+        "Column-based formats"
+    ],
+    
+    "model_characteristics": {
+        "grid": "Various demonstration arrays",
+        "layers": "N/A",
+        "stress_periods": "N/A",
+        "time_discretization": "N/A",
+        "solver": "N/A",
+        "model_execution": false,
+        "convergence": "NOT APPLICABLE - Utility test"
+    },
+    
+    "array_format_features": {
+        "free_format": {
+            "description": "Space/comma delimited arrays",
+            "features": ["Flexible spacing", "Multiplication syntax", "Scientific notation"],
+            "example": "10*250.0, 2.2 2*1.0, +1E-00"
+        },
+        "fixed_format": {
+            "description": "Column-based positioning",
+            "features": ["Fortran-style", "Precise widths", "No delimiters"],
+            "formats": ["(5I1)", "(4I1)", "(5I2)"]
+        },
+        "block_format": {
+            "description": "Cell range specification",
+            "features": ["Sparse data", "Block assignment", "Efficient storage"],
+            "syntax": "row1 row2 col1 col2 value"
+        }
+    },
+    
+    "control_records": {
+        "CONSTANT": "Single value for all cells",
+        "INTERNAL": "Read from input file",
+        "EXTERNAL": "Read from external file",
+        "OPEN/CLOSE": "Named file specification"
+    },
+    
+    "practical_applications": [
+        "Reading hydraulic conductivity arrays",
+        "Parsing recharge distributions",
+        "Loading initial head arrays",
+        "Processing zone arrays",
+        "Reading observation data",
+        "Parsing stress period data",
+        "Input file processing",
+        "Legacy format support"
+    ],
+    
+    "limitations_and_assumptions": [
+        "Format must match data structure",
+        "Array dimensions must be correct",
+        "Fixed format requires exact positioning",
+        "Scientific notation varies by format"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "N/A - Array parsing only",
+        "2_model_setup": "N/A - Array parsing only",
+        "3_initial_conditions": "N/A - Array parsing only",
+        "4_boundary_conditions": "N/A - Array parsing only",
+        "5_solver": "N/A - No model execution",
+        "6_visualization": "N/A - Array parsing only",
+        "7_post_processing": "Parsed arrays for MODFLOW input"
+    },
+    
+    "files_generated": [],
+    
+    "educational_value": "High - Essential for understanding MODFLOW input formats and FloPy array handling",
+    
+    "convergence_test": false,
+    "convergence_result": "NOT APPLICABLE - Utility demonstration"
+}

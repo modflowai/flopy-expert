@@ -1,0 +1,104 @@
+{
+    "test_name": "test_util_geometry",
+    "category": "Core Utilities",
+    "subcategory": "Spatial Analysis",
+    "description": "Demonstrates FloPy's geometry utility functions for spatial analysis and geometric operations",
+    "original_test": "test_util_geometry.py",
+    "model_type": "Utility (No MODFLOW execution)",
+    "packages_tested": ["utils.geometry"],
+    
+    "key_concepts": [
+        "Point-in-polygon testing",
+        "Clockwise/counter-clockwise determination",
+        "Vertex ordering",
+        "Grid cell geometry",
+        "Spatial relationships",
+        "Polygon operations",
+        "Geometric algorithms",
+        "GIS integration"
+    ],
+    
+    "model_characteristics": {
+        "grid": "N/A - Geometry operations",
+        "layers": "N/A",
+        "stress_periods": "N/A",
+        "time_discretization": "N/A",
+        "solver": "N/A",
+        "model_execution": false,
+        "convergence": "NOT APPLICABLE - Utility test"
+    },
+    
+    "geometry_features": {
+        "clockwise_testing": {
+            "purpose": "Determine polygon orientation",
+            "applications": ["Area calculation", "Normal vectors", "GIS compatibility"],
+            "algorithm": "Cross product method"
+        },
+        "point_in_polygon": {
+            "purpose": "Test point containment",
+            "applications": ["Well locations", "Zone identification", "Boundary testing"],
+            "algorithm": "Ray casting method"
+        },
+        "vertex_operations": {
+            "ordering": "CW/CCW determination",
+            "reversal": "Change polygon orientation",
+            "validation": "Ensure proper closure"
+        }
+    },
+    
+    "practical_examples": {
+        "well_location_check": {
+            "description": "Validate well positions in model domain",
+            "test_points": 5,
+            "valid_locations": "Inside irregular polygon",
+            "invalid_locations": "Outside domain boundary"
+        },
+        "edge_cases": {
+            "corners": "Vertex point testing",
+            "edges": "Boundary line testing",
+            "interior": "Inside polygon testing"
+        }
+    },
+    
+    "algorithms_demonstrated": [
+        "Ray casting for point-in-polygon",
+        "Cross product for orientation",
+        "Vertex ordering validation",
+        "Boundary intersection testing"
+    ],
+    
+    "practical_applications": [
+        "Wellfield design validation",
+        "Capture zone analysis",
+        "Contamination plume delineation",
+        "Model boundary definition",
+        "Observation network design",
+        "Risk assessment zones",
+        "Particle tracking domains",
+        "Zone budget regions"
+    ],
+    
+    "limitations_and_assumptions": [
+        "2D operations only",
+        "Simple polygons (no self-intersection)",
+        "Numerical precision affects edge cases",
+        "Coordinate system consistency required"
+    ],
+    
+    "conceptual_model_phases": {
+        "1_grid_generation": "N/A - Geometry utilities",
+        "2_model_setup": "N/A - Geometry utilities",
+        "3_initial_conditions": "N/A - Geometry utilities",
+        "4_boundary_conditions": "N/A - Geometry utilities",
+        "5_solver": "N/A - No model execution",
+        "6_visualization": "N/A - Geometry utilities",
+        "7_post_processing": "Spatial analysis results"
+    },
+    
+    "files_generated": [],
+    
+    "educational_value": "High - Essential for spatial analysis and model setup validation",
+    
+    "convergence_test": false,
+    "convergence_result": "NOT APPLICABLE - Utility demonstration"
+}

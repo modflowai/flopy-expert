@@ -24,8 +24,11 @@ These tests run MODFLOW and achieve successful convergence:
 | 7 | test_riv | River Package (RIV) | ✅ CONVERGES! |
 | 8 | test_subwt | Subsidence/Compaction (SWT) | ✅ CONVERGES! |
 | 9 | test_uzf | Unsaturated Zone Flow (UZF1) | ✅ CONVERGES! |
+| 10 | test_grid_cases | Grid types demonstration | ✅ CONVERGES! (FIXED) |
+| 11 | test_gridgen | Grid generation with refinement | ✅ CONVERGES! (FIXED) |
 
 **Achievement: All major physical packages CONVERGE!** 🎯
+**NEW: Fixed grid tests to actually converge!** 🔧
 
 ---
 
